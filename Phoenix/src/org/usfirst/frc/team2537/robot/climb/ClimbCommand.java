@@ -25,7 +25,7 @@ public class ClimbCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		if(Robot.climbSys.getlimitSwitch()){
+		if(Robot.climbSys.getLimitSwitch()){
 			return true;
 		}else{
 			return false;
@@ -33,10 +33,10 @@ public class ClimbCommand extends Command {
 	}
 
 	protected void end() {
-	Robot.climbSys.ultraDeath();
+		Robot.climbSys.ultraDeath();
 	}
 
 	protected void interrupted() {
-
+		Robot.climbSys.ultraDeath();
 	}
 }
