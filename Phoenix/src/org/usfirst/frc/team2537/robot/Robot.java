@@ -1,14 +1,19 @@
 package org.usfirst.frc.team2537.robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
+import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class Robot extends IterativeRobot {
 
+	public static ClimbSubsystem climbSys;
+
 	@Override
 	public void robotInit() {
-		DriverStation.getInstance().getGameSpecificMessage();
+		climbSys = new ClimbSubsystem();
+		climbSys.registerButtons();
+
 	}
 
 	@Override
@@ -18,16 +23,17 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousPeriodic() {
-		
+
 	}
 
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+
 	}
 
 	@Override
 	public void testPeriodic() {
-		
+
 	}
 }
