@@ -1,14 +1,16 @@
 package org.usfirst.frc.team2537.robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
+import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class Robot extends IterativeRobot {
-
+	
+	public static RampSubsystem rampSys;
 	@Override
 	public void robotInit() {
-		DriverStation.getInstance().getGameSpecificMessage();
+		rampSys = new RampSubsystem();
 	}
 
 	@Override
