@@ -1,16 +1,22 @@
 package org.usfirst.frc.team2537.robot;
 
+import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
 import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class Robot extends IterativeRobot {
-	
+
+	public static DriveSubsystem driveSys;
 	public static RampSubsystem rampSys;
+
 	@Override
 	public void robotInit() {
+		driveSys = new DriveSubsystem();
+		driveSys.initDefaultCommand();
 		rampSys = new RampSubsystem();
+		rampSys.registerButtons();
 	}
 
 	@Override
@@ -20,7 +26,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousPeriodic() {
-		
+
 	}
 
 	@Override
@@ -30,6 +36,6 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void testPeriodic() {
-		
+
 	}
 }

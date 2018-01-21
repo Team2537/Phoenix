@@ -7,20 +7,20 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class RampCommand extends Command {
-=
+
 	public RampCommand() {
 		requires(Robot.rampSys);
 
 	}
 	@Override 
 	protected void initialize() {
-		Robot.rampSys.setBackMotors(.5);
+		Robot.rampSys.setRampMotor(.5);
 	}
 	
 	@Override
 	protected void execute() {
 		if(Robot.rampSys.getLimitSwitchA()) {
-			Robot.rampSys.setLeftBackMotor(0);
+			Robot.rampSys.setRampMotor(0);
 		}
 	
 		if(Robot.rampSys.getLimitSwitchB()) {
