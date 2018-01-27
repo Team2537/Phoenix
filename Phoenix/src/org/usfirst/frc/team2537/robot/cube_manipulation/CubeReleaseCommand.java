@@ -9,6 +9,7 @@ public class CubeReleaseCommand extends Command {
 	
 	public CubeReleaseCommand() {
 		requires(Robot.cubeSys);
+		requires(Robot.PIDSys);
 	}
 	
 	protected void initialize() {

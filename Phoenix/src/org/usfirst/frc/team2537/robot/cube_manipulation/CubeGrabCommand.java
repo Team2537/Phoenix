@@ -18,6 +18,7 @@ public class CubeGrabCommand extends Command {
 	
 	public CubeGrabCommand() {
 		requires(Robot.cubeSys);
+		requires(Robot.PIDSys);
 	}
 	
 	protected void initialize() {
