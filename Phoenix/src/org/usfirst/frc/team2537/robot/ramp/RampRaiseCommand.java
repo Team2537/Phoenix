@@ -16,21 +16,18 @@ public class RampRaiseCommand extends Command {
 	
 	@Override
 	protected void execute() {
-		
+		Robot.rampSys.raiseRamp();
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		if(Robot.rampSys.getLeftEncoderRange()>100) {
-			return true; 
-		}
+		
 			return false;
 	}
 	
 	@Override 
 	protected void end() {
-		Robot.rampSys.setRampMotors(0, 0);
-
+		
 	}
 	
 	@Override

@@ -11,25 +11,19 @@ public class RampLowerCommand extends Command {
 	}
 	@Override 
 	protected void initialize() {
-		
 	}
-	
-	@Override 
 	protected void execute() {
-		Robot.rampSys.lowerRamp(-.5);
+		Robot.rampSys.lowerRamp();
+		
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		if (Robot.rampSys.getLeftEncoderRange()>100) {
-			return true;
-		}
 		return false;
 	}
 	
 	@Override 
 	protected void end() {
-		Robot.rampSys.setRampMotors(0, 0);
 		
 	}
 	

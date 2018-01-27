@@ -3,7 +3,6 @@ package org.usfirst.frc.team2537.robot.drive;
 import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.resources.CANTalon;
 
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveSubsystem extends Subsystem {
@@ -13,16 +12,14 @@ public class DriveSubsystem extends Subsystem {
 	private CANTalon rightBackRampMotor;
 	
 	public DriveSubsystem() {
-		leftFrontRampMotor = new CANTalon(Ports.LEFT_FRONT_RAMP_MOTOR);
-		leftBackRampMotor = new CANTalon(Ports.LEFT_BACK_RAMP_MOTOR);
-		rightBackRampMotor = new CANTalon(Ports.RIGHT_BACK_RAMP_MOTOR);
-		rightBackRampMotor = new CANTalon(Ports.RIGHT_BACK_RAMP_MOTOR);
+//		leftFrontRampMotor = new CANTalon(Ports.LEFT_FRONT_RAMP_MOTOR);
+//		leftBackRampMotor = new CANTalon(Ports.LEFT_BACK_RAMP_MOTOR);
+//		rightFrontRampMotor = new CANTalon(Ports.RIGHT_FRONT_RAMP_MOTOR);
+//		rightBackRampMotor = new CANTalon(Ports.RIGHT_BACK_RAMP_MOTOR);
 	}
-
-	@Override
+	
 	public void initDefaultCommand() {
 		this.setDefaultCommand(new DriveCommand());
-
 	}
 	
 	public void setLeftFrontMotor(double speed) {
@@ -60,5 +57,6 @@ public class DriveSubsystem extends Subsystem {
 		setLeftBackMotor(speed);
 		setRightBackMotor(speed);
 	}
+
 
 }

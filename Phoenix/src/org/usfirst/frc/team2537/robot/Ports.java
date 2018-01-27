@@ -9,9 +9,12 @@ public class Ports {
 	public static final int LEFT_ENC_A = 0, LEFT_ENC_B = 1;
 	public static final int RIGHT_ENC_A = 2, RIGHT_ENC_B = 3; 
 	//Limit Switches
-	public static final int LIMIT_SWITCH_A = 8, LIMIT_SWITCH_B = 9;
+	public static final int LIMIT_SWITCH_A = 8, LIMIT_SWITCH_B = 11;
 	//Joysticks
-	public static final int LEFT_JOYSTICK = 9, RIGHT_JOYSTICK = 10;
+	public static final int LEFT_JOYSTICK = 0, RIGHT_JOYSTICK = 1;
 	//Buttons
 	public static final int RAMP_RAISE_BUTTON = 1, RAMP_LOWER_BUTTON = 2;
+    public static final int SERVO_MOTOR=9; 
 }
+
+    		 

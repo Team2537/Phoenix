@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveCommand extends Command {
 
-		public DriveCommand() {
-			requires(Robot.driveSys);
-		}
+	public DriveCommand() {
+		requires(Robot.driveSys);
+	}
 	
 	@Override
 	protected void initialize() {
@@ -18,8 +18,8 @@ public class DriveCommand extends Command {
 	
 	@Override 
 	protected void execute() {
-		Robot.driveSys.setLeftMotors(HumanInput.leftJoystick.getRawAxis(1), HumanInput.leftJoystick.getRawAxis(1));
-		Robot.driveSys.setRightMotors(HumanInput.rightJoystick.getRawAxis(1),HumanInput.rightJoystick.getRawAxis(1)); 
+//		Robot.driveSys.setLeftMotors(HumanInput.leftJoystick.getRawAxis(1), HumanInput.leftJoystick.getRawAxis(1));
+//		Robot.driveSys.setRightMotors(HumanInput.rightJoystick.getRawAxis(1),HumanInput.rightJoystick.getRawAxis(1)); 
 	}
 	
 	@Override
