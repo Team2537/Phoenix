@@ -3,6 +3,7 @@ package org.usfirst.frc.team2537.robot.cube_manipulation;
 import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Encoder;
@@ -27,19 +28,13 @@ public class PIDSubsystem extends Subsystem {
     double encOneDistance;
     Talon flywheelA;
     Talon flywheelB;
-    PIDController control;
-    SpeedController motor;
-    DifferentialDrive driveMotor;
-    Gyro gyro;
-    int p;
-    int i;
-    int d;
-    double integral;
-    int previousError;
-    int setpoint;
+    double p;
+    double i;
+    double d;
+    double previousError;
+    double setpoint;
     double error;
-    double derivative;
-    double rcw;
+    
     
 
     public void initDefaultCommand() {
@@ -52,25 +47,29 @@ public class PIDSubsystem extends Subsystem {
     	p = 0;
     	i = 0;
     	d = 0;
-    	integral = 0;
     	previousError = 0;
     	setpoint = 0;
-    	control.enable();
     }
     
-    public void drive(Gyro gyro){
-    	this.gyro = gyro;
+    public double getFlywheelA() {
+    	return flywheelA.get();
     }
     
-    public void setSetPoint(){
-    	this.setpoint = setpoint;
+    public double getFlywheelB() {
+    	return flywheelB.get();
     }
     
-    public void pid(){
-    	error = setpoint - gyro.getAngle();
-    	this.integral = (error*.02);
-    	derivative = (error - this.previousError) / .02;
-    	this.rcw = p*error + i*this.integral + d*derivative;
+    public void setFlywheelA(double speed) {
+    	flywheelA.set(speed);
+    }
+    
+    public void setFlywheelB(double speed) {
+    	flywheelB.set(-speed);
+    }
+    
+    public void setBothFlywheels(double speed) {
+    	setFlywheelA(speed);
+    	setFlywheelB(speed);
     }
     
     public void encoderOneToDistance(){

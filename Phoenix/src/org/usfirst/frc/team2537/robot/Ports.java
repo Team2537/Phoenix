@@ -7,7 +7,8 @@ public class Ports {
 	public static final int POTENTIOMETER_CHANNEL = 3, POTENTOMETER_SCALE = 360;
 	
 	public static final int CLAW_GRAB_BUTTON = 1;
-	public static final int CLAW_RELEASE_BUTTON = 2;
+	public static final int CLAW_RELEASE_BUTTON = 1;
+
 	
 	public static final int ENCODER_ONE_A = 5, ENCODER_ONE_B = 6;
 	public static final int ENCODER_TWO_A = 7, ENCODER_TWO_B = 8;
