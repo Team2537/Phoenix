@@ -11,29 +11,14 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CubeSubsystem extends Subsystem {
-	double initialArmWidth;
-	double cubeWidth;
-    Encoder clawEncoder;
-    Compressor comp;
     Solenoid solea;
     Solenoid soleb;
-    double encValue;
-    double diameter;
-    double circumference;
-    double encDistance;
     Timer time;
 	
 	
 	public CubeSubsystem() {
-		initialArmWidth = 0;
-    	cubeWidth = 0;
-    	clawEncoder = new Encoder(Ports.ENCODER_A,Ports. ENCODER_B, false, Encoder.EncodingType.k4X);
     	solea = new Solenoid(Ports.SOLENOID_A);
     	soleb = new Solenoid(Ports.SOLENOID_B);
-//    	comp = new Compressor(Ports.COMPRESSOR);
-    	diameter = 7.5;
-    	circumference = diameter*Math.PI;
-    	time = new Timer();
 	}
 
 	@Override
@@ -57,14 +42,6 @@ public class CubeSubsystem extends Subsystem {
 	public void endOpenArm() {
 		soleb.set(false);
 	}
-	
-	public void encodersToDistance(){
-    	encValue = clawEncoder.get();
-    	encDistance = (encValue*circumference/360);
-    }
-	
-	
-	
 	
 	public void registerButtons() {
     	HumanInput.registerWhenPressedCommand(HumanInput.clawGrabButton, new CubeGrabCommand());

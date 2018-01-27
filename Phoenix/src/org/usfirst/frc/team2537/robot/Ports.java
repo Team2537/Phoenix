@@ -9,7 +9,8 @@ public class Ports {
 	public static final int CLAW_GRAB_BUTTON = 1;
 	public static final int CLAW_RELEASE_BUTTON = 2;
 	
-	public static final int ENCODER_A = 5, ENCODER_B = 6;
+	public static final int ENCODER_ONE_A = 5, ENCODER_ONE_B = 6;
+	public static final int ENCODER_TWO_A = 7, ENCODER_TWO_B = 8;
 	
 	public static final int SOLENOID_A = 0, SOLENOID_B = 1;
 	
@@ -17,5 +18,7 @@ public class Ports {
 	
 	public static final int BACK_LEFT_TALON = 0, FRONT_LEFT_TALON = 1;
 	public static final int BACK_RIGHT_TALON = 2, FRONT_RIGHT_TALON = 3;
+	
+	public static final int FLYWHEEL_A = 1, FLYWHEEL_B = 2;
 	
 }
