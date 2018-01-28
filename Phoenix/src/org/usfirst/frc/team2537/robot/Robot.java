@@ -1,7 +1,6 @@
 package org.usfirst.frc.team2537.robot;
 
 import org.usfirst.frc.team2537.robot.cube_manipulation.CubeSubsystem;
-import org.usfirst.frc.team2537.robot.cube_manipulation.PIDSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -13,7 +12,7 @@ public class Robot extends IterativeRobot {
 
 	public static DriveSubsystem driveSys;
 	public static CubeSubsystem cubeSys;
-	public static PIDSubsystem PIDSys;
+	double startTime;
 
 	@Override
 	public void robotInit() {
@@ -21,13 +20,13 @@ public class Robot extends IterativeRobot {
 		driveSys.initDefaultCommand();
 		cubeSys = new CubeSubsystem();
 		cubeSys.registerButtons();
-		PIDSys = new PIDSubsystem();
-		
+		startTime = System.currentTimeMillis();
+
 	}
 
 	@Override
 	public void autonomousInit() {
-
+		
 	}
 
 	@Override
@@ -38,6 +37,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		System.out.print(Robot.cubeSys.getEncoderOne());
+
 	}
 
 	@Override

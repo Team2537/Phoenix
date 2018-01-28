@@ -15,7 +15,7 @@ public class DriveCommand extends Command {
 		
 	}
 	protected void execute() {
-		//Robot.driveSys.setDifferentBothMotors(HumanInput.leftJoystick.getRawAxis(1), HumanInput.rightJoystick.getRawAxis(1));
+		Robot.driveSys.setDifferentBothMotors(HumanInput.leftJoystick.getRawAxis(1), HumanInput.rightJoystick.getRawAxis(1));
 		
 	}
 

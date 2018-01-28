@@ -11,6 +11,7 @@ public class CubeGrabCommand extends Command {
 	private final static double INNER_TARGET_1 = .45;
 	private final static double INNER_TARGET_2 = .55;
 	private final static double P = .01;
+	private final static double I = .001;
 	private final static double TOLERANCE = 10;
 	private double currentVoltage = 0;
 	private double distanceForward = 0;
@@ -18,27 +19,29 @@ public class CubeGrabCommand extends Command {
 	
 	public CubeGrabCommand() {
 		requires(Robot.cubeSys);
-		requires(Robot.PIDSys);
 	}
 	
 	protected void initialize() {
 		startTime = System.currentTimeMillis();
-		Robot.PIDSys.setBothFlywheels(.5);
+		Robot.cubeSys.setBothFlywheels(.3);
 		currentVoltage = .5;
 	}
 	
 	protected void execute() {
-		Robot.PIDSys.encoderOneToDistance();
-		if(System.currentTimeMillis() - startTime <= 200) {
-			if(Robot.PIDSys.getFlywheelA() < TARGET_SPEED - TOLERANCE || Robot.PIDSys.getFlywheelB() > TARGET_SPEED + TOLERANCE) {
-				currentVoltage += (TARGET_SPEED - Robot.PIDSys.getFlywheelA())*P;
-				Robot.PIDSys.setBothFlywheels(currentVoltage);
+		Robot.cubeSys.encoderOneToDistance();
+		if(System.currentTimeMillis() - startTime >= 200) {
+			if(Robot.cubeSys.getFlywheelA() < TARGET_SPEED - TOLERANCE || Robot.cubeSys.getFlywheelB() > TARGET_SPEED + TOLERANCE) {
+				currentVoltage += (TARGET_SPEED - Robot.cubeSys.getFlywheelA())*P;
+				Robot.cubeSys.setBothFlywheels(currentVoltage);
 			}
+//			if(Robot.cubeSys.getFlywheelA() < INNER_TARGET_1 || Robot.cubeSys.getFlywheelA() > INNER_TARGET_2){
+//				Robot.cubeSys.setBothFlywheels(.5);
+//			}
 			
-			if(Robot.PIDSys.encOneDistance >= distanceForward) {
-				Robot.PIDSys.setBothFlywheels(0);
-				Robot.cubeSys.startCompression();
-			}
+//			if(Robot.cubeSys.encOneDistance >= distanceForward) {
+//				Robot.cubeSys.setBothFlywheels(0);
+//				Robot.cubeSys.startCompression();
+//			}
 			
 		}
 	}
@@ -51,7 +54,7 @@ public class CubeGrabCommand extends Command {
 	}
 
 	protected void end() {
-		Robot.cubeSys.endCloseArm();
+//		Robot.cubeSys.endCloseArm();
 	}
 
 	protected void interrupted() {
