@@ -3,6 +3,7 @@ package org.usfirst.frc.team2537.robot.climb;
 import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -24,8 +25,7 @@ public class ClimbSubsystem extends Subsystem {
 		climbMotorTwo = new Talon(Ports.CLIMB_MOTOR_TWO);
 		climbMotorThree = new Talon(Ports.CLIMB_MOTOR_THREE);
 //		limitSwitch = new DigitalInput(Ports.LIMIT_SWITCH);
-	//	climbEnc = new Encoder(Ports.ENCODER_A, Ports.ENCODER_B, false, Encoder.EncodingType.k4X);
-		
+	//	climbEnc = new Encoder(Ports.ENCODER_A, Ports.ENCODER_B, false, Encoder.EncodingType.k4X);		
 	}
 
 	@Override

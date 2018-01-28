@@ -42,7 +42,7 @@ public class ClimbCommand extends Command {
 	}
 
 	protected void end() {
-	Robot.climbSys.ultraDeath();
+		Robot.climbSys.ultraDeath();
 	}
 
 	protected void interrupted() {
