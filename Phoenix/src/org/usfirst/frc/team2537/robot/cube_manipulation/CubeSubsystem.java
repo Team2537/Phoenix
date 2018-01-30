@@ -4,6 +4,7 @@ import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 import org.usfirst.frc.team2537.robot.resources.CANTalon;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Compressor;
@@ -24,20 +25,20 @@ public class CubeSubsystem extends Subsystem {
     double circumference;
     double ticksInEncoder;
     double encOneDistance;
-    Talon flywheelA;
-    Talon flywheelB;
+    CANTalon flywheelA;
+    CANTalon flywheelB;
     
 
 	
 	public CubeSubsystem() {
     	solea = new Solenoid(Ports.SOLENOID_A);
     	soleb = new Solenoid(Ports.SOLENOID_B);
-    	encoderOne = new Encoder(Ports.ENCODER_ONE_A,Ports.ENCODER_ONE_B, false, Encoder.EncodingType.k4X);
-    	encoderTwo = new Encoder(Ports.ENCODER_TWO_A, Ports.ENCODER_TWO_B, false, Encoder.EncodingType.k4X);
+//    	encoderOne = new Encoder(Ports.ENCODER_ONE_A,Ports.ENCODER_ONE_B, false, Encoder.EncodingType.k4X);
+//    	encoderTwo = new Encoder(Ports.ENCODER_TWO_A, Ports.ENCODER_TWO_B, false, Encoder.EncodingType.k4X);
     	diameter = 8;
     	circumference = diameter*Math.PI;
-    	flywheelA = new Talon(Ports.FLYWHEEL_A);
-    	flywheelB = new Talon(Ports.FLYWHEEL_B);
+    	flywheelA = new CANTalon(Ports.FLYWHEEL_A);
+    	flywheelB = new CANTalon(Ports.FLYWHEEL_B);
     	ticksInEncoder = 256;
     	
 	}
@@ -49,11 +50,13 @@ public class CubeSubsystem extends Subsystem {
 	}
 	
 	public double getFlywheelA() {
-    	return flywheelA.getSpeed();
+		flywheelA.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		return flywheelA.getSelectedSensorVelocity(0);
     }
     
     public double getFlywheelB() {
-    	return flywheelB.getSpeed();
+    	flywheelB.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		return flywheelB.getSelectedSensorVelocity(0);
     }
     
     public void setFlywheelA(double speed) {

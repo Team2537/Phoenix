@@ -13,6 +13,7 @@ public class CubeReleaseCommand extends Command {
 	private final static double P = .01;
 	private final static double I = .001;
 	private final static double TOLERANCE = .01;
+	private final static double endTime = 500;
 	private double currentVoltage = 0;
 	private double distanceForward = 0;
 	private long startTime;
@@ -27,18 +28,19 @@ public class CubeReleaseCommand extends Command {
 		currentVoltage = -.5;
 	}
 	protected void execute() {
-		Robot.cubeSys.encoderOneToDistance();
-		Robot.cubeSys.encoderOneToDistance();
 		if(System.currentTimeMillis() - startTime >= 200) {
 			if(Robot.cubeSys.getFlywheelA() < TARGET_SPEED - TOLERANCE || Robot.cubeSys.getFlywheelB() > TARGET_SPEED + TOLERANCE) {
 				currentVoltage += (TARGET_SPEED - Robot.cubeSys.getFlywheelA())*P;
 				Robot.cubeSys.setBothFlywheels(currentVoltage);
 			}
+			if(System.currentTimeMillis() - startTime >= endTime){
+				Robot.cubeSys.setBothFlywheels(0);
+				Robot.cubeSys.endCompression();
+			}
 		}
-//		if(Robot.cubeSys.encOneDistance >= distanceForward) {
-//			Robot.cubeSys.setBothFlywheels(0);
-//			Robot.cubeSys.endCompression();
-//		}
+			
+			
+
 	}
 
 	protected boolean isFinished() {
@@ -49,7 +51,7 @@ public class CubeReleaseCommand extends Command {
 	}
 
 	protected void end() {
-//		Robot.cubeSys.endOpenArm();
+		Robot.cubeSys.endOpenArm();
 	}
 
 	protected void interrupted() {
