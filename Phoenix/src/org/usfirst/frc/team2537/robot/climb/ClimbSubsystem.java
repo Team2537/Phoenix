@@ -16,7 +16,6 @@ public class ClimbSubsystem extends Subsystem {
 	private DigitalInput limitSwitch;
 	private Encoder climbEnc;
 	
-	public double speed = 0.5;
 
 	
 	public ClimbSubsystem() {
@@ -24,8 +23,6 @@ public class ClimbSubsystem extends Subsystem {
 		climbMotorOne = new Talon(Ports.CLIMB_MOTOR_ONE);
 		climbMotorTwo = new Talon(Ports.CLIMB_MOTOR_TWO);
 		climbMotorThree = new Talon(Ports.CLIMB_MOTOR_THREE);
-		limitSwitch = new DigitalInput(Ports.LIMIT_SWITCH);
-		encoder Encoder = new Encoder(Ports.ENCODER_A, Ports.ENCODER_B, false, EncodingType.k4X);
 		
 	}
 
@@ -40,25 +37,9 @@ public class ClimbSubsystem extends Subsystem {
 
 	}
 
-	public void motorOneActivation() {
+	
 
-		climbMotorOne.set(speed);
-
-	}
-
-	public void motorTwoActivation() {
-
-		climbMotorTwo.set(speed);
-
-	}
-
-	public void motorThreeActivation() {
-
-		climbMotorThree.set(speed);
-
-	}
-
-	public void megaMotorActivation() {
+	public void megaMotorActivation(double speed) {
 		climbMotorOne.set(speed);
 		climbMotorTwo.set(speed);
 		climbMotorThree.set(speed);
@@ -71,7 +52,5 @@ public class ClimbSubsystem extends Subsystem {
 
 	}
 	
-	public boolean getLimitSwitch(){
-		limitSwitch.get();
-	}
+	
 }

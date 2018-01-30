@@ -19,11 +19,11 @@ public class ClimbKillCommand extends Command {
 	@Override
 	protected boolean isFinished() {
 
-		return false;
+		return true;
 	}
 
 	protected void end() {
-
+		Robot.climbSys.ultraDeath();
 	}
 
 	protected void interrupted() {

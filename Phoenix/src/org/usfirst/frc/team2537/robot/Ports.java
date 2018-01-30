@@ -9,7 +9,4 @@ public class Ports {
 	public static final int CLIMB_MOTOR_ONE = 0;
 	public static final int CLIMB_MOTOR_TWO = 1;
 	public static final int CLIMB_MOTOR_THREE = 2;
-	public static final int LIMIT_SWITCH = 0;
-	public static final int ENCODER_A = 1;
-	public static final int ENCODER_B = 2;
 }

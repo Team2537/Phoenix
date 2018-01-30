@@ -15,7 +15,7 @@ public class ClimbCommand extends Command {
 
 	protected void initialize() {
 
-		Robot.climbSys.megaMotorActivation();
+		Robot.climbSys.megaMotorActivation(0.1);
 
 	}
 
@@ -25,11 +25,7 @@ public class ClimbCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		if(Robot.climbSys.getlimitSwitch()){
-			return true;
-		}else{
-			return false;
-		}
+		return false; 
 	}
 
 	protected void end() {
@@ -37,6 +33,7 @@ public class ClimbCommand extends Command {
 	}
 
 	protected void interrupted() {
+		Robot.climbSys.ultraDeath();
 
 	}
 }
