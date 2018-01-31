@@ -52,11 +52,13 @@ public class CubeSubsystem extends Subsystem {
 	public double getFlywheelA() {
 		flywheelA.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		return flywheelA.getSelectedSensorVelocity(0);
+		
     }
     
     public double getFlywheelB() {
     	flywheelB.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		return flywheelB.getSelectedSensorVelocity(0);
+		
     }
     
     public void setFlywheelA(double speed) {
