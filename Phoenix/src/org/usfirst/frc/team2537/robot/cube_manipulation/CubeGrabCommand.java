@@ -49,7 +49,7 @@ public class CubeGrabCommand extends Command {
 				Robot.cubeSys.startCompression();
 			}
 				
-			if(integral >= .3 ){
+			if(integral >= .2){
 				currentVoltage += .05;
 				Robot.cubeSys.setBothFlywheels(currentVoltage);
 				integral = 0;
