@@ -14,6 +14,7 @@ public class CubeGrabCommand extends Command {
 	private final static double I = .001;
 	private final static double TOLERANCE = 10;
 	private final static double endTime = 500;
+	private final static double startSpeed = .3;
 	private static double error = 0;
 	private static double integral = 0;
 	private double currentVoltage = 0;
@@ -25,21 +26,22 @@ public class CubeGrabCommand extends Command {
 	}
 	
 	protected void initialize() {
+		integral = 0;
 		startTime = System.currentTimeMillis();
-		Robot.cubeSys.setBothFlywheels(.3);
-		currentVoltage = .5;
+		Robot.cubeSys.setBothFlywheels(startSpeed);
+		currentVoltage = startSpeed;
 	}
 	
 	protected void execute() {
 		error = Math.abs(Robot.cubeSys.getFlywheelA() - TARGET_SPEED);
-		integral += error;
+		integral += error*0.02;
 		if(System.currentTimeMillis() - startTime >= 200) {
 			if(Robot.cubeSys.getFlywheelA() < TARGET_SPEED - TOLERANCE || Robot.cubeSys.getFlywheelB() > TARGET_SPEED + TOLERANCE) {
 				currentVoltage += (TARGET_SPEED - Robot.cubeSys.getFlywheelA())*P;
 				Robot.cubeSys.setBothFlywheels(currentVoltage);
 			}
 //			if(Robot.cubeSys.getFlywheelA() < INNER_TARGET_1 || Robot.cubeSys.getFlywheelA() > INNER_TARGET_2){
-//				Robot.cubeSys.setBothFlywheels(.5);
+//				Robot.cubeSys.setBothFlywheels(TARGET_SPEED);
 //			}
 			
 			if(System.currentTimeMillis() - startTime >= endTime){
@@ -47,7 +49,11 @@ public class CubeGrabCommand extends Command {
 				Robot.cubeSys.startCompression();
 			}
 				
-//			
+			if(integral >= .3 ){
+				currentVoltage += .05;
+				Robot.cubeSys.setBothFlywheels(currentVoltage);
+				integral = 0;
+			}
 			
 		}
 	}
