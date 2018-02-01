@@ -12,17 +12,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class VertUpCommand extends Command {
-
 	private boolean moveUp;
 	private boolean ending;
 	private CANTalon vertMotor;
 	
 	public boolean moveUp(int stopMotorValue) {
-		boolean isFinished = false;
-
+		boolean ending = false;
 		vertMotor.set(.3);
-		System.out.println(vertMotor.getMotorOutputPercent());
-		return isFinished;
+		return ending;
 	}
 
 	public VertUpCommand(boolean moveUp) {
