@@ -11,6 +11,7 @@ public class HumanInput {
 	
 	public static Joystick leftJoystick = new Joystick(Ports.LEFT_JOYSTICK);
 	public static Joystick rightJoystick = new Joystick(Ports.RIGHT_JOYSTICK);
+	
 	public static Button raiseButton = new JoystickButton(leftJoystick, Ports.RAISE_BUTTON);
 	public static Button lowerButton = new JoystickButton(leftJoystick, Ports.LOWER_BUTTON);
 
