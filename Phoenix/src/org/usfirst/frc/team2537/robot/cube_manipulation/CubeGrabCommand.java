@@ -26,7 +26,6 @@ public class CubeGrabCommand extends Command {
 	}
 	
 	protected void initialize() {
-		integral = 0;
 		startTime = System.currentTimeMillis();
 		Robot.cubeSys.setBothFlywheels(startSpeed);
 		currentVoltage = startSpeed;
@@ -53,6 +52,9 @@ public class CubeGrabCommand extends Command {
 				currentVoltage += .05;
 				Robot.cubeSys.setBothFlywheels(currentVoltage);
 				integral = 0;
+				if(integral >= .3){
+					
+				}
 			}
 			
 		}
