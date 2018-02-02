@@ -1,4 +1,4 @@
-package org.usfirst.team2537.robot.vert;
+package org.usfirst.frc.team2537.robot.vert;
 
 import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
