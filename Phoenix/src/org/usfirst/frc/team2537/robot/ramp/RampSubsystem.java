@@ -1,129 +1,40 @@
 package org.usfirst.frc.team2537.robot.ramp;
+
 //
 import org.usfirst.frc.team2537.robot.Ports;
-import org.usfirst.frc.team2537.robot.input.HumanInput;
-//
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
+
 import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class RampSubsystem extends Subsystem {
 
-//////	private Talon leftRampMotor;
-//////	private Talon rightRampMotor;
-//////	private Talon leftFrontRampMotor;
-//////	private Talon leftBackRampMotor;
-//////	private Talon rightFrontRampMotor;
-//////	private Talon rightBackRampMotor;
-//////	private Encoder leftEnc;
-//////	private Encoder rightEnc;
-//////	private DigitalInput limitSwitchA;
-//////	private DigitalInput limitSwitchB;
-        private Servo servo;
-	
-	
-        	public RampSubsystem() {
-//////		leftRampMotor = new Talon(Ports.LEFT_RAMP_MOTOR);
-//////		rightRampMotor = new Talon(Ports.RIGHT_RAMP_MOTOR);
-////		//leftFrontRampMotor = new Talon(Ports.LEFT_FRONT_RAMP_MOTOR);
-////		//leftBackRampMotor = new Talon(Ports.LEFT_BACK_RAMP_MOTOR);
-////		//rightBackRampMotor = new Talon(Ports.RIGHT_BACK_RAMP_MOTOR);
-////		//rightBackRampMotor = new Talon(Ports.RIGHT_BACK_RAMP_MOTOR);
-		     servo=new Servo(Ports.SERVO_MOTOR);
-        	}
-//////		leftEnc = new Encoder(Ports.LEFT_ENC_A, Ports.LEFT_ENC_B, false, Encoder.EncodingType.k4X);
-//////		rightEnc = new Encoder(Ports.RIGHT_ENC_A, Ports.RIGHT_ENC_B, false, Encoder.EncodingType.k4X);		
-//	     limitSwitchA = new DigitalInput(Ports.LIMIT_SWITCH_A);
-//	    limitSwitchB = new DigitalInput(Ports.LIMIT_SWITCH_B);
-//	}
-	    @Override
-	protected void initDefaultCommand() {
-	    		// TODO Auto-generated method stub   
-    }
-	
-         	public void registerButtons() {
-		HumanInput.registerWhenPressedCommand(HumanInput.rampRaiseButton, new RampRaiseCommand ());
-		HumanInput.registerWhenPressedCommand(HumanInput.rampLowerButton, new RampLowerCommand ());
+	private Solenoid solea;
+	private Servo servo;
+
+	public RampSubsystem() {
+		solea = new Solenoid(Ports.SOLENOID_C);
+		servo = new Servo(Ports.SERVO_MOTOR);
 	}
-	
-	
-     	public void lowerRamp() {
-		servo.setAngle(90);
-  }
-     	
-     	public void raiseRamp() {
+
+	@Override
+	protected void initDefaultCommand() {
+	}
+
+	public void registerButtons() {
+		
+	}
+
+	public void openLatch() {
+		servo.setAngle(120);
+	}
+
+	public void raiseRamp() {
 		servo.setAngle(0);
 	}
 	
+	public void openRampPiston() {
+		solea.set(true);
+	}
 	
-//	public double getLeftEncoderRange() {
-//		return leftEnc.getDistance();
-//	}
-//	
-//	public double getRightEncoderRange() {
-//		return rightEnc.getDistance();
-//	}
-	
-//	public void setLeftFrontMotor(double speed) {
-//		leftFrontRampMotor.set(speed);
-//	}
-//     	public void setLeftBackMotor(double speed) {
-//		leftBackRampMotor.set(speed);
-//	}
-	//public void setRightFrontMotor(double speed) {
-//////		rightFrontRampMotor.set(speed);
-//////	}
-//////	
-//////	public void setRightBackMotor(double speed) {
-//////		rightBackRampMotor.set(speed);
-//////	}
-////	
-//////	public void setLeftMotors(double frontSpeed, double backSpeed) {
-//////		setLeftFrontMotor(frontSpeed);
-//////		setLeftBackMotor(backSpeed);
-//////	}
-////	
-//////	public void setRightMotors(double frontSpeed, double backSpeed) {
-//////		setRightFrontMotor(frontSpeed);
-//////		setRightBackMotor(backSpeed);
-//////	}
-//////	public void setMotors(double leftFrontSpeed, double leftBackSpeed, double rightFrontSpeed, double rightBackSpeed) {
-//////		setLeftFrontMotor(leftFrontSpeed);
-//////		setLeftBackMotor(leftBackSpeed);
-//////		setRightFrontMotor(rightFrontSpeed);
-//////		setRightBackMotor(rightBackSpeed);
-//////	}
-//////	public void setBackMotors(double speed) {
-//////		setLeftBackMotor(speed);
-//////		setRightBackMotor(speed);
-//////	}
-//////	public void setLeftRampMotor(double speed) {
-//////		setLeftRampMotor(speed);
-//////	}
-//////	public void setRightRampMotor(double speed) {
-//////		setRightRampMotor(speed);
-//////	}
-//////	
-//////	public void setRampMotors(double leftSpeed, double rightSpeed) {
-//////		setLeftRampMotor(leftSpeed);
-//////		setRightRampMotor(rightSpeed);
-//////	}
-//////	
-//////	public void raiseRamp(double speed) {
-//////		setRampMotors(speed,speed);
-//////	}
-//////	
-//////	public void lowerRamp(double speed) {
-//////		setRampMotors(speed,speed);
-//////	}
-	
-//	public boolean getLimitSwitchA() {
-//		return limitSwitchA.get();
-//	}
-	
- //    	public boolean getLimitSwitchB() {
-//		return limitSwitchB.get();
-//	}
 }

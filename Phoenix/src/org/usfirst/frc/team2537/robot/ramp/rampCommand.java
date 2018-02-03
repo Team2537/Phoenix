@@ -4,34 +4,46 @@ import org.usfirst.frc.team2537.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class RampRaiseCommand extends Command {
-
-	public RampRaiseCommand() {
+public class rampCommand extends Command {
+	
+	private long startTime;
+	
+	public rampCommand() {
 		requires(Robot.rampSys);
 	}
-	@Override 
+	
+	@Override
 	protected void initialize() {
+		startTime = System.currentTimeMillis();
+		Robot.rampSys.openLatch();
 		
 	}
 	
 	@Override
 	protected void execute() {
-		Robot.rampSys.raiseRamp();
+		
+	}
+
+	@Override
+	protected boolean isFinished() {
+		if(System.currentTimeMillis() - startTime > 200) {
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 	
 	@Override
-	protected boolean isFinished() {
-		
-			return false;
-	}
-	
-	@Override 
 	protected void end() {
+		Robot.rampSys.openRampPiston();
 		
 	}
 	
 	@Override
 	protected void interrupted() {
+		end();
 		
 	}
+
 }
