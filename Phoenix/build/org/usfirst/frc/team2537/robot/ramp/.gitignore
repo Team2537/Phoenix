@@ -1,1 +1,4 @@
 /rampCommand.class
+/RampLowerCommand.class
+/RampRaiseCommand.class
+/RampSubsystem.class
