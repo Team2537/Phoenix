@@ -97,8 +97,8 @@ public class CubeSubsystem extends Subsystem {
 	}
 	
 	public void registerButtons() {
-		HumanInput.registerWhileHeldCommand(HumanInput.clawGrabButton, new CubeGrabCommand());
-		HumanInput.registerWhileHeldCommand(HumanInput.cubeFlipperReleaseButton, new CubeStartCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.clawGrabButton, new CubeGrabCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.cubeFlipperReleaseButton, new CubeStartCommand());
 //    	HumanInput.registerWhenPressedCommand(HumanInput.clawReleaseButton, new CubeReleaseCommand());
    	
     }
