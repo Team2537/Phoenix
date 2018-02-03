@@ -2,15 +2,19 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="Phoenix/src"/>
-	<classpathentry kind="var" path="cscore" sourcepath="/cscore.sources"/>
-	<classpathentry kind="var" path="networktables" sourcepath="/networktables.sources"/>
-	<classpathentry kind="var" path="opencv" sourcepath="/opencv.sources"/>
-	<classpathentry kind="var" path="wpilib" sourcepath="/wpilib.sources"/>
-	<classpathentry kind="var" path="wpiutil" sourcepath="/wpiutil.sources"/>
+	<classpathentry kind="var" path="cscore" sourcepath="cscore.sources"/>
 	<classpathentry kind="var" path="CTRE_Phoenix.jar" sourcepath="/CTRE_Phoenix.sources">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/Users/Anjali/wpilib/user/java/docs/CTRE_Phoenix-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/j0nsb/wpilib/user/java/docs/CTRE_Phoenix-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="var" path="networktables" sourcepath="networktables.sources"/>
+	<classpathentry kind="var" path="opencv" sourcepath="opencv.sources"/>
+	<classpathentry kind="var" path="wpilib" sourcepath="wpilib.sources">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/Users/Juni/wpilib/java/current/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="wpiutil" sourcepath="wpiutil.sources"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
