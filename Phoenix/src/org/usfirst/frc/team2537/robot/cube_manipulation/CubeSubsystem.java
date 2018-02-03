@@ -11,8 +11,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * registers buttons for commands
  */
 public class CubeSubsystem extends Subsystem {
-    private Solenoid solea;
-    private Solenoid soleb;
+    private Solenoid manipulatorSolenoidA;
+    private Solenoid manipulatorSolenoidB;
+    private Solenoid flipSolenoidA;
+    private Solenoid flipSolenoidB;
 
    /* Timer time;
     Encoder encoderOne;
@@ -30,8 +32,10 @@ public class CubeSubsystem extends Subsystem {
 	 * creates the solenoids and assigns ports to them
 	 */
 	public CubeSubsystem() {
-    	solea = new Solenoid(Ports.SOLENOID_A);
-    	soleb = new Solenoid(Ports.SOLENOID_B);
+    	manipulatorSolenoidA = new Solenoid(Ports.MANIPULATOR_SOLENOID_A);
+    	manipulatorSolenoidB = new Solenoid(Ports.MANIPULATOR_SOLENOID_B);
+    	flipSolenoidA = new Solenoid(Ports.FLIP_SOLENOID_A);
+    	flipSolenoidB = new Solenoid(Ports.FLIP_SOLENOID_B);
     /*	diameter = 8;
     	circumference = diameter*Math.PI;
     	flywheelA = new CANTalon(Ports.FLYWHEEL_A);
@@ -45,6 +49,8 @@ public class CubeSubsystem extends Subsystem {
 		// TODO Auto-generated method stub
 		
 	}
+	
+
 	
 /*	public double getFlywheelA() {
 		flywheelA.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -86,41 +92,71 @@ public class CubeSubsystem extends Subsystem {
     
 */    
 	
+	// Methods used for setup
+	
 	/**
-	 * starts to apply the pressure
+	 * opens manipulator
 	 */
 	public void openGrabPiston() {
-		solea.set(true);
+		manipulatorSolenoidA.set(true);
 	}
 	
 	/**
-	 * stops the pressure
+	 * stops opening manipulator
 	 */
-	public void closeGrabPiston() {
-		solea.set(false);
+	public void stopOpenGrabPiston() {
+		manipulatorSolenoidA.set(false);
 	}
 	
 	/**
-	 * applies pressure
+	 * closes manipulator
 	 */
-	public void openStartPiston() {
-		soleb.set(true);
+	public void openReleasePiston() {
+		manipulatorSolenoidB.set(true);
 	}
 	
 	/**
-	 * stops pressure
+	 * stops closing manipulator
 	 */
-	public void closeStartPiston() {
-		soleb.set(false);
+	public void closeReleasePiston() {
+		manipulatorSolenoidB.set(false);
+	}
+	
+	/**
+	 * flips down manipulator
+	 */
+	public void openFlipper() {
+		flipSolenoidA.set(true);
+	}
+	
+	/**
+	 * stops flipping down manipulator
+	 */
+	public void stopOpenFlipper() {
+		flipSolenoidA.set(false);
+	}
+	
+	/**
+	 * flips up manipulator
+	 */
+	public void closeFlipper() {
+		flipSolenoidB.set(true);
+	}
+	
+	/**
+	 * stops flipping up manipulator
+	 */
+	public void stopCloseFlipper() {
+		flipSolenoidB.set(false);
 	}
 	
 	/**
 	 * registers buttons so that when they are pressed, the respective command starts	
 	 */
 	public void registerButtons() {
-		HumanInput.registerWhenPressedCommand(HumanInput.clawGrabButton, new CubeGrabCommand());
-		HumanInput.registerWhenPressedCommand(HumanInput.cubeFlipperReleaseButton, new CubeStartCommand());
-//    	HumanInput.registerWhenPressedCommand(HumanInput.clawReleaseButton, new CubeReleaseCommand());
-   	
+		HumanInput.registerWhenPressedCommand(HumanInput.cubeGrabButton, new CubeGrabCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.cubeReleaseButton, new CubeReleaseCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.cubeFlipDownButton, new CubeFlipDownCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.cubeFlipUpButton, new CubeFlipUpCommand());
     }
 }

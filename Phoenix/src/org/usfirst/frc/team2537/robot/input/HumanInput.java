@@ -12,11 +12,10 @@ public class HumanInput {
 	public static Joystick leftJoystick = new Joystick(Ports.LEFT_JOYSTICK);
 	public static Joystick rightJoystick = new Joystick(Ports.RIGHT_JOYSTICK);
 	
-	public static Button clawGrabButton = new JoystickButton(leftJoystick, Ports.CLAW_GRAB_BUTTON);
-	public static Button cubeFlipperReleaseButton = new JoystickButton(rightJoystick, Ports.CLAW_RELEASE_BUTTON);
-
-	
-	
+	public static Button cubeGrabButton = new JoystickButton(leftJoystick, Ports.CUBE_GRAB_BUTTON);
+	public static Button cubeReleaseButton = new JoystickButton(rightJoystick, Ports.CUBE_RELEASE_BUTTON);
+	public static Button cubeFlipDownButton = new JoystickButton(leftJoystick, Ports.FLIP_MANIPULATOR_DOWN_BUTTON);
+	public static Button cubeFlipUpButton = new JoystickButton(leftJoystick, Ports.FLIP_MANIPULATOR_UP_BUTTON);
 	
 	/**
 	 * Register button to command

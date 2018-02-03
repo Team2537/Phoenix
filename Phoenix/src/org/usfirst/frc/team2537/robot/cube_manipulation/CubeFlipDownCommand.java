@@ -5,12 +5,15 @@ import org.usfirst.frc.team2537.robot.input.HumanInput;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CubeStartCommand extends Command {
+public class CubeFlipDownCommand extends Command {
+	
+	private long startTime;
+	private static final int WAIT_TIME = 1000; // 1 second
 	
 	/**
 	 * tells that the command requires cubeSys	
 	 */
-	public CubeStartCommand() {
+	public CubeFlipDownCommand() {
 		requires(Robot.cubeSys);
 	}
 	
@@ -20,8 +23,8 @@ public class CubeStartCommand extends Command {
 	 */
 	@Override
 	protected void initialize() {
-		Robot.cubeSys.openStartPiston();
-		
+		startTime = System.currentTimeMillis();
+		Robot.cubeSys.openFlipper();;
 	}
 	
 	@Override
@@ -35,11 +38,7 @@ public class CubeStartCommand extends Command {
 	 */
 	@Override
 	protected boolean isFinished() {
-
-		if(HumanInput.cubeFlipperReleaseButton.get()) {
-			return false;
-		}
-		else return true;
+		return (System.currentTimeMillis() - startTime > WAIT_TIME);
 	}
 	
 	/**
@@ -47,7 +46,7 @@ public class CubeStartCommand extends Command {
 	 */
 	@Override
 	protected void end() {		
-		Robot.cubeSys.closeStartPiston();
+		Robot.cubeSys.stopOpenFlipper();;
 		
 	}
 	
@@ -56,8 +55,7 @@ public class CubeStartCommand extends Command {
 	 */
 	@Override
 	protected void interrupted() {
-		Robot.cubeSys.closeStartPiston();
-		
+		Robot.cubeSys.stopOpenFlipper();
 	}
 
 }
