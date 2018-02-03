@@ -7,7 +7,7 @@ public class Ports {
 	public static final int POTENTIOMETER_CHANNEL = 3, POTENTOMETER_SCALE = 360;
 	
 	public static final int CLAW_GRAB_BUTTON = 1;
-	public static final int CLAW_RELEASE_BUTTON = 2;
+	public static final int CLAW_RELEASE_BUTTON = 1;
 
 	
 	public static final int ENCODER_ONE_A = 2, ENCODER_ONE_B = 3;
@@ -15,7 +15,6 @@ public class Ports {
 	
 	public static final int SOLENOID_A = 0, SOLENOID_B = 1;
 	
-	public static final int COMPRESSOR = 8;
 	
 	public static final int BACK_LEFT_TALON = 2, FRONT_LEFT_TALON = 4;
 	public static final int BACK_RIGHT_TALON = 1, FRONT_RIGHT_TALON = 2;

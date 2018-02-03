@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2537.robot.cube_manipulation;
+/*package org.usfirst.frc.team2537.robot.cube_manipulation;
 
 import org.usfirst.frc.team2537.robot.Robot;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
@@ -57,4 +57,4 @@ public class CubeReleaseCommand extends Command {
 	protected void interrupted() {
 		end();
 	}
-}
+}*/

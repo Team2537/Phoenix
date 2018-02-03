@@ -2,22 +2,15 @@ package org.usfirst.frc.team2537.robot.cube_manipulation;
 
 import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
-import org.usfirst.frc.team2537.robot.resources.CANTalon;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CubeSubsystem extends Subsystem {
-    Solenoid solea;
-    Solenoid soleb;
-    Timer time;
+    private Solenoid solea;
+    private Solenoid soleb;
+
+   /* Timer time;
     Encoder encoderOne;
     Encoder encoderTwo;
     double encOneValue;
@@ -27,20 +20,18 @@ public class CubeSubsystem extends Subsystem {
     double encOneDistance;
     CANTalon flywheelA;
     CANTalon flywheelB;
-    
+   */ 
 
 	
 	public CubeSubsystem() {
     	solea = new Solenoid(Ports.SOLENOID_A);
     	soleb = new Solenoid(Ports.SOLENOID_B);
-//    	encoderOne = new Encoder(Ports.ENCODER_ONE_A,Ports.ENCODER_ONE_B, false, Encoder.EncodingType.k4X);
-//    	encoderTwo = new Encoder(Ports.ENCODER_TWO_A, Ports.ENCODER_TWO_B, false, Encoder.EncodingType.k4X);
-    	diameter = 8;
+    /*	diameter = 8;
     	circumference = diameter*Math.PI;
     	flywheelA = new CANTalon(Ports.FLYWHEEL_A);
     	flywheelB = new CANTalon(Ports.FLYWHEEL_B);
     	ticksInEncoder = 256;
-    	
+    	*/
 	}
 
 	@Override
@@ -49,7 +40,7 @@ public class CubeSubsystem extends Subsystem {
 		
 	}
 	
-	public double getFlywheelA() {
+/*	public double getFlywheelA() {
 		flywheelA.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		return flywheelA.getSelectedSensorVelocity(0);
 		
@@ -73,7 +64,7 @@ public class CubeSubsystem extends Subsystem {
     	setFlywheelA(speed);
     	setFlywheelB(speed);
     }
-    
+  
     public double getEncoderOne(){
     	return encoderOne.get();
     }
@@ -87,28 +78,29 @@ public class CubeSubsystem extends Subsystem {
     	encOneDistance = (encOneValue*circumference/ticksInEncoder);
     }
     
-    
+*/    
 	
-	public void startCompression() {
+	public void openGrabPiston() {
 		solea.set(true);
 	}
 	
-	public void endCloseArm() {
+	public void closeGrabPiston() {
 		solea.set(false);
 	}
 	
-	public void endCompression() {
+	public void openStartPiston() {
 		soleb.set(true);
 	}
 	
-	public void endOpenArm() {
+	public void closeStartPiston() {
 		soleb.set(false);
 	}
 	
 	public void registerButtons() {
-    	HumanInput.registerWhenPressedCommand(HumanInput.clawGrabButton, new CubeGrabCommand());
-    	HumanInput.registerWhenPressedCommand(HumanInput.clawReleaseButton, new CubeReleaseCommand());
-    	
+		HumanInput.registerWhileHeldCommand(HumanInput.clawGrabButton, new CubeGrabCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.cubeFlipperReleaseButton, new CubeStartCommand());
+//    	HumanInput.registerWhenPressedCommand(HumanInput.clawReleaseButton, new CubeReleaseCommand());
+   	
     }
 }
 
