@@ -15,6 +15,15 @@ public class HumanInput {
 	public static Button raiseButton = new JoystickButton(leftJoystick, Ports.RAISE_BUTTON);
 	public static Button lowerButton = new JoystickButton(leftJoystick, Ports.LOWER_BUTTON);
 
+
+	public static Button climbOnButton = new JoystickButton(rightJoystick, Ports.CLIMB_ON_BUTTON);
+	public static Button climbOffButton = new JoystickButton(rightJoystick, Ports.CLIMB_OFF_BUTTON);
+	public static Button overrideKeyOne = new JoystickButton(leftJoystick, Ports.OVERRIDE_KEY_ONE);
+	public static Button overrideKeyTwo = new JoystickButton(leftJoystick, Ports.OVERRIDE_KEY_TWO);
+	public static Button overrideKeyThree = new JoystickButton(leftJoystick, Ports.OVERRIDE_KEY_THREE);
+	
+	
+	
 	/**
 	 * Register button to command
 	 * 
@@ -24,10 +33,23 @@ public class HumanInput {
 	 * @param c
 	 *            command to register to button
 	 */
+
 	public static void registerWhenPressedCommand(Button b, Command c) {
 		b.whenPressed(c);
+
 	}
 	
+	/**
+	 * Register held button to a command
+	 * when button is released, interrupted() is called
+	 * if command finishes while button is held, command is called again
+	 * isFinsished() should always return false
+	 * 
+	 * @param b
+	 * 			button to register command to
+	 * @param c
+	 * 			command to register button
+	 */
 	public static void registerWhileHeldCommand(Button b, Command c) {
 		b.whileHeld(c);
 	}
