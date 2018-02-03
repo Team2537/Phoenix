@@ -7,10 +7,8 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * names solenoid a and solenoid b
- * solenoid a applies pressure in one direction, closing the claw, and solenoid b closes the claw
- * @author Space RAIDers
- *
+ * creates solenoids and methods to control them
+ * registers buttons for commands
  */
 public class CubeSubsystem extends Subsystem {
     private Solenoid solea;
@@ -126,15 +124,3 @@ public class CubeSubsystem extends Subsystem {
    	
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
