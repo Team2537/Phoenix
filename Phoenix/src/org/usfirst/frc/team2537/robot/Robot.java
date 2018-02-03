@@ -12,6 +12,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		vertSys = new VertSubsystem();
+		vertSys.registerButtons();
 	}
 
 	@Override

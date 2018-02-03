@@ -27,4 +27,8 @@ public class HumanInput {
 	public static void registerWhenPressedCommand(Button b, Command c) {
 		b.whenPressed(c);
 	}
+	
+	public static void registerWhileHeldCommand(Button b, Command c) {
+		b.whileHeld(c);
+	}
 }
