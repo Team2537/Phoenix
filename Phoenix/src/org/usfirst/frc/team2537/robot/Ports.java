@@ -1,13 +1,10 @@
 package org.usfirst.frc.team2537.robot;
 
 public class Ports {
-	//Talons
-	public static final int LEFT_FRONT_RAMP_MOTOR = 4, LEFT_BACK_RAMP_MOTOR = 5,RIGHT_FRONT_RAMP_MOTOR = 6, RIGHT_BACK_RAMP_MOTOR = 7;
-	//Talon with Ramp
-	public static final int LEFT_RAMP_MOTOR =11, RIGHT_RAMP_MOTOR = 12;
-	
+	//Drive Motors
+	public static final int BACK_LEFT_MOTOR = 0, BACK_RIGHT_MOTOR = 1, FRONT_LEFT_MOTOR = 2, FRONT_RIGHT_MOTOR = 3;
 	//Servo
-	public static final int SERVO_MOTOR = 9;
+	public static final int RAMP_SERVO = 9;
 	//Encoders
 	public static final int LEFT_ENC_A = 0, LEFT_ENC_B = 1;
 	public static final int RIGHT_ENC_A = 2, RIGHT_ENC_B = 3; 
@@ -16,9 +13,9 @@ public class Ports {
 	//Joysticks
 	public static final int LEFT_JOYSTICK = 0, RIGHT_JOYSTICK = 1;
 	//Buttons
-	public static final int OPEN_LATCH = 4; 
-    
-    public static final int SOLENOID_C = 2;
+	public static final int RAMP_LOWER_BUTTON = 4, RAMP_RAISE_BUTTON = 5; 
+    //Solenoids
+    public static final int RAMP_LOWER_SOLENOID = 2, RAMP_RAISE_SOLENOID = 3;
 }
 
     		 

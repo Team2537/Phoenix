@@ -18,13 +18,11 @@ public class DriveCommand extends Command {
 	
 	@Override 
 	protected void execute() {
-//		Robot.driveSys.setLeftMotors(HumanInput.leftJoystick.getRawAxis(1), HumanInput.leftJoystick.getRawAxis(1));
-//		Robot.driveSys.setRightMotors(HumanInput.rightJoystick.getRawAxis(1),HumanInput.rightJoystick.getRawAxis(1)); 
+		Robot.driveSys.setMotors(Robot.driveSys.getLeftJoystick(), Robot.driveSys.getRightJoystick());
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	

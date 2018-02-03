@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class HumanInput {
 	public static Joystick leftJoystick = new Joystick(Ports.LEFT_JOYSTICK);
 	public static Joystick rightJoystick = new Joystick(Ports.RIGHT_JOYSTICK);
-	public static Button dropRamp = new JoystickButton(rightJoystick, Ports.OPEN_LATCH);
+	public static Button rampLowerButton = new JoystickButton(rightJoystick, Ports.RAMP_LOWER_BUTTON);
+	public static Button rampRaiseButton = new JoystickButton(rightJoystick, Ports.RAMP_RAISE_BUTTON);
 
 	/**
 	 * Register button to command
