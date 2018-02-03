@@ -21,10 +21,17 @@ public class CubeGrabCommand extends Command {
 	private double distanceForward = 0;
 	private long startTime;
 */	
+	
+	/**
+	 * says that the command requires cubeSys
+	 */
 	public CubeGrabCommand() {
 		requires(Robot.cubeSys);
 	}
 	
+	/**
+	 * when the command is initialized, it starts to apply pressure and closes the claw
+	 */
 	protected void initialize() {
 //		startTime = System.currentTimeMillis();
 		Robot.cubeSys.openGrabPiston();
@@ -60,7 +67,10 @@ public class CubeGrabCommand extends Command {
 	
 
 	}
-
+	
+	/**
+	 * if the button is released, the command is finished
+	 */
 	protected boolean isFinished() {
 		if(HumanInput.clawGrabButton.get()) {
 			return false;
@@ -68,11 +78,17 @@ public class CubeGrabCommand extends Command {
 		else return true;
 		
 	}
-				
+	
+	/**
+	 * when the command ends, pressure stops being applied
+	 */
 	protected void end() {
 		Robot.cubeSys.closeGrabPiston();
 	}
-
+	
+	/**
+	 * if the command is interrupted, pressure stops being applied
+	 */
 	protected void interrupted() {
 		Robot.cubeSys.closeGrabPiston();
 	}

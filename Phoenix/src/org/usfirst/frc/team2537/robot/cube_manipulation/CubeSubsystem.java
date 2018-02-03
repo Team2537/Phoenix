@@ -6,6 +6,12 @@ import org.usfirst.frc.team2537.robot.input.HumanInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+/**
+ * names solenoid a and solenoid b
+ * solenoid a applies pressure in one direction, closing the claw, and solenoid b closes the claw
+ * @author Space RAIDers
+ *
+ */
 public class CubeSubsystem extends Subsystem {
     private Solenoid solea;
     private Solenoid soleb;
@@ -22,7 +28,9 @@ public class CubeSubsystem extends Subsystem {
     CANTalon flywheelB;
    */ 
 
-	
+	/**
+	 * creates the solenoids and assigns ports to them
+	 */
 	public CubeSubsystem() {
     	solea = new Solenoid(Ports.SOLENOID_A);
     	soleb = new Solenoid(Ports.SOLENOID_B);
@@ -80,22 +88,37 @@ public class CubeSubsystem extends Subsystem {
     
 */    
 	
+	/**
+	 * starts to apply the pressure
+	 */
 	public void openGrabPiston() {
 		solea.set(true);
 	}
 	
+	/**
+	 * stops the pressure
+	 */
 	public void closeGrabPiston() {
 		solea.set(false);
 	}
 	
+	/**
+	 * applies pressure
+	 */
 	public void openStartPiston() {
 		soleb.set(true);
 	}
 	
+	/**
+	 * stops pressure
+	 */
 	public void closeStartPiston() {
 		soleb.set(false);
 	}
 	
+	/**
+	 * registers buttons so that when they are pressed, the respective command starts	
+	 */
 	public void registerButtons() {
 		HumanInput.registerWhenPressedCommand(HumanInput.clawGrabButton, new CubeGrabCommand());
 		HumanInput.registerWhenPressedCommand(HumanInput.cubeFlipperReleaseButton, new CubeStartCommand());
