@@ -16,4 +16,15 @@ public class Ports {
 	
 	// Drive Motors
 	public static final int FRONT_LEFT_MOTOR = 0, FRONT_RIGHT_MOTOR = 1, BACK_LEFT_MOTOR = 2, BACK_RIGHT_MOTOR = 3;
-}
+	
+	// Power Distribution Panel
+	public static final int PDP = 0;
+	
+	// Ultrasonic
+	public static final int ULTRASONIC_INPUT = 1;
+	public static final int ULTRASONIC_OUTPUT = 1;
+	
+
+	}
+
+

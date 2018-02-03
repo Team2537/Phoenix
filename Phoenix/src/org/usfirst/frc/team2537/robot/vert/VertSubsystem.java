@@ -5,6 +5,8 @@ import org.usfirst.frc.team2537.robot.input.HumanInput;
 import org.usfirst.frc.team2537.robot.resources.CANTalon;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -18,11 +20,17 @@ public class VertSubsystem extends Subsystem {
 	private Encoder vertEnc;
 	private CANTalon vertMotorOne;
 	private CANTalon vertMotorTwo;
+	private PowerDistributionPanel PDP;
+	private Ultrasonic ultrasonic;
+	private Ultrasonic ultrasonicOutput;
 
 	public VertSubsystem() {
 		vertEnc = new Encoder(Ports.VERT_ENC_A, Ports.VERT_ENC_B, false, Encoder.EncodingType.k4X);
 		vertMotorOne = new CANTalon(Ports.VERT_MOTOR_ONE);
 		vertMotorTwo = new CANTalon(Ports.VERT_MOTOR_TWO);
+		PDP = new PowerDistributionPanel(Ports.PDP);
+		
+		ultrasonic = new Ultrasonic(Ports.ULTRASONIC_INPUT,Ports.ULTRASONIC_OUTPUT); //help
 	}
 
 	public void initDefaultCommand() {
@@ -35,6 +43,7 @@ public class VertSubsystem extends Subsystem {
 		
 	}
 
+	
 	public int getDistance() {
 		return vertEnc.get();
 	}
@@ -42,6 +51,21 @@ public class VertSubsystem extends Subsystem {
 	public void setVertMotors(double speed) {
 		vertMotorOne.set(speed);
 		vertMotorTwo.set(-speed);
+	}
+	
+	public boolean getAmperage() {
+		if (PDP.getCurrent(1) >= 6.5) {
+			return true;
+		} else {
+			return false;
+		}
+		}
+	public boolean getUltrasonic() {
+		if (ultrasonic.getRangeInches() <= 5) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	

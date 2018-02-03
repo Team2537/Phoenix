@@ -27,6 +27,8 @@ public class VertUpCommand extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
+		Robot.vertSys.getAmperage();
+		Robot.vertSys.getUltrasonic();
 		return false;
 	}
 

@@ -24,7 +24,8 @@ public class VertDownCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		
+		Robot.vertSys.getAmperage();
+		Robot.vertSys.getUltrasonic();
 		return false;
 	}
 	
