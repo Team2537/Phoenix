@@ -11,8 +11,6 @@ public class ClimbSubsystem extends Subsystem {
 	private Talon climbMotorOne;
 	private Talon climbMotorTwo;
 	private Talon climbMotorThree;
-//	private DigitalInput limitSwitch;
-	// private Encoder climbEnc;
 	
 
 	
@@ -21,9 +19,7 @@ public class ClimbSubsystem extends Subsystem {
 		climbMotorOne = new Talon(Ports.CLIMB_MOTOR_ONE);
 		climbMotorTwo = new Talon(Ports.CLIMB_MOTOR_TWO);
 		climbMotorThree = new Talon(Ports.CLIMB_MOTOR_THREE);
-//		limitSwitch = new DigitalInput(Ports.LIMIT_SWITCH);
-//		climbEnc = new Encoder(Ports.ENCODER_A, Ports.ENCODER_B, false, Encoder.EncodingType.k4X);		
-	}
+}
 
 	@Override
 	public void initDefaultCommand() {
@@ -51,7 +47,4 @@ public class ClimbSubsystem extends Subsystem {
 
 	}
 
-//	public boolean getLimitSwitch(){
-//		return limitSwitch.get();
-//	}
 }

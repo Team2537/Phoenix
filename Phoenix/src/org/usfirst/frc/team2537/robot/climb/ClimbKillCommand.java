@@ -5,6 +5,10 @@ import org.usfirst.frc.team2537.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ClimbKillCommand extends Command {
+	
+	public ClimbKillCommand() {
+		requires(Robot.climbSys);
+	}
 
 	protected void initialize() {
 
@@ -27,6 +31,7 @@ public class ClimbKillCommand extends Command {
 	}
 
 	protected void interrupted() {
+		Robot.climbSys.ultraDeath();
 
 	}
 
