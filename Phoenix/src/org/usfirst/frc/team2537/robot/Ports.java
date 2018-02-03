@@ -13,4 +13,7 @@ public class Ports {
 
 	// Encoders
 	public static final int VERT_ENC_A = 1, VERT_ENC_B = 2;
+	
+	// Drive Motors
+	public static final int FRONT_LEFT_MOTOR = 0, FRONT_RIGHT_MOTOR = 1, BACK_LEFT_MOTOR = 2, BACK_RIGHT_MOTOR = 3;
 }
