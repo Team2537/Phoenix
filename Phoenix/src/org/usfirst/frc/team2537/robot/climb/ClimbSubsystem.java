@@ -39,7 +39,7 @@ public class ClimbSubsystem extends Subsystem {
 	 */
 	public void registerButtons() {
 		HumanInput.registerWhenPressedCommand(HumanInput.climbOnButton, new ClimbCommand());
-		HumanInput.climbOffButton.cancelWhenPressed(getCurrentCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.climbOffButton, new ClimbKillCommand());
 	}
 
 	/**
