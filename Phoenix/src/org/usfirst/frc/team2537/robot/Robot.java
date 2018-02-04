@@ -17,7 +17,7 @@ public class Robot extends IterativeRobot {
 		driveSys.initDefaultCommand();
 		climbSys = new ClimbSubsystem();
 		climbSys.registerButtons();
-
+		
 	}
 
 	@Override

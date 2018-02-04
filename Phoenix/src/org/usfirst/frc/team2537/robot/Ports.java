@@ -12,5 +12,8 @@ public class Ports {
 	public static final int CLIMB_MOTOR_ONE = 4;
 	public static final int CLIMB_MOTOR_TWO = 5;
 	public static final int CLIMB_MOTOR_THREE = 6;
+	public static final int CLIMB_MOTOR_ONE_PDP_CHANNEL= 0;
+	public static final int CLIMB_MOTOR_TWO_PDP_CHANNEL= 1;
+	public static final int CLIMB_MOTOR_THREE_PDP_CHANNEL = 2;
 	public static final int LIMIT_SWITCH = 0;
 }

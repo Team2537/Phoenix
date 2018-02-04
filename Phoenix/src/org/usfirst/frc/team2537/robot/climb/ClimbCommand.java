@@ -22,12 +22,15 @@ public class ClimbCommand extends Command {
 	}
 
 	protected void execute() { 
-		
+		-
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Robot.climbSys.getLimitSwitch() || amperage1 > maxAmps || amperage2 > maxAmps;
+		return (Robot.climbSys.getLimitSwitch() && !Robot.climbSys.limitSwitchOverridden()) ||
+				Robot.climbSys.getCurrentOne() > ClimbSubsystem.MAX_CURRENT || 
+				Robot.climbSys.getCurrentTwo() > ClimbSubsystem.MAX_CURRENT || 
+				Robot.climbSys.getCurrentThree() > ClimbSubsystem.MAX_CURRENT;
 	}
 
 	protected void end() {

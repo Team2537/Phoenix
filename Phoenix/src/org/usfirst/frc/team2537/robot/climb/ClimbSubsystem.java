@@ -18,17 +18,15 @@ public class ClimbSubsystem extends Subsystem {
 	private Talon climbMotorOne;
 	private Talon climbMotorTwo;
 	private Talon climbMotorThree;
-	private DigitalInput limitSwitch;	
-	private double amperage1;
-	private double amperage2;
-	
+	private DigitalInput limitSwitch;
+	public static final double MAX_CURRENT = 1337; //TODO: test for the max current value
 	public ClimbSubsystem() {
 		
 		climbMotorOne = new Talon(Ports.CLIMB_MOTOR_ONE);
 		climbMotorTwo = new Talon(Ports.CLIMB_MOTOR_TWO);
 		climbMotorThree = new Talon(Ports.CLIMB_MOTOR_THREE);
 		limitSwitch = new DigitalInput(Ports.LIMIT_SWITCH);
-}
+	}
 	/**
 	 * 
 	 */
@@ -41,8 +39,7 @@ public class ClimbSubsystem extends Subsystem {
 	 */
 	public void registerButtons() {
 		HumanInput.registerWhenPressedCommand(HumanInput.climbOnButton, new ClimbCommand());
-		HumanInput.registerWhenPressedCommand(HumanInput.climbOffButton, new ClimbKillCommand());
-		
+		HumanInput.climbOffButton.cancelWhenPressed(getCurrentCommand());
 	}
 
 	/**
@@ -73,12 +70,17 @@ public class ClimbSubsystem extends Subsystem {
 	 * 
 	 * @return current
 	 */
-	public double getCurrent() {
-		amperage1 = PDPJNI.getPDPTotalCurrent(0);
-		return amperage1;
+	public double getCurrentOne() {
+		return PDPJNI.getPDPChannelCurrent((byte) 0, 0);
 	}
 	public double getCurrentTwo() {
-		amperage2 = PDPJNI.getPDPTotalCurrent(0);
-		return amperage2;
+		return PDPJNI.getPDPChannelCurrent((byte) 1,0);
+	}
+	public double getCurrentThree() {
+		return PDPJNI.getPDPChannelCurrent((byte)2,0);
+	}
+	
+	public boolean limitSwitchOverridden() {
+		return HumanInput.overrideKeyOne.get() && HumanInput.overrideKeyTwo.get() && HumanInput.overrideKeyThree.get();
 	}
 }
