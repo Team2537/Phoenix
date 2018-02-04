@@ -29,7 +29,7 @@ public class CubeGrabCommand extends Command {
 	}
 	
 	/**
-	 * if the button is released, the command is finished
+	 * if time used to grab cube is greater than 1 second, command finished (used to prevent squishing cube)
 	 */
 	protected boolean isFinished() {
 		return (System.currentTimeMillis() - startTime > WAIT_TIME);

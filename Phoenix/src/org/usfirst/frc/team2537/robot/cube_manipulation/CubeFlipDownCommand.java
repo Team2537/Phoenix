@@ -24,7 +24,7 @@ public class CubeFlipDownCommand extends Command {
 	@Override
 	protected void initialize() {
 		startTime = System.currentTimeMillis();
-		Robot.cubeSys.openFlipper();;
+		Robot.cubeSys.openFlipper();
 	}
 	
 	@Override
@@ -46,7 +46,7 @@ public class CubeFlipDownCommand extends Command {
 	 */
 	@Override
 	protected void end() {		
-		Robot.cubeSys.stopOpenFlipper();;
+		Robot.cubeSys.stopOpenFlipper();
 		
 	}
 	
