@@ -19,7 +19,8 @@ public class ClimbSubsystem extends Subsystem {
 	private Talon climbMotorTwo;
 	private Talon climbMotorThree;
 	private DigitalInput limitSwitch;	
-	private double current;
+	private double amperage1;
+	private double amperage2;
 	
 	public ClimbSubsystem() {
 		
@@ -73,8 +74,11 @@ public class ClimbSubsystem extends Subsystem {
 	 * @return current
 	 */
 	public double getCurrent() {
-		current = PDPJNI.getPDPTotalCurrent(0);
-		return current;
+		amperage1 = PDPJNI.getPDPTotalCurrent(0);
+		return amperage1;
 	}
-
+	public double getCurrentTwo() {
+		amperage2 = PDPJNI.getPDPTotalCurrent(0);
+		return amperage2;
+	}
 }

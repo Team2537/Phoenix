@@ -27,7 +27,7 @@ public class ClimbCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return Robot.get
+		return Robot.climbSys.getLimitSwitch() || amperage1 > maxAmps || amperage2 > maxAmps;
 	}
 
 	protected void end() {
