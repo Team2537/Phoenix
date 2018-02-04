@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2537.robot.vision;
+package org.usfirst.frc.team2537.robot.auto.vision;
 
 public class Point {
 	public static final int CAMERA_WIDTH = 640;

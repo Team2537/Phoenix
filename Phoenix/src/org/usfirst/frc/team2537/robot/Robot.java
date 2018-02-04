@@ -1,12 +1,12 @@
 package org.usfirst.frc.team2537.robot;
 
 import org.usfirst.frc.team2537.robot.auto.EncoderTest;
+import org.usfirst.frc.team2537.robot.auto.vision.SerialSubsystem;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
 import org.usfirst.frc.team2537.robot.cube_manipulation.CubeSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
 import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
 import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
-import org.usfirst.frc.team2537.robot.vision.SerialSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;

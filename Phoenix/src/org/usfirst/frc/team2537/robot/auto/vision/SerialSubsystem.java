@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2537.robot.vision;
+package org.usfirst.frc.team2537.robot.auto.vision;
 
 import org.usfirst.frc.team2537.robot.Ports;
 

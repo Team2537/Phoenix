@@ -1,11 +1,18 @@
-package org.usfirst.frc.team2537.robot.vision;
+package org.usfirst.frc.team2537.robot.auto.vision;
 
 public class Target {
 	private Point[] points;
 	private Point[] boundingBox;
+	private Point boundingBoxCenter;
+	private double boundingBoxArea;
 
 	public Target(Point[] points) {
 		this.points = points;
+		this.boundingBoxArea = 0;
+	}
+	
+	public Target(){
+		this(new Point[0]);
 	}
 
 	public Point[] getPoints() {
@@ -39,5 +46,33 @@ public class Target {
 			boundingBox[1] = new Point(rightX, downY);
 		}
 		return boundingBox;
+	}
+	
+	public double getBoundingBoxLength(){
+		if(boundingBox == null){
+			getBoundingBox();
+		}
+		return boundingBox[1].getX() - boundingBox[0].getX();
+	}
+	
+	public double getBoundingBoxHeight(){
+		if(boundingBox == null){
+			getBoundingBox();
+		}
+		return boundingBox[1].getY() - boundingBox[0].getY();
+	}
+	
+	public double getBoundingBoxArea(){
+		if(boundingBoxArea == 0){
+			boundingBoxArea = Math.abs(getBoundingBoxLength()*getBoundingBoxHeight());
+		}
+		return boundingBoxArea;
+	}
+	
+	public Point getBoundingBoxCenter(){
+		if(boundingBoxCenter == null){
+			boundingBoxCenter = new Point((int)(getBoundingBoxLength()/2), (int)(getBoundingBoxHeight()/2));
+		}
+		return boundingBoxCenter;
 	}
 }
