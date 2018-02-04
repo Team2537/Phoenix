@@ -17,7 +17,6 @@ public class DriveCommand extends Command {
 	
 	@Override 
 	protected void execute() {
-		Robot.driveSys.setMotors(Robot.driveSys.getLeftJoystick(), Robot.driveSys.getRightJoystick());
 	}
 	
 	@Override
