@@ -39,11 +39,24 @@ public class Ports {
 	public static final int MANIPULATOR_SOLENOID_A = 0, MANIPULATOR_SOLENOID_B = 1;
 	public static final int FLIP_SOLENOID_A = 2, FLIP_SOLENOID_B = 3;
 
-	public static final edu.wpi.first.wpilibj.SerialPort.Port RASPI = Port.kMXP;
 
 	// potentiometers
 	public static final int POTENTIOMETER_CHANNEL = 3, POTENTOMETER_SCALE = 360;
 
 	public static final int FLYWHEEL_A = 1, FLYWHEEL_B = 2;
 
-}
+	
+	// Power Distribution Panel
+	public static final int PDP = 0;
+	
+	// Ultrasonic
+	public static final int ULTRASONIC_INPUT = 1;
+	public static final int ULTRASONIC_OUTPUT = 1;
+	
+	public static final edu.wpi.first.wpilibj.SerialPort.Port RASPI = Port.kMXP;
+
+	
+
+	}
+
+

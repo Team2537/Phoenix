@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveSubsystem extends Subsystem{
+
 	
 /******************************************************************************/
 /*                              PUBLIC CONSTANTS                              */
@@ -54,6 +55,7 @@ public class DriveSubsystem extends Subsystem{
 		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
 		talonBackLeft.configSelectedFeedbackSensor  (FeedbackDevice.QuadEncoder, 0,0);
 		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
+
 	}
 	
 	
