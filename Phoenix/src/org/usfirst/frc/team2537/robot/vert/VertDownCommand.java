@@ -14,12 +14,11 @@ public class VertDownCommand extends Command {
 
 	@Override
 	protected void initialize() {
-		if (Robot.vertSys.getUltrasonic() > ULTRASONIC_DISTANCE) {
-			Robot.vertSys.setVertMotors(0);
-		} else {
+//		if (Robot.vertSys.getUltrasonic() > ULTRASONIC_DISTANCE) {
+//			Robot.vertSys.setVertMotors(0);
+//		} else {
 			Robot.vertSys.setVertMotors(-0.8);
-		}
-
+//		}
 	}
 
 	@Override

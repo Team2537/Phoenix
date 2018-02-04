@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
 		climbSys.registerButtons();
 		
 		rampSys = new RampSubsystem();
-		rampSys.registerButtons();
+//		rampSys.registerButtons();
 		
 		serialSys = new SerialSubsystem();
 		
