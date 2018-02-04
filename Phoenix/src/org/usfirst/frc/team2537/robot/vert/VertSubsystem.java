@@ -22,7 +22,6 @@ public class VertSubsystem extends Subsystem {
 	private CANTalon vertMotorTwo;
 	private Ultrasonic ultrasonic;
 	private PowerDistributionPanel PDP;
-	private PowerDistributionPanel channelTwo;
 	double current;
 
 	public VertSubsystem() { 
@@ -54,21 +53,20 @@ public class VertSubsystem extends Subsystem {
 		vertMotorOne.set(speed);
 		vertMotorTwo.set(-speed);
 	}
-	
-	//returns amp for channel 5
-	public double getAmperageOne() {
-		return PDP.getCurrent(5);
-	}
-
-	//returns amp for channel 4
-	public double getAmperageTwo() {
-		return PDP.getCurrent(4);
-		
-	}
 
 	//returns distance of object from robot
 	public double getUltrasonic() {
 		return ultrasonic.getRangeInches();
+	}
+	
+	//returns current of vert motor one
+	public double getCurrentOne() {
+		return PDP.getCurrent(Ports.VERT_MOTOR_ONE_PDP_CHANNEL);
+	}
+	
+	//returns current of vert motor two
+	public double getCurrentTwo() {
+		return PDP.getCurrent(Ports.VERT_MOTOR_TWO_PDP_CHANNEL);
 	}
 
 }

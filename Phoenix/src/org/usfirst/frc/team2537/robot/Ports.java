@@ -21,7 +21,12 @@ public class Ports {
 	public static final int PDP = 0;
 	
 	// Ultrasonic
-	public static final int ULTRASONIC_INPUT = 1, ULTRASONIC_OUTPUT = 1;
+	public static final int ULTRASONIC_INPUT = 0, ULTRASONIC_OUTPUT = 1;
+	
+	// Motor Channels
+	public static final int VERT_MOTOR_ONE_PDP_CHANNEL = 5;
+	public static final int VERT_MOTOR_TWO_PDP_CHANNEL = 4;
+	
 	
 	}
 

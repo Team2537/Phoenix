@@ -26,13 +26,13 @@ public class VertDownCommand extends Command {
 			Robot.vertSys.setVertMotors(-0.8);
 		}
 		//stops bot when it exceeds amp limit for channel 5
-		if (Robot.vertSys.getAmperageOne() >= AMP_LIMIT) {
+		if (Robot.vertSys.getCurrentOne() >= AMP_LIMIT) {
 			Robot.vertSys.setVertMotors(0);
 		} else {
 			Robot.vertSys.setVertMotors(-0.8);
 		}	
 		//stops bot when it exceeds amp limit for channel 4
-		if (Robot.vertSys.getAmperageTwo() >= AMP_LIMIT) {
+		if (Robot.vertSys.getCurrentTwo() >= AMP_LIMIT) {
 			Robot.vertSys.setVertMotors(0);
 		} else {
 			Robot.vertSys.setVertMotors(-0.8);
