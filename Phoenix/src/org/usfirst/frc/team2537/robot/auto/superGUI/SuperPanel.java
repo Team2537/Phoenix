@@ -95,6 +95,7 @@ public class SuperPanel extends JPanel implements KeyListener, MouseMotionListen
 		System.exit(0);
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void keyPressed(KeyEvent k) {
 		if(k.getKeyCode() == deleteAllKey){
