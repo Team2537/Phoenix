@@ -9,7 +9,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.PWMTalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveSubsystem extends Subsystem{
@@ -35,8 +34,8 @@ public class DriveSubsystem extends Subsystem{
 	
 	private TalonSRX talonFrontLeft;
 	private TalonSRX talonFrontRight;
-	private PWMTalonSRX talonBackLeft;
-	private PWMTalonSRX talonBackRight;
+	private TalonSRX talonBackLeft;
+	private TalonSRX talonBackRight;
 	public ControlMode controlMode = ControlMode.PercentOutput;
 	
 	
@@ -48,10 +47,12 @@ public class DriveSubsystem extends Subsystem{
 	public DriveSubsystem(){
 		talonFrontLeft  = new TalonSRX(Ports.FRONT_LEFT_MOTOR);
 		talonFrontRight = new TalonSRX(Ports.FRONT_RIGHT_MOTOR);
-		talonBackLeft   = new PWMTalonSRX(Ports.BACK_LEFT_MOTOR);
-		talonBackRight  = new PWMTalonSRX(Ports.BACK_RIGHT_MOTOR);
+		talonBackLeft   = new TalonSRX(Ports.BACK_LEFT_MOTOR);
+		talonBackRight  = new TalonSRX(Ports.BACK_RIGHT_MOTOR);
 		
-		talonFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,  0,0);
+		talonFrontLeft.configSelectedFeedbackSensor (FeedbackDevice.QuadEncoder, 0,0);
+		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
+		talonBackLeft.configSelectedFeedbackSensor  (FeedbackDevice.QuadEncoder, 0,0);
 		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
 	}
 	
@@ -75,38 +76,34 @@ public class DriveSubsystem extends Subsystem{
 	 * @return average value of all talons in inches
 	 */
 	public double getEncoderDistance(){
-		double rawDistance = (talonFrontLeft.getSelectedSensorPosition(0) * LEFT_MOTOR_DIRECTION +
-			    talonFrontRight.getSelectedSensorPosition(0) * RIGHT_MOTOR_DIRECTION) / 2;
+		double rawDistance = (	// ticks
+				(talonFrontLeft.getSelectedSensorPosition(0) + talonBackLeft.getSelectedSensorPosition(0))
+				* LEFT_MOTOR_DIRECTION +
+			    (talonFrontRight.getSelectedSensorPosition(0) + talonBackRight.getSelectedSensorPosition(0))
+			    * RIGHT_MOTOR_DIRECTION) / 4;
 		return Conversions.convertDistance(rawDistance, Distances.TICKS, Distances.INCHES);
-	}
-	
-	public double getEncoderVelocity(){
-		/*
-		if(encFrontLeft.skippedCycles() < encFrontRight.skippedCycles()){
-			return encFrontLeft.latestValidVelocity() * LEFT_MOTOR_DIRECTION;
-		} else {
-			return encFrontRight.latestValidVelocity() * RIGHT_MOTOR_DIRECTION;
-		}
-		*/
-		return (talonFrontLeft.getSelectedSensorVelocity(0) * LEFT_MOTOR_DIRECTION +
-			    talonFrontRight.getSelectedSensorVelocity(0) * RIGHT_MOTOR_DIRECTION) / 2;
-	}
-	
-	public void resetEncoders() {
-		 talonFrontRight.getSensorCollection().setQuadraturePosition(0,0);
-		 talonFrontLeft.getSensorCollection().setQuadraturePosition(0,0);
 	}
 	
 	/**
 	 * @return average velocity of all talons in inches per second
 	 */
-	public double getVelocityAverage(){
-		/* ticks per 100ms */
-		double rawVelocity = (talonFrontLeft.getSelectedSensorVelocity(0)
-				+ talonFrontRight.getSelectedSensorVelocity(0)) / 2;
-
+	public double getEncoderVelocity(){
+		double rawVelocity = (	// ticks per 100ms
+				(talonFrontLeft.getSelectedSensorVelocity(0) + talonBackLeft.getSelectedSensorVelocity(0))
+				* LEFT_MOTOR_DIRECTION +
+				(talonFrontRight.getSelectedSensorVelocity(0) + talonBackRight.getSelectedSensorVelocity(0))
+				* RIGHT_MOTOR_DIRECTION) / 4;
 		return Conversions.convertSpeed(rawVelocity, Distances.TICKS, Times.HUNDRED_MS, Distances.INCHES, Times.SECONDS);
 	}
+	
+	public void resetEncoders() {
+		 talonFrontRight.getSensorCollection().setQuadraturePosition(0,0);
+		 talonFrontLeft.getSensorCollection().setQuadraturePosition(0,0);
+		 talonBackRight.getSensorCollection().setQuadraturePosition(0,0);
+		 talonBackLeft.getSensorCollection().setQuadraturePosition(0,0);
+	}
+	
+
 	
 	
 /******************************************************************************/
@@ -122,10 +119,10 @@ public class DriveSubsystem extends Subsystem{
 			talonFrontRight.set(controlMode, speed*RIGHT_MOTOR_DIRECTION);
 		}
 		if(id == Motor.BACK_LEFT || id == Motor.LEFT || id == Motor.BACK || id == Motor.ALL){
-			talonBackLeft.set(speed*LEFT_MOTOR_DIRECTION);
+			talonBackLeft.set(controlMode, speed*LEFT_MOTOR_DIRECTION);
 		}
 		if(id == Motor.BACK_RIGHT || id == Motor.RIGHT || id == Motor.BACK || id == Motor.ALL){
-			talonBackRight.set(speed*RIGHT_MOTOR_DIRECTION);
+			talonBackRight.set(controlMode, speed*RIGHT_MOTOR_DIRECTION);
 		}
 	}
 	
