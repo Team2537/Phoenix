@@ -17,7 +17,7 @@ public class ClimbKillCommand extends Command {
 	}
 
 	protected void execute() {
-
+		
 	}
 
 	@Override
