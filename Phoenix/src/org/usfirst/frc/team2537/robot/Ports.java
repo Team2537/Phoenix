@@ -11,6 +11,8 @@ public class Ports {
 	public static final int CLIMB_ON_BUTTON = 3, CLIMB_OFF_BUTTON = 2;
 	public static final int OVERRIDE_KEY_ONE = 6, OVERRIDE_KEY_TWO = 7, OVERRIDE_KEY_THREE = 8;
 	public static final int RAMP_LOWER_BUTTON = 4, RAMP_RAISE_BUTTON = 5;
+	public static final int CUBE_GRAB_BUTTON = 1, CUBE_RELEASE_BUTTON = 1;
+	public static final int FLIP_MANIPULATOR_DOWN_BUTTON = 4, FLIP_MANIPULATOR_UP_BUTTON = 5;
 
 	// Talons
 	public static final int VERT_MOTOR_ONE = 2, VERT_MOTOR_TWO = 3;
@@ -34,6 +36,14 @@ public class Ports {
 
 	// Solenoids
 	public static final int RAMP_LOWER_SOLENOID = 5, RAMP_RAISE_SOLENOID = 4;
+	public static final int MANIPULATOR_SOLENOID_A = 0, MANIPULATOR_SOLENOID_B = 1;
+	public static final int FLIP_SOLENOID_A = 2, FLIP_SOLENOID_B = 3;
 
 	public static final edu.wpi.first.wpilibj.SerialPort.Port RASPI = Port.kMXP;
+
+	// potentiometers
+	public static final int POTENTIOMETER_CHANNEL = 3, POTENTOMETER_SCALE = 360;
+
+	public static final int FLYWHEEL_A = 1, FLYWHEEL_B = 2;
+
 }

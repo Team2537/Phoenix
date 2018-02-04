@@ -2,6 +2,7 @@ package org.usfirst.frc.team2537.robot;
 
 import org.usfirst.frc.team2537.robot.auto.EncoderTest;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
+import org.usfirst.frc.team2537.robot.cube_manipulation.CubeSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
 import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
 import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
@@ -22,27 +23,33 @@ public class Robot extends IterativeRobot {
 	public static VertSubsystem vertSys;
 	public static ClimbSubsystem climbSys;
 	public static RampSubsystem rampSys;
-	
+	public static SerialSubsystem serialSys;	
+	public static CubeSubsystem cubeSys;
 
-	public static SerialSubsystem serialSys;
-	
 	@Override
 	public void robotInit() {
 		driveSys = new DriveSubsystem();
 		driveSys.initDefaultCommand();
 		driveSys.resetEncoders();
+		
 		vertSys = new VertSubsystem();
 		vertSys.registerButtons();
+		
 		climbSys = new ClimbSubsystem();
 		climbSys.registerButtons();
+		
 		rampSys = new RampSubsystem();
 		rampSys.registerButtons();
+		
 		serialSys = new SerialSubsystem();
+		
+		cubeSys = new CubeSubsystem();
+		cubeSys.registerButtons();
+
 	}
 
 	@Override
 	public void autonomousInit() {
-		//new DriveStraightCommand(100, 1).start();
 	}
 
 	@Override

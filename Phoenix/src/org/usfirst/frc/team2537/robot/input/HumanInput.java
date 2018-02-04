@@ -18,12 +18,20 @@ public class HumanInput {
 
 	public static Button climbOnButton = new JoystickButton(rightJoystick, Ports.CLIMB_ON_BUTTON);
 	public static Button climbOffButton = new JoystickButton(rightJoystick, Ports.CLIMB_OFF_BUTTON);
+	
 	public static Button overrideKeyOne = new JoystickButton(leftJoystick, Ports.OVERRIDE_KEY_ONE);
 	public static Button overrideKeyTwo = new JoystickButton(leftJoystick, Ports.OVERRIDE_KEY_TWO);
 	public static Button overrideKeyThree = new JoystickButton(leftJoystick, Ports.OVERRIDE_KEY_THREE);
+	
 	public static Button rampLowerButton = new JoystickButton(rightJoystick, Ports.RAMP_LOWER_BUTTON);
 	public static Button rampRaiseButton = new JoystickButton(rightJoystick, Ports.RAMP_RAISE_BUTTON);
-
+	
+	public static Button cubeGrabButton = new JoystickButton(leftJoystick, Ports.CUBE_GRAB_BUTTON);
+	public static Button cubeReleaseButton = new JoystickButton(rightJoystick, Ports.CUBE_RELEASE_BUTTON);
+	
+	public static Button cubeFlipDownButton = new JoystickButton(leftJoystick, Ports.FLIP_MANIPULATOR_DOWN_BUTTON);
+	public static Button cubeFlipUpButton = new JoystickButton(leftJoystick, Ports.FLIP_MANIPULATOR_UP_BUTTON);
+	
 	/**
 	 * Register button to command
 	 * 
