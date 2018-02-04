@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class VertDownCommand extends Command {
 	
-
+	private static final int ULTRASONIC_DISTANCE = 5; // 5 inches
 	
 	public VertDownCommand() {
 		requires(Robot.vertSys);
@@ -24,9 +24,7 @@ public class VertDownCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		Robot.vertSys.getAmperage();
-		Robot.vertSys.getUltrasonic();
-		return false;
+		return Robot.vertSys.getUltrasonic() > ULTRASONIC_DISTANCE;
 	}
 	
 	@Override
