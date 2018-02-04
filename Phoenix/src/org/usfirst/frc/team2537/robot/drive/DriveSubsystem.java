@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.PWMTalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveSubsystem extends Subsystem{
+
 	
 /******************************************************************************/
 /*                              PUBLIC CONSTANTS                              */
@@ -53,6 +54,7 @@ public class DriveSubsystem extends Subsystem{
 		
 		talonFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,  0,0);
 		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
+
 	}
 	
 	
