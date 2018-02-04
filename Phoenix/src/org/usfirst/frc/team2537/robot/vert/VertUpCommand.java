@@ -9,7 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class VertUpCommand extends Command {
 	
-	private static final int ULTRASONIC_DISTANCE = 3; // 5 inches
+	private static final int ULTRASONIC_DISTANCE = 5; // 5 inches
+	private static final int AMP_LIMIT = 5; //5 amps TBD
 
 
 	
@@ -19,19 +20,36 @@ public class VertUpCommand extends Command {
 	}
 
 	protected void initialize() {
-		if (Robot.vertSys.getUltrasonic() > ULTRASONIC_DISTANCE) {
+		
+	}
+
+	protected void execute() {
+		// stops bot when it's 5 inches or closer to object
+		if (Robot.vertSys.getUltrasonic() <= ULTRASONIC_DISTANCE) {
 			Robot.vertSys.setVertMotors(0);
 		} else {
 			Robot.vertSys.setVertMotors(-0.8);
 		}	
-		}
-
-	protected void execute() {
+		//stops bot when it exceeds amp limit for channel 5
+		if (Robot.vertSys.getAmperageOne() >= AMP_LIMIT) {
+			Robot.vertSys.setVertMotors(0);
+		} else {
+			Robot.vertSys.setVertMotors(-0.8);
+		}	
+		//stops bot when it exceeds amp limit for channel 4
+		if (Robot.vertSys.getAmperageTwo() >= AMP_LIMIT) {
+			Robot.vertSys.setVertMotors(0);
+		} else {
+			Robot.vertSys.setVertMotors(-0.8);
+		}	
+		
 		
 	}
 
 	protected boolean isFinished() {
+		
 		return false;
+		
 	}
 
 	protected void end() {
