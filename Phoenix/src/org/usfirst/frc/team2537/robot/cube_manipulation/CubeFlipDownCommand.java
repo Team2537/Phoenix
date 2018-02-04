@@ -1,7 +1,6 @@
 package org.usfirst.frc.team2537.robot.cube_manipulation;
 
 import org.usfirst.frc.team2537.robot.Robot;
-import org.usfirst.frc.team2537.robot.input.HumanInput;
 
 import edu.wpi.first.wpilibj.command.Command;
 
