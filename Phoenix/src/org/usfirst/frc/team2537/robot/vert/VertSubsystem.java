@@ -21,7 +21,7 @@ public class VertSubsystem extends Subsystem {
 	private CANTalon vertMotorOne;
 	private CANTalon vertMotorTwo;
 	private Ultrasonic ultrasonic;
-	private PowerDistributionPanel channelOne;
+	private PowerDistributionPanel PDP;
 	private PowerDistributionPanel channelTwo;
 	double current;
 
@@ -29,16 +29,15 @@ public class VertSubsystem extends Subsystem {
 		vertEnc = new Encoder(Ports.VERT_ENC_A, Ports.VERT_ENC_B, false, Encoder.EncodingType.k4X);
 		vertMotorOne = new CANTalon(Ports.VERT_MOTOR_ONE);
 		vertMotorTwo = new CANTalon(Ports.VERT_MOTOR_TWO);
-		channelOne = new PowerDistributionPanel(Ports.PDP);
-		channelTwo = new PowerDistributionPanel(Ports.PDP);
-		ultrasonic = new Ultrasonic(Ports.ULTRASONIC_INPUT, Ports.ULTRASONIC_OUTPUT); // help
+		PDP = new PowerDistributionPanel(Ports.PDP);
+		ultrasonic = new Ultrasonic(Ports.ULTRASONIC_INPUT, Ports.ULTRASONIC_OUTPUT); 
 	}
 
 	public void initDefaultCommand() {
 
 	}
 	
-	//makes sure command works when button pressed or held
+	//makes sure command works when button held
 	public void registerButtons() {
 		HumanInput.registerWhileHeldCommand(HumanInput.raiseButton, new VertUpCommand());
 		HumanInput.registerWhileHeldCommand(HumanInput.lowerButton, new VertDownCommand());
@@ -56,18 +55,18 @@ public class VertSubsystem extends Subsystem {
 		vertMotorTwo.set(-speed);
 	}
 	
-	//receives amp for channel 5
+	//returns amp for channel 5
 	public double getAmperageOne() {
-		return channelOne.getCurrent(5);
+		return PDP.getCurrent(5);
 	}
 
-	//receives amp for channel 4
+	//returns amp for channel 4
 	public double getAmperageTwo() {
-		return channelTwo.getCurrent(4);
+		return PDP.getCurrent(4);
 		
 	}
 
-	//receives distance of object(wall) from robot
+	//returns distance of object from robot
 	public double getUltrasonic() {
 		return ultrasonic.getRangeInches();
 	}
