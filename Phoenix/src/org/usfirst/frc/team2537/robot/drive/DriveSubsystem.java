@@ -3,7 +3,7 @@ package org.usfirst.frc.team2537.robot.drive;
 import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 import org.usfirst.frc.team2537.robot.resources.CANTalon;
-import edu.wpi.first.wpilibj.Joystick;
+
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -12,8 +12,6 @@ public class DriveSubsystem extends Subsystem {
 	private CANTalon backRight;
 	private Talon frontLeft;
 	private Talon frontRight;
-	private Joystick rightJoystick;
-	private Joystick leftJoystick;
 	double deadZone = .1;
 	
 	public DriveSubsystem() {
@@ -21,8 +19,6 @@ public class DriveSubsystem extends Subsystem {
 		backRight = new CANTalon(Ports.BACK_RIGHT_MOTOR);
 		frontLeft = new Talon(Ports.FRONT_LEFT_MOTOR);
 		frontRight = new Talon(Ports.FRONT_RIGHT_MOTOR);
-		rightJoystick = new Joystick(Ports.RIGHT_JOYSTICK);
-		leftJoystick = new Joystick(Ports.LEFT_JOYSTICK);
 	}
 	
 	@Override
