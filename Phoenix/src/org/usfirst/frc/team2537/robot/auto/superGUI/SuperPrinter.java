@@ -51,7 +51,7 @@ public class SuperPrinter {
 
 				// turn to command
 				if(angleDiff != 0){
-					if(commandWriter != null) commandWriter.write("\t\taddSequential(new AutoRotateCommand(" + angleDiff + "));\n");
+					if(commandWriter != null) commandWriter.write("\t\taddSequential(new RotateCommand(" + angleDiff + "));\n");
 					System.out.println("Turn " + angleDiff);
 				}
 
@@ -84,7 +84,7 @@ public class SuperPrinter {
 			while(angleDiff < -180) angleDiff += 360;
 
 			if (angleDiff != 0) {
-				if(commandWriter != null) commandWriter.write("\t\taddSequential(new AutoRotateCommand(" + angleDiff + "));\n");
+				if(commandWriter != null) commandWriter.write("\t\taddSequential(new RotateCommand(" + angleDiff + "));\n");
 				System.out.println("Turn " + angleDiff);
 			}
 
@@ -123,7 +123,7 @@ public class SuperPrinter {
 			if(mapsList != null){
 				for(File map : mapsList){
 					String mapName = map.getName();
-					autoWriter.write("import org.usfirst.frc.team2537.maps." + mapName.substring(0, mapName.length() - 5) + ";\n");
+					autoWriter.write("import org.usfirst.frc.team2537.robot.auto.routes." + mapName.substring(0, mapName.length() - 4) + ";\n");
 				}
 				autoWriter.write("\n");
 			}
@@ -137,7 +137,7 @@ public class SuperPrinter {
 			if(mapsList != null){
 				for(File map : mapsList){
 					String mapName = map.getName();
-					mapName = mapName.substring(0, mapName.length() - 5);
+					mapName = mapName.substring(0, mapName.length() - 4);
 					if(mapName.equals("DefaultAuto") || mapName.equals("DriveForward"))
 						autoWriter.write("\t\taddDefault(\"" + mapName + "\", new " + mapName + "());\n");
 					else
