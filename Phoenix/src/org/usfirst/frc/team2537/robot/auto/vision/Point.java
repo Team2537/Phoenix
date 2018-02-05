@@ -4,8 +4,7 @@ public class Point {
 	public static final int CAMERA_WIDTH = 640;
 	public static final int CAMERA_HEIGHT = 480;
 	
-	private int x;
-	private int y;
+	public final int x, y;
 
 	public Point(int x, int y) {
 		this.x = x;
@@ -16,14 +15,6 @@ public class Point {
 		return x + "," + y + "|";
 	}
 
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
-	}
-	
 	public double getX(CoordinateSystems system){
 		double currentX = x, halfWidth = CAMERA_WIDTH/2.0;
 		if(system == CoordinateSystems.CARTESIAN || system == CoordinateSystems.CARTESIAN_NORMALIZED){

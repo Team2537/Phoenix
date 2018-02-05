@@ -29,17 +29,17 @@ public class Target {
 			int upY = Integer.MIN_VALUE;
 			int downY = Integer.MAX_VALUE;
 			for (int i = 0; i < points.length; i++) {
-				if (points[i].getX() < leftX) {
-					leftX = points[i].getX();
+				if (points[i].x < leftX) {
+					leftX = points[i].x;
 				}
-				if (points[i].getX() > rightX) {
-					rightX = points[i].getX();
+				if (points[i].x > rightX) {
+					rightX = points[i].x;
 				}
-				if (points[i].getY() > upY) {
-					upY = points[i].getY();
+				if (points[i].y > upY) {
+					upY = points[i].y;
 				}
-				if (points[i].getY() < downY) {
-					downY = points[i].getY();
+				if (points[i].y < downY) {
+					downY = points[i].y;
 				}
 			}
 			boundingBox[0] = new Point(leftX, upY); 
@@ -52,14 +52,14 @@ public class Target {
 		if(boundingBox == null){
 			getBoundingBox();
 		}
-		return boundingBox[1].getX() - boundingBox[0].getX();
+		return boundingBox[1].x - boundingBox[0].x;
 	}
 	
 	public double getBoundingBoxHeight(){
 		if(boundingBox == null){
 			getBoundingBox();
 		}
-		return boundingBox[1].getY() - boundingBox[0].getY();
+		return boundingBox[1].y - boundingBox[0].y;
 	}
 	
 	public double getBoundingBoxArea(){

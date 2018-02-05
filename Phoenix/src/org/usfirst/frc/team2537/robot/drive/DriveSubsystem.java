@@ -130,7 +130,7 @@ public class DriveSubsystem extends Subsystem{
 	
 	public void setMotors(double speed, Motor...motors){
 		if(motors.length == 0){
-			setMotors(speed, Motor.FRONT_LEFT, Motor.FRONT_RIGHT, Motor.BACK_LEFT, Motor.BACK_RIGHT);
+			setMotors(speed, Motor.ALL);
 		} else {
 			for(Motor motor : motors){
 				setMotors(speed,motor);
