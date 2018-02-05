@@ -53,7 +53,7 @@ public class PurePursuit extends Command {
 		Vector2d perpPoint = new Vector2d(perpX, perpY);
 		Vector2d goalPoint = Vector2d.add(perpPoint, Vector2d.scale(Vector2d.normalize(endPoint), followDistance));
 		
-		finished = goalPoint.length() >= endPoint.length();
+		finished = Math.abs(goalPoint.x) >= Math.abs(endPoint.x) && Math.signum(goalPoint.x) == Math.signum(endPoint.x);
 		
 		double heading = Math.toRadians(Navx.getInstance().getAngle());
 		double rotatedGoalX = (goalPoint.x - xPos)*Math.cos(heading) + (goalPoint.y - yPos)*Math.sin(heading);
