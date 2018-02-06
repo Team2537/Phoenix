@@ -28,9 +28,9 @@ public class ClimbCommand extends Command {
 	@Override
 	protected boolean isFinished() {
 		return (Robot.climbSys.getLimitSwitch() && !Robot.climbSys.limitSwitchOverridden()) ||
-				Robot.climbSys.getCurrentOne() > ClimbSubsystem.MAX_CURRENT || 
-				Robot.climbSys.getCurrentTwo() > ClimbSubsystem.MAX_CURRENT || 
-				Robot.climbSys.getCurrentThree() > ClimbSubsystem.MAX_CURRENT;
+				(Robot.climbSys.getCurrentOne() > ClimbSubsystem.MAX_CURRENT) || 
+				(Robot.climbSys.getCurrentTwo() > ClimbSubsystem.MAX_CURRENT) || 
+				(Robot.climbSys.getCurrentThree() > ClimbSubsystem.MAX_CURRENT);
 	}
 
 	protected void end() {

@@ -1,8 +1,5 @@
 package org.usfirst.frc.team2537.robot.drive;
 
-import org.usfirst.frc.team2537.robot.resources.CANTalon;
-
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveCommand extends Command {
