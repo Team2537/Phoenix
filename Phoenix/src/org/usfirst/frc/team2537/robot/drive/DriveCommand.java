@@ -18,8 +18,8 @@ public class DriveCommand extends Command {
 	
 	@Override 
 	protected void execute() {
-		Robot.driveSys.setMotors(HumanInput.rightJoystick.getRawAxis(1), Motor.RIGHT);
-		Robot.driveSys.setMotors(HumanInput.leftJoystick.getRawAxis(1), Motor.LEFT);
+		Robot.driveSys.setMotors(-HumanInput.rightJoystick.getRawAxis(1), Motor.RIGHT);
+		Robot.driveSys.setMotors(-HumanInput.leftJoystick.getRawAxis(1), Motor.LEFT);
 	}
 	
 	@Override

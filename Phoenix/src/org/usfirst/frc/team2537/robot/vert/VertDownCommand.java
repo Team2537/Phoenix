@@ -17,7 +17,7 @@ public class VertDownCommand extends Command {
 //		if (Robot.vertSys.getUltrasonic() > ULTRASONIC_DISTANCE) {
 //			Robot.vertSys.setVertMotors(0);
 //		} else {
-			Robot.vertSys.setVertMotors(-0.8);
+			Robot.vertSys.setVertMotors(0.8);
 //		}
 	}
 
