@@ -1,4 +1,3 @@
-/rampCommand.class
-/RampLowerCommand.class
-/RampRaiseCommand.class
+/CloseRampCommand.class
+/OpenRampCommand.class
 /RampSubsystem.class

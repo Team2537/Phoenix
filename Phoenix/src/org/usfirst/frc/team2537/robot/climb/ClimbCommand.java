@@ -3,7 +3,11 @@ package org.usfirst.frc.team2537.robot.climb;
 import org.usfirst.frc.team2537.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-
+	/**
+	 * 
+	 * @author Space RAIDers
+	 *
+	 */
 public class ClimbCommand extends Command {
 
 	public ClimbCommand() {
@@ -20,7 +24,10 @@ public class ClimbCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return (Robot.climbSys.getLimitSwitch() && !Robot.climbSys.limitSwitchOverridden()) ||
+				(Robot.climbSys.getCurrentOne() > ClimbSubsystem.MAX_CURRENT) || 
+				(Robot.climbSys.getCurrentTwo() > ClimbSubsystem.MAX_CURRENT) || 
+				(Robot.climbSys.getCurrentThree() > ClimbSubsystem.MAX_CURRENT);
 	}
 
 	protected void end() {
