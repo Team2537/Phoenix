@@ -10,5 +10,10 @@
 	<classpathentry kind="lib" path="libs/CTRE_Phoenix-sources.jar"/>
 	<classpathentry kind="lib" path="libs/CTRE_Phoenix.jar"/>
 	<classpathentry kind="lib" path="libs/navx_frc.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix-sources.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/j4k-natives-windows-amd64.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/navx_frc.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/ufdw.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
