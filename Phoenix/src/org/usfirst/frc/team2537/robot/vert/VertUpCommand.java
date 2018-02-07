@@ -47,7 +47,7 @@ public class VertUpCommand extends Command {
 	}
 
 	protected boolean isFinished() {
-		
+
 		return false;
 		
 	}
