@@ -44,7 +44,6 @@ public class HumanInput {
 
 	public static void registerWhenPressedCommand(Button b, Command c) {
 		b.whenPressed(c);
-
 	}
 	
 	/**
