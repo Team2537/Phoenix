@@ -2,6 +2,7 @@ package org.usfirst.frc.team2537.robot;
 
 import org.usfirst.frc.team2537.robot.auto.EncoderTest;
 import org.usfirst.frc.team2537.robot.auto.vision.SerialSubsystem;
+import org.usfirst.frc.team2537.robot.cameras.Cameras;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
 import org.usfirst.frc.team2537.robot.cube_manipulation.CubeSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 	public static RampSubsystem rampSys;
 	public static SerialSubsystem serialSys;	
 	public static CubeSubsystem cubeSys;
+	public static Cameras cameras;
 
 	@Override
 	public void robotInit() {
@@ -45,6 +47,9 @@ public class Robot extends IterativeRobot {
 		
 		cubeSys = new CubeSubsystem();
 		cubeSys.registerButtons();
+		
+		cameras = new Cameras();
+		cameras.start();
 
 	}
 
