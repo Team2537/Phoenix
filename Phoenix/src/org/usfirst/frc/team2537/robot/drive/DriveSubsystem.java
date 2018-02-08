@@ -55,7 +55,6 @@ public class DriveSubsystem extends Subsystem{
 		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
 		talonBackLeft.configSelectedFeedbackSensor  (FeedbackDevice.QuadEncoder, 0,0);
 		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
-
 	}
 	
 	
