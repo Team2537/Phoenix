@@ -1,6 +1,6 @@
-package org.usfirst.frc.team2537.robot.conversions;
+package org.usfirst.frc.team2537.robot.units;
 
-public class Conversions {
+public class Units {
 	
 	public static double convertDistance(double value, Distances currentType, Distances desiredType){
 		return value * currentType.getTicks() / desiredType.getTicks();

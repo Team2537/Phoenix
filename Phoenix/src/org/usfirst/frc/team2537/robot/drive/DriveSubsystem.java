@@ -1,9 +1,9 @@
 package org.usfirst.frc.team2537.robot.drive;
 
 import org.usfirst.frc.team2537.robot.Ports;
-import org.usfirst.frc.team2537.robot.conversions.Conversions;
-import org.usfirst.frc.team2537.robot.conversions.Distances;
-import org.usfirst.frc.team2537.robot.conversions.Times;
+import org.usfirst.frc.team2537.robot.units.Units;
+import org.usfirst.frc.team2537.robot.units.Distances;
+import org.usfirst.frc.team2537.robot.units.Times;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -74,27 +74,59 @@ public class DriveSubsystem extends Subsystem{
 /******************************************************************************/
 	
 	/**
+	 * @return average value of left talons in inches
+	 */
+	public double getEncoderDistanceLeft(){
+		double rawDistance =
+				(talonFrontLeft.getSelectedSensorPosition(0) + talonBackLeft.getSelectedSensorPosition(0))
+				/ 2 * LEFT_MOTOR_DIRECTION;
+		return Units.convertDistance(rawDistance, Distances.TICKS, Distances.INCHES);
+	}
+	
+	/**
+	 * @return average value of right talons in inches
+	 */
+	public double getEncoderDistanceRight(){
+		double rawDistance =
+				(talonFrontRight.getSelectedSensorPosition(0) + talonBackRight.getSelectedSensorPosition(0))
+				/ 2 * RIGHT_MOTOR_DIRECTION;
+		return Units.convertDistance(rawDistance, Distances.TICKS, Distances.INCHES);
+	}
+	
+	/**
 	 * @return average value of all talons in inches
 	 */
 	public double getEncoderDistance(){
-		double rawDistance = (	// ticks
-				(talonFrontLeft.getSelectedSensorPosition(0) + talonBackLeft.getSelectedSensorPosition(0))
-				* LEFT_MOTOR_DIRECTION +
-			    (talonFrontRight.getSelectedSensorPosition(0) + talonBackRight.getSelectedSensorPosition(0))
-			    * RIGHT_MOTOR_DIRECTION) / 4;
-		return Conversions.convertDistance(rawDistance, Distances.TICKS, Distances.INCHES);
+		return (getEncoderDistanceLeft() + getEncoderDistanceRight()) / 2;
+	}
+	
+	/**
+	 * @return average velocity of left talons in inches per second
+	 */
+	public double getEncoderVelocityLeft(){
+		double rawVelocity =
+				(talonFrontLeft.getSelectedSensorVelocity(0) + talonBackLeft.getSelectedSensorVelocity(0))
+				/ 2 * LEFT_MOTOR_DIRECTION;
+		return Units.convertSpeed(rawVelocity, Distances.TICKS, Times.HUNDRED_MS, Distances.INCHES,
+				Times.SECONDS);
+	}
+	
+	/**
+	 * @return average velocity of right talons in inches per second
+	 */
+	public double getEncoderVelocityRight(){
+		double rawVelocity =
+				(talonFrontRight.getSelectedSensorVelocity(0) + talonBackRight.getSelectedSensorVelocity(0))
+				/ 2 * RIGHT_MOTOR_DIRECTION;
+		return Units.convertSpeed(rawVelocity, Distances.TICKS, Times.HUNDRED_MS, Distances.INCHES,
+				Times.SECONDS);
 	}
 	
 	/**
 	 * @return average velocity of all talons in inches per second
 	 */
 	public double getEncoderVelocity(){
-		double rawVelocity = (	// ticks per 100ms
-				(talonFrontLeft.getSelectedSensorVelocity(0) + talonBackLeft.getSelectedSensorVelocity(0))
-				* LEFT_MOTOR_DIRECTION +
-				(talonFrontRight.getSelectedSensorVelocity(0) + talonBackRight.getSelectedSensorVelocity(0))
-				* RIGHT_MOTOR_DIRECTION) / 4;
-		return Conversions.convertSpeed(rawVelocity, Distances.TICKS, Times.HUNDRED_MS, Distances.INCHES, Times.SECONDS);
+		return (getEncoderVelocityLeft() + getEncoderVelocityRight()) / 2;
 	}
 	
 	public void resetEncoders() {
@@ -103,9 +135,6 @@ public class DriveSubsystem extends Subsystem{
 		 talonBackRight.getSensorCollection().setQuadraturePosition(0,0);
 		 talonBackLeft.getSensorCollection().setQuadraturePosition(0,0);
 	}
-	
-
-	
 	
 /******************************************************************************/
 /*                               MOTOR METHODS                                */

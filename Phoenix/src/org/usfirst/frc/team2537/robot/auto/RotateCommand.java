@@ -33,7 +33,7 @@ public class RotateCommand extends Command {
 
     @Override
     protected void execute() {
-    	currentAngle = Navx.getInstance().getAngle();
+    	currentAngle = Navx.getInstance().getHeading();
     	double speed = DEFAULT_SPEED;
     	if (Math.abs(currentAngle-targetAngle) < SLOW_DOWN_ANGLE) { //reduces speed if angle is close to finishing angle
 			speed=REDUCED_SPEED;

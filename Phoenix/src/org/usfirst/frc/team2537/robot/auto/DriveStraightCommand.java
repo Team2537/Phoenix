@@ -1,9 +1,9 @@
 package org.usfirst.frc.team2537.robot.auto;
 
 import org.usfirst.frc.team2537.robot.Robot;
-import org.usfirst.frc.team2537.robot.conversions.Conversions;
-import org.usfirst.frc.team2537.robot.conversions.Distances;
 import org.usfirst.frc.team2537.robot.drive.Motor;
+import org.usfirst.frc.team2537.robot.units.Units;
+import org.usfirst.frc.team2537.robot.units.Distances;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
@@ -58,7 +58,7 @@ public class DriveStraightCommand extends Command {
 	 */
 	public DriveStraightCommand(double distance, double defaultPercentOutput) {
 		requires(Robot.driveSys);
-		targetTicks = Conversions.convertDistance(distance, Distances.INCHES, Distances.TICKS);
+		targetTicks = Units.convertDistance(distance, Distances.INCHES, Distances.TICKS);
 		motorPower = defaultPercentOutput;
 		slowingDown = false;
 	}
@@ -72,13 +72,13 @@ public class DriveStraightCommand extends Command {
 		Robot.driveSys.resetEncoders();
 		Robot.driveSys.setMode(ControlMode.PercentOutput);
 		Navx.getInstance().reset();
-		System.out.println("starting angle: " + Navx.getInstance().getAngle());
+		System.out.println("starting angle: " + Navx.getInstance().getHeading());
 	}
 
 	@Override
 	protected void execute() {
 		/* we convert angles to values in range [-1,1] */
-		double normalizedAngle = Navx.getInstance().getAngle() / 180;
+		double normalizedAngle = Navx.getInstance().getHeading() / 180;
 		double normalizedSlowDownAngle = ANGLE_TOLERANCE / 180;
 		double currentTicks = Robot.driveSys.getEncoderDistance();
 		double currentVelocity = Robot.driveSys.getEncoderVelocity();

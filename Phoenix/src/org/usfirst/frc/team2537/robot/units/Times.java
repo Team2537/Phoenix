@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2537.robot.conversions;
+package org.usfirst.frc.team2537.robot.units;
 
 public enum Times{
 	NANOSECONDS	(1e-6),
