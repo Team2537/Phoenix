@@ -52,7 +52,7 @@ public class VertSubsystem extends Subsystem {
 	//sets speed of vertMotors
 	public void setVertMotors(double speed) {
 		vertMotorOne.set(speed);
-		vertMotorTwo.set(-speed);
+		vertMotorTwo.set(speed);
 	}
 
 
