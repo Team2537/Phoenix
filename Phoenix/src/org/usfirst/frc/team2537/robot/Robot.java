@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2537.robot;
 
-import org.usfirst.frc.team2537.Cuber.CuberSubsystem;
+import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;

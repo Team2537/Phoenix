@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2537.Cuber;
+package org.usfirst.frc.team2537.robot.cuber;
 
 import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.input.HumanInput;

@@ -1,20 +1,18 @@
-package org.usfirst.frc.team2537.Cuber;
+package org.usfirst.frc.team2537.robot.cuber;
 
 import org.usfirst.frc.team2537.robot.Robot;
-import org.usfirst.frc.team2537.robot.input.HumanInput;
 
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PickUpCommand extends Command {
- double speed;
-	public PickUpCommand() {
+public class ExpelCommand extends Command {
+	double speed;
+	public ExpelCommand() {
 		requires(Robot.cuberSys);
 	}
 	
 	@Override
 	protected void initialize() {
-		Robot.cuberSys.setFlywheelMotors(speed);
+		Robot.cuberSys.setFlywheelMotors(-speed);
 		
 		
 	}
