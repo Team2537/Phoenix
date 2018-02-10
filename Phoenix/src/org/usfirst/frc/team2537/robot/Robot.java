@@ -4,12 +4,15 @@ import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class Robot extends IterativeRobot {
 
 	public static DriveSubsystem driveSys;
 	public static ClimbSubsystem climbSys;
+	public static PowerDistributionPanel PDP;
+	
 
 	@Override
 	public void robotInit() {
@@ -17,7 +20,7 @@ public class Robot extends IterativeRobot {
 		driveSys.initDefaultCommand();
 		climbSys = new ClimbSubsystem();
 		climbSys.registerButtons();
-		
+		PDP = new PowerDistributionPanel();
 	}
 
 	@Override

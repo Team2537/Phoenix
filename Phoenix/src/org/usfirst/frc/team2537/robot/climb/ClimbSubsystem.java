@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2537.robot.climb;
 
 import org.usfirst.frc.team2537.robot.Ports;
+import org.usfirst.frc.team2537.robot.Robot;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -19,7 +20,7 @@ public class ClimbSubsystem extends Subsystem {
 	private Talon climbMotorTwo;
 	private Talon climbMotorThree;
 	private DigitalInput limitSwitch;
-	public static final double MAX_CURRENT = 1337; //TODO: test for the max current value
+	public static final double MAX_CURRENT = 131; //TODO: test for the max current value
 	public ClimbSubsystem() {
 		
 		climbMotorOne = new Talon(Ports.CLIMB_MOTOR_ONE);
@@ -71,13 +72,13 @@ public class ClimbSubsystem extends Subsystem {
 	 * @return current
 	 */
 	public double getCurrentOne() {
-		return PDPJNI.getPDPChannelCurrent((byte) 0, 0);
+		return Robot.PDP.getCurrent(Ports.CLIMB_MOTOR_ONE_PDP_CHANNEL);
 	}
 	public double getCurrentTwo() {
-		return PDPJNI.getPDPChannelCurrent((byte) 1,0);
+		return Robot.PDP.getCurrent(Ports.CLIMB_MOTOR_TWO_PDP_CHANNEL);
 	}
 	public double getCurrentThree() {
-		return PDPJNI.getPDPChannelCurrent((byte)2,0);
+		return Robot.PDP.getCurrent(Ports.CLIMB_MOTOR_THREE_PDP_CHANNEL);
 	}
 	
 	public boolean limitSwitchOverridden() {
