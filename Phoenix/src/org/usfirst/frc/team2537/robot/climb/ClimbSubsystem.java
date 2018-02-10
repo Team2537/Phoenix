@@ -4,14 +4,13 @@ import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.Robot;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.hal.PDPJNI;
 	
 	/**
 	 * 
 	 * @author Space RAIDers
+	 *
 	 *
 	 */
 public class ClimbSubsystem extends Subsystem {
@@ -19,24 +18,25 @@ public class ClimbSubsystem extends Subsystem {
 	private Talon climbMotorOne;
 	private Talon climbMotorTwo;
 	private Talon climbMotorThree;
-	private DigitalInput limitSwitch;
-	public static final double MAX_CURRENT = 131; //TODO: test for the max current value
+	public static final double MAX_CURRENT = 35; //TODO: test for the max current value
 	public ClimbSubsystem() {
 		
 		climbMotorOne = new Talon(Ports.CLIMB_MOTOR_ONE);
 		climbMotorTwo = new Talon(Ports.CLIMB_MOTOR_TWO);
 		climbMotorThree = new Talon(Ports.CLIMB_MOTOR_THREE);
-		limitSwitch = new DigitalInput(Ports.LIMIT_SWITCH);
+	
 	}
 	/**
-	 * 
+	 *  there is current-ly nothing here ;)
+	 *  shocking, isn't it?
 	 */
 	@Override
 	public void initDefaultCommand() {
 		
 	}
 	/**
-	 * 
+	 * this means that pressing the climbOn button will start the climb 
+	 * and pressing the climbOff button will stop the climb
 	 */
 	public void registerButtons() {
 		HumanInput.registerWhenPressedCommand(HumanInput.climbOnButton, new ClimbCommand());
@@ -45,7 +45,7 @@ public class ClimbSubsystem extends Subsystem {
 
 	/**
 	 * 
-	 * @param speed
+	 * this method turns all three motors on
 	 */
 	public void megaMotorActivation(double speed) {
 		climbMotorOne.set(speed);
@@ -53,7 +53,7 @@ public class ClimbSubsystem extends Subsystem {
 		climbMotorThree.set(speed);
 	}
 	/**
-	 * This method is the kill command
+	 * This method shuts off all three motors
 	 */
 	public void ultraDeath() {
 		climbMotorOne.set(0);
@@ -61,14 +61,9 @@ public class ClimbSubsystem extends Subsystem {
 		climbMotorThree.set(0);
 
 	}
+	
 	/**
-	 * This method gets the limit switch
-	 */
-	public boolean getLimitSwitch() {
-		return limitSwitch.get();
-	}
-	/**
-	 * 
+	 * these methods return the current for each of the motors
 	 * @return current
 	 */
 	public double getCurrentOne() {
@@ -81,7 +76,5 @@ public class ClimbSubsystem extends Subsystem {
 		return Robot.PDP.getCurrent(Ports.CLIMB_MOTOR_THREE_PDP_CHANNEL);
 	}
 	
-	public boolean limitSwitchOverridden() {
-		return HumanInput.overrideKeyOne.get() && HumanInput.overrideKeyTwo.get() && HumanInput.overrideKeyThree.get();
-	}
+	
 }
