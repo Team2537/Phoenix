@@ -57,8 +57,11 @@ public class Ports {
 	
 	public static final int VERT_MOTOR_TWO_PDP_CHANNEL = 4;
 	
-	//Encoders
+	// Encoders
 	public static final int VERT_ENC_TRIGGER = 4, VERT_ENC_ECHO = 5;
+	
+	// Vert Limit Switch
+	public static final int VERT_LIMIT_SWITCH = 0; //fix port
 
 	public static final edu.wpi.first.wpilibj.SerialPort.Port RASPI = Port.kMXP;
 

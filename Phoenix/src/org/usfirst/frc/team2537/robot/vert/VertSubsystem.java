@@ -3,6 +3,7 @@ package org.usfirst.frc.team2537.robot.vert;
 import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Talon;
@@ -23,6 +24,7 @@ public class VertSubsystem extends Subsystem {
 	private Talon vertMotorTwo;
 	private Ultrasonic ultrasonic;
 	private PowerDistributionPanel PDP;
+	private DigitalInput limitSwitch;
 	double current;
 
 	public VertSubsystem() { 
@@ -30,7 +32,9 @@ public class VertSubsystem extends Subsystem {
 		vertMotorOne = new Talon(Ports.VERT_MOTOR_ONE);
 		vertMotorTwo = new Talon(Ports.VERT_MOTOR_TWO);
 		PDP = new PowerDistributionPanel(Ports.PDP);
-		ultrasonic = new Ultrasonic(Ports.ULTRASONIC_INPUT, Ports.ULTRASONIC_OUTPUT); 
+		ultrasonic = new Ultrasonic(Ports.ULTRASONIC_INPUT, Ports.ULTRASONIC_OUTPUT);
+		ultrasonic.setAutomaticMode(true);
+		limitSwitch = new DigitalInput(Ports.VERT_LIMIT_SWITCH);
 	}
 
 	public void initDefaultCommand() {
@@ -71,6 +75,10 @@ public class VertSubsystem extends Subsystem {
 	//returns current of vert motor two
 	public double getCurrentTwo() {
 		return PDP.getCurrent(Ports.VERT_MOTOR_TWO_PDP_CHANNEL);
+	}
+	
+	public boolean getLimitSwitch() {
+		return limitSwitch.get();
 	}
 
 }
