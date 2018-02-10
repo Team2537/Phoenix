@@ -2,8 +2,8 @@ package org.usfirst.frc.team2537.robot.auto;
 
 import org.usfirst.frc.team2537.robot.Robot;
 import org.usfirst.frc.team2537.robot.drive.Motor;
-import org.usfirst.frc.team2537.robot.units.Units;
 import org.usfirst.frc.team2537.robot.units.Distances;
+import org.usfirst.frc.team2537.robot.units.Units;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 

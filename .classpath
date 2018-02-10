@@ -16,5 +16,6 @@
 			<attribute name="javadoc_location" value="jar:file:/C:/Users/Space%20RAIDers/wpilib/user/java/docs/CTRE_Phoenix-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="var" path="navx-mxp"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
