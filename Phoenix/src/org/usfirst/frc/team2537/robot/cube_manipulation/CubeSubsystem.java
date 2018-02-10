@@ -3,6 +3,7 @@ package org.usfirst.frc.team2537.robot.cube_manipulation;
 import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -15,6 +16,7 @@ public class CubeSubsystem extends Subsystem {
     private Solenoid manipulatorSolenoidB;
     private Solenoid flipSolenoidA;
     private Solenoid flipSolenoidB;
+    private Compressor compressor;
 
    /* Timer time;
     Encoder encoderOne;
@@ -36,6 +38,8 @@ public class CubeSubsystem extends Subsystem {
     	manipulatorSolenoidB = new Solenoid(Ports.MANIPULATOR_SOLENOID_B);
     	flipSolenoidA = new Solenoid(Ports.FLIP_SOLENOID_A);
     	flipSolenoidB = new Solenoid(Ports.FLIP_SOLENOID_B);
+    	compressor = new Compressor();
+    	compressor.start();
     /*	diameter = 8;
     	circumference = diameter*Math.PI;
     	flywheelA = new CANTalon(Ports.FLYWHEEL_A);
