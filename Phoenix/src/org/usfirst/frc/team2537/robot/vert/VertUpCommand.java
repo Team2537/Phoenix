@@ -48,7 +48,7 @@ public class VertUpCommand extends Command {
 	}
 
 	protected boolean isFinished() {
-		return false;
+		return Robot.vertSys.getLimitSwitch();
 	}
 
 	protected void end() {
