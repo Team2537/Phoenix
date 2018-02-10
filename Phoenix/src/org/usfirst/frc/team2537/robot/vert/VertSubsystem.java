@@ -22,7 +22,7 @@ public class VertSubsystem extends Subsystem {
 	private Encoder vertEnc;
 	private Talon vertMotorOne;
 	private Talon vertMotorTwo;
-	private Ultrasonic ultrasonic;
+//	private Ultrasonic ultrasonic;
 	private PowerDistributionPanel PDP;
 	private DigitalInput limitSwitch;
 	double current;
@@ -32,8 +32,8 @@ public class VertSubsystem extends Subsystem {
 		vertMotorOne = new Talon(Ports.VERT_MOTOR_ONE);
 		vertMotorTwo = new Talon(Ports.VERT_MOTOR_TWO);
 		PDP = new PowerDistributionPanel(Ports.PDP);
-		ultrasonic = new Ultrasonic(Ports.ULTRASONIC_INPUT, Ports.ULTRASONIC_OUTPUT);
-		ultrasonic.setAutomaticMode(true);
+//		ultrasonic = new Ultrasonic(Ports.ULTRASONIC_INPUT, Ports.ULTRASONIC_OUTPUT);
+//		ultrasonic.setAutomaticMode(true);
 		limitSwitch = new DigitalInput(Ports.VERT_LIMIT_SWITCH);
 	}
 
@@ -63,9 +63,9 @@ public class VertSubsystem extends Subsystem {
 
 
 	//returns distance of object from robot
-	public double getUltrasonic() {
-		return ultrasonic.getRangeInches();
-	}
+//	public double getUltrasonic() {
+//		return ultrasonic.getRangeInches();
+//	}
 	
 	//returns current of vert motor one
 	public double getCurrentOne() {

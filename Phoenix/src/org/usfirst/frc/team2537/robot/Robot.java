@@ -26,7 +26,7 @@ public class Robot extends IterativeRobot {
 	public static RampSubsystem rampSys;
 	public static SerialSubsystem serialSys;	
 	public static CubeSubsystem cubeSys;
-	public static Cameras cameras;
+//	public static Cameras cameras;
 
 	@Override
 	public void robotInit() {
@@ -45,11 +45,11 @@ public class Robot extends IterativeRobot {
 		
 		serialSys = new SerialSubsystem();
 		
-		cubeSys = new CubeSubsystem();
-		cubeSys.registerButtons();
+//		cubeSys = new CubeSubsystem();
+//		cubeSys.registerButtons();
 		
-		cameras = new Cameras();
-		cameras.start();
+//		cameras = new Cameras();
+//		cameras.start();
 
 	}
 

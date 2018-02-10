@@ -18,14 +18,14 @@ public class ClimbSubsystem extends Subsystem {
 	private Talon climbMotorOne;
 	private Talon climbMotorTwo;
 	private Talon climbMotorThree;
-	private DigitalInput limitSwitch;
+//	private DigitalInput limitSwitch;
 	public static final double MAX_CURRENT = 1337; //TODO: test for the max current value
 	public ClimbSubsystem() {
 		
 		climbMotorOne = new Talon(Ports.CLIMB_MOTOR_ONE);
 		climbMotorTwo = new Talon(Ports.CLIMB_MOTOR_TWO);
 		climbMotorThree = new Talon(Ports.CLIMB_MOTOR_THREE);
-		limitSwitch = new DigitalInput(Ports.LIMIT_SWITCH);
+//		limitSwitch = new DigitalInput(Ports.LIMIT_SWITCH);
 	}
 	/**
 	 * 
@@ -63,9 +63,9 @@ public class ClimbSubsystem extends Subsystem {
 	/**
 	 * This method gets the limit switch
 	 */
-	public boolean getLimitSwitch() {
-		return limitSwitch.get();
-	}
+//	public boolean getLimitSwitch() {
+//		return limitSwitch.get();
+//	}
 	/**
 	 * 
 	 * @return current
