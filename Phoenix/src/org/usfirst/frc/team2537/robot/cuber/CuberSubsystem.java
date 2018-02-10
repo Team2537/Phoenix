@@ -16,7 +16,7 @@ public class CuberSubsystem extends Subsystem {
 	private Talon liftMotor; //window(lifting motor)
 	private double radius = 2; //what units?//for getTime90Degrees() method (see below)
 	private static final double PI = 3.14; //for getTime90Degrees() method (see below)
-	private double speedLift; 
+	private double speedLift;
 	
 	
 	public CuberSubsystem() { 
@@ -25,6 +25,8 @@ public class CuberSubsystem extends Subsystem {
 		flywheelMotorRight = new Talon(Ports.FLYWHEEL_MOTOR_RIGHT);
 		liftMotor = new Talon(Ports.WINDOW_MOTOR);
 		liftEnc = new Encoder(Ports.LIFT_ENCODER_A, Ports.LIFT_ENCODER_B, false, Encoder.EncodingType.k4X);
+		double speedLift;
+		
 	}
 	
 	public void initDefaultCommand() {
@@ -34,16 +36,27 @@ public class CuberSubsystem extends Subsystem {
 	public void registerButtons() { //registers buttons when held and directs to either pick up command or expel command
 		HumanInput.registerWhileHeldCommand(HumanInput.pickUpButton, new PickUpCommand()); 
 		HumanInput.registerWhileHeldCommand(HumanInput.expelButton, new ExpelCommand()); 
+		HumanInput.
 	}
 	
 	public void setFlywheelMotors(double speed) { //sets both left and right flywheel motor speed
 		flywheelMotorLeft.set(speed);
 		flywheelMotorRight.set(speed);
 	}
-	
+
 	public void setLiftMotor(double speedLift) { //sets window motor speed
-			liftMotor.set(speedLift);  
+			liftMotor.set(speedLift);  			
 	}
+	
+	public double getDegrees() { //returns degrees
+		return liftEnc.get();
+	}
+
+	public void resetEncoder() { //resets lift motor encoder
+		liftEnc.reset();
+	}
+	
+	
 //BELOW COULD BE USED ONLY IF WE DONT HAVE SENSORS TO TURN WINDOW MOTOR ARM TO 90 DEGREES
 	/*
 	public double getTimefor90Degrees() { //this calculates time needed for arm to move from 0 degrees to 90 degrees in case we don't have sensors or stuff

@@ -14,9 +14,7 @@ public class PickUpCommand extends Command {
 	
 	@Override
 	protected void initialize() {
-		Robot.cuberSys.setFlywheelMotors(speed);
-		
-		
+		Robot.cuberSys.setFlywheelMotors(speed); //initializes Flywheel motors to designated speed
 	}
 	
 	@Override
@@ -32,14 +30,118 @@ public class PickUpCommand extends Command {
 	
 	@Override
 	protected void end() {
-		Robot.cuberSys.setFlywheelMotors(0);
-		
+		Robot.cuberSys.setFlywheelMotors(0);  //sets Flywheel motor speed to zero
 	}
 	
 	@Override
 	protected void interrupted() {
-		Robot.cuberSys.setFlywheelMotors(0);
-		
+		Robot.cuberSys.setFlywheelMotors(0); //sets Flywheel motor speed to zero
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// this is just here because it can be

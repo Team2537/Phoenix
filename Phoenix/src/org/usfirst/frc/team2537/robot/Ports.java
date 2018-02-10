@@ -20,5 +20,6 @@ public class Ports {
 	public static final int LEFT_JOYSTICK = 0, RIGHT_JOYSTICK = 1;
 	
 	//buttons
-	public static final int PICK_UP_BUTTON = 1, EXPEL_BUTTON = 2;
+	public static final int PICK_UP_BUTTON = 1, EXPEL_BUTTON = 2, LIFT_BUTTON = 5, LOWER_BUTTON = 4;
+	
 }
