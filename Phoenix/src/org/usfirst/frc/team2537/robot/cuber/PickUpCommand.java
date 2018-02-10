@@ -1,15 +1,13 @@
 package org.usfirst.frc.team2537.robot.cuber;
 
 import org.usfirst.frc.team2537.robot.Robot;
-import org.usfirst.frc.team2537.robot.input.HumanInput;
 
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PickUpCommand extends Command {
  double speed;
 	public PickUpCommand() {
-		requires(Robot.cuberSys);
+		requires(Robot.cuberSys); //requires cuberSys variables and methods
 	}
 	
 	@Override
@@ -23,9 +21,9 @@ public class PickUpCommand extends Command {
 	}
 	
 	@Override
-	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
+	protected boolean isFinished() { //returns true when flywheel motors exceed max amp
+		
+		return(Robot.cuberSys.getRightFlywheelCurrent() >=  Robot.cuberSys.currentLimit || Robot.cuberSys.getLeftFlywheelCurrent() >=  Robot.cuberSys.currentLimit); 
 	}
 	
 	@Override

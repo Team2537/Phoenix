@@ -22,4 +22,8 @@ public class Ports {
 	//buttons
 	public static final int PICK_UP_BUTTON = 1, EXPEL_BUTTON = 2, LIFT_BUTTON = 5, LOWER_BUTTON = 4;
 	
+	//motor channels for the pdp
+	public static final int LEFT_FLYWHEEL_PDP_CHANNEL = 1, RIGHT_FLYWHEEL_PDP_CHANNEL = 2;
+	
+	
 }

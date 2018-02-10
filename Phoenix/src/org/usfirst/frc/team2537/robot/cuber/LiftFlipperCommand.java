@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class LiftFlipperCommand extends Command {
 	
-	//	this is only here and not in cuberSys because eclipse hates me
+	//	"this is only here and not in cuberSys because eclipse hates me" - alex
 	
-	double speedLift = 0.3;
+	double speedLift = 0.3; // local var used for window/lift motor
 	
 	protected LiftFlipperCommand() {
 		requires(Robot.cuberSys);
@@ -26,9 +26,9 @@ public class LiftFlipperCommand extends Command {
 	
 	}
 	
-	protected boolean isFinished() {
+	protected boolean isFinished() { //returns true if motor turns under or equal to 0 degrees or when flywheel motors exceed max amp
 	
-	return(Robot.cuberSys.getDegrees() <= 0); //returns true if motor turns over or equal to 0 degrees
+	return(Robot.cuberSys.getDegrees() <= 0) || Robot.cuberSys. getRightFlywheelCurrent() >= Robot.cuberSys.currentLimit|| Robot.cuberSys.getLeftFlywheelCurrent() >=  Robot.cuberSys.currentLimit; 
 }
 	
 	protected void end() {
@@ -40,7 +40,7 @@ public class LiftFlipperCommand extends Command {
 	
 	protected void interrupted() {
 		
-		Robot.cuberSys.setLiftMotor(0);
+		Robot.cuberSys.setLiftMotor(0); //sets lift motor speed to zero
 		Robot.cuberSys.resetEncoder();
 	}
 	
