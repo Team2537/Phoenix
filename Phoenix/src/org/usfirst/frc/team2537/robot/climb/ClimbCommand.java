@@ -15,7 +15,7 @@ public class ClimbCommand extends Command {
 	}
 
 	protected void initialize() {
-		Robot.climbSys.megaMotorActivation(0.85);
+		Robot.climbSys.megaMotorActivation(0.7);
 	}
 
 	protected void execute() {

@@ -7,15 +7,15 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class VertDownCommand extends Command {
 
-	private static final int ULTRASONIC_DISTANCE = 3; // 3 inches
 	private static final int AMP_LIMIT = 5;  //5 amps HELLLA TBD
+
 	public VertDownCommand() {
 		requires(Robot.vertSys);
 	}
 
 	@Override
 	protected void initialize() {
-		
+		Robot.vertSys.setVertMotors(-.8);
 	}
 
 	@Override
@@ -38,9 +38,6 @@ public class VertDownCommand extends Command {
 //		} else {
 //			Robot.vertSys.setVertMotors(0.8);
 //		}	
-		
-		Robot.vertSys.setVertMotors(-.8);
-		
 	}
 
 	@Override

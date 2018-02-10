@@ -12,12 +12,12 @@ public class HumanInput {
 	public static Joystick leftJoystick = new Joystick(Ports.LEFT_JOYSTICK);
 	public static Joystick rightJoystick = new Joystick(Ports.RIGHT_JOYSTICK);
 	
-	public static Button raiseButton = new JoystickButton(leftJoystick, Ports.VERT_RAISE_BUTTON);
-	public static Button lowerButton = new JoystickButton(leftJoystick, Ports.VERT_LOWER_BUTTON);
+	public static Button raiseButton = new JoystickButton(rightJoystick, Ports.VERT_RAISE_BUTTON);
+	public static Button lowerButton = new JoystickButton(rightJoystick, Ports.VERT_LOWER_BUTTON);
 
 
-	public static Button climbOnButton = new JoystickButton(rightJoystick, Ports.CLIMB_ON_BUTTON);
-	public static Button climbOffButton = new JoystickButton(rightJoystick, Ports.CLIMB_OFF_BUTTON);
+	public static Button climbOnButton = new JoystickButton(leftJoystick, Ports.CLIMB_ON_BUTTON);
+	public static Button climbOffButton = new JoystickButton(leftJoystick, Ports.CLIMB_OFF_BUTTON);
 	
 	public static Button overrideKeyOne = new JoystickButton(leftJoystick, Ports.OVERRIDE_KEY_ONE);
 	public static Button overrideKeyTwo = new JoystickButton(leftJoystick, Ports.OVERRIDE_KEY_TWO);
