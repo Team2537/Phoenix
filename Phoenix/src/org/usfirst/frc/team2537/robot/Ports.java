@@ -13,7 +13,7 @@ public class Ports {
 	//Joysticks
 	public static final int LEFT_JOYSTICK = 0, RIGHT_JOYSTICK = 1;
 	//Buttons
-	public static final int RAMP_LOWER_BUTTON = 4, RAMP_RAISE_BUTTON = 5; 
+	public static final int RAMP_LOWER_BUTTON = 4, RAMP_RAISE_BUTTON = 5, RAMP_OPEN_BUTTON = 6;
     //Solenoids
     public static final int RAMP_LOWER_SOLENOID = 2, RAMP_RAISE_SOLENOID = 3;
 }

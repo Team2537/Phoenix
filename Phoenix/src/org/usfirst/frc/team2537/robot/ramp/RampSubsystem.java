@@ -10,14 +10,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class RampSubsystem extends Subsystem {
 
-	private Solenoid rampLowerSole;
-	private Solenoid rampRaiseSole;
-	private Servo rampServo;
-
+	
+	private Servo rampOpenServo;
 	public RampSubsystem() {
-		rampLowerSole = new Solenoid(Ports.RAMP_LOWER_SOLENOID);
-		rampRaiseSole = new Solenoid(Ports.RAMP_RAISE_SOLENOID);
-		rampServo = new Servo(Ports.RAMP_SERVO);
+		rampOpenServo = new Servo(Ports.RAMP_SERVO);
 	}
 
 	@Override
@@ -30,28 +26,15 @@ public class RampSubsystem extends Subsystem {
 		HumanInput.registerWhenPressedCommand(HumanInput.rampRaiseButton, new CloseRampCommand());
 	}
 
-	public void lowerRampServo() {
-		rampServo.setAngle(120);
+	public void openRamp() {
+		rampOpenServo.setAngle(180);
 	}
-
-	public void raiseRampServo() {
-		rampServo.setAngle(0);
+	public void closeRamp() {
+		rampOpenServo.setAngle(0);
 	}
-	
-	public void lowerRampSoleOn() {
-		rampLowerSole.set(true);
-	}
-	
-	public void lowerRampSoleOff() {
-		rampLowerSole.set(false);
-	}
-	
-	public void raiseRampSoleOn() {
-		rampRaiseSole.set(true);
-	}
-	
-	public void raiseRampSoleOff() {
-		rampRaiseSole.set(false);
-	}
-	
 }
+
+
+
+
+
