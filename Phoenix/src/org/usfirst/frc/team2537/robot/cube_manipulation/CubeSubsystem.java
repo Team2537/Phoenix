@@ -54,7 +54,15 @@ public class CubeSubsystem extends Subsystem {
 		
 	}
 	
-
+	/**
+	 * registers buttons so that when they are pressed, the respective command starts	
+	 */
+	public void registerButtons() {
+		HumanInput.registerWhenPressedCommand(HumanInput.cubeGrabButton, new CubeGrabCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.cubeReleaseButton, new CubeReleaseCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.cubeFlipDownButton, new CubeFlipDownCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.cubeFlipUpButton, new CubeFlipUpCommand());
+    }
 	
 /*	public double getFlywheelA() {
 		flywheelA.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -154,13 +162,5 @@ public class CubeSubsystem extends Subsystem {
 		flipSolenoidB.set(false);
 	}
 	
-	/**
-	 * registers buttons so that when they are pressed, the respective command starts	
-	 */
-	public void registerButtons() {
-		HumanInput.registerWhenPressedCommand(HumanInput.cubeGrabButton, new CubeGrabCommand());
-		HumanInput.registerWhenPressedCommand(HumanInput.cubeReleaseButton, new CubeReleaseCommand());
-		HumanInput.registerWhenPressedCommand(HumanInput.cubeFlipDownButton, new CubeFlipDownCommand());
-		HumanInput.registerWhenPressedCommand(HumanInput.cubeFlipUpButton, new CubeFlipUpCommand());
-    }
+	
 }

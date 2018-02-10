@@ -32,8 +32,7 @@ public class CubeFlipDownCommand extends Command {
 	}
 	
 	/**
-	 * 	if the button is being pressed, the command keeps on running, and when it is released,
-		it continues to else, and returns true, which indicates that the command is finished
+	 * ends after 1 second to avoid draining power
 	 */
 	@Override
 	protected boolean isFinished() {
@@ -45,7 +44,7 @@ public class CubeFlipDownCommand extends Command {
 	 */
 	@Override
 	protected void end() {		
-		Robot.cubeSys.stopOpenFlipper();;
+		Robot.cubeSys.stopOpenFlipper();
 		
 	}
 	
