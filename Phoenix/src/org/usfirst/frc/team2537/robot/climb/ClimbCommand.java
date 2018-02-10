@@ -15,7 +15,7 @@ public class ClimbCommand extends Command {
 	}
 
 	protected void initialize() {
-		Robot.climbSys.megaMotorActivation(0.7);
+		Robot.climbSys.setClimbMotors(0.7);
 	}
 
 	protected void execute() {
@@ -24,17 +24,16 @@ public class ClimbCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return
-				(Robot.climbSys.getCurrentOne() > ClimbSubsystem.MAX_CURRENT) || 
-				(Robot.climbSys.getCurrentTwo() > ClimbSubsystem.MAX_CURRENT) || 
-				(Robot.climbSys.getCurrentThree() > ClimbSubsystem.MAX_CURRENT);
+		return (Robot.climbSys.getCurrentClimbMotorOne() > ClimbSubsystem.MAX_CURRENT) || 
+				(Robot.climbSys.getCurrentClimbMotorTwo() > ClimbSubsystem.MAX_CURRENT) || 
+				(Robot.climbSys.getCurrentClimbMotorThree() > ClimbSubsystem.MAX_CURRENT);
 	}
 
 	protected void end() {
-		Robot.climbSys.ultraDeath();
+		Robot.climbSys.setClimbMotors(0);
 	}
 
 	protected void interrupted() {
-		Robot.climbSys.ultraDeath();
+		Robot.climbSys.setClimbMotors(0);
 	}
 }

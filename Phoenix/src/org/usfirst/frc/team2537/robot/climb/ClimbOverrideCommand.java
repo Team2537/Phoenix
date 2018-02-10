@@ -12,7 +12,7 @@ public class ClimbOverrideCommand extends Command {
 
 	@Override
 	protected void initialize() {
-		Robot.climbSys.megaMotorActivation(0.85);
+		Robot.climbSys.setClimbMotors(0.85);
 
 	}
 
@@ -31,13 +31,13 @@ public class ClimbOverrideCommand extends Command {
 
 	@Override
 	protected void end() {
-		Robot.climbSys.ultraDeath();
+		Robot.climbSys.setClimbMotors(0);
 
 	}
 
 	@Override
 	protected void interrupted() {
-		Robot.climbSys.ultraDeath();
+		Robot.climbSys.setClimbMotors(0);
 
 	}
 
