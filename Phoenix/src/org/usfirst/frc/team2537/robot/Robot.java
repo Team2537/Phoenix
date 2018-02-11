@@ -3,7 +3,7 @@ package org.usfirst.frc.team2537.robot;
 import org.usfirst.frc.team2537.robot.auto.EncoderTest;
 import org.usfirst.frc.team2537.robot.auto.vision.SerialSubsystem;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
-import org.usfirst.frc.team2537.robot.cube_manipulation.CubeSubsystem;
+import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
 import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
 import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
@@ -19,7 +19,7 @@ public class Robot extends IterativeRobot {
 	public static ClimbSubsystem climbSys;
 	public static RampSubsystem rampSys;
 	public static SerialSubsystem serialSys;	
-	public static CubeSubsystem cubeSys;
+	public static CuberSubsystem cuberSys;
 	public static long startTime;
 	
 //	public static Cameras cameras;
@@ -41,14 +41,13 @@ public class Robot extends IterativeRobot {
 		rampSys = new RampSubsystem();
 		rampSys.registerButtons();
 		
+		cuberSys = new CuberSubsystem();
+		cuberSys.registerButtons();
+		
 		serialSys = new SerialSubsystem();
 		
-//		cubeSys = new CubeSubsystem();
-//		cubeSys.registerButtons();
-		
-//		cameras = new Cameras();
-//		cameras.start();
-		
+
+	
 		pdp = new PowerDistributionPanel();
 		
 		

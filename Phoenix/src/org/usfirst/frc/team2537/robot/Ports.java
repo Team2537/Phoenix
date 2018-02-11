@@ -2,6 +2,7 @@
 package org.usfirst.frc.team2537.robot;
 
 import edu.wpi.first.wpilibj.SerialPort.Port;
+import edu.wpi.first.wpilibj.DigitalSource;
 
 public class Ports {
 	
@@ -20,14 +21,19 @@ public class Ports {
 
 	public static final int RAMP_LOWER_BUTTON = 4, RAMP_RAISE_BUTTON = 5;
 
-	public static final int CUBE_GRAB_BUTTON = 1, CUBE_RELEASE_BUTTON = 1;
-
 	public static final int FLIP_MANIPULATOR_DOWN_BUTTON = 4, FLIP_MANIPULATOR_UP_BUTTON = 5;
+	
+	public static final int PICK_UP_BUTTON = 1, EXPEL_BUTTON = 1, LIFT_BUTTON = 5, LOWER_BUTTON = 4;
+
 
 	// Talons
 	public static final int VERT_MOTOR_ONE = 3, VERT_MOTOR_TWO = 5;
 
 	public static final int CLIMB_MOTOR_ONE = 2, CLIMB_MOTOR_TWO = 4, CLIMB_MOTOR_THREE = 6;
+	
+	public static final int FLYWHEEL_MOTOR_LEFT = 0, FLYWHEEL_MOTOR_RIGHT = 2;
+	
+	public static final int WINDOW_MOTOR = 2;
 
 	// Drive Motors
 	public static final int FRONT_LEFT_MOTOR = 2, FRONT_RIGHT_MOTOR = 0, BACK_LEFT_MOTOR = 1, BACK_RIGHT_MOTOR = 3;
@@ -61,8 +67,14 @@ public class Ports {
 	
 	public static final int VERT_MOTOR_TWO_PDP_CHANNEL = 4;
 	
+	public static final int LEFT_FLYWHEEL_PDP_CHANNEL = 1, RIGHT_FLYWHEEL_PDP_CHANNEL = 2;
+
+	
 	// Encoders
 	public static final int VERT_ENC_TRIGGER = 4, VERT_ENC_ECHO = 5;
+	
+	public static final int LIFT_ENCODER_A = 1, LIFT_ENCODER_B = 2;
+
 	
 	// Vert Limit Switch
 	public static final int VERT_LIMIT_SWITCH = 0; //fix port
@@ -71,4 +83,11 @@ public class Ports {
 
 
 
+
+	
+	
+	
+	
+	
+	
 }
