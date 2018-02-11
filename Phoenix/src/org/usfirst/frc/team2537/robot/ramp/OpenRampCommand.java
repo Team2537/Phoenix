@@ -13,7 +13,7 @@ public class OpenRampCommand extends Command {
 	
 	@Override
 	protected void initialize() {
-		Robot.rampSys.openRamp();
+		Robot.rampSys.openRamp();//opens servo
 	}
 	
 	@Override

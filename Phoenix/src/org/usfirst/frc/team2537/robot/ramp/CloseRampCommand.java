@@ -15,7 +15,7 @@ public class CloseRampCommand extends Command {
 	@Override
 	protected void initialize() {
 		
-		Robot.rampSys.closeRamp();
+		Robot.rampSys.closeRamp();//closes ramp
 		
 	}
 	

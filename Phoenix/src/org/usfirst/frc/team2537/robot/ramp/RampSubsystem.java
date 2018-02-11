@@ -13,7 +13,7 @@ public class RampSubsystem extends Subsystem {
 	
 	private Servo rampOpenServo;
 	public RampSubsystem() {
-		rampOpenServo = new Servo(Ports.RAMP_SERVO);
+		rampOpenServo = new Servo(Ports.RAMP_SERVO);//creation of servo object and assignment to port value
 	}
 
 	@Override
@@ -27,10 +27,10 @@ public class RampSubsystem extends Subsystem {
 	}
 
 	public void openRamp() {
-		rampOpenServo.setAngle(180);
+		rampOpenServo.setAngle(180); //servo set to 180 degrees
 	}
 	public void closeRamp() {
-		rampOpenServo.setAngle(0);
+		rampOpenServo.setAngle(0);//servo set to 0 degrees
 	}
 }
 
