@@ -23,8 +23,6 @@ public class CuberSubsystem extends Subsystem {
 		liftMotor = new Talon(Ports.WINDOW_MOTOR);
 		liftEnc = new Encoder(Ports.LIFT_ENCODER_A, Ports.LIFT_ENCODER_B, false, Encoder.EncodingType.k4X);
 		cuberIRSensor = new DigitalInput(Ports.CUBER_IR);
-		
-		
 	}
 	
 	public void initDefaultCommand() {

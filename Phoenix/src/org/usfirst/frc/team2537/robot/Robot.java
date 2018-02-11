@@ -24,6 +24,7 @@ public class Robot extends IterativeRobot {
 	public static CuberSubsystem cuberSys;
 	
 	public static PowerDistributionPanel pdp;
+	
 	public static SmartDashboard smartDashboard;
 	public static VisionInput visionSerial;
 	
@@ -34,6 +35,7 @@ public class Robot extends IterativeRobot {
 		driveSys = new DriveSubsystem();
 		driveSys.initDefaultCommand();
 		driveSys.resetEncoders();
+		
 		smartDashboard = new SmartDashboard();
 		Navx.getInstance().reset();
 		

@@ -6,12 +6,7 @@ import org.usfirst.frc.team2537.robot.input.HumanInput;
 
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-	
-	/**
-	 * 
-	 * @author Space RAIDers
-	 *
-	 */
+
 public class ClimbSubsystem extends Subsystem {
 
 	private Talon climbMotorOne;
@@ -38,22 +33,24 @@ public class ClimbSubsystem extends Subsystem {
 	}
 
 	public void setClimbMotors(double speed) {
+		// CHECK THAT THESE ARE CORRECT BEFORE STARTING TO AVOID DESTROYING GEARBOX
 		climbMotorOne.set(speed);
 		climbMotorTwo.set(speed);
 		climbMotorThree.set(speed);
 	}
 
 	public double getCurrentClimbMotorOne() {
-		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_ONE_PDP_CHANNEL);
+		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_ONE_PDP);
 	}
 	public double getCurrentClimbMotorTwo() {
-		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_TWO_PDP_CHANNEL);
+		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_TWO_PDP);
 	}
 	public double getCurrentClimbMotorThree() {
-		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_THREE_PDP_CHANNEL);
+		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_THREE_PDP);
 	}
 	
 	public boolean limitSwitchOverridden() {
 		return HumanInput.overrideKeyOne.get() && HumanInput.overrideKeyTwo.get() && HumanInput.overrideKeyThree.get();
 	}
+	
 }

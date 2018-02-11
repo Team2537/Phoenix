@@ -8,14 +8,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class VertSubsystem extends Subsystem {
-
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
-
 
 	private Encoder vertEnc;
 	private Talon vertMotorOne;
@@ -24,7 +17,7 @@ public class VertSubsystem extends Subsystem {
 	double current;
 
 	public VertSubsystem() { 
-		vertEnc = new Encoder(Ports.VERT_ENC_TRIGGER, Ports.VERT_ENC_ECHO, false, Encoder.EncodingType.k4X);
+		vertEnc = new Encoder(Ports.VERT_ENC_A, Ports.VERT_ENC_B, false, Encoder.EncodingType.k4X);
 		vertMotorOne = new Talon(Ports.VERT_MOTOR_ONE);
 		vertMotorTwo = new Talon(Ports.VERT_MOTOR_TWO);
 		limitSwitch = new DigitalInput(Ports.VERT_LIMIT_SWITCH);
@@ -34,24 +27,21 @@ public class VertSubsystem extends Subsystem {
 
 	}
 	
-	//makes sure command works when button held
 	public void registerButtons() {
 		HumanInput.registerWhileHeldCommand(HumanInput.raiseButton, new VertUpCommand());
 		HumanInput.registerWhileHeldCommand(HumanInput.lowerButton, new VertDownCommand());
 
 	}
 
-	//receives distance robot travels with encoders
 	public int getDistance() {
 		return vertEnc.get();
 	}
 
-	//sets speed of vertMotors
 	public void setVertMotors(double speed) {
+		// CHECK THAT THESE ARE CORRECT BEFORE STARTING TO AVOID DESTROYING GEARBOX
 		vertMotorOne.set(speed);
 		vertMotorTwo.set(speed);
 	}
-	
 	
 	public boolean getLimitSwitch() {
 		return limitSwitch.get();
