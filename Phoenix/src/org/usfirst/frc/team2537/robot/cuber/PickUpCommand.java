@@ -24,7 +24,7 @@ public class PickUpCommand extends Command {
 	
 	@Override
 	protected boolean isFinished() {
-		return(Robot.cuberSys.getRightFlywheelCurrent() >=  CuberSubsystem.FLYWHEEL_CURRENT_LIMIT || 
+		return (Robot.cuberSys.getRightFlywheelCurrent() >=  CuberSubsystem.FLYWHEEL_CURRENT_LIMIT || 
 				Robot.cuberSys.getLeftFlywheelCurrent() >=  CuberSubsystem.FLYWHEEL_CURRENT_LIMIT || 
 				Robot.cuberSys.voltageToDistance(Robot.cuberSys.getIRSensorVoltage()) < Robot.cuberSys.CUTOFF_DISTANCE);
 	}

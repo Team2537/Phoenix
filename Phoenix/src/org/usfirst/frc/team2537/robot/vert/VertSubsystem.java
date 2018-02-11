@@ -10,14 +10,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class VertSubsystem extends Subsystem {
 
-	private Encoder vertEnc;
 	private Talon vertMotorOne;
 	private Talon vertMotorTwo;
 	private DigitalInput limitSwitch;
 	double current;
 
 	public VertSubsystem() { 
-		vertEnc = new Encoder(Ports.VERT_ENC_A, Ports.VERT_ENC_B, false, Encoder.EncodingType.k4X);
 		vertMotorOne = new Talon(Ports.VERT_MOTOR_ONE);
 		vertMotorTwo = new Talon(Ports.VERT_MOTOR_TWO);
 		limitSwitch = new DigitalInput(Ports.VERT_LIMIT_SWITCH);
@@ -31,10 +29,6 @@ public class VertSubsystem extends Subsystem {
 		HumanInput.registerWhileHeldCommand(HumanInput.raiseButton, new VertUpCommand());
 		HumanInput.registerWhileHeldCommand(HumanInput.lowerButton, new VertDownCommand());
 
-	}
-
-	public int getDistance() {
-		return vertEnc.get();
 	}
 
 	public void setVertMotors(double speed) {

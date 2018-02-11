@@ -53,7 +53,7 @@ public class Robot extends IterativeRobot {
 		
 		visionSerial = new VisionInput();
 	
-		pdp = new PowerDistributionPanel(Ports.PDP);
+		pdp = new PowerDistributionPanel();
 
 	}
 

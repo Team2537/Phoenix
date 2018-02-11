@@ -4,6 +4,13 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
 
 public class Ports {
 	
+	// PDP Channels
+	public static final int LEFT_FLYWHEEL_PDP_CHANNEL = 6, RIGHT_FLYWHEEL_PDP_CHANNEL = 7;
+	
+	public static final int CLIMB_MOTOR_ONE_PDP = 2, CLIMB_MOTOR_TWO_PDP = 1, CLIMB_MOTOR_THREE_PDP = 0;
+	
+	/**********Input**********/
+	
 	// Joysticks
 	public static final int LEFT_JOYSTICK = 0, RIGHT_JOYSTICK = 1;
 
@@ -20,6 +27,7 @@ public class Ports {
 	
 	public static final int PICK_UP_BUTTON = 1, EXPEL_BUTTON = 1, LIFT_BUTTON = 5, LOWER_BUTTON = 4;
 
+	/**********Motors**********/
 
 	// Talons
 	public static final int VERT_MOTOR_ONE = 4, VERT_MOTOR_TWO = 5;
@@ -33,35 +41,12 @@ public class Ports {
 	// Drive Motors
 	public static final int FRONT_LEFT_MOTOR = 0, FRONT_RIGHT_MOTOR = 1, BACK_LEFT_MOTOR = 2, BACK_RIGHT_MOTOR = 3;
 
-	// limit switches
-	public static final int LIMIT_SWITCH = 0;
-
 	// Servo
 	public static final int RAMP_SERVO = 9;
-
-	// Solenoids
-	public static final int RAMP_LOWER_SOLENOID = 5, RAMP_RAISE_SOLENOID = 4;
-
-	public static final int MANIPULATOR_SOLENOID_A = 0, MANIPULATOR_SOLENOID_B = 1;
-
-	public static final int FLIP_SOLENOID_A = 2, FLIP_SOLENOID_B = 3;
-
-	// potentiometers
-	public static final int POTENTIOMETER_CHANNEL = 3, POTENTOMETER_SCALE = 360;
-
-	public static final int FLYWHEEL_A = 1, FLYWHEEL_B = 2;
-
-	// Power Distribution Panel
-	public static final int PDP = 0;
 	
-	// PDP Channels
-	public static final int LEFT_FLYWHEEL_PDP_CHANNEL = 6, RIGHT_FLYWHEEL_PDP_CHANNEL = 7;
-	
-	public static final int CLIMB_MOTOR_ONE_PDP = 2, CLIMB_MOTOR_TWO_PDP = 1, CLIMB_MOTOR_THREE_PDP = 0;
+	/**********Sensors**********/
 	
 	// Encoders
-	public static final int VERT_ENC_A = 4, VERT_ENC_B = 5;
-	
 	public static final int LIFT_ENCODER_A = 1, LIFT_ENCODER_B = 2;
 
 	// Limit Switch
