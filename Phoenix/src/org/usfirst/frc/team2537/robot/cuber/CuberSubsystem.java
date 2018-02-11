@@ -4,6 +4,7 @@ import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.Robot;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
@@ -12,17 +13,19 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class CuberSubsystem extends Subsystem {
 	private Talon flywheelMotorLeft; 
 	private Talon flywheelMotorRight;
-	private Encoder liftEnc; //window(lifting) motor encoder
-	private Talon liftMotor; //window(lifting motor)
-	public final double currentLimit = 134;  //constant for max amp
-	private DigitalInput cuberIRSensor;
+	private Encoder liftEnc;
+	private Talon liftMotor;
+	private AnalogInput cuberIRSensor;
+	public static final double FLYWHEEL_SPEED = .5;
+	public static final double FLYWHEEL_CURRENT_LIMIT = 30; // TODO: determine max amps
+	public static final double CUTOFF_DISTANCE = 2; // TODO: determine cutoff distance
 	
-	public CuberSubsystem() { //constructors for cuberSubsys
+	public CuberSubsystem() {
 		flywheelMotorLeft = new Talon(Ports.FLYWHEEL_MOTOR_LEFT);
 		flywheelMotorRight = new Talon(Ports.FLYWHEEL_MOTOR_RIGHT);
 		liftMotor = new Talon(Ports.WINDOW_MOTOR);
 		liftEnc = new Encoder(Ports.LIFT_ENCODER_A, Ports.LIFT_ENCODER_B, false, Encoder.EncodingType.k4X);
-		cuberIRSensor = new DigitalInput(Ports.CUBER_IR);
+		cuberIRSensor = new AnalogInput(Ports.CUBER_IR);
 	}
 	
 	public void initDefaultCommand() {
@@ -30,30 +33,30 @@ public class CuberSubsystem extends Subsystem {
 	}
 	
 	public void registerButtons() { 
-		HumanInput.registerWhileHeldCommand(HumanInput.pickUpButton, new PickUpCommand()); //corresponds to pickUp command
-		HumanInput.registerWhileHeldCommand(HumanInput.expelButton, new ExpelCommand()); //corresponds to expel command
-		HumanInput.registerWhenPressedCommand(HumanInput.lowerButton, new LowerFlipperCommand()); //corresponds to LowerFlipper command
-		HumanInput.registerWhenPressedCommand(HumanInput.raiseButton, new LiftFlipperCommand());//corresponds to LiftFlipper command
+		HumanInput.registerWhileHeldCommand(HumanInput.pickUpButton, new PickUpCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.expelButton, new ExpelCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.lowerButton, new LowerFlipperCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.raiseButton, new LiftFlipperCommand());
 	}
 	
-	public void setFlywheelMotors(double speed) { //sets both left and right flywheel motor speed
+	public void setFlywheelMotors(double speed) {
 		flywheelMotorLeft.set(speed);
 		flywheelMotorRight.set(speed);
 	}
 
-	public void setLiftMotor(double speedLift) { //sets window motor speed
+	public void setLiftMotor(double speedLift) {
 			liftMotor.set(speedLift);  			
 	}
 	
-	public double getDegrees() { //returns degrees of lift/window motor
+	public double getDegrees() {
 		return liftEnc.get();
 	}
 
-	public void resetEncoder() { //resets lift motor encoder
+	public void resetEncoder() {
 		liftEnc.reset();
 	}
 	
-	public double getLeftFlywheelCurrent(){ // returns amps of left flywheel motor
+	public double getLeftFlywheelCurrent() {
 		return Robot.pdp.getCurrent(Ports.LEFT_FLYWHEEL_PDP_CHANNEL);
 		 
 	}
@@ -63,11 +66,13 @@ public class CuberSubsystem extends Subsystem {
 		
 	}
 	
-	public boolean getIRSensor() {
-		return cuberIRSensor.get();
+	public double getIRSensorVoltage() {
+		return cuberIRSensor.getVoltage();
 	}
 	
-
+	public double voltageToDistance(double voltage) {
+		return 0; // TODO: convert voltage to distance
+	}
 	
 }
 

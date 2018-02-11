@@ -30,7 +30,7 @@ public class LowerFlipperCommand extends Command {
 
 	protected boolean isFinished() { //returns true if motor turns over or equal to 90 degrees or when flywheel motors exceed max amp
 		
-		return(Robot.cuberSys.getDegrees() >= 90 || Robot.cuberSys.getRightFlywheelCurrent() >= Robot.cuberSys.currentLimit) || Robot.cuberSys.getLeftFlywheelCurrent() >= Robot.cuberSys.currentLimit; //returns true if motor turns over or equal to 90 degrees
+		return(Robot.cuberSys.getDegrees() >= 90 || Robot.cuberSys.getRightFlywheelCurrent() >= Robot.cuberSys.FLYWHEEL_CURRENT_LIMIT) || Robot.cuberSys.getLeftFlywheelCurrent() >= Robot.cuberSys.FLYWHEEL_CURRENT_LIMIT; //returns true if motor turns over or equal to 90 degrees
 
 	}
 

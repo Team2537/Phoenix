@@ -5,17 +5,16 @@ import org.usfirst.frc.team2537.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PickUpCommand extends Command {
- double speed;
+	
 	public PickUpCommand() {
-		requires(Robot.cuberSys); //requires cuberSys variables and methods
+		requires(Robot.cuberSys);
 	}
 	
 	@Override
 	protected void initialize() {
 		Robot.cuberSys.setFlywheelMotors(0);
-		if(!Robot.cuberSys.getIRSensor()) {
-			Robot.cuberSys.setFlywheelMotors(0.8); //initializes Flywheel motors to designated speed
-		}
+		if (Robot.cuberSys.voltageToDistance(Robot.cuberSys.getIRSensorVoltage()) < Robot.cuberSys.CUTOFF_DISTANCE)
+			Robot.cuberSys.setFlywheelMotors(Robot.cuberSys.FLYWHEEL_SPEED);
 	}
 	
 	@Override
@@ -24,125 +23,20 @@ public class PickUpCommand extends Command {
 	}
 	
 	@Override
-	protected boolean isFinished() { //returns true when flywheel motors exceed max amp
-		
-		return(Robot.cuberSys.getRightFlywheelCurrent() >=  Robot.cuberSys.currentLimit || Robot.cuberSys.getLeftFlywheelCurrent() >=  Robot.cuberSys.currentLimit); 
+	protected boolean isFinished() {
+		return(Robot.cuberSys.getRightFlywheelCurrent() >=  CuberSubsystem.FLYWHEEL_CURRENT_LIMIT || 
+				Robot.cuberSys.getLeftFlywheelCurrent() >=  CuberSubsystem.FLYWHEEL_CURRENT_LIMIT || 
+				Robot.cuberSys.voltageToDistance(Robot.cuberSys.getIRSensorVoltage()) < Robot.cuberSys.CUTOFF_DISTANCE);
 	}
 	
 	@Override
 	protected void end() {
-		Robot.cuberSys.setFlywheelMotors(0);  //sets Flywheel motor speed to zero
+		Robot.cuberSys.setFlywheelMotors(0);
 	}
 	
 	@Override
 	protected void interrupted() {
-		Robot.cuberSys.setFlywheelMotors(0); //sets Flywheel motor speed to zero
+		Robot.cuberSys.setFlywheelMotors(0);
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// this is just here because it can be
