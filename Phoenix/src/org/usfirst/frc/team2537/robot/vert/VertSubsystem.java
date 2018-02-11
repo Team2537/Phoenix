@@ -4,6 +4,7 @@ import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 import org.usfirst.frc.team2537.robot.resources.CANTalon;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -20,16 +21,16 @@ public class VertSubsystem extends Subsystem {
 	private Encoder vertEnc;
 	private CANTalon vertMotorOne;
 	private CANTalon vertMotorTwo;
-	private Ultrasonic ultrasonic;
 	private PowerDistributionPanel PDP;
 	double current;
+	private DigitalInput limitswitch;
 
 	public VertSubsystem() { 
 		vertEnc = new Encoder(Ports.VERT_ENC_A, Ports.VERT_ENC_B, false, Encoder.EncodingType.k4X);
 		vertMotorOne = new CANTalon(Ports.VERT_MOTOR_ONE);
 		vertMotorTwo = new CANTalon(Ports.VERT_MOTOR_TWO);
 		PDP = new PowerDistributionPanel(Ports.PDP);
-		ultrasonic = new Ultrasonic(Ports.ULTRASONIC_INPUT, Ports.ULTRASONIC_OUTPUT); 
+		limitswitch = new DigitalInput(Ports.LIMIT_SWITCH);
 	}
 
 	public void initDefaultCommand() {
@@ -54,11 +55,10 @@ public class VertSubsystem extends Subsystem {
 		vertMotorTwo.set(-speed);
 	}
 
-	//returns distance of object from robot
-	public double getUltrasonic() {
-		return ultrasonic.getRangeInches();
+	public boolean getLimitSwitch() {
+		return limitswitch.get();
+		
 	}
-	
 	//returns current of vert motor one
 	public double getCurrentOne() {
 		return PDP.getCurrent(Ports.VERT_MOTOR_ONE_PDP_CHANNEL);
