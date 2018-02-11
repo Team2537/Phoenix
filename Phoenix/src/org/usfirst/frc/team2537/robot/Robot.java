@@ -26,6 +26,8 @@ public class Robot extends IterativeRobot {
 	public static PowerDistributionPanel pdp;
 	public static SmartDashboard smartDashboard;
 	public static VisionInput visionSerial;
+	
+	public static long startTime;
 
 	@Override
 	public void robotInit() {
@@ -51,6 +53,7 @@ public class Robot extends IterativeRobot {
 	
 		pdp = new PowerDistributionPanel(Ports.PDP);
 
+		startTime = System.currentTimeMillis();
 	}
 
 	@Override
