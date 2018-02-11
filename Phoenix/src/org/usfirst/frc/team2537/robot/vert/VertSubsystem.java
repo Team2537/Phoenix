@@ -34,20 +34,18 @@ public class VertSubsystem extends Subsystem {
 
 	}
 	
-	//makes sure command works when button held
 	public void registerButtons() {
 		HumanInput.registerWhileHeldCommand(HumanInput.raiseButton, new VertUpCommand());
 		HumanInput.registerWhileHeldCommand(HumanInput.lowerButton, new VertDownCommand());
 
 	}
 
-	//receives distance robot travels with encoders
 	public int getDistance() {
 		return vertEnc.get();
 	}
 
-	//sets speed of vertMotors
 	public void setVertMotors(double speed) {
+		// MAKE SURE THESE ARE SET CORRECTLY TO AVOID DESTROYING GEARBOX
 		vertMotorOne.set(speed);
 		vertMotorTwo.set(speed);
 	}

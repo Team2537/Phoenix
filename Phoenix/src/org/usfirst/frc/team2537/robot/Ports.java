@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
 
 public class Ports {
 	
+	// PDP Channels
+	public static final int CLIMB_MOTOR_ONE_PDP = 2, CLIMB_MOTOR_TWO_PDP = 1, CLIMB_MOTOR_THREE_PDP = 0;
 	
 	// Joysticks
 	public static final int LEFT_JOYSTICK = 0, RIGHT_JOYSTICK = 1;
@@ -24,16 +26,16 @@ public class Ports {
 
 
 	// Talons
-	public static final int VERT_MOTOR_ONE = 3, VERT_MOTOR_TWO = 5;
+	public static final int VERT_MOTOR_ONE = 4, VERT_MOTOR_TWO = 5;
 
-	public static final int CLIMB_MOTOR_ONE = 2, CLIMB_MOTOR_TWO = 4, CLIMB_MOTOR_THREE = 6;
+	public static final int CLIMB_MOTOR_ONE = 1, CLIMB_MOTOR_TWO = 2, CLIMB_MOTOR_THREE = 3;
 	
 	public static final int FLYWHEEL_MOTOR_LEFT = 0, FLYWHEEL_MOTOR_RIGHT = 2;
 	
 	public static final int WINDOW_MOTOR = 2;
 
 	// Drive Motors
-	public static final int FRONT_LEFT_MOTOR = 2, FRONT_RIGHT_MOTOR = 0, BACK_LEFT_MOTOR = 1, BACK_RIGHT_MOTOR = 3;
+	public static final int FRONT_LEFT_MOTOR = 0, FRONT_RIGHT_MOTOR = 1, BACK_LEFT_MOTOR = 2, BACK_RIGHT_MOTOR = 3;
 
 	// limit switches
 	public static final int LIMIT_SWITCH = 0;
@@ -63,8 +65,6 @@ public class Ports {
 	
 	public static final int LEFT_FLYWHEEL_PDP_CHANNEL = 6, RIGHT_FLYWHEEL_PDP_CHANNEL = 7;
 	
-	public static final int CLIMB_MOTOR_ONE_PDP_CHANNEL = 0, CLIMB_MOTOR_TWO_PDP_CHANNEL = 1, CLIMB_MOTOR_THREE_PDP_CHANNEL = 2;
-
 	
 	// Encoders
 	public static final int VERT_ENC_TRIGGER = 4, VERT_ENC_ECHO = 5;

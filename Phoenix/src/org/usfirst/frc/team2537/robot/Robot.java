@@ -1,3 +1,4 @@
+// MAKE SURE ALL MOTORS ARE SPINNING IN THE CORRECT DIRECTION TO AVOID DESTROYING GEARBOXES
 package org.usfirst.frc.team2537.robot;
 
 import org.usfirst.frc.team2537.robot.auto.EncoderTest;
@@ -20,11 +21,9 @@ public class Robot extends IterativeRobot {
 	public static RampSubsystem rampSys;
 	public static SerialSubsystem serialSys;	
 	public static CuberSubsystem cuberSys;
-
-	
-
 	
 	public static long startTime;
+	
 	public static PowerDistributionPanel pdp;
 
 	@Override
@@ -42,8 +41,8 @@ public class Robot extends IterativeRobot {
 		rampSys = new RampSubsystem();
 		rampSys.registerButtons();
 		
-		cuberSys = new CuberSubsystem();
-		cuberSys.registerButtons();
+//		cuberSys = new CuberSubsystem();
+//		cuberSys.registerButtons();
 		
 		serialSys = new SerialSubsystem();
 		
@@ -75,7 +74,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println(Robot.vertSys.getLimitSwitch());
+//		System.out.println(Robot.vertSys.getLimitSwitch());
 
 	}
 

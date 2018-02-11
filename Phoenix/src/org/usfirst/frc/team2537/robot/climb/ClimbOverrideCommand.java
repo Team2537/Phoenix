@@ -22,9 +22,7 @@ public class ClimbOverrideCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return (Robot.climbSys.getCurrentClimbMotorOne() > ClimbSubsystem.MAX_CURRENT)
-				|| (Robot.climbSys.getCurrentClimbMotorTwo() > ClimbSubsystem.MAX_CURRENT)
-				|| (Robot.climbSys.getCurrentClimbMotorThree() > ClimbSubsystem.MAX_CURRENT);
+		return false;
 
 	}
 
