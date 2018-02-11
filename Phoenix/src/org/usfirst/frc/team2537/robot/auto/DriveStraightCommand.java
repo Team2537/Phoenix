@@ -2,8 +2,6 @@ package org.usfirst.frc.team2537.robot.auto;
 
 import org.usfirst.frc.team2537.robot.Robot;
 import org.usfirst.frc.team2537.robot.drive.Motor;
-import org.usfirst.frc.team2537.robot.units.Distances;
-import org.usfirst.frc.team2537.robot.units.Units;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
@@ -21,18 +19,18 @@ public class DriveStraightCommand extends Command {
 	 */
 	public static final double ANGLE_TOLERANCE = 1;
 
-	public static final double SLOW_DOWN_POWER = 100;
+	public static final double SLOW_DOWN_POWER = 10;
 
-	public static final double[] ANGLE_PID = new double[] { 20, 0, 0 };
+	public static final double ANGLE_kP = 2;
 
 	/** value [0,1] representing the percent of power to motors */
-	public static final double DEFAULT_PERCENT_OUTPUT = 0.4;
+	public static final double DEFAULT_PERCENT_OUTPUT = 0.69;
 
 	/******************************************************************************/
 	/* INSTANCE VARIABLES */
 	/******************************************************************************/
 
-	private double targetTicks;
+	private double targetInches;
 	private double motorPower;
 	private boolean slowingDown;
 
@@ -58,7 +56,7 @@ public class DriveStraightCommand extends Command {
 	 */
 	public DriveStraightCommand(double distance, double defaultPercentOutput) {
 		requires(Robot.driveSys);
-		targetTicks = Units.convertDistance(distance, Distances.INCHES, Distances.TICKS);
+		targetInches = distance;
 		motorPower = defaultPercentOutput;
 		slowingDown = false;
 	}
@@ -72,54 +70,44 @@ public class DriveStraightCommand extends Command {
 		Robot.driveSys.resetEncoders();
 		Robot.driveSys.setMode(ControlMode.PercentOutput);
 		Navx.getInstance().reset();
-		System.out.println("starting angle: " + Navx.getInstance().getHeading());
+		System.out.println("starting angle: " + Navx.getInstance().getAngle());
 	}
 
 	@Override
 	protected void execute() {
-		/* we convert angles to values in range [-1,1] */
-		double normalizedAngle = Navx.getInstance().getHeading() / 180;
-		double normalizedSlowDownAngle = ANGLE_TOLERANCE / 180;
-		double currentTicks = Robot.driveSys.getEncoderDistance();
+		double currentInches = Robot.driveSys.getAverageEncoderInches();
 		double currentVelocity = Robot.driveSys.getEncoderVelocity();
 		double power = motorPower;
 
 		if (!slowingDown) {
 			double slowDownDistance = calculateSlowDownDistance(currentVelocity);
-			/*System.out.printf("avg velocity: %f in/s;  slow down distance: %f in.; target ticks: %f%n",
-					Conversions.roundDigits(Conversions.convertSpeed(currentVelocity, Distances.TICKS, Times.HUNDRED_MS,
-							Distances.INCHES, Times.SECONDS), 4),
-					Conversions.roundDigits(
-							Conversions.convertDistance(slowDownDistance, Distances.TICKS, Distances.INCHES), 4),
-					targetTicks);*/
-			if (targetTicks - currentTicks <= slowDownDistance) {
+			if (targetInches - currentInches <= slowDownDistance) {
 				System.out.println("\n\n\n\n\n SLOWING DOWN!!! slow down distance: " + slowDownDistance);
 				slowingDown = true;
 			}
 		}
 
 		if (slowingDown) {
-			/*System.out.printf("avg velocity: %f in/s%n",
-					Conversions.roundDigits(Conversions.convertSpeed(currentVelocity, Distances.TICKS, Times.HUNDRED_MS,
-							Distances.INCHES, Times.SECONDS), 4));*/
-			power *= (targetTicks - currentTicks) / targetTicks;
+			power *= (targetInches - currentInches) / targetInches;
 		}
 
 		/* we add a speed delta to compensate for being off angle */
-		
-		double slowDownDelta = 0;
-		if (Math.abs(normalizedAngle) > Math.abs(normalizedSlowDownAngle)) {
-			System.out.println(normalizedAngle * 180 + " degrees");
-			slowDownDelta = normalizedAngle * ANGLE_PID[0] * power;
+		double powerAdjustmentFromAngle = 0;
+		double currentAngle = Navx.getInstance().getAngle();
+//		System.out.println("current angle: " + currentAngle);
+		if (Math.abs(currentAngle) > ANGLE_TOLERANCE) {
+			powerAdjustmentFromAngle = currentAngle/180*ANGLE_kP*power;
 		}
 
-		Robot.driveSys.setMotors(power - slowDownDelta, Motor.LEFT);
-		Robot.driveSys.setMotors(power + slowDownDelta, Motor.RIGHT);
+		Robot.driveSys.setMotors(power - powerAdjustmentFromAngle, Motor.LEFT);
+		Robot.driveSys.setMotors(power + powerAdjustmentFromAngle, Motor.RIGHT);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Robot.driveSys.getEncoderDistance() >= targetTicks;
+		System.out.println("speed: " + Robot.driveSys.getEncoderVelocity() + "; " + 
+				Robot.driveSys.getAverageEncoderInches() + " / " + targetInches);
+		return Robot.driveSys.getAverageEncoderInches() >= targetInches;
 	}
 
 	@Override
@@ -148,6 +136,7 @@ public class DriveStraightCommand extends Command {
 	 *         should slow down (inches)
 	 */
 	private double calculateSlowDownDistance(double speed) {
+		//return Math.pow(speed, speed / SLOW_DOWN_POWER) / SLOW_DOWN_POWER;
 		return Math.pow(speed, 2) / SLOW_DOWN_POWER;
 	}
 
