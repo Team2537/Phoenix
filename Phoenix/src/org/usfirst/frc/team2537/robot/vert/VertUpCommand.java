@@ -1,7 +1,6 @@
 package org.usfirst.frc.team2537.robot.vert;
 
 import org.usfirst.frc.team2537.robot.Robot;
-import org.usfirst.frc.team2537.robot.input.HumanInput;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,7 +9,6 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class VertUpCommand extends Command {
 
-	private static final int AMP_LIMIT = 5; // 5 amps TBD
 
 	public VertUpCommand() {
 		requires(Robot.vertSys);
@@ -24,24 +22,6 @@ public class VertUpCommand extends Command {
 	}
 
 	protected void execute() {
-		// // stops bot when it's 5 inches or closer to object
-		// if (Robot.vertSys.getUltrasonic() <= ULTRASONIC_DISTANCE) {
-		// Robot.vertSys.setVertMotors(0);
-		// } else {
-		// Robot.vertSys.setVertMotors(-0.8);
-		// }
-		// //stops bot when it exceeds amp limit for channel 5
-		// if (Robot.vertSys.getCurrentOne() >= AMP_LIMIT) {
-		// Robot.vertSys.setVertMotors(0);
-		// } else {
-		// Robot.vertSys.setVertMotors(-0.8);
-		// }
-		// //stops bot when it exceeds amp limit for channel 4
-		// if (Robot.vertSys.getCurrentTwo() >= AMP_LIMIT) {
-		// Robot.vertSys.setVertMotors(0);
-		// } else {
-		// Robot.vertSys.setVertMotors(-0.8);
-		// }
 		if (Robot.vertSys.getLimitSwitch())
 			Robot.vertSys.setVertMotors(0);
 	}

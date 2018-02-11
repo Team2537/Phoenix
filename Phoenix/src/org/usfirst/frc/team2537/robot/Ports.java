@@ -2,7 +2,6 @@
 package org.usfirst.frc.team2537.robot;
 
 import edu.wpi.first.wpilibj.SerialPort.Port;
-import edu.wpi.first.wpilibj.DigitalSource;
 
 public class Ports {
 	
@@ -63,11 +62,10 @@ public class Ports {
 	public static final int ULTRASONIC_INPUT = 0, ULTRASONIC_OUTPUT = 1;
 	
 	// PDP Channels
-	public static final int VERT_MOTOR_ONE_PDP_CHANNEL = 5;
 	
-	public static final int VERT_MOTOR_TWO_PDP_CHANNEL = 4;
+	public static final int LEFT_FLYWHEEL_PDP_CHANNEL = 6, RIGHT_FLYWHEEL_PDP_CHANNEL = 7;
 	
-	public static final int LEFT_FLYWHEEL_PDP_CHANNEL = 1, RIGHT_FLYWHEEL_PDP_CHANNEL = 2;
+	public static final int CLIMB_MOTOR_ONE_PDP_CHANNEL = 0, CLIMB_MOTOR_TWO_PDP_CHANNEL = 1, CLIMB_MOTOR_THREE_PDP_CHANNEL = 2;
 
 	
 	// Encoders

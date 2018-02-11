@@ -5,14 +5,13 @@ import org.usfirst.frc.team2537.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ExpelCommand extends Command {
-	double speed; //local var for flywheel motor speed
 	public ExpelCommand() {
 		requires(Robot.cuberSys); //requires variables and methods form cuberSys
 	}
 	
 	@Override
 	protected void initialize() {
-		Robot.cuberSys.setFlywheelMotors(-speed); // sets speed to reverse to expel out cube
+		Robot.cuberSys.setFlywheelMotors(-0.8); // sets speed to reverse to expel out cube
 		
 		
 	}

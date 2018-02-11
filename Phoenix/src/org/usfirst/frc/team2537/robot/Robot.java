@@ -20,10 +20,11 @@ public class Robot extends IterativeRobot {
 	public static RampSubsystem rampSys;
 	public static SerialSubsystem serialSys;	
 	public static CuberSubsystem cuberSys;
+
+	
+
+	
 	public static long startTime;
-	
-//	public static Cameras cameras;
-	
 	public static PowerDistributionPanel pdp;
 
 	@Override
@@ -48,7 +49,7 @@ public class Robot extends IterativeRobot {
 		
 
 	
-		pdp = new PowerDistributionPanel();
+		pdp = new PowerDistributionPanel(Ports.PDP);
 		
 		
 

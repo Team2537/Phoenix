@@ -12,7 +12,7 @@ public class PickUpCommand extends Command {
 	
 	@Override
 	protected void initialize() {
-		Robot.cuberSys.setFlywheelMotors(speed); //initializes Flywheel motors to designated speed
+		Robot.cuberSys.setFlywheelMotors(0.8); //initializes Flywheel motors to designated speed
 	}
 	
 	@Override
