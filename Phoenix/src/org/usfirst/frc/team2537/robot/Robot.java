@@ -1,4 +1,3 @@
-// MAKE SURE ALL MOTORS ARE SPINNING IN THE CORRECT DIRECTION TO AVOID DESTROYING GEARBOXES
 package org.usfirst.frc.team2537.robot;
 
 import org.usfirst.frc.team2537.robot.auto.DriveStraightCommand;
@@ -23,13 +22,12 @@ public class Robot extends IterativeRobot {
 	public static ClimbSubsystem climbSys;
 	public static RampSubsystem rampSys;
 	public static CuberSubsystem cuberSys;
-
-	public static long startTime;
 	
 	public static PowerDistributionPanel pdp;
 	public static SmartDashboard smartDashboard;
 	public static VisionInput visionSerial;
-
+	
+	public static long startTime;
 
 	@Override
 	public void robotInit() {
@@ -48,14 +46,13 @@ public class Robot extends IterativeRobot {
 		rampSys = new RampSubsystem();
 		rampSys.registerButtons();
 		
-//		cuberSys = new CuberSubsystem();
-//		cuberSys.registerButtons();
+		cuberSys = new CuberSubsystem();
+		cuberSys.registerButtons();
 		
 		visionSerial = new VisionInput();
 	
 		pdp = new PowerDistributionPanel(Ports.PDP);
 
-		startTime = System.currentTimeMillis();
 	}
 
 	@Override
@@ -74,6 +71,7 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		Scheduler.getInstance().removeAll();
 		Robot.driveSys.resetEncoders();
+		startTime = System.currentTimeMillis();
 	}
 
 	@Override
@@ -81,7 +79,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("angle",  Navx.getInstance().getAngle());
 		SmartDashboard.putNumber("yaw", Navx.getInstance().getYaw());
 		Scheduler.getInstance().run();
-		
 		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
 	}
 

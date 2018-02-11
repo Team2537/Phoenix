@@ -4,6 +4,7 @@ import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.Robot;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -13,17 +14,15 @@ public class CuberSubsystem extends Subsystem {
 	private Talon flywheelMotorRight;
 	private Encoder liftEnc; //window(lifting) motor encoder
 	private Talon liftMotor; //window(lifting motor)
-	//private double speedLift;
-	//private double leftCurrent;
-	//private double rightCurrent;
-	 public final double currentLimit = 134;  //constant for max amp
-	
+	public final double currentLimit = 134;  //constant for max amp
+	private DigitalInput cuberIRSensor;
 	
 	public CuberSubsystem() { //constructors for cuberSubsys
 		flywheelMotorLeft = new Talon(Ports.FLYWHEEL_MOTOR_LEFT);
 		flywheelMotorRight = new Talon(Ports.FLYWHEEL_MOTOR_RIGHT);
 		liftMotor = new Talon(Ports.WINDOW_MOTOR);
 		liftEnc = new Encoder(Ports.LIFT_ENCODER_A, Ports.LIFT_ENCODER_B, false, Encoder.EncodingType.k4X);
+		cuberIRSensor = new DigitalInput(Ports.CUBER_IR);
 		
 		
 	}
@@ -64,6 +63,10 @@ public class CuberSubsystem extends Subsystem {
 	public double getRightFlywheelCurrent() { //returns amps of right flywheel motor
 		return Robot.pdp.getCurrent(Ports.RIGHT_FLYWHEEL_PDP_CHANNEL);
 		
+	}
+	
+	public boolean getIRSensor() {
+		return cuberIRSensor.get();
 	}
 	
 
