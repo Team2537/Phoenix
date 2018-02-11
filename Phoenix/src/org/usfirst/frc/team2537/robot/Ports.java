@@ -5,8 +5,6 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
 
 public class Ports {
 	
-	// PDP Channels
-	public static final int CLIMB_MOTOR_ONE_CHANNEL = 2, CLIMB_MOTOR_TWO_CHANNEL = 4, CLIMB_MOTOR_THREE_CHANNEL = 6;
 	
 	// Joysticks
 	public static final int LEFT_JOYSTICK = 0, RIGHT_JOYSTICK = 1;

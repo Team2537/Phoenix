@@ -44,13 +44,13 @@ public class ClimbSubsystem extends Subsystem {
 	}
 
 	public double getCurrentClimbMotorOne() {
-		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_ONE_CHANNEL);
+		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_ONE_PDP_CHANNEL);
 	}
 	public double getCurrentClimbMotorTwo() {
-		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_TWO_CHANNEL);
+		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_TWO_PDP_CHANNEL);
 	}
 	public double getCurrentClimbMotorThree() {
-		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_THREE_CHANNEL);
+		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_THREE_PDP_CHANNEL);
 	}
 	
 	public boolean limitSwitchOverridden() {
