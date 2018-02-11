@@ -8,17 +8,14 @@ import edu.wpi.first.wpilibj.command.Command;
 public class VisionRotateCommand extends Command {
 
 	/* when the pi cannot see the target, we spin faster to try to find the target */
-	private static final double FAST_SPEED = 0.75;
-	/* we spin slower when the pi can see the target so that we do not overshoot */
-	private static final double SLOW_SPEED = 0.5;
-	
+	private static final double DEFAULT_PERCENT_OUTPUT = 0.69;
+	private static final double CENTER_kP = 2;
 	private static final double TURNING_TOLERANCE = 0.1;
 	
 	private double centerX;
 	
 	public VisionRotateCommand(){
 		requires(Robot.driveSys);
-		requires(Robot.serialSys);
 	}
 
 	@Override
@@ -28,28 +25,24 @@ public class VisionRotateCommand extends Command {
 
 	@Override
 	protected void execute() {
-		Target[] targets = Robot.serialSys.getVisionPacket();
+		Target[] targets = Robot.visionSerial.getVisionPacket();
 		
 		/* if we cannot see the target, we spin faster */
-		if(targets.length == 0){
-			Robot.driveSys.setMotors(FAST_SPEED,  Motor.LEFT);
-			Robot.driveSys.setMotors(-FAST_SPEED, Motor.RIGHT);
-		} else {
+		double power = DEFAULT_PERCENT_OUTPUT;
+		
+		if(targets.length > 0){
 			Target largestTarget = new Target();
-			for(Target target : targets){
+			for(Target target : targets){	// focus on the largest target only
 				if(target.getBoundingBoxArea() > largestTarget.getBoundingBoxArea()){
 					largestTarget = target;
 				}
 			}
 			centerX = largestTarget.getBoundingBoxCenter().getX(CoordinateSystems.CARTESIAN_NORMALIZED);
-			if(centerX > 0){
-				Robot.driveSys.setMotors(SLOW_SPEED,  Motor.LEFT);
-				Robot.driveSys.setMotors(-SLOW_SPEED, Motor.RIGHT);
-			} else {
-				Robot.driveSys.setMotors(-SLOW_SPEED, Motor.LEFT);
-				Robot.driveSys.setMotors(SLOW_SPEED,  Motor.RIGHT);
-			}
+			power = Math.min(power, Math.abs(centerX/180*power*CENTER_kP)) * Math.signum(centerX);
 		}
+		
+		Robot.driveSys.setMotors( power,  Motor.LEFT);
+		Robot.driveSys.setMotors(-power, Motor.RIGHT);
 	}
 
 	@Override

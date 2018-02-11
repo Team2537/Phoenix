@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
 
 public class Ports {
 	// Joysticks
-	public static final int LEFT_JOYSTICK = 1, RIGHT_JOYSTICK = 0;
+	public static final int LEFT_JOYSTICK = 0, RIGHT_JOYSTICK = 1;
 
 	// Buttons
 	public static final int VERT_RAISE_BUTTON = 3, VERT_LOWER_BUTTON = 2;
@@ -26,7 +26,7 @@ public class Ports {
 	public static final int CLIMB_MOTOR_ONE = 4, CLIMB_MOTOR_TWO = 5, CLIMB_MOTOR_THREE = 6;
 
 	// Drive Motors
-	public static final int FRONT_LEFT_MOTOR = 2, FRONT_RIGHT_MOTOR = 0, BACK_LEFT_MOTOR = 1, BACK_RIGHT_MOTOR = 3;
+	public static final int FRONT_LEFT_MOTOR = 1, FRONT_RIGHT_MOTOR = 0, BACK_LEFT_MOTOR = 3, BACK_RIGHT_MOTOR = 2;
 
 	// limit switches
 	public static final int LIMIT_SWITCH = 0;

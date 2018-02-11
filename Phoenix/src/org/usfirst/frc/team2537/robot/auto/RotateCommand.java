@@ -12,10 +12,9 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RotateCommand extends Command {
 	private double targetAngle;
-	private static final double DEFAULT_SPEED = 0.75;
-	private static final double REDUCED_SPEED = 0.5;
+	private static final double DEFAULT_PERCENT_OUTPUT = 0.75;
+	private static final double ANGLE_kP = 2;
 	private static final double TOLERANCE = 1; // degrees
-	private static final int SLOW_DOWN_ANGLE = 10;
 	private double currentAngle;
     public RotateCommand(double angle) {
     	requires(Robot.driveSys);
@@ -33,19 +32,12 @@ public class RotateCommand extends Command {
 
     @Override
     protected void execute() {
-    	currentAngle = Navx.getInstance().getHeading();
-    	double speed = DEFAULT_SPEED;
-    	if (Math.abs(currentAngle-targetAngle) < SLOW_DOWN_ANGLE) { //reduces speed if angle is close to finishing angle
-			speed=REDUCED_SPEED;
-		}
+    	currentAngle = Navx.getInstance().getAngle();
     	double deltaAngle = currentAngle - targetAngle;
-		if (deltaAngle > TOLERANCE){
-			Robot.driveSys.setMotors(-speed, Motor.LEFT);
-			Robot.driveSys.setMotors( speed, Motor.RIGHT);
-		} else if (deltaAngle < -TOLERANCE) {
-			Robot.driveSys.setMotors( speed, Motor.LEFT);
-			Robot.driveSys.setMotors(-speed, Motor.RIGHT);
-		}
+    	double power = DEFAULT_PERCENT_OUTPUT;
+    	power = Math.min(power, Math.abs(deltaAngle/180*power*ANGLE_kP)) * Math.signum(deltaAngle);
+		Robot.driveSys.setMotors(-power,  Motor.LEFT);
+		Robot.driveSys.setMotors( power, Motor.RIGHT);
     }
 
     @Override

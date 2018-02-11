@@ -3,9 +3,8 @@ package org.usfirst.frc.team2537.robot.auto.vision;
 import org.usfirst.frc.team2537.robot.Ports;
 
 import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class SerialSubsystem extends Subsystem {
+public class VisionInput {
 	public final boolean DEBUG = true;
 	public final int BAUDRATE = 38400;
 	
@@ -14,14 +13,10 @@ public class SerialSubsystem extends Subsystem {
 	private String lastCompletedString;
 	private boolean recievedEmptyPacket;
 
-	public SerialSubsystem(){
+	public VisionInput(){
 		serial = new SerialPort(BAUDRATE, Ports.RASPI);
 		buffer = "";
 		recievedEmptyPacket = true;
-	}
-	
-	public void initDefaultCommand() {
-		setDefaultCommand(new ReadSerialCommand()); // automatically adds packets to the buffer
 	}
 
 	public Target[] getVisionPacket() {

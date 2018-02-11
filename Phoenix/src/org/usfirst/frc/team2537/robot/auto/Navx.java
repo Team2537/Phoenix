@@ -22,7 +22,8 @@ public class Navx extends AHRS {
 	/**
 	 * @return direction of robot from [-180,180], increasing clockwise, with 0 as positive y
 	 */
-	public double getHeading(){
+	@Override
+	public double getAngle(){
 		return ((super.getAngle() + 180) % 360 + 360) % 360 - 180;
 	}
 	
