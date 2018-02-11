@@ -25,5 +25,7 @@ public class Ports {
 	//motor channels for the pdp
 	public static final int LEFT_FLYWHEEL_PDP_CHANNEL = 1, RIGHT_FLYWHEEL_PDP_CHANNEL = 2;
 	
+	//infrared sensor
+	public static final int INFRARED_DISTANCE_INPUT = 0, INFRARED_DISTANCE_OUTPUT = 0;
 	
 }

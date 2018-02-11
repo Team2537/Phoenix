@@ -1,8 +1,10 @@
 package org.usfirst.frc.team2537.robot.cuber;
 
 import org.usfirst.frc.team2537.robot.Ports;
+import org.usfirst.frc.team2537.robot.Robot;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Talon;
@@ -20,9 +22,8 @@ public class CuberSubsystem extends Subsystem {
 	//private double leftCurrent;
 	//private double rightCurrent;
 	private PowerDistributionPanel PDP; // pdp to measure current of flywheel motors
-	 public static final double currentLimit = 134;  //constant for max amp
-	
-	
+	 public static final double currentLimit = 134;  //constant for max amp	
+	 
 	public CuberSubsystem() { //constructors for cuberSubsys
 		flywheelEnc = new Encoder(Ports.CUBER_ENCODER_A, Ports.CUBER_ENCODER_B, false, Encoder.EncodingType.k4X);
 		flywheelMotorLeft = new Talon(Ports.FLYWHEEL_MOTOR_LEFT);
@@ -70,7 +71,9 @@ public class CuberSubsystem extends Subsystem {
 		double rightCurrent = PDP.getCurrent(Ports.RIGHT_FLYWHEEL_PDP_CHANNEL);
 		return rightCurrent;
 	}
+	public void getInfrared(){
 	
+	}
 //BELOW COULD BE USED ONLY IF WE DONT HAVE SENSORS TO TURN WINDOW MOTOR ARM TO 90 DEGREES
 	/*
 	public double getTimefor90Degrees() { //this calculates time needed for arm to move from 0 degrees to 90 degrees in case we don't have sensors or stuff
