@@ -20,6 +20,7 @@ public class Robot extends IterativeRobot {
 	public static RampSubsystem rampSys;
 	public static SerialSubsystem serialSys;	
 	public static CubeSubsystem cubeSys;
+	public static long startTime;
 	
 //	public static Cameras cameras;
 	
@@ -49,6 +50,8 @@ public class Robot extends IterativeRobot {
 //		cameras.start();
 		
 		pdp = new PowerDistributionPanel();
+		
+		
 
 	}
 
@@ -65,7 +68,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		new EncoderTest().start();
-		//serialSys.initDefaultCommand();
+		startTime = System.currentTimeMillis();
+		
 	}
 
 	@Override

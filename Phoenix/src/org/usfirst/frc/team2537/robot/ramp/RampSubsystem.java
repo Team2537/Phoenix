@@ -5,7 +5,6 @@ import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 
 import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class RampSubsystem extends Subsystem {
