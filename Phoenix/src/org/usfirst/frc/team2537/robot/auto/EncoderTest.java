@@ -14,6 +14,7 @@ public class EncoderTest extends Command {
 	@Override
 	protected void execute(){
 		System.out.println(Robot.driveSys.getAverageEncoderInches());
+//		System.out.println(Robot.driveSys.getEncoderDistance());
 	}
 	
 	@Override

@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2537.robot.climb;
 import org.usfirst.frc.team2537.robot.Robot;
-import org.usfirst.frc.team2537.robot.input.HumanInput;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -12,7 +11,7 @@ public class ClimbOverrideCommand extends Command {
 
 	@Override
 	protected void initialize() {
-		Robot.climbSys.megaMotorActivation(0.85);
+		Robot.climbSys.setClimbMotors(0.85);
 
 	}
 
@@ -23,21 +22,21 @@ public class ClimbOverrideCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return (!HumanInput.overrideKeyOne.get()) || 
-				(!HumanInput.overrideKeyTwo.get())|| 
-				(!HumanInput.overrideKeyThree.get());
+		return (Robot.climbSys.getCurrentClimbMotorOne() > ClimbSubsystem.MAX_CURRENT)
+				|| (Robot.climbSys.getCurrentClimbMotorTwo() > ClimbSubsystem.MAX_CURRENT)
+				|| (Robot.climbSys.getCurrentClimbMotorThree() > ClimbSubsystem.MAX_CURRENT);
 
 	}
 
 	@Override
 	protected void end() {
-		Robot.climbSys.ultraDeath();
+		Robot.climbSys.setClimbMotors(0);
 
 	}
 
 	@Override
 	protected void interrupted() {
-		Robot.climbSys.ultraDeath();
+		Robot.climbSys.setClimbMotors(0);
 
 	}
 

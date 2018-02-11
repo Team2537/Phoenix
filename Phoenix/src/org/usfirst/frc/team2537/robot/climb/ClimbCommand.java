@@ -3,19 +3,23 @@ package org.usfirst.frc.team2537.robot.climb;
 import org.usfirst.frc.team2537.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-	/**
-	 * 
-	 * @author Space RAIDers
-	 *
-	 */
+
+/**
+ * 
+ * @author Space RAIDers
+ *
+ */
 public class ClimbCommand extends Command {
+	private static final int BUTTON_LOCK = 105000;
 
 	public ClimbCommand() {
 		requires(Robot.climbSys);
 	}
 
 	protected void initialize() {
-		Robot.climbSys.megaMotorActivation(0.85);
+		if (System.currentTimeMillis() - Robot.startTime >= BUTTON_LOCK) {
+			Robot.climbSys.setClimbMotors(0.7);
+		} 
 	}
 
 	protected void execute() {
@@ -24,17 +28,16 @@ public class ClimbCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return (Robot.climbSys.getLimitSwitch() && !Robot.climbSys.limitSwitchOverridden()) ||
-				(Robot.climbSys.getCurrentOne() > ClimbSubsystem.MAX_CURRENT) || 
-				(Robot.climbSys.getCurrentTwo() > ClimbSubsystem.MAX_CURRENT) || 
-				(Robot.climbSys.getCurrentThree() > ClimbSubsystem.MAX_CURRENT);
+		return (Robot.climbSys.getCurrentClimbMotorOne() > ClimbSubsystem.MAX_CURRENT)
+				|| (Robot.climbSys.getCurrentClimbMotorTwo() > ClimbSubsystem.MAX_CURRENT)
+				|| (Robot.climbSys.getCurrentClimbMotorThree() > ClimbSubsystem.MAX_CURRENT);
 	}
 
 	protected void end() {
-		Robot.climbSys.ultraDeath();
+		Robot.climbSys.setClimbMotors(0);
 	}
 
 	protected void interrupted() {
-		Robot.climbSys.ultraDeath();
+		Robot.climbSys.setClimbMotors(0);
 	}
 }

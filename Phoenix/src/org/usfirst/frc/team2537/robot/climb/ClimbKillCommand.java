@@ -12,13 +12,13 @@ public class ClimbKillCommand extends Command {
 	
 	@Override
 	protected void initialize() {
-		Robot.climbSys.ultraDeath();
+		Robot.climbSys.setClimbMotors(0);
 		
 	}
 	
 	@Override
 	protected void execute() {
-		Robot.climbSys.ultraDeath();
+		Robot.climbSys.setClimbMotors(0);
 	}
 	
 	@Override
@@ -29,13 +29,13 @@ public class ClimbKillCommand extends Command {
 	
 	@Override
 	protected void end() {
-		Robot.climbSys.ultraDeath();
+		Robot.climbSys.setClimbMotors(0);
 		
 	}
 	
 	@Override
 	protected void interrupted() {
-		Robot.climbSys.ultraDeath();
+		Robot.climbSys.setClimbMotors(0);
 		
 	}
 

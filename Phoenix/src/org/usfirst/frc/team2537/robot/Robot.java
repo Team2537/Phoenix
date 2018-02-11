@@ -4,31 +4,26 @@ import org.usfirst.frc.team2537.robot.auto.DriveStraightCommand;
 import org.usfirst.frc.team2537.robot.auto.Navx;
 import org.usfirst.frc.team2537.robot.auto.vision.ReadSerialCommand;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
-import org.usfirst.frc.team2537.robot.cameras.Cameras;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
-import org.usfirst.frc.team2537.robot.cube_manipulation.CubeSubsystem;
+import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
 import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
 import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
- */
 public class Robot extends IterativeRobot {
+	
 	public static DriveSubsystem driveSys;
 	public static VertSubsystem vertSys;
 	public static ClimbSubsystem climbSys;
 	public static RampSubsystem rampSys;
-	public static CubeSubsystem cubeSys;
-	public static Cameras cameras;
+	public static CuberSubsystem cuberSys;
+	
+	public static PowerDistributionPanel pdp;
 	public static SmartDashboard smartDashboard;
 	public static VisionInput visionSerial;
 
@@ -39,19 +34,23 @@ public class Robot extends IterativeRobot {
 		driveSys.resetEncoders();
 		smartDashboard = new SmartDashboard();
 		Navx.getInstance().reset();
-		/*
-		 * vertSys = new VertSubsystem(); vertSys.registerButtons();
-		 * 
-		 * climbSys = new ClimbSubsystem(); climbSys.registerButtons();
-		 * 
-		 * rampSys = new RampSubsystem(); // rampSys.registerButtons();
-		 * 
-		 * serialSys = new SerialSubsystem();
-		 * 
-		 * cubeSys = new CubeSubsystem(); cubeSys.registerButtons();
-		 * 
-		 * cameras = new Cameras(); cameras.start();
-		 */
+		
+		vertSys = new VertSubsystem();
+		vertSys.registerButtons();
+		
+		climbSys = new ClimbSubsystem();
+		climbSys.registerButtons();
+		
+		rampSys = new RampSubsystem();
+		rampSys.registerButtons();
+		
+		cuberSys = new CuberSubsystem();
+		cuberSys.registerButtons();
+		
+		visionSerial = new VisionInput();
+	
+		pdp = new PowerDistributionPanel(Ports.PDP);
+
 	}
 
 	@Override
@@ -82,6 +81,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void testPeriodic() {
+		
 	}
 
 }
