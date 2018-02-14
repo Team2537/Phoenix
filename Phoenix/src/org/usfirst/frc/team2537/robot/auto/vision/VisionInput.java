@@ -7,81 +7,80 @@ import edu.wpi.first.wpilibj.SerialPort;
 public class VisionInput {
 	public final boolean DEBUG = true;
 	public final int BAUDRATE = 38400;
-	
+
 	private SerialPort serial;
 	private String buffer;
 	private String lastCompletedString;
-	private boolean recievedEmptyPacket;
-
-	public VisionInput(){
+	
+	public VisionInput() {
 		serial = new SerialPort(BAUDRATE, Ports.RASPI);
 		buffer = "";
-		recievedEmptyPacket = true;
+		lastCompletedString = "";
 	}
 
 	public Target[] getVisionPacket() {
-		if(recievedEmptyPacket){
-			return new Target[0];
-		} else {
-			return getVisionPacketNonEmpty();
-		}
-	}
-	
-	public Target[] getVisionPacketNonEmpty() {
 		return decodeVisionPacket(lastCompletedString);
 	}
-	
+
 	public static Target[] decodeVisionPacket(String packetToDecode) {
-		if(packetToDecode == "" || packetToDecode == null){
+		if (packetToDecode.equals("") || packetToDecode == null) {
 			return new Target[0];
 		}
+		
 		String[] stringTargets = packetToDecode.split("#");
 		Target[] targets = new Target[stringTargets.length];
 		for (int i = 0; i < stringTargets.length; i++) {
 			String[] pointArr = stringTargets[i].split("\\|");
 			Point[] points = new Point[pointArr.length];
+			
+			int leftX = 640;
+			int rightX = 0;
 			for (int j = 0; j < pointArr.length; j++) {
 				String[] coordinates = pointArr[j].split(",");
 				points[j] = new Point(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
+				if(points[j].x < leftX){
+					leftX = points[j].x;
+				}
+				if(points[j].x > rightX){
+					rightX = points[j].x;
+				}
 			}
+			
 			targets[i] = new Target(points);
 		}
 		return targets;
 	}
-	
+
 	public void addToBuffer() { // should run periodically
-		if (serial.getBytesReceived() > 0) {
-			try { // wrapped in a try/catch because if the pi inits before the rio it'll crash otherwise
+		try { // wrapped in a try/catch because if the pi inits before the rio it'll crash otherwise
+			if (serial.getBytesReceived() > 0) {
 				String stringToAppend = serial.readString();
 				serial.flush();
-				for (int i = 0; i < stringToAppend.length(); i++) {
-					char charToAppend = stringToAppend.charAt(i);
-					if (charToAppend == '>') { // is current character opening character?
-						if(buffer.length() == 0){ // check for empty packets
-							recievedEmptyPacket = true;
-						} else {
-							if(lastCompletedString == null) { // make sure to discard premature packets
-								recievedEmptyPacket = true;
-								lastCompletedString = "";
-							} else {
-								recievedEmptyPacket = false;
-								lastCompletedString = buffer;
-							}
-						}
-						buffer = "";
-					} else { // otherwise, add current char to the buffer
-						buffer += charToAppend;
+				
+				System.out.println(stringToAppend);
+				
+				int packetEnd = stringToAppend.lastIndexOf('<');
+				if(packetEnd == -1){
+					buffer += stringToAppend;
+				} else {
+					
+					int packetStart = stringToAppend.lastIndexOf('<', packetEnd - 1);
+					if(packetStart == -1){
+						lastCompletedString = buffer + stringToAppend.substring(0, packetEnd);
+					} else {
+						lastCompletedString = stringToAppend.substring(packetStart + 1, packetEnd);
 					}
+					
+					buffer = stringToAppend.substring(packetEnd + 1);
 				}
-			} catch (Exception e) {
-				System.out.println("serial exception");
 			}
+		} catch (Exception e) {
+			System.out.println("serial exception " + e.getMessage());
 		}
 	}
-	
+
 	/*
-	public void sendVisionPacket(Point[] packetsToSend) {
-		serial.writeString(encodeVisionPacket(packetsToSend));
-	}
-	*/
+	 * public void sendVisionPacket(Point[] packetsToSend) {
+	 * serial.writeString(encodeVisionPacket(packetsToSend)); }
+	 */
 }

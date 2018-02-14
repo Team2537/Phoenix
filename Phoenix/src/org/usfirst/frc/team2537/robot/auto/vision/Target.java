@@ -13,6 +13,9 @@ public class Target {
 	
 	public Target(){
 		this(new Point[0]);
+		this.boundingBox = new Point[2];
+		this.boundingBox[0] = new Point(0,0);
+		this.boundingBox[1] = new Point(0,0);
 	}
 
 	public Point[] getPoints() {
@@ -71,7 +74,9 @@ public class Target {
 	
 	public Point getBoundingBoxCenter(){
 		if(boundingBoxCenter == null){
-			boundingBoxCenter = new Point((int)(getBoundingBoxLength()/2), (int)(getBoundingBoxHeight()/2));
+			Point topLeft = getBoundingBox()[0];
+			boundingBoxCenter = new Point((int)(topLeft.x + getBoundingBoxLength()/2),
+					(int)(topLeft.y + getBoundingBoxHeight()/2));
 		}
 		return boundingBoxCenter;
 	}

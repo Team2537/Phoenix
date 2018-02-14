@@ -1,26 +1,27 @@
 package org.usfirst.frc.team2537.robot.auto.vision;
 
-import org.usfirst.frc.team2537.robot.Robot;
-import org.usfirst.frc.team2537.robot.drive.Motor;
-
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class VisionRotateCommand extends Command {
 
 	/* when the pi cannot see the target, we spin faster to try to find the target */
-	private static final double DEFAULT_PERCENT_OUTPUT = 0.69;
-	private static final double CENTER_kP = 2;
+	private static final double DEFAULT_PERCENT_OUTPUT = 0.3;
+	private static final double CENTER_kP = 1;
 	private static final double TURNING_TOLERANCE = 0.1;
+	private static long lastReceiveTime;
 	
 	private double centerX;
+	private Side lastSide;
 	
 	public VisionRotateCommand(){
 		requires(Robot.driveSys);
+		centerX = Double.POSITIVE_INFINITY;
+		lastSide = Side.LEFT;
 	}
 
 	@Override
 	protected void initialize() {
-		
 	}
 
 	@Override
@@ -29,7 +30,10 @@ public class VisionRotateCommand extends Command {
 		
 		/* if we cannot see the target, we spin faster */
 		double power = DEFAULT_PERCENT_OUTPUT;
-		
+		if(lastSide == Side.LEFT){
+			power *= -1;
+		}
+
 		if(targets.length > 0){
 			Target largestTarget = new Target();
 			for(Target target : targets){	// focus on the largest target only
@@ -37,8 +41,12 @@ public class VisionRotateCommand extends Command {
 					largestTarget = target;
 				}
 			}
-			centerX = largestTarget.getBoundingBoxCenter().getX(CoordinateSystems.CARTESIAN_NORMALIZED);
-			power = Math.min(power, Math.abs(centerX/180*power*CENTER_kP)) * Math.signum(centerX);
+			centerX = largestTarget.getBoundingBoxCenter().x / 320.0 - 1;
+			lastSide = centerX < 0 ? Side.LEFT : Side.RIGHT;
+
+			SmartDashboard.putNumber("center", centerX);
+			
+			power = Math.min(Math.abs(power), Math.abs(centerX*power*CENTER_kP)) * Math.signum(centerX);
 		}
 		
 		Robot.driveSys.setMotors( power,  Motor.LEFT);
@@ -47,7 +55,8 @@ public class VisionRotateCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return Math.abs(centerX) < TURNING_TOLERANCE;
+		//return Math.abs(centerX) < TURNING_TOLERANCE;
+		return false;
 	}
 
 	@Override
@@ -58,6 +67,10 @@ public class VisionRotateCommand extends Command {
 	@Override
 	protected void interrupted() {
 		Robot.driveSys.setMotors(0, Motor.ALL);
+	}
+	
+	enum Side {
+		LEFT, RIGHT;
 	}
 
 }
