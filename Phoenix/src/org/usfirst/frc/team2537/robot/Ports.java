@@ -22,10 +22,11 @@ public class Ports {
 	//buttons
 	public static final int PICK_UP_BUTTON = 1, EXPEL_BUTTON = 2, LIFT_BUTTON = 5, LOWER_BUTTON = 4;
 	
-	//motor channels for the pdp
-	public static final int LEFT_FLYWHEEL_PDP_CHANNEL = 1, RIGHT_FLYWHEEL_PDP_CHANNEL = 2;
-	
-	//infrared sensor
-	public static final int INFRARED_DISTANCE_INPUT = 0, INFRARED_DISTANCE_OUTPUT = 0;
+	//ultrasonics
+	public static final int ULTRASONIC_INPUT = 1, ULTRASONIC_OUTPUT = 2;
+
+	//PDP channels
+	public static final int RIGHT_FLYWHEEL_PDP_CHANNEL = 1, LEFT_FLYWHEEL_PDP_CHANNEL = 2 ;
+
 	
 }

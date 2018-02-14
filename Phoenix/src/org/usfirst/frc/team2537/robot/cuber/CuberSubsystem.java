@@ -8,16 +8,18 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CuberSubsystem extends Subsystem {
-	private Encoder flywheelEnc; //encoder for 2 flywheels
+	private Encoder flywheelEnc; 
 	private Talon flywheelMotorLeft; 
 	private Talon flywheelMotorRight;
-	private Encoder liftEnc; //window(lifting) motor encoder
-	private Talon liftMotor; //window(lifting motor)
+	private Encoder liftEnc; 
+	private Talon liftMotor; 
 	private double radius = 2; //what units?//for getTime90Degrees() method (see below)
 	private static final double PI = 3.14; //for getTime90Degrees() method (see below)
+	private Ultrasonic ultrasonic;
 	//private double speedLift;
 	//private double leftCurrent;
 	//private double rightCurrent;
@@ -30,7 +32,7 @@ public class CuberSubsystem extends Subsystem {
 		flywheelMotorRight = new Talon(Ports.FLYWHEEL_MOTOR_RIGHT);
 		liftMotor = new Talon(Ports.WINDOW_MOTOR);
 		liftEnc = new Encoder(Ports.LIFT_ENCODER_A, Ports.LIFT_ENCODER_B, false, Encoder.EncodingType.k4X);
-		
+		ultrasonic = new Ultrasonic(Ports.ULTRASONIC_INPUT, Ports.ULTRASONIC_OUTPUT);
 		
 	}
 	
@@ -45,14 +47,22 @@ public class CuberSubsystem extends Subsystem {
 		HumanInput.registerWhenPressedCommand(HumanInput.liftButton, new LiftFlipperCommand());//corresponds to LiftFlipper command
 	}
 	
-	public void setFlywheelMotors(double speed) { //sets both left and right flywheel motor speed
+	/*
+	 * sets both left and right flywheel motor speed
+	 */
+	public void setFlywheelMotors(double speed) { 
 		flywheelMotorLeft.set(speed);
 		flywheelMotorRight.set(speed);
 	}
+	
 
-	public void setLiftMotor(double speedLift) { //sets window motor speed
+	/**
+	 * sets window motor speed
+	 */
+	public void setLiftMotor(double speedLift) { 
 			liftMotor.set(speedLift);  			
 	}
+	
 	
 	public double getDegrees() { //returns degrees of lift/window motor
 		return liftEnc.get();
@@ -70,6 +80,9 @@ public class CuberSubsystem extends Subsystem {
 	public double getRightFlywheelCurrent() { //returns amps of right flywheel motor
 		double rightCurrent = PDP.getCurrent(Ports.RIGHT_FLYWHEEL_PDP_CHANNEL);
 		return rightCurrent;
+	}
+	public double getUltrasonicDistance() { //returns distance of cube from  back of cuber
+		return ultrasonic.getRangeInches();
 	}
 	public void getInfrared(){
 	
