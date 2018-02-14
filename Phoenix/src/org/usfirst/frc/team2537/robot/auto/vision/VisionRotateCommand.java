@@ -1,5 +1,8 @@
 package org.usfirst.frc.team2537.robot.auto.vision;
 
+import org.usfirst.frc.team2537.robot.Robot;
+import org.usfirst.frc.team2537.robot.drive.Motor;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
