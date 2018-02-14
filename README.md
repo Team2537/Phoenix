@@ -11,5 +11,5 @@ Team 2537 2018 FIRST Power Up Robot Code
 1. Expel cube
 2. Stop climb
 3. Start climb
-4. Swap cameras
+4. Close ramp latch
 5. Deploy ramp
