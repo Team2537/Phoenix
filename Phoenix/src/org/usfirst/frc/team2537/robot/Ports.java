@@ -4,6 +4,6 @@ public class Ports {
 	
 	public static final int LEFT_JOYSTICK = 0;
 	
-	public static final int CAMERA_SWITCH_BUTTON = 4;
+	public static final int CAMERA_SWITCH_BUTTON = 3;
 	
 }
