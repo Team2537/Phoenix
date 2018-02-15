@@ -26,6 +26,8 @@ public class Ports {
 	public static final int FLIP_MANIPULATOR_DOWN_BUTTON = 4, FLIP_MANIPULATOR_UP_BUTTON = 5;
 	
 	public static final int PICK_UP_BUTTON = 1, EXPEL_BUTTON = 1, LIFT_BUTTON = 5, LOWER_BUTTON = 4;
+	
+	public static final int CAMERA_SWITCH_BUTTON = 7;
 
 	/**********Motors**********/
 
@@ -59,3 +61,4 @@ public class Ports {
 	public static final edu.wpi.first.wpilibj.SerialPort.Port RASPI = Port.kMXP;
 	
 }
+

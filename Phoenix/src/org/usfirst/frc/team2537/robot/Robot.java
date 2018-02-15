@@ -4,6 +4,7 @@ import org.usfirst.frc.team2537.robot.auto.DriveStraightCommand;
 import org.usfirst.frc.team2537.robot.auto.Navx;
 import org.usfirst.frc.team2537.robot.auto.vision.ReadSerialCommand;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
+import org.usfirst.frc.team2537.robot.cameras.Cameras;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
 import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
@@ -22,6 +23,8 @@ public class Robot extends IterativeRobot {
 	public static ClimbSubsystem climbSys;
 	public static RampSubsystem rampSys;
 	public static CuberSubsystem cuberSys;
+	
+	public static Cameras cameras;
 	
 	public static PowerDistributionPanel pdp;
 	
@@ -53,6 +56,9 @@ public class Robot extends IterativeRobot {
 		
 		visionSerial = new VisionInput();
 	
+		cameras = new Cameras();
+		cameras.start();
+		
 		pdp = new PowerDistributionPanel();
 
 	}

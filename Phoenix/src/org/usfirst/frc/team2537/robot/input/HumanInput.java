@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class HumanInput {
-	
+
 	public static Joystick leftJoystick = new Joystick(Ports.LEFT_JOYSTICK);
 	public static Joystick rightJoystick = new Joystick(Ports.RIGHT_JOYSTICK);
 	
@@ -32,6 +32,8 @@ public class HumanInput {
 	
 	public static Button cubeFlipDownButton = new JoystickButton(leftJoystick, Ports.FLIP_MANIPULATOR_DOWN_BUTTON);
 	public static Button cubeFlipUpButton = new JoystickButton(leftJoystick, Ports.FLIP_MANIPULATOR_UP_BUTTON);
+	
+	public static Button cameraSwitchButton = new JoystickButton(leftJoystick, Ports.CAMERA_SWITCH_BUTTON);
 	
 	/**
 	 * Register button to command
