@@ -30,6 +30,7 @@ public class ClimbSubsystem extends Subsystem {
 	public void registerButtons() {
 		HumanInput.registerWhenPressedCommand(HumanInput.climbOnButton, new ClimbCommand());
 		HumanInput.registerWhenPressedCommand(HumanInput.climbOffButton, new ClimbKillCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.climbOverrideKeyThree, new ClimbOverrideCommand());
 	}
 
 	public void setClimbMotors(double speed) {
@@ -49,7 +50,7 @@ public class ClimbSubsystem extends Subsystem {
 		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_THREE_PDP);
 	}
 	
-	public boolean limitSwitchOverridden() {
+	public boolean climberOverridden() {
 		return HumanInput.climbOverrideKeyOne.get() && HumanInput.climbOverrideKeyTwo.get() && HumanInput.climbOverrideKeyThree.get();
 	}
 	

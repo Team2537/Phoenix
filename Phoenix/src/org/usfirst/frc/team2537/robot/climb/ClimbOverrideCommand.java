@@ -1,4 +1,5 @@
 package org.usfirst.frc.team2537.robot.climb;
+
 import org.usfirst.frc.team2537.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -11,7 +12,11 @@ public class ClimbOverrideCommand extends Command {
 
 	@Override
 	protected void initialize() {
-		Robot.climbSys.setClimbMotors(0.85);
+		if (Robot.climbSys.climberOverridden()) {
+			Robot.climbSys.setClimbMotors(0.85);
+		} else {
+			Robot.climbSys.setClimbMotors(0);
+		}
 
 	}
 
