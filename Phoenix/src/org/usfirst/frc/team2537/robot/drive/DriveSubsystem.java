@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -38,6 +39,7 @@ public class DriveSubsystem extends Subsystem {
 	private TalonSRX talonFrontRight;
 	private TalonSRX talonBackLeft;
 	private TalonSRX talonBackRight;
+	private Ultrasonic ultrasonic;
 	public ControlMode controlMode = ControlMode.PercentOutput;
 
 	/******************************************************************************/
@@ -54,6 +56,8 @@ public class DriveSubsystem extends Subsystem {
 		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		talonBackLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		
+		//ultrasonic = new Ultrasonic(Ports.ULTRASONIC_PING, Ports.ULTRASONIC_ECHO);
 	}
 
 	/******************************************************************************/
@@ -80,51 +84,56 @@ public class DriveSubsystem extends Subsystem {
 				+ "back left: " + talonBackLeft.getSelectedSensorPosition(0)*LEFT_MOTOR_DIRECTION + "\n"
 				+ "back right: " + talonBackRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION;
 	}
+	
 	/**
 	 * @return average value of all talons in inches
 	 */
-	public double getAverageEncoderInches() {
-		/*
+	public double getEncoderDistance() {
 		double[] encoderTicks = new double[4];
 		encoderTicks[0] = talonFrontLeft.getSelectedSensorPosition(0) * LEFT_MOTOR_DIRECTION;
 		encoderTicks[1] = talonFrontRight.getSelectedSensorPosition(0) * RIGHT_MOTOR_DIRECTION;
 		encoderTicks[2] = talonBackLeft.getSelectedSensorPosition(0) * LEFT_MOTOR_DIRECTION;
 		encoderTicks[3] = talonBackRight.getSelectedSensorPosition(0) * RIGHT_MOTOR_DIRECTION;
 		
-		double maxTicks = 0;
-		for(int x = 0; x < encoderTicks.length; x++){
-			if(Math.abs(encoderTicks[x]) > Math.abs(maxTicks)){
-				maxTicks = encoderTicks[x];
+		double avg = getUniformAverage(encoderTicks, ENCODER_MIN_PERCENT_AGREEMENT);
+		return Units.convertDistance(avg, Distances.TICKS, Distances.INCHES);
+	}
+	
+	/**
+	 * @return average velocity of all talons in inches/second
+	 */
+	public double getEncoderVelocity() {
+		double[] encoderTicks = new double[4];
+		encoderTicks[0] = talonFrontLeft.getSelectedSensorVelocity(0) * LEFT_MOTOR_DIRECTION;
+		encoderTicks[1] = talonFrontRight.getSelectedSensorVelocity(0) * RIGHT_MOTOR_DIRECTION;
+		encoderTicks[2] = talonBackLeft.getSelectedSensorVelocity(0) * LEFT_MOTOR_DIRECTION;
+		encoderTicks[3] = talonBackRight.getSelectedSensorVelocity(0) * RIGHT_MOTOR_DIRECTION;
+		
+		double avg = getUniformAverage(encoderTicks, ENCODER_MIN_PERCENT_AGREEMENT);
+		return Units.convertSpeed(avg, Distances.TICKS, Times.HUNDRED_MS, Distances.INCHES, Times.SECONDS);
+	}
+	
+	private double getUniformAverage(double[] vals, double tolerance) {
+		double maxVal = 0;
+		for(double val : vals){
+			if(Math.abs(val) > Math.abs(maxVal)){
+				maxVal = val;
 			}
 		}
 		
-		if(maxTicks == 0){
+		if(maxVal == 0){
 			return 0;
 		}
 		
 		double sum = 0;
-		int validEncoders = 0;
-		for(int x = 0; x < encoderTicks.length; x++){
-			if(Math.abs(encoderTicks[x] / maxTicks) >= (1 - ENCODER_MIN_PERCENT_AGREEMENT)){
-				sum += encoderTicks[x];
-				validEncoders++;
+		int validVals = 0;
+		for(double val : vals){
+			if(1 - val / maxVal <= tolerance){
+				sum += val;
+				validVals++;
 			}
 		}
-		System.out.println("valid encoders: "+validEncoders);
-		return sum / validEncoders;
-		*/
-		return Units.convertDistance((talonFrontLeft.getSelectedSensorPosition(0) * LEFT_MOTOR_DIRECTION + 
-				talonFrontRight.getSelectedSensorPosition(0) * RIGHT_MOTOR_DIRECTION) / 2, 
-				Distances.TICKS, Distances.INCHES);
-	}
-
-	/**
-	 * @return average velocity of all talons in inches per second
-	 */
-	public double getEncoderVelocity() {
-		return Units.convertSpeed((talonFrontLeft.getSelectedSensorVelocity(0) * LEFT_MOTOR_DIRECTION + 
-				talonFrontRight.getSelectedSensorVelocity(0) * RIGHT_MOTOR_DIRECTION) / 2,
-				Distances.TICKS, Times.HUNDRED_MS, Distances.INCHES, Times.SECONDS);
+		return sum / validVals;
 	}
 
 	public void resetEncoders() {
@@ -162,7 +171,18 @@ public class DriveSubsystem extends Subsystem {
 			}
 		}
 	}
-
+	
+	/******************************************************************************/
+	/* ULTRASONIC */
+	/******************************************************************************/
+	
+	/**
+	 * @return ultrasonic ping distance in inches
+	 */
+	public double getUltrasonicRange() {
+		return ultrasonic.getRangeInches();
+	}
+	
 	/******************************************************************************/
 	/* SETTERS */
 	/******************************************************************************/

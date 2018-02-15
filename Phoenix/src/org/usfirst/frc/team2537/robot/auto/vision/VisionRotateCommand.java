@@ -12,15 +12,24 @@ public class VisionRotateCommand extends Command {
 	private static final double DEFAULT_PERCENT_OUTPUT = 0.3;
 	private static final double CENTER_kP = 1;
 	private static final double TURNING_TOLERANCE = 0.1;
-	private static long lastReceiveTime;
 	
 	private double centerX;
 	private Side lastSide;
+	private boolean stopAtTarget;
 	
-	public VisionRotateCommand(){
+	public VisionRotateCommand(Side defaultTurn, boolean stopAtTarget){
 		requires(Robot.driveSys);
-		centerX = Double.POSITIVE_INFINITY;
-		lastSide = Side.LEFT;
+		this.centerX = Double.POSITIVE_INFINITY;
+		this.lastSide = defaultTurn;
+		this.stopAtTarget = stopAtTarget;
+	}
+	
+	public VisionRotateCommand(Side defaultTurn) {
+		this(defaultTurn, true);
+	}
+	
+	public VisionRotateCommand() {
+		this(Side.LEFT);
 	}
 
 	@Override
@@ -58,8 +67,7 @@ public class VisionRotateCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		//return Math.abs(centerX) < TURNING_TOLERANCE;
-		return false;
+		return stopAtTarget && Math.abs(centerX) < TURNING_TOLERANCE;
 	}
 
 	@Override
