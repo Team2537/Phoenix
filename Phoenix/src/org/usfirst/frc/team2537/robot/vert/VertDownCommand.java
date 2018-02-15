@@ -9,9 +9,9 @@ public class VertDownCommand extends Command {
 	private static final int AMP_LIMIT = 5;  //5 amps HELLLA TBD
 	
 	// PID Loop
-	private double kp;
-	private double ki;
-	private double kd;
+	private double kp = .01;
+	private double ki = 0;
+	private double kd = 0;
 	private double integralActivityZone = 2;
 
 	private double computedSpeed;
@@ -39,11 +39,11 @@ public class VertDownCommand extends Command {
 		if (Robot.vertSys.getCurrentOne() >= AMP_LIMIT) {
 			Robot.vertSys.setVertMotors(0);
 		} else {
-			Robot.vertSys.setVertMotors(0.8);
+			Robot.vertSys.setVertMotors(-600);
 		}	
 		//stops bot when it exceeds amp limit for channel 4
 		if (Robot.vertSys.getCurrentTwo() >= AMP_LIMIT) {
-			Robot.vertSys.setVertMotors(0);
+			Robot.vertSys.setVertMotors(-600);
 		} else {
 			Robot.vertSys.setVertMotors(0.8);
 		}	

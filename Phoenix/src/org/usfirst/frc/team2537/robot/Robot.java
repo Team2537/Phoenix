@@ -20,12 +20,12 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousInit() {
-
+		
 	}
 
 	@Override
 	public void autonomousPeriodic() {
-
+	
 	}
 
 	@Override

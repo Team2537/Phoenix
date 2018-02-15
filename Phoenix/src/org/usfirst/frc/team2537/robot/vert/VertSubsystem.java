@@ -6,6 +6,7 @@ import org.usfirst.frc.team2537.robot.input.HumanInput;
 import org.usfirst.frc.team2537.robot.resources.CANTalon;
 
 import com.ctre.phoenix.ErrorCode;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -48,7 +49,7 @@ public class VertSubsystem extends Subsystem {
 	// makes sure command works when button held
 	public void registerButtons() {
 		HumanInput.registerWhileHeldCommand(HumanInput.raiseButton, new VertUpCommand());
-		HumanInput.registerWhileHeldCommand(HumanInput.lowerButton, new VertDownCommand());
+//		HumanInput.registerWhileHeldCommand(HumanInput.lowerButton, new VertDownCommand());
 
 	}
 
@@ -60,7 +61,7 @@ public class VertSubsystem extends Subsystem {
 
 	// sets speed of vertMotors
 	public void setVertMotors(double speed) {
-		// vertMotorOne.set(speed);
+		 vertMotorOne.set(ControlMode.Velocity, speed);
 		// vertMotorTwo.set(-speed);
 	}
 
