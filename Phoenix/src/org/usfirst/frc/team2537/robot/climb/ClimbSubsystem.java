@@ -50,7 +50,7 @@ public class ClimbSubsystem extends Subsystem {
 	}
 	
 	public boolean limitSwitchOverridden() {
-		return HumanInput.overrideKeyOne.get() && HumanInput.overrideKeyTwo.get() && HumanInput.overrideKeyThree.get();
+		return HumanInput.climbOverrideKeyOne.get() && HumanInput.climbOverrideKeyTwo.get() && HumanInput.climbOverrideKeyThree.get();
 	}
 	
 }

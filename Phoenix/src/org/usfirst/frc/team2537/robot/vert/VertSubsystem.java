@@ -21,6 +21,7 @@ public class VertSubsystem extends Subsystem {
 		vertMotorTwo = new CANTalon(Ports.VERT_MOTOR_TWO);
 		
 		vertMotorOne.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+		vertMotorOne.overrideLimitSwitchesEnable(true);
 		
 		vertMotorTwo.setControlMode(ControlMode.Follower);
 		vertMotorTwo.setInverted(true);
@@ -31,8 +32,8 @@ public class VertSubsystem extends Subsystem {
 	}
 	
 	public void registerButtons() {
-		HumanInput.registerWhileHeldCommand(HumanInput.raiseButton, new VertUpCommand());
-		HumanInput.registerWhileHeldCommand(HumanInput.lowerButton, new VertDownCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.vertRaiseButton, new VertUpCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.vertLowerButton, new VertDownCommand());
 
 	}
 

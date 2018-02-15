@@ -3,29 +3,36 @@ package org.usfirst.frc.team2537.robot.cuber;
 import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.Robot;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
+import org.usfirst.frc.team2537.robot.resources.CANTalon;
 
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Talon;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CuberSubsystem extends Subsystem {
-	private Talon flywheelMotorLeft; 
-	private Talon flywheelMotorRight;
-	private Encoder liftEnc;
-	private Talon liftMotor;
-	private AnalogInput cuberIRSensor;
+	private CANTalon flywheelMotorLeft; 
+	private CANTalon flywheelMotorRight;
+	private CANTalon liftMotor;
+	private Ultrasonic cuberUltron;
 	public static final double FLYWHEEL_SPEED = .5;
 	public static final double FLYWHEEL_CURRENT_LIMIT = 30; // TODO: determine max amps
 	public static final double CUTOFF_DISTANCE = 2; // TODO: determine cutoff distance
+	public static final int ULTRASONIC_RANGE = 3;
+	public static final double FLIPPER_TIMEOUT = 5000; //TODO: Figure this one out
+
 	
 	public CuberSubsystem() {
-		flywheelMotorLeft = new Talon(Ports.FLYWHEEL_MOTOR_LEFT);
-		flywheelMotorRight = new Talon(Ports.FLYWHEEL_MOTOR_RIGHT);
-		liftMotor = new Talon(Ports.WINDOW_MOTOR);
-		liftEnc = new Encoder(Ports.LIFT_ENCODER_A, Ports.LIFT_ENCODER_B, false, Encoder.EncodingType.k4X);
-		cuberIRSensor = new AnalogInput(Ports.CUBER_IR);
+		flywheelMotorLeft = new CANTalon(Ports.FLYWHEEL_MOTOR_LEFT);
+		flywheelMotorRight = new CANTalon(Ports.FLYWHEEL_MOTOR_RIGHT);
+		liftMotor = new CANTalon(Ports.WINDOW_MOTOR);
+		
+		cuberUltron = new Ultrasonic(Ports.CUBER_ULTRASONIC_TRIGGER, Ports.CUBER_ULTRASONIC_ECHO);
+		
+		liftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+		liftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+		
 	}
 	
 	public void initDefaultCommand() {
@@ -33,10 +40,10 @@ public class CuberSubsystem extends Subsystem {
 	}
 	
 	public void registerButtons() { 
-		HumanInput.registerWhileHeldCommand(HumanInput.pickUpButton, new PickUpCommand());
-		HumanInput.registerWhileHeldCommand(HumanInput.expelButton, new ExpelCommand());
-		HumanInput.registerWhenPressedCommand(HumanInput.lowerButton, new LowerFlipperCommand());
-		HumanInput.registerWhenPressedCommand(HumanInput.raiseButton, new LiftFlipperCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.cuberPickUpButton, new PickUpCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.cuberExpelButton, new ExpelCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.cuberFlipDownButton, new LowerFlipperCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.cuberFlipUpButton, new LiftFlipperCommand());
 	}
 	
 	public void setFlywheelMotors(double speed) {
@@ -48,13 +55,6 @@ public class CuberSubsystem extends Subsystem {
 			liftMotor.set(speedLift);  			
 	}
 	
-	public double getDegrees() {
-		return liftEnc.get();
-	}
-
-	public void resetEncoder() {
-		liftEnc.reset();
-	}
 	
 	public double getLeftFlywheelCurrent() {
 		return Robot.pdp.getCurrent(Ports.LEFT_FLYWHEEL_PDP_CHANNEL);
@@ -66,9 +66,10 @@ public class CuberSubsystem extends Subsystem {
 		
 	}
 	
-	public double getIRSensorVoltage() {
-		return cuberIRSensor.getVoltage();
+	public double getUltrasonicInches() {
+		return cuberUltron.getRangeInches();
 	}
+	
 	
 	public double voltageToDistance(double voltage) {
 		return 0; // TODO: convert voltage to distance
