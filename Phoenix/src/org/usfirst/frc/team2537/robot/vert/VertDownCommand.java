@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class VertDownCommand extends Command {
 
-	private static final int AMP_LIMIT = 5;  //5 amps HELLLA TBD
+	private static final int AMP_LIMIT = 5;  //5 amps HECKKA TBD
 	
 	// PID Loop
 	private double kp = .01;
