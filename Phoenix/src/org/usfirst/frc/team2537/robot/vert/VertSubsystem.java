@@ -1,9 +1,11 @@
 package org.usfirst.frc.team2537.robot.vert;
 
 import org.usfirst.frc.team2537.robot.Ports;
+import org.usfirst.frc.team2537.robot.Robot;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 import org.usfirst.frc.team2537.robot.resources.CANTalon;
 
+import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -24,78 +26,60 @@ public class VertSubsystem extends Subsystem {
 	private TalonSRX vertMotorOne;
 	private TalonSRX vertMotorTwo;
 	private PowerDistributionPanel PDP;
-	double current;
 	private DigitalInput limitswitch;
 	double speed;
-	double proportionalGain;
+
 	
-	
-	public VertSubsystem() { 
+
+	public VertSubsystem() {
+
 		vertEnc = new Encoder(Ports.VERT_ENC_A, Ports.VERT_ENC_B, false, Encoder.EncodingType.k4X);
 		vertMotorOne = new TalonSRX(Ports.VERT_MOTOR_ONE);
 		vertMotorTwo = new TalonSRX(Ports.VERT_MOTOR_TWO);
 		PDP = new PowerDistributionPanel(Ports.PDP);
 		limitswitch = new DigitalInput(Ports.LIMIT_SWITCH);
-		
-	
+
 	}
 
 	public void initDefaultCommand() {
 
 	}
-	
-	//makes sure command works when button held
+
+	// makes sure command works when button held
 	public void registerButtons() {
 		HumanInput.registerWhileHeldCommand(HumanInput.raiseButton, new VertUpCommand());
 		HumanInput.registerWhileHeldCommand(HumanInput.lowerButton, new VertDownCommand());
 
 	}
 
-	//receives distance robot travels with encoders
+	// receives distance robot travels with encoders
 	public int getDistance() {
 		return vertEnc.get();
+
 	}
 
-	//sets speed of vertMotors
+	// sets speed of vertMotors
 	public void setVertMotors(double speed) {
-//		vertMotorOne.set(speed);
-//		vertMotorTwo.set(-speed);
+		// vertMotorOne.set(speed);
+		// vertMotorTwo.set(-speed);
 	}
 
 	public boolean getLimitSwitch() {
 		return limitswitch.get();
-		
+
 	}
-	//returns current of vert motor one
+
+	// returns current of vert motor one
 	public double getCurrentOne() {
 		return PDP.getCurrent(Ports.VERT_MOTOR_ONE_PDP_CHANNEL);
+
 	}
-	
-	//returns current of vert motor two
+
+	// returns current of vert motor two
 	public double getCurrentTwo() {
 		return PDP.getCurrent(Ports.VERT_MOTOR_TWO_PDP_CHANNEL);
+
+	}
+
 	
-	}
-	public double getProportionalGain(){
-		
-		return proportionalGain;
-		
-	}
-
 }
-
-
-
-/**
- * the code commented out below is used in PID loops
- * (based on my horrible understanding): 
- * the code defines which "slot" will be used,
- * and then configures the initial set function for p, i, d and f
- */
-
-
-//talon.selectProfileSlot(0, 0);
-//talon.config_kF(0, 0.2, Constants.kTimeoutMs);
-//talon.config_kP(0, 0.2, Constants.kTimeoutMs);
-//talon.config_kI(0, 0, Constants.kTimeoutMs);
-//talon.config_kD(0, 0, Constants.kTimeoutMs);
