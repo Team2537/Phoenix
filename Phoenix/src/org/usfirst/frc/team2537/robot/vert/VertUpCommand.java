@@ -9,21 +9,17 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class VertUpCommand extends Command {
 
-
 	public VertUpCommand() {
 		requires(Robot.vertSys);
 
 	}
 
 	protected void initialize() {
-		Robot.vertSys.setVertMotors(0);
-		if (!Robot.vertSys.getLimitSwitch())
-			Robot.vertSys.setVertMotors(0.8);
+		Robot.vertSys.setVertMotors(0.8);
 	}
 
 	protected void execute() {
-		if (Robot.vertSys.getLimitSwitch())
-			Robot.vertSys.setVertMotors(0);
+
 	}
 
 	protected boolean isFinished() {

@@ -2,23 +2,29 @@ package org.usfirst.frc.team2537.robot.vert;
 
 import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
+import org.usfirst.frc.team2537.robot.resources.CANTalon;
 
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Talon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class VertSubsystem extends Subsystem {
 
-	private Talon vertMotorOne;
-	private Talon vertMotorTwo;
-	private DigitalInput limitSwitch;
+	private CANTalon vertMotorOne;
+	private CANTalon vertMotorTwo;
 	double current;
 
 	public VertSubsystem() { 
-		vertMotorOne = new Talon(Ports.VERT_MOTOR_ONE);
-		vertMotorTwo = new Talon(Ports.VERT_MOTOR_TWO);
-		limitSwitch = new DigitalInput(Ports.VERT_LIMIT_SWITCH);
+		vertMotorOne = new CANTalon(Ports.VERT_MOTOR_ONE);
+		vertMotorTwo = new CANTalon(Ports.VERT_MOTOR_TWO);
+		
+		vertMotorOne.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+		vertMotorOne.overrideLimitSwitchesEnable(true);
+		
+		vertMotorTwo.setControlMode(ControlMode.Follower);
+		vertMotorTwo.setInverted(true);
 	}
 
 	public void initDefaultCommand() {
@@ -26,19 +32,16 @@ public class VertSubsystem extends Subsystem {
 	}
 	
 	public void registerButtons() {
-		HumanInput.registerWhileHeldCommand(HumanInput.raiseButton, new VertUpCommand());
-		HumanInput.registerWhileHeldCommand(HumanInput.lowerButton, new VertDownCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.vertRaiseButton, new VertUpCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.vertLowerButton, new VertDownCommand());
 
 	}
 
 	public void setVertMotors(double speed) {
 		// CHECK THAT THESE ARE CORRECT BEFORE STARTING TO AVOID DESTROYING GEARBOX
 		vertMotorOne.set(speed);
-		vertMotorTwo.set(speed);
 	}
 	
-	public boolean getLimitSwitch() {
-		return limitSwitch.get();
-	}
+
 
 }

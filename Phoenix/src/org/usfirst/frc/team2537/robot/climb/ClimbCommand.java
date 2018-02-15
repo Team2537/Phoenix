@@ -30,9 +30,9 @@ public class ClimbCommand extends Command {
 	}
 
 	protected void initialize() {
-//		if (System.currentTimeMillis() - Robot.startTime >= BUTTON_LOCK) {
+		if (System.currentTimeMillis() - Robot.startTime >= BUTTON_LOCK) {
 			Robot.climbSys.setClimbMotors(SPEED);
-//		} 
+		} 
 		
 		filename = "/home/lvuser/climberAmps"
 				+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()) + ".csv";
@@ -60,7 +60,9 @@ public class ClimbCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return (Robot.climbSys.getCurrentClimbMotorOne() >= ClimbSubsystem.MAX_CURRENT
+				|| Robot.climbSys.getCurrentClimbMotorTwo() >= ClimbSubsystem.MAX_CURRENT
+				|| Robot.climbSys.getCurrentClimbMotorThree() >= ClimbSubsystem.MAX_CURRENT);
 	}
 
 	protected void end() {

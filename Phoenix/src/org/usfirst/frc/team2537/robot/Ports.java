@@ -26,6 +26,8 @@ public class Ports {
 	public static final int FLIP_MANIPULATOR_DOWN_BUTTON = 4, FLIP_MANIPULATOR_UP_BUTTON = 5;
 	
 	public static final int PICK_UP_BUTTON = 1, EXPEL_BUTTON = 1, LIFT_BUTTON = 5, LOWER_BUTTON = 4;
+	
+	public static final int CAMERA_SWITCH_BUTTON = 7;
 
 	/**********Motors**********/
 
@@ -49,11 +51,8 @@ public class Ports {
 	// Encoders
 	public static final int LIFT_ENCODER_A = 1, LIFT_ENCODER_B = 2;
 
-	// Limit Switch
-	public static final int VERT_LIMIT_SWITCH = 0;
-	
-	// IR
-	public static final int CUBER_IR = 1; // fix port
+	//Ultrasonic
+	public static final int CUBER_ULTRASONIC_TRIGGER = 3, CUBER_ULTRASONIC_ECHO = 4;
 	
 	// Ultrasonic
 	public static final int ULTRASONIC_PING = 0, ULTRASONIC_ECHO = 0; //TODO: add ultrasonic
@@ -62,3 +61,4 @@ public class Ports {
 	public static final edu.wpi.first.wpilibj.SerialPort.Port RASPI = Port.kMXP;
 	
 }
+

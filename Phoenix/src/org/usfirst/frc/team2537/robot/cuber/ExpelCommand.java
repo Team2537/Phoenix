@@ -23,7 +23,8 @@ public class ExpelCommand extends Command {
 	
 	@Override
 	protected boolean isFinished() { //returns true when Flywheel motors exceed max amp
-		return(Robot.cuberSys.getRightFlywheelCurrent() >=  Robot.cuberSys.FLYWHEEL_CURRENT_LIMIT || Robot.cuberSys.getLeftFlywheelCurrent() >=  Robot.cuberSys.FLYWHEEL_CURRENT_LIMIT); 
+		return(Robot.cuberSys.getRightFlywheelCurrent() >= CuberSubsystem.FLYWHEEL_CURRENT_LIMIT
+				|| Robot.cuberSys.getLeftFlywheelCurrent() >= CuberSubsystem.FLYWHEEL_CURRENT_LIMIT);
 	
 	}
 	
