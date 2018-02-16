@@ -54,6 +54,9 @@ public class Ports {
 	//Ultrasonic
 	public static final int CUBER_ULTRASONIC_TRIGGER = 3, CUBER_ULTRASONIC_ECHO = 4;
 	
+	// Ultrasonic
+	public static final int ULTRASONIC_PING = 0, ULTRASONIC_ECHO = 0; //TODO: add ultrasonic
+	
 	// Raspberry Pi
 	public static final edu.wpi.first.wpilibj.SerialPort.Port RASPI = Port.kMXP;
 	

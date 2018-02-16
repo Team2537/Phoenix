@@ -58,7 +58,7 @@ public class PurePursuit extends Command {
 	}
 
 	private void updatePos() {
-		double displacement = Robot.driveSys.getAverageEncoderInches();
+		double displacement = Robot.driveSys.getEncoderDistance();
 		double deltaRadians = displacement * prevCurvature;
 		if (Math.abs(prevCurvature) > kEpsilon) {
 			xPos += (Math.sin(prevHeading + deltaRadians) - Math.sin(prevHeading)) / prevCurvature;

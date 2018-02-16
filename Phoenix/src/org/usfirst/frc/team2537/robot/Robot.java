@@ -2,7 +2,6 @@ package org.usfirst.frc.team2537.robot;
 
 import org.usfirst.frc.team2537.robot.auto.DriveStraightCommand;
 import org.usfirst.frc.team2537.robot.auto.Navx;
-import org.usfirst.frc.team2537.robot.auto.vision.ReadSerialCommand;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
 import org.usfirst.frc.team2537.robot.cameras.Cameras;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
@@ -42,6 +41,7 @@ public class Robot extends IterativeRobot {
 		smartDashboard = new SmartDashboard();
 		Navx.getInstance().reset();
 		
+		/*
 		vertSys = new VertSubsystem();
 		vertSys.registerButtons();
 		
@@ -53,20 +53,21 @@ public class Robot extends IterativeRobot {
 		
 		cuberSys = new CuberSubsystem();
 		cuberSys.registerButtons();
-		
+
 		visionSerial = new VisionInput();
 	
 		cameras = new Cameras();
 		cameras.start();
 		
 		pdp = new PowerDistributionPanel();
+		*/
 
 	}
 
 	@Override
 	public void autonomousInit() {
-		new ReadSerialCommand().start();
-		new DriveStraightCommand(100).start();
+		//new ReadSerialCommand().start();
+		new DriveStraightCommand(50).start();
 	}
 
 	@Override
@@ -78,6 +79,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		Scheduler.getInstance().removeAll();
+		Navx.getInstance().reset();
 		Robot.driveSys.resetEncoders();
 		startTime = System.currentTimeMillis();
 	}
@@ -85,7 +87,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		SmartDashboard.putNumber("angle",  Navx.getInstance().getAngle());
+		SmartDashboard.putNumber("pitch", Navx.getInstance().getPitch());
 		SmartDashboard.putNumber("yaw", Navx.getInstance().getYaw());
+		SmartDashboard.putNumber("roll", Navx.getInstance().getRoll());
 		Scheduler.getInstance().run();
 		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
 	}
