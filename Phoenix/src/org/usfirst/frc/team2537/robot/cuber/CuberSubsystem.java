@@ -8,6 +8,7 @@ import org.usfirst.frc.team2537.robot.resources.CANTalon;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -16,6 +17,7 @@ public class CuberSubsystem extends Subsystem {
 	private CANTalon flywheelMotorRight;
 	private CANTalon liftMotor;
 	private Ultrasonic cuberUltron;
+	private AnalogInput cuberIr;
 	public static final double FLYWHEEL_SPEED = .5;
 	public static final double FLYWHEEL_CURRENT_LIMIT = 30; // TODO: determine max amps
 	public static final double CUTOFF_DISTANCE = 2; // TODO: determine cutoff distance
@@ -29,6 +31,7 @@ public class CuberSubsystem extends Subsystem {
 		liftMotor = new CANTalon(Ports.WINDOW_MOTOR);
 		
 		cuberUltron = new Ultrasonic(Ports.CUBER_ULTRASONIC_TRIGGER, Ports.CUBER_ULTRASONIC_ECHO);
+		cuberIr = new AnalogInput(Ports.CUBER_IR);
 		
 		liftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
 		liftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
@@ -71,8 +74,10 @@ public class CuberSubsystem extends Subsystem {
 	}
 	
 	
-	public double voltageToDistance(double voltage) {
-		return 0; // TODO: convert voltage to distance
+
+	
+	public double getIrVoltage() {
+		return cuberIr.getVoltage();
 	}
 	
 }
