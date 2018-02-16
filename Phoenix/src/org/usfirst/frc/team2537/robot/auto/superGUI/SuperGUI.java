@@ -51,7 +51,7 @@ public class SuperGUI {
 
 	public static final String COMMANDS_DIRECTORY = "src/org/usfirst/frc/team2537/robot/auto/routes/";
 	public static final String MAPS_DIRECTORY = "src/org/usfirst/frc/team2537/robot/auto/superGUI/maps/";
-	public static final String AUTOCHOOSER_LOCATION = " src/org/usfirst/frc/team2537/robot/auto/AutoChooser.java";
+	public static final String AUTOCHOOSER_LOCATION = "src/org/usfirst/frc/team2537/robot/auto/AutoChooser.java";
 
 	public static final String AUTOROTATE_COMMAND = "org.usfirst.frc.team2537.robot.auto.RotateCommand";
 	public static final String AUTODRIVE_COMMAND = "org.usfirst.frc.team2537.robot.auto.DriveStraightCommand";
