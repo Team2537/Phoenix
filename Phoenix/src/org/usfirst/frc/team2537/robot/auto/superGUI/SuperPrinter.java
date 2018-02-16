@@ -51,26 +51,15 @@ public class SuperPrinter {
 
 				// turn to command
 				if(angleDiff != 0){
-					if(commandWriter != null) commandWriter.write("\t\taddSequential(new RotateCommand(" + angleDiff + "));\n");
+					if(commandWriter != null) commandWriter.write("\t\taddSequential(new " + SuperGUI.AUTOROTATE_COMMAND.substring(SuperGUI.AUTOROTATE_COMMAND.lastIndexOf('.') + 1) + "(" + angleDiff + "));\n");
 					System.out.println("Turn " + angleDiff);
 				}
 
 				// place gear/shoot
-				switch (a.getAction()) {
-				case SWITCH:
-					if(commandWriter != null) commandWriter.write("\t\taddSequential(new SwitchCommand());\n");
-					System.out.println("Place Switch");
-					break;
-				case SCALE:
-					if(commandWriter != null) commandWriter.write("\t\taddSequential(new ScaleCommand());\n");
-					System.out.println("Place Scale");
-					break;
-				case PICKUP:
-					if(commandWriter != null) commandWriter.write("\t\taddSequential(new PickupCommand());\n");
-					System.out.println("Pickup cube");
-					break;
-				case ROTATE:
-					break;
+				if(a.getAction() != SuperEnum.ROTATE && commandWriter != null) {
+					String commandName = a.getAction().command.substring(a.getAction().command.lastIndexOf('.') + 1);
+					commandWriter.write("\t\taddSequential(new " + commandName + "());\n");
+					System.out.println(commandName);
 				}
 			}
 
@@ -84,7 +73,7 @@ public class SuperPrinter {
 			while(angleDiff < -180) angleDiff += 360;
 
 			if (angleDiff != 0) {
-				if(commandWriter != null) commandWriter.write("\t\taddSequential(new RotateCommand(" + angleDiff + "));\n");
+				if(commandWriter != null) commandWriter.write("\t\taddSequential(new " + SuperGUI.AUTOROTATE_COMMAND.substring(SuperGUI.AUTOROTATE_COMMAND.lastIndexOf('.') + 1) + "(" + angleDiff + "));\n");
 				System.out.println("Turn " + angleDiff);
 			}
 
@@ -93,7 +82,7 @@ public class SuperPrinter {
 			if (point.isBackwards()) distance = -distance;
 
 			if (distance != 0) {
-				if(commandWriter != null) commandWriter.write("\t\taddSequential(new DriveStraightCommand(" + distance + "));\n");
+				if(commandWriter != null) commandWriter.write("\t\taddSequential(new " + SuperGUI.AUTODRIVE_COMMAND.substring(SuperGUI.AUTODRIVE_COMMAND.lastIndexOf('.') + 1) + "(" + distance + "));\n");
 				System.out.println("Drive " + distance);
 			}
 
@@ -115,15 +104,16 @@ public class SuperPrinter {
 		PrintWriter autoWriter;
 		try {
 			autoWriter = new PrintWriter(SuperGUI.AUTOCHOOSER_LOCATION, "UTF-8");
-			File dir = new File(SuperGUI.MAPS_DIRECTORY);
-			File[] mapsList =  dir.listFiles();
+			File dir = new File(SuperGUI.COMMANDS_DIRECTORY);
+			File[] commandsList =  dir.listFiles();
 
-			autoWriter.write("package org.usfirst.frc.team2537.robot.auto;\n\n");
+			autoWriter.write("package " + SuperGUI.AUTOCHOOSER_LOCATION.substring(4, SuperGUI.AUTOCHOOSER_LOCATION.lastIndexOf("/")).replace('/', '.') + ";\n\n");
 
-			if(mapsList != null){
-				for(File map : mapsList){
-					String mapName = map.getName();
-					autoWriter.write("import org.usfirst.frc.team2537.robot.auto.routes." + mapName.substring(0, mapName.length() - 4) + ";\n");
+			if(commandsList != null){
+				for(File command : commandsList){
+					if(command.getPath().equals(SuperGUI.AUTOCHOOSER_LOCATION)) continue;
+					String commandName = command.getName();
+					autoWriter.write("import " + SuperGUI.COMMANDS_DIRECTORY.substring(4, SuperGUI.COMMANDS_DIRECTORY.length()).replace('/', '.') + commandName.substring(0, commandName.length() - 5) + ";\n");
 				}
 				autoWriter.write("\n");
 			}
@@ -134,14 +124,15 @@ public class SuperPrinter {
 			autoWriter.write("public class AutoChooser extends SendableChooser<Command> {\n");
 			autoWriter.write("\tpublic AutoChooser() {\n");
 
-			if(mapsList != null){
-				for(File map : mapsList){
-					String mapName = map.getName();
-					mapName = mapName.substring(0, mapName.length() - 4);
-					if(mapName.equals("DefaultAuto") || mapName.equals("DriveForward"))
-						autoWriter.write("\t\taddDefault(\"" + mapName + "\", new " + mapName + "());\n");
+			if(commandsList != null){
+				for(File command : commandsList){
+					if(command.getPath().equals(SuperGUI.AUTOCHOOSER_LOCATION)) continue;
+					String commandName = command.getName();
+					commandName = commandName.substring(0, commandName.length() - 5);
+					if(commandName.equals("DefaultAuto") || commandName.equals("DriveForward"))
+						autoWriter.write("\t\taddDefault(\"" + commandName + "\", new " + commandName + "());\n");
 					else
-						autoWriter.write("\t\taddObject(\"" + mapName + "\", new " + mapName + "());\n");
+						autoWriter.write("\t\taddObject(\"" + commandName + "\", new " + commandName + "());\n");
 				}
 			}
 

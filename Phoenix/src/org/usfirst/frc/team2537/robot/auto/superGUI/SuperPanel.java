@@ -98,16 +98,17 @@ public class SuperPanel extends JPanel implements KeyListener, MouseMotionListen
 	@SuppressWarnings("unused")
 	@Override
 	public void keyPressed(KeyEvent k) {
-		if(k.getKeyCode() == deleteAllKey){
+		switch(k.getKeyCode()) {
+		case deleteAllKey:
 			startingPoint = null;
-		}
-		if(k.getKeyCode() == deleteLastKey){
+			break;
+		case deleteLastKey:
 			if(startingPoint != null){
 				if(startingPoint.getNext() == null) startingPoint = null;
 				else startingPoint.removeFinalSuperPoint();
 			}
-		}
-		if(k.getKeyCode() == openSnapMenuKey){
+			break;
+		case openSnapMenuKey:
 			if(startingPoint == null) {
 				for(SuperSnapEnum s : SuperSnapEnum.values()) {
 					if(s.isStartingPos) {
@@ -118,11 +119,17 @@ public class SuperPanel extends JPanel implements KeyListener, MouseMotionListen
 			} else {
 				snapMenu.show(k.getComponent(),mousePos.x,mousePos.y);
 			}
-		}
-		if (k.getKeyCode() == toggleFollowCursorKey) followCursor = !followCursor;
-		if (k.getKeyCode() == toggleObstacleVisbilityKey) obstaclesVisible = !obstaclesVisible;
-		if (k.getKeyCode() == relativeAngleToggleKey) relativeAngles = !relativeAngles;
-		if (k.getKeyCode() == openMapKey) {
+			break;
+		case toggleFollowCursorKey:
+			followCursor = !followCursor;
+			break;
+		case toggleObstacleVisbilityKey:
+			obstaclesVisible = !obstaclesVisible;
+			break;
+		case relativeAngleToggleKey:
+			relativeAngles = !relativeAngles;
+			break;
+		case openMapKey:
 			final JFileChooser fc = new JFileChooser(SuperGUI.MAPS_DIRECTORY);
 			int i = fc.showOpenDialog(fc);
 			if(i == JFileChooser.APPROVE_OPTION) {
@@ -130,8 +137,8 @@ public class SuperPanel extends JPanel implements KeyListener, MouseMotionListen
 				startingPoint = SuperReader.readCourse(selectedFile);
 				followCursor = true;
 			}
-		}
-		if (k.getKeyCode() == printCourseKey) {
+			break;
+		case printCourseKey:
 			System.out.println("Course================" + startingPoint.getNumBots());
 			String mapName;
 			if(SuperGUI.WRITE_COMMAND || SuperGUI.WRITE_MAP) {
@@ -154,10 +161,13 @@ public class SuperPanel extends JPanel implements KeyListener, MouseMotionListen
 					File commandFile = new File(SuperGUI.COMMANDS_DIRECTORY + mapName + ".java");
 					try {
 						BufferedWriter commandWriter = new BufferedWriter(new FileWriter(commandFile));
-						commandWriter.write("package org.usfirst.frc.team2537.robot.auto.routes;\n\n");
-						commandWriter.write("import org.usfirst.frc.team2537.robot.auto.DriveStraightCommand;\n");
-						commandWriter.write("import org.usfirst.frc.team2537.robot.auto.RotateCommand;\n");
-						commandWriter.write("import edu.wpi.first.wpilibj.command.CommandGroup;\n\n");
+						commandWriter.write("package " + SuperGUI.COMMANDS_DIRECTORY.substring(4, SuperGUI.COMMANDS_DIRECTORY.length() - 1).replace('/', '.') + ";\n\n");
+						commandWriter.write("import " + SuperGUI.AUTOROTATE_COMMAND + ";\n");
+						commandWriter.write("import " + SuperGUI.AUTODRIVE_COMMAND + ";\n");
+						for(SuperEnum e : SuperEnum.values()) {
+							commandWriter.write("import " + e.command + ";\n");
+						}
+						commandWriter.write("\nimport edu.wpi.first.wpilibj.command.CommandGroup;\n\n");
 						commandWriter.write("public class " + mapName + " extends CommandGroup {\n");
 						commandWriter.write("\tpublic " + mapName + "() {\n");
 
@@ -185,8 +195,11 @@ public class SuperPanel extends JPanel implements KeyListener, MouseMotionListen
 			} catch(IOException e) {
 				e.printStackTrace();
 			}
+			break;
+		case exitKey:
+			quit();
+			break;
 		}
-		if (k.getKeyCode() == exitKey) quit();
 		repaint();
 	}
 
