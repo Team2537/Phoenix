@@ -9,6 +9,8 @@ public class Ports {
 	
 	public static final int CLIMB_MOTOR_ONE_PDP = 2, CLIMB_MOTOR_TWO_PDP = 1, CLIMB_MOTOR_THREE_PDP = 0;
 	
+	public static final int VERT_PDP = 12;
+	
 	/**********Input**********/
 	
 	// Joysticks
@@ -31,14 +33,17 @@ public class Ports {
 
 	/**********Motors**********/
 
-	// Talons
+	//CANTalons
 	public static final int VERT_MOTOR_ONE = 4, VERT_MOTOR_TWO = 5;
+	
+	public static final int FLYWHEEL_MOTOR_LEFT = 7, FLYWHEEL_MOTOR_RIGHT = 8;
+	
+	public static final int WINDOW_MOTOR = 6;
+	
+	//Talons
+	
+	public static final int CLIMB_MOTOR_ONE = 1, CLIMB_MOTOR_TWO = 2, CLIMB_MOTOR_THREE = 0;
 
-	public static final int CLIMB_MOTOR_ONE = 1, CLIMB_MOTOR_TWO = 2, CLIMB_MOTOR_THREE = 3;
-	
-	public static final int FLYWHEEL_MOTOR_LEFT = 0, FLYWHEEL_MOTOR_RIGHT = 2;
-	
-	public static final int WINDOW_MOTOR = 2;
 
 	// Drive Motors
 	public static final int FRONT_LEFT_MOTOR = 0, FRONT_RIGHT_MOTOR = 1, BACK_LEFT_MOTOR = 2, BACK_RIGHT_MOTOR = 3;

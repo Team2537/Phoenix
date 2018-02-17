@@ -1,10 +1,25 @@
 package org.usfirst.frc.team2537.robot.cuber;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PickUpCommand extends Command {
+	
+	private String filename;
+	private Path dataPath;
+	private PrintWriter writer;
+	private double avgAmps;
+	private long startTime;
 
 
 	public PickUpCommand() {
@@ -17,6 +32,24 @@ public class PickUpCommand extends Command {
 		if (Robot.cuberSys.getUltrasonicInches() > CuberSubsystem.ULTRASONIC_RANGE) {
 			Robot.cuberSys.setFlywheelMotors(0.8);
 		}
+		
+		filename = "/home/lvuser/cuberAmps"
+				+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()) + ".csv";
+		dataPath = Paths.get(filename);
+		if (Files.exists(dataPath)) {
+			System.out.println("File " + dataPath + " already exists. It shouldn't.");
+		}
+
+		try {
+			Files.createFile(dataPath);
+			writer = new PrintWriter(filename);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		writer.println("Time (ms),Current (amps)");
+		startTime = System.currentTimeMillis();
+		avgAmps = (Robot.pdp.getCurrent(Ports.LEFT_FLYWHEEL_PDP_CHANNEL) + Robot.pdp.getCurrent(Ports.RIGHT_FLYWHEEL_PDP_CHANNEL)) / 2;
+		writer.println(System.currentTimeMillis() - startTime + "," + avgAmps);
 	}
 
 	@Override
@@ -26,6 +59,9 @@ public class PickUpCommand extends Command {
 				|| Robot.cuberSys.getLeftFlywheelCurrent() >= CuberSubsystem.FLYWHEEL_CURRENT_LIMIT) {
 			Robot.cuberSys.setFlywheelMotors(0);
 		}
+		
+		avgAmps = (Robot.pdp.getCurrent(Ports.LEFT_FLYWHEEL_PDP_CHANNEL) + Robot.pdp.getCurrent(Ports.RIGHT_FLYWHEEL_PDP_CHANNEL)) / 2;
+		writer.println(System.currentTimeMillis() - startTime + "," + avgAmps);
 
 	}
 
@@ -37,11 +73,15 @@ public class PickUpCommand extends Command {
 	@Override
 	protected void end() {
 		Robot.cuberSys.setFlywheelMotors(0);
+		writer.flush();
+		writer.close();
 	}
 
 	@Override
 	protected void interrupted() {
 		Robot.cuberSys.setFlywheelMotors(0);
+		writer.flush();
+		writer.close();
 	}
 
 }
