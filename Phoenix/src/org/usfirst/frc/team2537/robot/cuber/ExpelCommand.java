@@ -11,7 +11,7 @@ public class ExpelCommand extends Command {
 	
 	@Override
 	protected void initialize() {
-		Robot.cuberSys.setFlywheelMotors(-0.8); // sets speed to reverse to expel out cube
+		Robot.cuberSys.setFlywheelMotors(0.8); // sets speed to reverse to expel out cube
 		
 		
 	}

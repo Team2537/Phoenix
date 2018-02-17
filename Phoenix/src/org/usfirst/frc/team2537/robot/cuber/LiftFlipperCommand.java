@@ -15,9 +15,10 @@ public class LiftFlipperCommand extends Command {
 		
 	}
 
-	protected void initialized() {
-		startTime = System.currentTimeMillis();
-		Robot.cuberSys.setLiftMotor(-0.3); //reverses direction to lift motor upwards
+	protected void initialize() {
+		System.out.println("trying to lift");
+//		startTime = System.currentTimeMillis();
+		Robot.cuberSys.setLiftMotor(0.5); //reverses direction to lift motor upwards
 		
 	}
 
@@ -27,7 +28,8 @@ public class LiftFlipperCommand extends Command {
 	}
 	
 	protected boolean isFinished() { //returns true if motor turns under or equal to 0 degrees or when flywheel motors exceed max amp
-		return (System.currentTimeMillis() - startTime >= CuberSubsystem.FLIPPER_TIMEOUT);
+//		return (System.currentTimeMillis() - startTime >= CuberSubsystem.FLIPPER_TIMEOUT);
+		return false;
 	}
 	
 	protected void end() {

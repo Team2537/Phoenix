@@ -19,7 +19,7 @@ public class CuberSubsystem extends Subsystem {
 	private Ultrasonic cuberUltron;
 	private AnalogInput cuberIr;
 	public static final double FLYWHEEL_SPEED = .5;
-	public static final double FLYWHEEL_CURRENT_LIMIT = 30; // TODO: determine max amps
+	public static final double FLYWHEEL_CURRENT_LIMIT = 35; // TODO: determine max amps
 	public static final double CUTOFF_DISTANCE = 2; // TODO: determine cutoff distance
 	public static final int ULTRASONIC_RANGE = 3;
 	public static final double FLIPPER_TIMEOUT = 5000; //TODO: Figure this one out
@@ -36,6 +36,9 @@ public class CuberSubsystem extends Subsystem {
 		liftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
 		liftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
 		
+		liftMotor.overrideLimitSwitchesEnable(true);
+		
+		
 	}
 	
 	public void initDefaultCommand() {
@@ -51,7 +54,7 @@ public class CuberSubsystem extends Subsystem {
 	
 	public void setFlywheelMotors(double speed) {
 		flywheelMotorLeft.set(speed);
-		flywheelMotorRight.set(speed);
+		flywheelMotorRight.set(-speed);
 	}
 
 	public void setLiftMotor(double speedLift) {

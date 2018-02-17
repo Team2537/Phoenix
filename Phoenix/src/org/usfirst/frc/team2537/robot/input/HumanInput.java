@@ -23,9 +23,9 @@ public class HumanInput {
 	public static Button climbOnButton = new JoystickButton(leftJoystick, Ports.CLIMB_ON_BUTTON);
 	public static Button climbOffButton = new JoystickButton(leftJoystick, Ports.CLIMB_OFF_BUTTON);
 	
-	public static Button climbOverrideKeyOne = new JoystickButton(leftJoystick, Ports.OVERRIDE_KEY_ONE);
-	public static Button climbOverrideKeyTwo = new JoystickButton(leftJoystick, Ports.OVERRIDE_KEY_TWO);
-	public static Button climbOverrideKeyThree = new JoystickButton(leftJoystick, Ports.OVERRIDE_KEY_THREE);
+	public static Button climbOverrideKeyOne = new JoystickButton(rightJoystick, Ports.OVERRIDE_KEY_ONE);
+	public static Button climbOverrideKeyTwo = new JoystickButton(rightJoystick, Ports.OVERRIDE_KEY_TWO);
+	public static Button climbOverrideKeyThree = new JoystickButton(rightJoystick, Ports.OVERRIDE_KEY_THREE);
 	
 	public static Button rampLowerButton = new JoystickButton(rightJoystick, Ports.RAMP_LOWER_BUTTON);
 	public static Button rampRaiseButton = new JoystickButton(rightJoystick, Ports.RAMP_RAISE_BUTTON);

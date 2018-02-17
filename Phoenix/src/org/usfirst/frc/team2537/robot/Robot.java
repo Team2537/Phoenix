@@ -38,10 +38,10 @@ public class Robot extends IterativeRobot {
 		driveSys.initDefaultCommand();
 		driveSys.resetEncoders();
 		
-		smartDashboard = new SmartDashboard();
+		/*smartDashboard = new SmartDashboard();
 		Navx.getInstance().reset();
 		
-		/*
+	
 		vertSys = new VertSubsystem();
 		vertSys.registerButtons();
 		
@@ -49,18 +49,17 @@ public class Robot extends IterativeRobot {
 		climbSys.registerButtons();
 		
 		rampSys = new RampSubsystem();
-		rampSys.registerButtons();
+		rampSys.registerButtons();*/
 		
 		cuberSys = new CuberSubsystem();
 		cuberSys.registerButtons();
 
-		visionSerial = new VisionInput();
+		/*visionSerial = new VisionInput();
 	
 		cameras = new Cameras();
 		cameras.start();
-		
-		pdp = new PowerDistributionPanel();
 		*/
+		pdp = new PowerDistributionPanel();
 
 	}
 
@@ -91,7 +90,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("yaw", Navx.getInstance().getYaw());
 		SmartDashboard.putNumber("roll", Navx.getInstance().getRoll());
 		Scheduler.getInstance().run();
-		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
+//		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
 	}
 
 	@Override
