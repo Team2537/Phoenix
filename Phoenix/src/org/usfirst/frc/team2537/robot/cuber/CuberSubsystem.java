@@ -8,17 +8,13 @@ import org.usfirst.frc.team2537.robot.resources.CANTalon;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
-import edu.wpi.first.wpilibj.DigitalOutput;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CuberSubsystem extends Subsystem {
 	private CANTalon flywheelMotorLeft; 
 	private CANTalon flywheelMotorRight;
 	private CANTalon liftMotor;
-	private Ultrasonic cuberUltron;
-	private DigitalOutput cuberFakeUltron;
-	public boolean whatBool = true;
+	private UltrasonicWrapper ultrasonic;
 	public static final double FLYWHEEL_SPEED = .5;
 	public static final double FLYWHEEL_CURRENT_LIMIT = 35; // TODO: determine max amps
 	public static final double CUTOFF_DISTANCE = 2; // TODO: determine cutoff distance
@@ -32,8 +28,8 @@ public class CuberSubsystem extends Subsystem {
 		flywheelMotorRight = new CANTalon(Ports.FLYWHEEL_MOTOR_RIGHT);
 		liftMotor = new CANTalon(Ports.WINDOW_MOTOR);
 	
-		cuberUltron = new Ultrasonic(Ports.CUBER_FAKE_ULTRASONIC, Ports.CUBER_ULTRASONIC_ECHO);
-		cuberFakeUltron = new DigitalOutput(Ports.CUBER_ULTRASONIC_TRIGGER);
+		ultrasonic = new UltrasonicWrapper(Ports.CUBER_ULTRASONIC_TRIGGER, Ports.CUBER_ULTRASONIC_ECHO, 
+				Ports.CUBER_ULTRASONIC_DUMMY);
 		
 		liftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
 		liftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
@@ -75,13 +71,7 @@ public class CuberSubsystem extends Subsystem {
 	}
 	
 	public double getUltrasonicInches() {
-		return cuberUltron.getRangeInches();
-		
-	}
-	
-	public void setOutput() {
-		cuberFakeUltron.set(whatBool);
-		whatBool = !whatBool;
+		return ultrasonic.getRangeInches();
 		
 	}
 	
