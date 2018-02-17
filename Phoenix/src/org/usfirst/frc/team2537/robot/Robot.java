@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2537.robot;
 
 import org.usfirst.frc.team2537.robot.auto.DriveStraightCommand;
+import org.usfirst.frc.team2537.robot.auto.ShittyAutoCommand;
 import org.usfirst.frc.team2537.robot.auto.Navx;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
 import org.usfirst.frc.team2537.robot.cameras.Cameras;
@@ -70,7 +71,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		//new ReadSerialCommand().start();
-		new DriveStraightCommand(50).start();
+		//new DriveStraightCommand(50).start();
+		new ShittyAutoCommand(3).start();
 	}
 
 	@Override
