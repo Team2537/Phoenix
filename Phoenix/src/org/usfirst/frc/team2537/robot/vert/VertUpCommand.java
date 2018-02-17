@@ -17,9 +17,8 @@ public class VertUpCommand extends Command {
 	}
 
 	protected void execute() {
-		Robot.vertSys.setVertMotors(0);
-		if (!Robot.vertSys.getLimitSwitch())
-			Robot.vertSys.setVertMotors(0.8);
+		if (Robot.vertSys.getLimitSwitch())
+			Robot.vertSys.setVertMotors(0);
 	}
 
 	protected boolean isFinished() {
