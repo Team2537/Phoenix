@@ -8,23 +8,24 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class VertSubsystem extends Subsystem {
 
 	private CANTalon vertMotorOne;
 	private CANTalon vertMotorTwo;
+	private DigitalInput limitSwitch;
 	double current;
 
 	public VertSubsystem() { 
 		vertMotorOne = new CANTalon(Ports.VERT_MOTOR_ONE);
 		vertMotorTwo = new CANTalon(Ports.VERT_MOTOR_TWO);
 		
-		vertMotorOne.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-		vertMotorOne.overrideLimitSwitchesEnable(true);
-		
 		vertMotorTwo.setControlMode(ControlMode.Follower);
 		vertMotorTwo.setInverted(true);
+		
+		limitSwitch = new DigitalInput(Ports.VERT_LIMIT_SWITCH);
 	}
 
 	public void initDefaultCommand() {
@@ -42,6 +43,8 @@ public class VertSubsystem extends Subsystem {
 		vertMotorOne.set(speed);
 	}
 	
-
+	public boolean getLimitSwitch() {
+		return limitSwitch.get();
+	}
 
 }

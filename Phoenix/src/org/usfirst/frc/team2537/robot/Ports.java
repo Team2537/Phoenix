@@ -51,14 +51,14 @@ public class Ports {
 	// Encoders
 	public static final int LIFT_ENCODER_A = 1, LIFT_ENCODER_B = 2;
 
-	//Ultrasonic
-	public static final int CUBER_ULTRASONIC_TRIGGER = 3, CUBER_ULTRASONIC_ECHO = 4;
-	
 	// Ultrasonic
-	public static final int ULTRASONIC_PING = 0, ULTRASONIC_ECHO = 0; //TODO: add ultrasonic
+	public static final int CUBER_ULTRASONIC_TRIGGER = 1, CUBER_ULTRASONIC_ECHO = 0;
 	
-	//analong
+	// analog
 	public static final int CUBER_IR = 0;
+	
+	// Limit Switch
+	public static final int VERT_LIMIT_SWITCH = 2;
 	
 	// Raspberry Pi
 	public static final edu.wpi.first.wpilibj.SerialPort.Port RASPI = Port.kMXP;
