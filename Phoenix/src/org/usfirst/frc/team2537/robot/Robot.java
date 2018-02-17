@@ -10,6 +10,8 @@ import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
 import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
 import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -31,6 +33,7 @@ public class Robot extends IterativeRobot {
 	public static VisionInput visionSerial;
 	
 	public static long startTime;
+	
 
 	@Override
 	public void robotInit() {
@@ -38,7 +41,7 @@ public class Robot extends IterativeRobot {
 		driveSys.initDefaultCommand();
 		driveSys.resetEncoders();
 		
-		/*smartDashboard = new SmartDashboard();
+	/*	smartDashboard = new SmartDashboard();
 		Navx.getInstance().reset();
 		
 	
@@ -58,9 +61,10 @@ public class Robot extends IterativeRobot {
 	
 		cameras = new Cameras();
 		cameras.start();
-		*/
-		pdp = new PowerDistributionPanel();
-
+		
+		pdp = new PowerDistributionPanel();*/
+		
+		
 	}
 
 	@Override
@@ -95,7 +99,10 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void testPeriodic() {
-		
+		Scheduler.getInstance().run();
+		Robot.cuberSys.setOutput();
+		System.out.println(Robot.cuberSys.getUltrasonicInches());
+	
 	}
 
 }

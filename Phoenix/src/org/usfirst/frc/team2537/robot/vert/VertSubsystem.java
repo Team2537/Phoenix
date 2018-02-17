@@ -21,7 +21,7 @@ public class VertSubsystem extends Subsystem {
 		vertMotorTwo = new CANTalon(Ports.VERT_MOTOR_TWO);
 		
 		vertMotorTwo.setControlMode(ControlMode.Follower);
-		vertMotorTwo.setInverted(true);
+		vertMotorTwo.follow(vertMotorOne);
 		
 		limitSwitch = new DigitalInput(Ports.VERT_LIMIT_SWITCH);
 	}
@@ -39,6 +39,8 @@ public class VertSubsystem extends Subsystem {
 	public void setVertMotors(double speed) {
 		// CHECK THAT THESE ARE CORRECT BEFORE STARTING TO AVOID DESTROYING GEARBOX
 		vertMotorOne.set(speed);
+		
+	
 	}
 	
 	public boolean getLimitSwitch() {

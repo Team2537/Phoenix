@@ -57,7 +57,7 @@ public class Ports {
 	public static final int LIFT_ENCODER_A = 1, LIFT_ENCODER_B = 2;
 
 	// Ultrasonic
-	public static final int CUBER_ULTRASONIC_TRIGGER = 1, CUBER_ULTRASONIC_ECHO = 0;
+	public static final int CUBER_ULTRASONIC_TRIGGER = 4, CUBER_ULTRASONIC_ECHO = 3, CUBER_FAKE_ULTRASONIC = 9;
 	
 	// analog
 	public static final int CUBER_IR = 0;

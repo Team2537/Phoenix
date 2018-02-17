@@ -17,7 +17,7 @@ public class LowerFlipperCommand extends Command {
 	protected void initialize() {
 		System.out.println("trying to lower");
 		// startTime = System.currentTimeMillis();
-		Robot.cuberSys.setLiftMotor(-0.5); // initializes speed of lift motor to lower
+		Robot.cuberSys.setLiftMotor(-1); // initializes speed of lift motor to lower
 
 	}
 

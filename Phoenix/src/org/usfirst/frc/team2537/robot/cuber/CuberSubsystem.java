@@ -8,7 +8,7 @@ import org.usfirst.frc.team2537.robot.resources.CANTalon;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
-import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -17,21 +17,23 @@ public class CuberSubsystem extends Subsystem {
 	private CANTalon flywheelMotorRight;
 	private CANTalon liftMotor;
 	private Ultrasonic cuberUltron;
-	private AnalogInput cuberIr;
+	private DigitalOutput cuberFakeUltron;
+	public boolean whatBool = true;
 	public static final double FLYWHEEL_SPEED = .5;
 	public static final double FLYWHEEL_CURRENT_LIMIT = 35; // TODO: determine max amps
 	public static final double CUTOFF_DISTANCE = 2; // TODO: determine cutoff distance
 	public static final int ULTRASONIC_RANGE = 3;
 	public static final double FLIPPER_TIMEOUT = 5000; //TODO: Figure this one out
+	
 
 	
 	public CuberSubsystem() {
 		flywheelMotorLeft = new CANTalon(Ports.FLYWHEEL_MOTOR_LEFT);
 		flywheelMotorRight = new CANTalon(Ports.FLYWHEEL_MOTOR_RIGHT);
 		liftMotor = new CANTalon(Ports.WINDOW_MOTOR);
-		
-		cuberUltron = new Ultrasonic(Ports.CUBER_ULTRASONIC_TRIGGER, Ports.CUBER_ULTRASONIC_ECHO);
-		cuberIr = new AnalogInput(Ports.CUBER_IR);
+	
+		cuberUltron = new Ultrasonic(Ports.CUBER_FAKE_ULTRASONIC, Ports.CUBER_ULTRASONIC_ECHO);
+		cuberFakeUltron = new DigitalOutput(Ports.CUBER_ULTRASONIC_TRIGGER);
 		
 		liftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
 		liftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
@@ -74,13 +76,13 @@ public class CuberSubsystem extends Subsystem {
 	
 	public double getUltrasonicInches() {
 		return cuberUltron.getRangeInches();
+		
 	}
 	
-	
-
-	
-	public double getIrVoltage() {
-		return cuberIr.getVoltage();
+	public void setOutput() {
+		cuberFakeUltron.set(whatBool);
+		whatBool = !whatBool;
+		
 	}
 	
 }

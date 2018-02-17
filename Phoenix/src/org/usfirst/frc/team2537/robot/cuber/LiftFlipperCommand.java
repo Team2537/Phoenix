@@ -18,7 +18,7 @@ public class LiftFlipperCommand extends Command {
 	protected void initialize() {
 		System.out.println("trying to lift");
 //		startTime = System.currentTimeMillis();
-		Robot.cuberSys.setLiftMotor(0.5); //reverses direction to lift motor upwards
+		Robot.cuberSys.setLiftMotor(1); //reverses direction to lift motor upwards
 		
 	}
 
