@@ -11,6 +11,8 @@ public class Ports {
 	
 	public static final int VERT_PDP = 12;
 	
+	public static final int FRONT_RIGHT_PDP = 13, FRONT_LEFT_PDP = 12, BACK_RIGHT_PDP = 14, BACK_LEFT_PDP = 15;
+	
 	/**********Input**********/
 	
 	// Joysticks
@@ -19,22 +21,21 @@ public class Ports {
 	// Buttons
 	public static final int VERT_RAISE_BUTTON = 3, VERT_LOWER_BUTTON = 2;
 
-	public static final int CLIMB_ON_BUTTON = 3, CLIMB_OFF_BUTTON = 2;
+	public static final int CLIMB_ON_BUTTON = 5, CLIMB_OFF_BUTTON = 4;
 
-	public static final int OVERRIDE_KEY_ONE = 6, OVERRIDE_KEY_TWO = 7, OVERRIDE_KEY_THREE = 8;
+	public static final int OVERRIDE_KEY_ONE = 6, OVERRIDE_KEY_TWO = 7;
 
-	public static final int RAMP_LOWER_BUTTON = 4, RAMP_RAISE_BUTTON = 5;
+	public static final int RAMP_LOWER_BUTTON = 8, RAMP_RAISE_BUTTON = 9;
 
-	public static final int FLIP_MANIPULATOR_DOWN_BUTTON = 4, FLIP_MANIPULATOR_UP_BUTTON = 5;
+	public static final int FLIP_MANIPULATOR_DOWN_BUTTON = 2, FLIP_MANIPULATOR_UP_BUTTON = 3;
 	
-	public static final int PICK_UP_BUTTON = 1, EXPEL_BUTTON = 1, LIFT_BUTTON = 5, LOWER_BUTTON = 4;
+	public static final int PICK_UP_BUTTON = 1, PICK_UP_BUTTON_TWO = 1, EXPEL_SLOW_BUTTON = 4, EXPEL_FAST_BUTTON = 5;
 	
-	public static final int CAMERA_SWITCH_BUTTON = 7;
 
 	/**********Motors**********/
 
 	//CANTalons
-	public static final int VERT_MOTOR_ONE = 4, VERT_MOTOR_TWO = 5;
+	public static final int VERT_MOTOR_ONE = 5, VERT_MOTOR_TWO = 4;
 	
 	public static final int FLYWHEEL_MOTOR_LEFT = 7, FLYWHEEL_MOTOR_RIGHT = 8;
 	
@@ -68,6 +69,6 @@ public class Ports {
 	// Raspberry Pi
 	public static final edu.wpi.first.wpilibj.SerialPort.Port RASPI = Port.kMXP;
 	
-	
+
 }
 

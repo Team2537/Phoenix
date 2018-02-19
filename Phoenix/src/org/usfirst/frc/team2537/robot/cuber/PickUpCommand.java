@@ -30,7 +30,7 @@ public class PickUpCommand extends Command {
 	protected void initialize() {
 		Robot.cuberSys.setFlywheelMotors(0);
 			if (Robot.cuberSys.getUltrasonicInches() > CuberSubsystem.ULTRASONIC_RANGE) {
-			Robot.cuberSys.setFlywheelMotors(-0.8);
+			Robot.cuberSys.setFlywheelMotors(0.8);
 		}
 //		
 //		filename = "/home/lvuser/cuberAmps"
@@ -54,9 +54,10 @@ public class PickUpCommand extends Command {
 
 	@Override
 	protected void execute() {
+		Robot.cuberSys.setOutput();
 		if (Robot.cuberSys.getUltrasonicInches() < CuberSubsystem.ULTRASONIC_RANGE
-				||Robot.cuberSys.getRightFlywheelCurrent() >= CuberSubsystem.FLYWHEEL_CURRENT_LIMIT
-				|| Robot.cuberSys.getLeftFlywheelCurrent() >= CuberSubsystem.FLYWHEEL_CURRENT_LIMIT) {
+				/*||Robot.cuberSys.getRightFlywheelCurrent() >= CuberSubsystem.FLYWHEEL_CURRENT_LIMIT
+				|| Robot.cuberSys.getLeftFlywheelCurrent() >= CuberSubsystem.FLYWHEEL_CURRENT_LIMIT*/) {
 			Robot.cuberSys.setFlywheelMotors(0);
 		}
 		

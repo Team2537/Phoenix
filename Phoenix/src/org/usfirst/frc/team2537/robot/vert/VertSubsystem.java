@@ -5,6 +5,7 @@ import org.usfirst.frc.team2537.robot.input.HumanInput;
 import org.usfirst.frc.team2537.robot.resources.CANTalon;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -19,6 +20,8 @@ public class VertSubsystem extends Subsystem {
 	public VertSubsystem() { 
 		vertMotorOne = new CANTalon(Ports.VERT_MOTOR_ONE);
 		vertMotorTwo = new CANTalon(Ports.VERT_MOTOR_TWO);
+		
+		vertMotorOne.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		
 		vertMotorTwo.setControlMode(ControlMode.Follower);
 		vertMotorTwo.follow(vertMotorOne);
@@ -41,6 +44,14 @@ public class VertSubsystem extends Subsystem {
 		vertMotorOne.set(speed);
 		
 	
+	}
+	
+	public double getEncoderPos() {
+		return vertMotorOne.getSelectedSensorPosition(0)*-1;
+	}
+	
+	public void resetEncoder() {
+		vertMotorOne.getSensorCollection().setQuadraturePosition(0, 0);
 	}
 	
 	public boolean getLimitSwitch() {

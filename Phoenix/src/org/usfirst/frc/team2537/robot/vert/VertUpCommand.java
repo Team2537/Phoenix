@@ -5,15 +5,24 @@ import org.usfirst.frc.team2537.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class VertUpCommand extends Command {
-
-	public VertUpCommand() {
+	
+	private final double targetDistance;
+	
+	public VertUpCommand(double targetDistance) {
 		requires(Robot.vertSys);
+		this.targetDistance = targetDistance;
+	}
+	
+	public VertUpCommand() {
+		this(-1);
 	}
 
 	protected void initialize() {
+		System.out.println("also hi");
+		Robot.vertSys.resetEncoder();
 		Robot.vertSys.setVertMotors(0);
 		if (!Robot.vertSys.getLimitSwitch())
-			Robot.vertSys.setVertMotors(0.8);
+			Robot.vertSys.setVertMotors(0.9);
 	}
 
 	protected void execute() {
@@ -25,7 +34,7 @@ public class VertUpCommand extends Command {
 
 
 	protected boolean isFinished() {
-		return false;
+		return (targetDistance > 0 && Robot.vertSys.getEncoderPos() >= targetDistance) || Robot.vertSys.getLimitSwitch();
 	}
 
 	protected void end() {

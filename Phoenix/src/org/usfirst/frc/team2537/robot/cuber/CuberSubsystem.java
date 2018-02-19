@@ -49,9 +49,11 @@ public class CuberSubsystem extends Subsystem {
 	
 	public void registerButtons() { 
 		HumanInput.registerWhileHeldCommand(HumanInput.cuberPickUpButton, new PickUpCommand());
-		HumanInput.registerWhileHeldCommand(HumanInput.cuberExpelButton, new ExpelCommand());
-		HumanInput.registerWhenPressedCommand(HumanInput.cuberFlipDownButton, new LowerFlipperCommand());
-		HumanInput.registerWhenPressedCommand(HumanInput.cuberFlipUpButton, new LiftFlipperCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.cuberPickUpButtonTwo, new PickUpCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.cuberExpelFastButton, new ExpelCommand(true));
+		HumanInput.registerWhileHeldCommand(HumanInput.cuberExpelSlowButton, new ExpelCommand(false));
+		HumanInput.registerWhileHeldCommand(HumanInput.cuberFlipDownButton, new LowerFlipperCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.cuberFlipUpButton, new LiftFlipperCommand());
 	}
 	
 	public void setFlywheelMotors(double speed) {
@@ -63,7 +65,7 @@ public class CuberSubsystem extends Subsystem {
 			liftMotor.set(speedLift);  			
 	}
 	
-	
+	/*
 	public double getLeftFlywheelCurrent() {
 		return Robot.pdp.getCurrent(Ports.LEFT_FLYWHEEL_PDP_CHANNEL);
 		 
@@ -72,17 +74,34 @@ public class CuberSubsystem extends Subsystem {
 	public double getRightFlywheelCurrent() { //returns amps of right flywheel motor
 		return Robot.pdp.getCurrent(Ports.RIGHT_FLYWHEEL_PDP_CHANNEL);
 		
-	}
+	}*/
 	
 	public double getUltrasonicInches() {
 		return cuberUltron.getRangeInches();
 		
 	}
 	
+	
+	/**
+	 * So this is janky folks
+	 * 
+	 * the trigger of the ultrasonic doesn't work
+	 * so the trigger port is set to a digital output
+	 * and the trigger constructor on the ultrasonic
+	 * is set to a dummy port. This actually works,
+	 * and getRangeInches and mm will return the actual
+	 * range 
+	 * 
+	 * @author Daniel Osheroff
+	 */
 	public void setOutput() {
 		cuberFakeUltron.set(whatBool);
 		whatBool = !whatBool;
 		
+	}
+	
+	public double getFlipperVoltage() {
+		return liftMotor.getMotorOutputVoltage();
 	}
 	
 }
