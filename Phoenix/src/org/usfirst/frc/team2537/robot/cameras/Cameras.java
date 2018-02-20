@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2537.robot.cameras;
 
 import org.opencv.core.Mat;
+import org.usfirst.frc.team2537.robot.Ports;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
@@ -14,17 +15,16 @@ public class Cameras extends Thread {
 
 	private CvSource outputStream;
 	private Mat source;
-	private Mat output;
 	
 	public Cameras() {
 		source = new Mat();
-		output = new Mat();
 		
-		cam0 = new UsbCamera("cam0", 0);
-		cam0.setResolution(320, 240);
+		cam0 = new UsbCamera("cam0", Ports.CAMERA_PORT);
+		cam0.setResolution(1280, 720);
+		cam0.setFPS(30);
 		CameraServer.getInstance().addCamera(cam0);
 		cvSink = CameraServer.getInstance().getVideo(cam0);
-		outputStream = CameraServer.getInstance().putVideo("cams", 320, 240);
+		outputStream = CameraServer.getInstance().putVideo("cams", 1280, 720);
 	}
 	
 	

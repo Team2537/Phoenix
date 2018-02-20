@@ -56,10 +56,10 @@ public class Robot extends IterativeRobot {
 		cuberSys = new CuberSubsystem();
 		cuberSys.registerButtons();
 
-		//visionSerial = new VisionInput();
+	//  visionSerial = new VisionInput();
 	
-	/*	cameras = new Cameras();
-		cameras.start();*/
+		cameras = new Cameras();
+		cameras.start();
 		
 		pdp = new PowerDistributionPanel();
 		
@@ -68,7 +68,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousInit() {
-		//new ReadSerialCommand().start();
+		// new ReadSerialCommand().start();
 		//new DriveStraightCommand(50).start();
 		//new DriveStraightTest().start();
 //		final int FMS_TIMEOUT=2; //num of seconds to wait before giving up on FMS
@@ -103,8 +103,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("yaw", Navx.getInstance().getYaw());
 		SmartDashboard.putNumber("roll", Navx.getInstance().getRoll());
 		Scheduler.getInstance().run();
-		System.out.println(Robot.vertSys.getEncoderPos());
-//		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
 	}
 
 	@Override
