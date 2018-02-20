@@ -26,7 +26,7 @@ public abstract class DriveStraightTemplate extends Command {
 	public static final double ANGLE_kP = 1;
 
 	/** value [0,1] representing the percent of power to motors */
-	public static final double DEFAULT_PERCENT_OUTPUT = 0.69;
+	public static final double DEFAULT_PERCENT_OUTPUT = 0.68;
 	
 	public static final double MIN_PERCENT_OUTPUT = 0.15;
 
