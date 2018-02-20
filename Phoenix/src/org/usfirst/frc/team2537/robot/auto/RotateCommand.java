@@ -50,8 +50,6 @@ public class RotateCommand extends Command {
     protected void end() {
     	System.out.println("ending rotatecommand");
     	Robot.driveSys.setMotors(0);
-		Robot.driveSys.resetEncoders();
-		Navx.getInstance().reset();
     }
 
     @Override

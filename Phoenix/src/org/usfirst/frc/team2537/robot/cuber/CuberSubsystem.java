@@ -45,8 +45,8 @@ public class CuberSubsystem extends Subsystem {
 	public void registerButtons() { 
 		HumanInput.registerWhileHeldCommand(HumanInput.cuberPickUpButton, new PickUpCommand());
 		HumanInput.registerWhileHeldCommand(HumanInput.cuberPickUpButtonTwo, new PickUpCommand());
-		HumanInput.registerWhileHeldCommand(HumanInput.cuberExpelFastButton, new ExpelCommand(true));
-		HumanInput.registerWhileHeldCommand(HumanInput.cuberExpelSlowButton, new ExpelCommand(false));
+		HumanInput.registerWhileHeldCommand(HumanInput.cuberExpelFastButton, new ExpelCommand(0.8));
+		HumanInput.registerWhileHeldCommand(HumanInput.cuberExpelSlowButton, new ExpelCommand(0.5));
 		HumanInput.registerWhileHeldCommand(HumanInput.cuberFlipDownButton, new LowerFlipperCommand());
 		HumanInput.registerWhileHeldCommand(HumanInput.cuberFlipUpButton, new LiftFlipperCommand());
 	}

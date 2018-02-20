@@ -103,6 +103,7 @@ public abstract class DriveStraightTemplate extends Command {
 		}
 		
 		power = Math.max(power, MIN_PERCENT_OUTPUT);
+		power *= Math.signum(remainingInches);
 
 		/* we add a speed delta to compensate for being off angle */
 		double powerAdjustmentFromAngle = 0;
@@ -111,7 +112,7 @@ public abstract class DriveStraightTemplate extends Command {
 		if (Math.abs(currentAngle) > ANGLE_TOLERANCE) {
 			powerAdjustmentFromAngle = currentAngle/180*ANGLE_kP*power;
 		}
-
+		
 		Robot.driveSys.setMotors(power - powerAdjustmentFromAngle, Motor.LEFT);
 		Robot.driveSys.setMotors(power + powerAdjustmentFromAngle, Motor.RIGHT);
 	}
@@ -127,8 +128,6 @@ public abstract class DriveStraightTemplate extends Command {
 	protected void end() {
 		System.out.println("ending driveforward");
 		Robot.driveSys.setMotors(0);
-		Robot.driveSys.resetEncoders();
-		Navx.getInstance().reset();
 		initialized = false;
 	}
 
