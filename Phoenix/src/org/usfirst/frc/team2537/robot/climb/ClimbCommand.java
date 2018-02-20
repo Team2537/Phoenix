@@ -17,7 +17,7 @@ public class ClimbCommand extends Command {
 	
 	private static final int BUTTON_LOCK = 105000; // 1:45 fron teleop starts until we can climb
 	
-	private static final double SPEED = .75;
+	private static final double SPEED = .85;
 	
 	private long startTime;
 	private String filename;
@@ -32,9 +32,11 @@ public class ClimbCommand extends Command {
 	protected void initialize() {
 		if (System.currentTimeMillis() - Robot.startTime >= BUTTON_LOCK) {
 			Robot.climbSys.setClimbMotors(SPEED);
-		} 
+		} else {
+			Robot.climbSys.setClimbMotors(0);
+		}
 		
-		filename = "/home/lvuser/climberAmps"
+		/*filename = "/home/lvuser/climberAmps"
 				+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()) + ".csv";
 		dataPath = Paths.get(filename);
 		if (Files.exists(dataPath)) {
@@ -50,30 +52,30 @@ public class ClimbCommand extends Command {
 		writer.println("Time (ms),Current (amps)");
 		startTime = System.currentTimeMillis();
 		avgAmps = (Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_ONE_PDP) + Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_TWO_PDP) + Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_THREE_PDP)) / 3;
-		writer.println(System.currentTimeMillis() - startTime + "," + avgAmps);
+		writer.println(System.currentTimeMillis() - startTime + "," + avgAmps);*/
 	}
 
 	protected void execute() {
-		avgAmps = (Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_ONE_PDP) + Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_TWO_PDP) + Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_THREE_PDP)) / 3;
-		writer.println(System.currentTimeMillis() - startTime + "," + avgAmps);
+/*		avgAmps = (Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_ONE_PDP) + Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_TWO_PDP) + Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_THREE_PDP)) / 3;
+		writer.println(System.currentTimeMillis() - startTime + "," + avgAmps);*/
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return (Robot.climbSys.getCurrentClimbMotorOne() >= ClimbSubsystem.MAX_CURRENT
+		return false; /*(Robot.climbSys.getCurrentClimbMotorOne() >= ClimbSubsystem.MAX_CURRENT
 				|| Robot.climbSys.getCurrentClimbMotorTwo() >= ClimbSubsystem.MAX_CURRENT
-				|| Robot.climbSys.getCurrentClimbMotorThree() >= ClimbSubsystem.MAX_CURRENT);
+				|| Robot.climbSys.getCurrentClimbMotorThree() >= ClimbSubsystem.MAX_CURRENT);*/
 	}
 
 	protected void end() {
 		Robot.climbSys.setClimbMotors(0);
-		writer.flush();
-		writer.close();
+	/*	writer.flush();
+		writer.close();*/
 	}
 
 	protected void interrupted() {
-		Robot.climbSys.setClimbMotors(0);
+		Robot.climbSys.setClimbMotors(0);/*
 		writer.flush();
-		writer.close();
+		writer.close();*/
 	}
 }

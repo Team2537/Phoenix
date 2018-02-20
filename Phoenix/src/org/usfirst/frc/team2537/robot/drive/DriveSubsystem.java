@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2537.robot.drive;
 
 import org.usfirst.frc.team2537.robot.Ports;
+import org.usfirst.frc.team2537.robot.Robot;
 import org.usfirst.frc.team2537.robot.units.Distances;
 import org.usfirst.frc.team2537.robot.units.Times;
 import org.usfirst.frc.team2537.robot.units.Units;
@@ -89,11 +90,11 @@ public class DriveSubsystem extends Subsystem {
 	 * @return average value of all talons in inches
 	 */
 	public double getEncoderDistance() {
-		double[] encoderTicks = new double[4];
+		double[] encoderTicks = new double[2];
 		encoderTicks[0] = talonFrontLeft.getSelectedSensorPosition(0) * LEFT_MOTOR_DIRECTION;
 		encoderTicks[1] = talonFrontRight.getSelectedSensorPosition(0) * RIGHT_MOTOR_DIRECTION;
-		encoderTicks[2] = talonBackLeft.getSelectedSensorPosition(0) * LEFT_MOTOR_DIRECTION;
-		encoderTicks[3] = talonBackRight.getSelectedSensorPosition(0) * RIGHT_MOTOR_DIRECTION;
+		//encoderTicks[2] = talonBackLeft.getSelectedSensorPosition(0) * LEFT_MOTOR_DIRECTION;
+		//encoderTicks[3] = talonBackRight.getSelectedSensorPosition(0) * RIGHT_MOTOR_DIRECTION;
 		
 		double avg = getUniformAverage(encoderTicks, ENCODER_MIN_PERCENT_AGREEMENT);
 		return Units.convertDistance(avg, Distances.TICKS, Distances.INCHES);
@@ -103,11 +104,11 @@ public class DriveSubsystem extends Subsystem {
 	 * @return average velocity of all talons in inches/second
 	 */
 	public double getEncoderVelocity() {
-		double[] encoderTicks = new double[4];
+		double[] encoderTicks = new double[2];
 		encoderTicks[0] = talonFrontLeft.getSelectedSensorVelocity(0) * LEFT_MOTOR_DIRECTION;
 		encoderTicks[1] = talonFrontRight.getSelectedSensorVelocity(0) * RIGHT_MOTOR_DIRECTION;
-		encoderTicks[2] = talonBackLeft.getSelectedSensorVelocity(0) * LEFT_MOTOR_DIRECTION;
-		encoderTicks[3] = talonBackRight.getSelectedSensorVelocity(0) * RIGHT_MOTOR_DIRECTION;
+		//encoderTicks[2] = talonBackLeft.getSelectedSensorVelocity(0) * LEFT_MOTOR_DIRECTION;
+		//encoderTicks[3] = talonBackRight.getSelectedSensorVelocity(0) * RIGHT_MOTOR_DIRECTION;
 		
 		double avg = getUniformAverage(encoderTicks, ENCODER_MIN_PERCENT_AGREEMENT);
 		return Units.convertSpeed(avg, Distances.TICKS, Times.HUNDRED_MS, Distances.INCHES, Times.SECONDS);
@@ -195,6 +196,13 @@ public class DriveSubsystem extends Subsystem {
 	 */
 	public void setMode(ControlMode controlMode) {
 		this.controlMode = controlMode;
+	}
+	
+	public void fixingDrive() {
+		System.out.println("Front Right: " + Robot.pdp.getCurrent(Ports.FRONT_RIGHT_PDP));
+		System.out.println("Front Left: " + Robot.pdp.getCurrent(Ports.FRONT_LEFT_PDP));
+		System.out.println("Back Right: " + Robot.pdp.getCurrent(Ports.BACK_RIGHT_PDP));
+		System.out.println("Back Left : " + Robot.pdp.getCurrent(Ports.BACK_LEFT_PDP));
 	}
 
 }

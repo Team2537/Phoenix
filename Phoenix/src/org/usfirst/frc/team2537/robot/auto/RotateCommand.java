@@ -7,14 +7,12 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class RotateCommand extends Command {
 	private double targetAngle;
-	private static final double DEFAULT_PERCENT_OUTPUT = 0.75;
+	private static final double DEFAULT_PERCENT_OUTPUT = 0.9;
+	private static final double MIN_PERCENT_OUTPUT = 0.6;
 	private static final double ANGLE_kP = 2;
-	private static final double TOLERANCE = 1; // degrees
+	private static final double TOLERANCE = 2; // degrees
 	private double currentAngle;
     public RotateCommand(double angle) {
     	requires(Robot.driveSys);
@@ -27,6 +25,7 @@ public class RotateCommand extends Command {
     @Override
     protected void initialize() {
     	Navx.getInstance().reset();
+    	Navx.getInstance().reset();
     	Robot.driveSys.setMode(ControlMode.PercentOutput);
     }
 
@@ -36,7 +35,8 @@ public class RotateCommand extends Command {
     	double deltaAngle = currentAngle - targetAngle;
     	double power = DEFAULT_PERCENT_OUTPUT;
     	power = Math.min(power, Math.abs(deltaAngle/180*power*ANGLE_kP)) * Math.signum(deltaAngle);
-		Robot.driveSys.setMotors(-power,  Motor.LEFT);
+		power = Math.max(Math.abs(power), Math.abs(MIN_PERCENT_OUTPUT)) * Math.signum(power);
+    	Robot.driveSys.setMotors(-power,  Motor.LEFT);
 		Robot.driveSys.setMotors( power, Motor.RIGHT);
     }
 
@@ -48,10 +48,14 @@ public class RotateCommand extends Command {
 
     @Override
     protected void end() {
-    	Robot.driveSys.setMotors(0, Motor.ALL);
+    	System.out.println("ending rotatecommand");
+    	Robot.driveSys.setMotors(0);
+		Robot.driveSys.resetEncoders();
+		Navx.getInstance().reset();
     }
 
     @Override
     protected void interrupted() {
+    	end();
     }
 }

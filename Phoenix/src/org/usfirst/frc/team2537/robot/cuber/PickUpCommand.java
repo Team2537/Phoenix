@@ -1,14 +1,8 @@
 package org.usfirst.frc.team2537.robot.cuber;
 
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
-import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -30,7 +24,7 @@ public class PickUpCommand extends Command {
 	protected void initialize() {
 		Robot.cuberSys.setFlywheelMotors(0);
 			if (Robot.cuberSys.getUltrasonicInches() > CuberSubsystem.ULTRASONIC_RANGE) {
-			Robot.cuberSys.setFlywheelMotors(-0.8);
+			Robot.cuberSys.setFlywheelMotors(0.8);
 		}
 //		
 //		filename = "/home/lvuser/cuberAmps"
@@ -55,8 +49,8 @@ public class PickUpCommand extends Command {
 	@Override
 	protected void execute() {
 		if (Robot.cuberSys.getUltrasonicInches() < CuberSubsystem.ULTRASONIC_RANGE
-				||Robot.cuberSys.getRightFlywheelCurrent() >= CuberSubsystem.FLYWHEEL_CURRENT_LIMIT
-				|| Robot.cuberSys.getLeftFlywheelCurrent() >= CuberSubsystem.FLYWHEEL_CURRENT_LIMIT) {
+				/*||Robot.cuberSys.getRightFlywheelCurrent() >= CuberSubsystem.FLYWHEEL_CURRENT_LIMIT
+				|| Robot.cuberSys.getLeftFlywheelCurrent() >= CuberSubsystem.FLYWHEEL_CURRENT_LIMIT*/) {
 			Robot.cuberSys.setFlywheelMotors(0);
 		}
 		

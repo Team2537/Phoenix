@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2537.robot;
 
 import org.usfirst.frc.team2537.robot.auto.Navx;
-import org.usfirst.frc.team2537.robot.auto.ShittyAutoCommand;
+import org.usfirst.frc.team2537.robot.auto.routes.OppositeSideScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
 import org.usfirst.frc.team2537.robot.cameras.Cameras;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
@@ -31,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static VisionInput visionSerial;
 	
 	public static long startTime;
+	public static String fmsData="OOO";
 	
 
 	@Override
@@ -39,7 +40,7 @@ public class Robot extends IterativeRobot {
 		driveSys.initDefaultCommand();
 		driveSys.resetEncoders();
 		
-	/*	smartDashboard = new SmartDashboard();
+		smartDashboard = new SmartDashboard();
 		Navx.getInstance().reset();
 		
 	
@@ -50,36 +51,45 @@ public class Robot extends IterativeRobot {
 		climbSys.registerButtons();
 		
 		rampSys = new RampSubsystem();
-		rampSys.registerButtons();*/
+		rampSys.registerButtons();
 		
 		cuberSys = new CuberSubsystem();
 		cuberSys.registerButtons();
 
-		/*visionSerial = new VisionInput();
+	//  visionSerial = new VisionInput();
 	
 		cameras = new Cameras();
 		cameras.start();
 		
-		pdp = new PowerDistributionPanel();*/
+		pdp = new PowerDistributionPanel();
 		
 		
 	}
 
 	@Override
 	public void autonomousInit() {
-		//new ReadSerialCommand().start();
+		// new ReadSerialCommand().start();
 		//new DriveStraightCommand(50).start();
-		new ShittyAutoCommand(3).start();
+		//new DriveStraightTest().start();
+//		final int FMS_TIMEOUT=2; //num of seconds to wait before giving up on FMS
+//		long startTime=System.currentTimeMillis();
+//		while (DriverStation.getInstance().getGameSpecificMessage().length()==0 &&
+//				System.currentTimeMillis()-startTime < (FMS_TIMEOUT*1000));
+//		fmsData=DriverStation.getInstance().getGameSpecificMessage();
+//		if (fmsData.length()==0)
+//			fmsData="OOO"; //if we can't get FMS data within 2 seconds, make dummy data
+//		System.out.println(fmsData);
+		new OppositeSideScaleRoute().start();
 	}
 
 	@Override
 	public void autonomousPeriodic() {
 		 Scheduler.getInstance().run();
-		 Robot.driveSys.justFuckMyShitUpFam();
 	}
 
 	@Override
 	public void teleopInit() {
+		Robot.vertSys.resetEncoder();
 		Scheduler.getInstance().removeAll();
 		Navx.getInstance().reset();
 		Robot.driveSys.resetEncoders();
@@ -93,14 +103,14 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("yaw", Navx.getInstance().getYaw());
 		SmartDashboard.putNumber("roll", Navx.getInstance().getRoll());
 		Scheduler.getInstance().run();
-//		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
 	}
 
 	@Override
 	public void testPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println(Robot.cuberSys.getUltrasonicInches());
 	
 	}
+	
+
 
 }

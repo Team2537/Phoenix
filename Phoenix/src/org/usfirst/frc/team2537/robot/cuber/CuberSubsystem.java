@@ -1,7 +1,6 @@
 package org.usfirst.frc.team2537.robot.cuber;
 
 import org.usfirst.frc.team2537.robot.Ports;
-import org.usfirst.frc.team2537.robot.Robot;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 import org.usfirst.frc.team2537.robot.resources.CANTalon;
 
@@ -45,9 +44,11 @@ public class CuberSubsystem extends Subsystem {
 	
 	public void registerButtons() { 
 		HumanInput.registerWhileHeldCommand(HumanInput.cuberPickUpButton, new PickUpCommand());
-		HumanInput.registerWhileHeldCommand(HumanInput.cuberExpelButton, new ExpelCommand());
-		HumanInput.registerWhenPressedCommand(HumanInput.cuberFlipDownButton, new LowerFlipperCommand());
-		HumanInput.registerWhenPressedCommand(HumanInput.cuberFlipUpButton, new LiftFlipperCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.cuberPickUpButtonTwo, new PickUpCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.cuberExpelFastButton, new ExpelCommand(true));
+		HumanInput.registerWhileHeldCommand(HumanInput.cuberExpelSlowButton, new ExpelCommand(false));
+		HumanInput.registerWhileHeldCommand(HumanInput.cuberFlipDownButton, new LowerFlipperCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.cuberFlipUpButton, new LiftFlipperCommand());
 	}
 	
 	public void setFlywheelMotors(double speed) {
@@ -59,7 +60,7 @@ public class CuberSubsystem extends Subsystem {
 			liftMotor.set(speedLift);  			
 	}
 	
-	
+	/*
 	public double getLeftFlywheelCurrent() {
 		return Robot.pdp.getCurrent(Ports.LEFT_FLYWHEEL_PDP_CHANNEL);
 		 
@@ -68,11 +69,14 @@ public class CuberSubsystem extends Subsystem {
 	public double getRightFlywheelCurrent() { //returns amps of right flywheel motor
 		return Robot.pdp.getCurrent(Ports.RIGHT_FLYWHEEL_PDP_CHANNEL);
 		
-	}
+	}*/
 	
 	public double getUltrasonicInches() {
 		return ultrasonic.getRangeInches();
-		
+	}
+	
+	public double getFlipperVoltage() {
+		return liftMotor.getMotorOutputVoltage();
 	}
 	
 }

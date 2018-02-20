@@ -5,14 +5,23 @@ import org.usfirst.frc.team2537.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ExpelCommand extends Command {
-	public ExpelCommand() {
+	private long startTime;
+	private final boolean isFast;
+	
+	public ExpelCommand(boolean isFast) {
 		requires(Robot.cuberSys); //requires variables and methods form cuberSys
+		this.isFast = isFast;
 	}
 	
 	@Override
 	protected void initialize() {
-		Robot.cuberSys.setFlywheelMotors(0.8); // sets speed to reverse to expel out cube
-		
+		if (isFast) {
+			Robot.cuberSys.setFlywheelMotors(-0.8); // sets speed to reverse to expel out cube
+			startTime = System.currentTimeMillis();
+		} else {
+			Robot.cuberSys.setFlywheelMotors(-0.5);
+			startTime = System.currentTimeMillis();
+		}
 		
 	}
 	
@@ -23,8 +32,9 @@ public class ExpelCommand extends Command {
 	
 	@Override
 	protected boolean isFinished() { //returns true when Flywheel motors exceed max amp
-		return(Robot.cuberSys.getRightFlywheelCurrent() >= CuberSubsystem.FLYWHEEL_CURRENT_LIMIT
-				|| Robot.cuberSys.getLeftFlywheelCurrent() >= CuberSubsystem.FLYWHEEL_CURRENT_LIMIT);
+		/*return(Robot.cuberSys.getRightFlywheelCurrent() >= CuberSubsystem.FLYWHEEL_CURRENT_LIMIT
+				|| Robot.cuberSys.getLeftFlywheelCurrent() >= CuberSubsystem.FLYWHEEL_CURRENT_LIMIT
+				||*/ return System.currentTimeMillis() - startTime >= 2000;
 	
 	}
 	

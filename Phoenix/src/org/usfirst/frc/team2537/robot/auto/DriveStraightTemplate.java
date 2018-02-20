@@ -18,13 +18,17 @@ public abstract class DriveStraightTemplate extends Command {
 	 * gradually slow down until the angle is 0
 	 */
 	public static final double ANGLE_TOLERANCE = 1;
+	
+	public static final double DISTANCE_TOLERANCE = 1;
 
-	public static final double SLOW_DOWN_POWER = 10;
+	public static final double SLOW_DOWN_POWER = 200;
 
-	public static final double ANGLE_kP = 2;
+	public static final double ANGLE_kP = 1;
 
 	/** value [0,1] representing the percent of power to motors */
-	public static final double DEFAULT_PERCENT_OUTPUT = 0.5;
+	public static final double DEFAULT_PERCENT_OUTPUT = 0.69;
+	
+	public static final double MIN_PERCENT_OUTPUT = 0.15;
 
 	/******************************************************************************/
 	/* INSTANCE VARIABLES */
@@ -33,6 +37,7 @@ public abstract class DriveStraightTemplate extends Command {
 	private double motorPower;
 	private double remainingInchesAtSlowdown;
 	private boolean slowingDown;
+	private boolean initialized;
 
 	/******************************************************************************/
 	/* CONSTRUCTORS */
@@ -58,6 +63,7 @@ public abstract class DriveStraightTemplate extends Command {
 		requires(Robot.driveSys);
 		motorPower = defaultPercentOutput;
 		slowingDown = false;
+		initialized = false;
 	}
 
 	/******************************************************************************/
@@ -66,14 +72,19 @@ public abstract class DriveStraightTemplate extends Command {
 
 	@Override
 	protected void initialize() {
-		Robot.driveSys.resetEncoders();
 		Robot.driveSys.setMode(ControlMode.PercentOutput);
+		Robot.driveSys.resetEncoders();
 		Navx.getInstance().reset();
 		System.out.println("starting angle: " + Navx.getInstance().getAngle());
+		System.out.println("encoders: " + Robot.driveSys.justFuckMyShitUpFam());
+		initialized = true;
 	}
 
 	@Override
 	protected void execute() {
+		if(!initialized) {
+			initialize();
+		}
 		double remainingInches = getRemainingInches();
 		double currentVelocity = Robot.driveSys.getEncoderVelocity();
 		double power = motorPower;
@@ -81,7 +92,7 @@ public abstract class DriveStraightTemplate extends Command {
 		if (!slowingDown) {
 			double slowDownDistance = calculateSlowDownDistance(currentVelocity);
 			if (remainingInches <= slowDownDistance) {
-				System.out.println("\n\n\n\n\n SLOWING DOWN!!! slow down distance: " + slowDownDistance);
+				System.out.println("\n\n SLOWING DOWN!!! slow down distance: " + slowDownDistance);
 				slowingDown = true;
 				remainingInchesAtSlowdown = remainingInches;
 			}
@@ -90,6 +101,8 @@ public abstract class DriveStraightTemplate extends Command {
 		if (slowingDown) {
 			power *= remainingInches / remainingInchesAtSlowdown;
 		}
+		
+		power = Math.max(power, MIN_PERCENT_OUTPUT);
 
 		/* we add a speed delta to compensate for being off angle */
 		double powerAdjustmentFromAngle = 0;
@@ -107,12 +120,16 @@ public abstract class DriveStraightTemplate extends Command {
 	protected boolean isFinished() {
 		System.out.println("speed: " + Robot.driveSys.getEncoderVelocity() + "; " + 
 				"remaining dist: " + getRemainingInches());
-		return getRemainingInches() <= 0;
+		return getRemainingInches() <= DISTANCE_TOLERANCE;
 	}
 
 	@Override
 	protected void end() {
+		System.out.println("ending driveforward");
 		Robot.driveSys.setMotors(0);
+		Robot.driveSys.resetEncoders();
+		Navx.getInstance().reset();
+		initialized = false;
 	}
 
 	/**
@@ -120,6 +137,7 @@ public abstract class DriveStraightTemplate extends Command {
 	 * subsystems is scheduled to run
 	 *
 	 */
+	
 	@Override
 	protected void interrupted() {
 		end();
