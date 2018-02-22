@@ -25,7 +25,7 @@ public class CuberSubsystem extends Subsystem {
 	public CuberSubsystem() {
 		flywheelMotorLeft = new CANTalon(Ports.FLYWHEEL_MOTOR_LEFT);
 		flywheelMotorRight = new CANTalon(Ports.FLYWHEEL_MOTOR_RIGHT);
-		liftMotor = new CANTalon(Ports.WINDOW_MOTOR);
+		liftMotor = new CANTalon(Ports.FLIPPER_WINDOW_MOTOR);
 	
 		ultrasonic = new UltrasonicWrapper(Ports.CUBER_ULTRASONIC_TRIGGER, Ports.CUBER_ULTRASONIC_ECHO, 
 				Ports.CUBER_ULTRASONIC_DUMMY);

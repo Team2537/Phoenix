@@ -29,7 +29,7 @@ public class Ports {
 
 	public static final int FLYWHEEL_MOTOR_LEFT = 7, FLYWHEEL_MOTOR_RIGHT = 8;
 
-	public static final int WINDOW_MOTOR = 6;
+	public static final int FLIPPER_WINDOW_MOTOR = 6;
 
 	// Talons
 
@@ -43,14 +43,8 @@ public class Ports {
 
 	/********** Sensors **********/
 
-	// Encoders
-	public static final int LIFT_ENCODER_A = 1, LIFT_ENCODER_B = 2;
-
 	// Ultrasonic
 	public static final int CUBER_ULTRASONIC_TRIGGER = 4, CUBER_ULTRASONIC_ECHO = 3, CUBER_ULTRASONIC_DUMMY = 9;
-	
-	// analog
-	public static final int CUBER_IR = 0;
 
 	// Limit Switch
 	public static final int VERT_LIMIT_SWITCH = 2;
