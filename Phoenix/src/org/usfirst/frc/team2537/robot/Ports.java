@@ -8,9 +8,11 @@ public class Ports {
 
 	// Joysticks
 	public static final int LEFT_JOYSTICK = 0, RIGHT_JOYSTICK = 1;
+	
+	public static final int XBOX_CONTROLLER = 2;
 
 	// Buttons
-	public static final int VERT_RAISE_BUTTON = 3, VERT_LOWER_BUTTON = 2;
+	public static final int VERT_RAISE_BUTTON = 6, VERT_LOWER_BUTTON = 5;
 
 	public static final int CLIMB_ON_BUTTON = 5, CLIMB_OFF_BUTTON = 4;
 
@@ -18,9 +20,9 @@ public class Ports {
 
 	public static final int RAMP_LOWER_BUTTON = 8, RAMP_RAISE_BUTTON = 9;
 
-	public static final int FLIP_MANIPULATOR_DOWN_BUTTON = 2, FLIP_MANIPULATOR_UP_BUTTON = 3;
+	public static final int FLIP_MANIPULATOR_DOWN_BUTTON = 3, FLIP_MANIPULATOR_UP_BUTTON = 4;
 
-	public static final int PICK_UP_BUTTON = 1, PICK_UP_BUTTON_TWO = 1, EXPEL_SLOW_BUTTON = 4, EXPEL_FAST_BUTTON = 5;
+	public static final int PICK_UP_BUTTON = 1, /*PICK_UP_BUTTON_TWO = 1,*/ EXPEL_SLOW_BUTTON = 8, EXPEL_FAST_BUTTON = 2;
 
 	/********** Motors **********/
 
