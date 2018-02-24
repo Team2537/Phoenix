@@ -1,17 +1,18 @@
-package org.usfirst.frc.team2537.robot.auto.routes;
+package org.usfirst.frc.team2537.robot.auto.routes.onecube;
 
 import org.usfirst.frc.team2537.robot.auto.DriveStraightCommand;
 import org.usfirst.frc.team2537.robot.auto.RotateCommand;
 import org.usfirst.frc.team2537.robot.cuber.ExpelCommand;
 import org.usfirst.frc.team2537.robot.cuber.LowerFlipperCommand;
 import org.usfirst.frc.team2537.robot.vert.VertUpCommand;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class SameSideScaleRoute extends CommandGroup {
-	public SameSideScaleRoute(){
+	public SameSideScaleRoute(boolean left){
 		addSequential(new DriveStraightCommand(295));
-		addSequential(new RotateCommand(90));
+		if(left) addSequential(new RotateCommand(90));
+		else addSequential(new RotateCommand(-90));
+
 		addParallel(new LowerFlipperCommand(), 0.5);
 		addParallel(new DriveStraightCommand(-30), 0.5);
 		addSequential(new VertUpCommand(675000));
@@ -49,4 +50,4 @@ S>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>o|
 | XX                                              |
 +-------------------------------------------------+
 
-*/
+ */
