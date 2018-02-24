@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2537.robot;
 
 import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
+import org.usfirst.frc.team2537.robot.input.HumanInput;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -11,6 +12,7 @@ public class Robot extends IterativeRobot {
 
 	public static CuberSubsystem cuberSys;
 	public static DigitalInput infra;
+	public static HumanInput input;
 
 	@Override
 	public void robotInit() {

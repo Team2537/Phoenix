@@ -20,6 +20,10 @@ public class HumanInput {
 	
 	
 	
+	
+		// TODO Auto-generated constructor stub
+	
+
 	/**
 	 * Register button to command
 	 * 
@@ -40,5 +44,8 @@ public class HumanInput {
 	
 	public static void registerWhenReleasedCommand(Button b, Command c) {
 		b.whenReleased(c);
+	}
+	public boolean checkExpelButtonPressed() {
+		return lowerButton.get();
 	}
 }

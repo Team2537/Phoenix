@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CuberSubsystem extends Subsystem {
@@ -20,6 +21,7 @@ public class CuberSubsystem extends Subsystem {
 	private double radius = 2; //what units?//for getTime90Degrees() method (see below)
 	private static final double PI = 3.14; //for getTime90Degrees() method (see below)
 	private Ultrasonic ultrasonic;
+	
 	//private double speedLift;
 	//private double leftCurrent;
 	//private double rightCurrent;
@@ -43,8 +45,8 @@ public class CuberSubsystem extends Subsystem {
 	public void registerButtons() { 
 		HumanInput.registerWhileHeldCommand(HumanInput.pickUpButton, new PickUpCommand()); //corresponds to pickUp command
 		HumanInput.registerWhileHeldCommand(HumanInput.expelButton, new ExpelCommand()); //corresponds to expel command
-		HumanInput.registerWhenPressedCommand(HumanInput.lowerButton, new LowerFlipperCommand()); //corresponds to LowerFlipper command
-		HumanInput.registerWhenPressedCommand(HumanInput.liftButton, new LiftFlipperCommand());//corresponds to LiftFlipper command
+		HumanInput.registerWhileHeldCommand(HumanInput.lowerButton, new LowerFlipperCommand()); //corresponds to LowerFlipper command
+		HumanInput.registerWhileHeldCommand(HumanInput.liftButton, new LiftFlipperCommand());//corresponds to LiftFlipper command
 	}
 	
 	/*
@@ -84,6 +86,9 @@ public class CuberSubsystem extends Subsystem {
 	public double getUltrasonicDistance() { //returns distance of cube from  back of cuber
 		return ultrasonic.getRangeInches();
 	}
+	
+	
+	
 	public void getInfrared(){
 	
 	}

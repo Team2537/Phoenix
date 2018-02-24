@@ -4,6 +4,9 @@ import org.usfirst.frc.team2537.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+import org.usfirst.frc.team2537.robot.input.HumanInput;
+
+
 public class LiftFlipperCommand extends Command {
 
 	// "this is only here and not in cuberSys because eclipse hates me" - alex
@@ -27,10 +30,10 @@ public class LiftFlipperCommand extends Command {
 
 	protected boolean isFinished() { // returns true if motor turns under or equal to 0 degrees or when flywheel
 										// motors exceed max amp
-
-		return (Robot.cuberSys.getDegrees() <= 0)
-				|| Robot.cuberSys.getRightFlywheelCurrent() >= Robot.cuberSys.currentLimit
-				|| Robot.cuberSys.getLeftFlywheelCurrent() >= Robot.cuberSys.currentLimit;
+		return (Robot.input.checkExpelButtonPressed() == false);
+//		return (Robot.cuberSys.getDegrees() <= 0)
+			//	|| Robot.cuberSys.getRightFlywheelCurrent() >= Robot.cuberSys.currentLimit
+	//			|| Robot.cuberSys.getLeftFlywheelCurrent() >= Robot.cuberSys.currentLimit;
 	}
 
 	protected void end() {
