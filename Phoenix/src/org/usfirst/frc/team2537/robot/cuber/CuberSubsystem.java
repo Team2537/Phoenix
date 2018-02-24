@@ -27,7 +27,7 @@ public class CuberSubsystem extends Subsystem {
 		flywheelMotorRight = new CANTalon(Ports.FLYWHEEL_MOTOR_RIGHT);
 		liftMotor = new CANTalon(Ports.FLIPPER_WINDOW_MOTOR);	
 		ultrasonic = new UltrasonicWrapper(Ports.CUBER_ULTRASONIC_TRIGGER, Ports.CUBER_ULTRASONIC_ECHO, 
-				Ports.CUBER_ULTRASONIC_DUMMY);
+				Ports.CUBER_FAKE_ULTRASONIC);
 		
 		liftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
 		liftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);

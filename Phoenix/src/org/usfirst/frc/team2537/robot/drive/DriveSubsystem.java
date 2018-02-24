@@ -58,7 +58,7 @@ public class DriveSubsystem extends Subsystem {
 		talonBackLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		
-		//ultrasonic = new Ultrasonic(Ports.ULTRASONIC_PING, Ports.ULTRASONIC_ECHO);
+		ultrasonic = new Ultrasonic(Ports.DRIVE_ULTRASONIC_TRIGGER, Ports.DRIVE_ULTRASONIC_ECHO);
 	}
 
 	/******************************************************************************/
