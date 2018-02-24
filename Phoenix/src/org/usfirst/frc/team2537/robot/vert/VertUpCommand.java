@@ -22,13 +22,13 @@ public class VertUpCommand extends Command {
 		Robot.vertSys.resetEncoder();
 		Robot.vertSys.setVertMotors(0);
 		if (!Robot.vertSys.getLimitSwitch())
-			Robot.vertSys.setVertMotors(0.9);
+			Robot.vertSys.setVertMotors(1);
 	}
 
 	protected void execute() {
 		if (Robot.vertSys.getLimitSwitch())
 			Robot.vertSys.setVertMotors(0);
-		
+
 		System.out.println(Robot.vertSys.getLimitSwitch());
 	}
 

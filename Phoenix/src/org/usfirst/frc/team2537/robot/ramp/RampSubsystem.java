@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class RampSubsystem extends Subsystem {
 
 	private Servo rampServo;
+	public boolean isOpen = false;
 
 	public RampSubsystem() {
 		rampServo = new Servo(Ports.RAMP_SERVO);

@@ -103,13 +103,14 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("yaw", Navx.getInstance().getYaw());
 		SmartDashboard.putNumber("roll", Navx.getInstance().getRoll());
 		Scheduler.getInstance().run();
+		if(Robot.rampSys.isOpen) {
+			SmartDashboard.putString("Ramp is Open", "THE RAMP IS OPEN YOU SURE YOU WANT THIS");
+		}
 	}
 
 	@Override
 	public void testPeriodic() {
 		Scheduler.getInstance().run();
-		
-		
 	
 	}
 	

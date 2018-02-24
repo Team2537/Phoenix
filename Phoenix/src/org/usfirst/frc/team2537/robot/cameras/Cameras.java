@@ -20,11 +20,11 @@ public class Cameras extends Thread {
 		source = new Mat();
 		
 		cam0 = new UsbCamera("cam0", Ports.CAMERA_PORT);
-		cam0.setResolution(1280, 720);
-		cam0.setFPS(30);
+		cam0.setResolution(320, 240);
+		cam0.setFPS(12);
 		CameraServer.getInstance().addCamera(cam0);
 		cvSink = CameraServer.getInstance().getVideo(cam0);
-		outputStream = CameraServer.getInstance().putVideo("cams", 1280, 720);
+		outputStream = CameraServer.getInstance().putVideo("cams", 640, 480);
 	}
 	
 	

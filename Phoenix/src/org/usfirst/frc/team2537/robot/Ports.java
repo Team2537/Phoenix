@@ -14,7 +14,7 @@ public class Ports {
 
 	public static final int CLIMB_ON_BUTTON = 5, CLIMB_OFF_BUTTON = 4;
 
-	public static final int OVERRIDE_KEY_ONE = 6, OVERRIDE_KEY_TWO = 7;
+	public static final int OVERRIDE_KEY_ONE = 11, OVERRIDE_KEY_TWO = 10;
 
 	public static final int RAMP_LOWER_BUTTON = 8, RAMP_RAISE_BUTTON = 9;
 
@@ -49,6 +49,7 @@ public class Ports {
 	// Ultrasonic
 	public static final int CUBER_ULTRASONIC_TRIGGER = 4, CUBER_ULTRASONIC_ECHO = 3, CUBER_FAKE_ULTRASONIC = 9;
 
+	public static final int DRIVE_ULTRASONIC_TRIGGER = 1, DRIVE_ULTRASONIC_ECHO = 0;
 	// analog
 	public static final int CUBER_IR = 0;
 

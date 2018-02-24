@@ -13,6 +13,7 @@ public class CloseRampCommand extends Command {
 	@Override
 	protected void initialize() {
 		Robot.rampSys.raiseRampServo();
+		
 	}
 	
 	@Override
@@ -22,17 +23,18 @@ public class CloseRampCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 	
 	@Override
 	protected void end() {
+		Robot.rampSys.isOpen = false;
 		
 	}
 	
 	@Override
 	protected void interrupted() {
-		
+		end();
 	}
 
 }

@@ -17,7 +17,7 @@ public class ClimbCommand extends Command {
 	
 	private static final int BUTTON_LOCK = 105000; // 1:45 fron teleop starts until we can climb
 	
-	private static final double SPEED = .85;
+	private static final double SPEED = 1;
 	
 	private long startTime;
 	private String filename;
@@ -30,11 +30,11 @@ public class ClimbCommand extends Command {
 	}
 
 	protected void initialize() {
-		if (System.currentTimeMillis() - Robot.startTime >= BUTTON_LOCK) {
+//		if (System.currentTimeMillis() - Robot.startTime >= BUTTON_LOCK) {
 			Robot.climbSys.setClimbMotors(SPEED);
-		} else {
-			Robot.climbSys.setClimbMotors(0);
-		}
+//		} else {
+//			Robot.climbSys.setClimbMotors(0);
+//		}
 		
 		/*filename = "/home/lvuser/climberAmps"
 				+ new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()) + ".csv";
