@@ -1,22 +1,24 @@
 package org.usfirst.frc.team2537.robot;
 
 import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
-import org.usfirst.frc.team2537.robot.input.HumanInput;
+import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
 
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class Robot extends IterativeRobot {
 
+	public static DriveSubsystem driveSys;
 	public static CuberSubsystem cuberSys;
-	public static DigitalInput infra;
-	public static HumanInput input;
+	public static PowerDistributionPanel pdp;
 
 	@Override
 	public void robotInit() {
-		DriverStation.getInstance().getGameSpecificMessage();
+		cuberSys =  new CuberSubsystem();
+		pdp = new PowerDistributionPanel();
+		driveSys = new DriveSubsystem();
+		driveSys.initDefaultCommand();
 	}
 
 	@Override

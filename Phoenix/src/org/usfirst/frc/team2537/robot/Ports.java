@@ -26,8 +26,13 @@ public class Ports {
 	public static final int ULTRASONIC_INPUT = 1, ULTRASONIC_OUTPUT = 2;
 
 	//PDP channels
-	public static final int RIGHT_FLYWHEEL_PDP_CHANNEL = 1, LEFT_FLYWHEEL_PDP_CHANNEL = 2 ;
+	public static final int RIGHT_FLYWHEEL_PDP_CHANNEL = 1, LEFT_FLYWHEEL_PDP_CHANNEL = 2, WINDOW_MOTOR_CHANNEL = 10;
 
+	//digital input
+	public static final int LIMIT_SWITCH_LIFT = 1, LIMIT_SWITCH_LOWER = 2;
+	
+	//drive motors
+	public static final int FRONT_RIGHT_MOTOR = 0, FRONT_LEFT_MOTOR = 1, BACK_RIGHT_MOTOR = 2, BACK_LEFT_MOTOR = 3; 
 	
 	
 }

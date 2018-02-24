@@ -15,11 +15,16 @@ public class LowerFlipperCommand extends Command {
 
 	}
 
-	protected void initialized() {
-
-		Robot.cuberSys.setLiftMotor(speedLower); // initializes speed of lift motor to lower
-
-	}
+	protected void initialize() {
+		// turns on motor only if limit switch isn't pressed or current limit not
+		// exceeded
+		if (Robot.cuberSys.checkLowerSwitch()
+				|| Robot.cuberSys.getWindowMotorCurrent() >= Robot.cuberSys.currentLimit) {
+			Robot.cuberSys.setLiftMotor(0);
+		} else {
+			Robot.cuberSys.setLiftMotor(speedLower);
+		}
+	} 
 
 	protected void execute() {
 
@@ -27,14 +32,13 @@ public class LowerFlipperCommand extends Command {
 
 	}
 
-	protected boolean isFinished() { // returns true if motor turns over or equal to 90 degrees or when flywheel
-										// motors exceed max amp
-
-		return (Robot.cuberSys.getDegrees() >= 90
-				|| Robot.cuberSys.getRightFlywheelCurrent() >= Robot.cuberSys.currentLimit)
-				|| Robot.cuberSys.getLeftFlywheelCurrent() >= Robot.cuberSys.currentLimit; // returns true if motor
-																							// turns over or equal to 90
-																							// degrees
+	/**
+	 * prevents stalling by shutting off window motor when lower switch is on or
+	 * motor amps exceed limit
+	 */
+	protected boolean isFinished() {
+		return (Robot.cuberSys.checkLowerSwitch()
+				|| Robot.cuberSys.getWindowMotorCurrent() >= Robot.cuberSys.currentLimit);
 
 	}
 
@@ -50,3 +54,10 @@ public class LowerFlipperCommand extends Command {
 
 	}
 }
+
+// return (Robot.cuberSys.getDegrees() >= 90
+// || Robot.cuberSys.getRightFlywheelCurrent() >= Robot.cuberSys.currentLimit)
+// || Robot.cuberSys.getLeftFlywheelCurrent() >= Robot.cuberSys.currentLimit; //
+// returns true if motor
+// turns over or equal to 90
+// degrees
