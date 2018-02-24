@@ -103,6 +103,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("yaw", Navx.getInstance().getYaw());
 		SmartDashboard.putNumber("roll", Navx.getInstance().getRoll());
 		Scheduler.getInstance().run();
+		System.out.println(Robot.vertSys.getBeamBreak());
 	}
 
 	@Override

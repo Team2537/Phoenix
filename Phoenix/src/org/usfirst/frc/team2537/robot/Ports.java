@@ -48,6 +48,9 @@ public class Ports {
 
 	// Limit Switch
 	public static final int VERT_LIMIT_SWITCH = 2;
+	
+	//Beam Break Sensors
+	public static final int VERT_BEAM_BREAK_RECEIVER = 2;
 
 	// Raspberry Pi
 	public static final edu.wpi.first.wpilibj.SerialPort.Port RASPI = Port.kMXP;
