@@ -3,6 +3,7 @@ package org.usfirst.frc.team2537.robot.auto.vision;
 import org.usfirst.frc.team2537.robot.Ports;
 
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.command.Command;
 
 public class VisionInput {
 	public final boolean DEBUG = true;
@@ -16,6 +17,16 @@ public class VisionInput {
 		serial = new SerialPort(BAUDRATE, Ports.RASPI);
 		buffer = "";
 		lastCompletedString = "";
+		new Command(){
+			@Override
+			protected void execute() {
+				addToBuffer();
+			}
+			@Override
+			protected boolean isFinished() {
+				return false;
+			}
+		}.start();
 	}
 
 	public Target[] getVisionPacket() {
