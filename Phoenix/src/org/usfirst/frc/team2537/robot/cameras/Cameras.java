@@ -12,7 +12,6 @@ public class Cameras extends Thread {
 	
 	private CvSink cvSink;
 	private UsbCamera cam0;
-
 	private CvSource outputStream;
 	private Mat source;
 	

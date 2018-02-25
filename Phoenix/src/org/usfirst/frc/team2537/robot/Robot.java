@@ -58,8 +58,8 @@ public class Robot extends IterativeRobot {
 
 	//  visionSerial = new VisionInput();
 	
-		cameras = new Cameras();
-		cameras.start();
+	/*	cameras = new Cameras();
+		cameras.start();*/
 		
 		pdp = new PowerDistributionPanel();
 		
