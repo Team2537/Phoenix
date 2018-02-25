@@ -48,17 +48,17 @@ public class DriveSubsystem extends Subsystem {
 	/******************************************************************************/
 
 	public DriveSubsystem() {
-		talonFrontLeft = new TalonSRX(Ports.FRONT_LEFT_MOTOR);
-		talonFrontRight = new TalonSRX(Ports.FRONT_RIGHT_MOTOR);
-		talonBackLeft = new TalonSRX(Ports.BACK_LEFT_MOTOR);
-		talonBackRight = new TalonSRX(Ports.BACK_RIGHT_MOTOR);
+		talonFrontLeft = new TalonSRX(Ports.FRONT_LEFT_DRIVE_MOTOR);
+		talonFrontRight = new TalonSRX(Ports.FRONT_RIGHT_DRIVE_MOTOR);
+		talonBackLeft = new TalonSRX(Ports.BACK_LEFT_DRIVE_MOTOR);
+		talonBackRight = new TalonSRX(Ports.BACK_RIGHT_DRIVE_MOTOR);
 
 		talonFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		talonBackLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		
-		//ultrasonic = new Ultrasonic(Ports.ULTRASONIC_PING, Ports.ULTRASONIC_ECHO);
+		ultrasonic = new Ultrasonic(Ports.DRIVE_ULTRASONIC_TRIGGER, Ports.DRIVE_ULTRASONIC_ECHO);
 	}
 
 	/******************************************************************************/

@@ -14,7 +14,7 @@ public class Ports {
 
 	public static final int CLIMB_ON_BUTTON = 5, CLIMB_OFF_BUTTON = 4;
 
-	public static final int OVERRIDE_KEY_ONE = 6, OVERRIDE_KEY_TWO = 7;
+	public static final int OVERRIDE_KEY_ONE = 11, OVERRIDE_KEY_TWO = 10;
 
 	public static final int RAMP_LOWER_BUTTON = 8, RAMP_RAISE_BUTTON = 9;
 
@@ -29,14 +29,14 @@ public class Ports {
 
 	public static final int FLYWHEEL_MOTOR_LEFT = 7, FLYWHEEL_MOTOR_RIGHT = 8;
 
-	public static final int WINDOW_MOTOR = 6;
+	public static final int FLIPPER_WINDOW_MOTOR = 6;
+	
+	public static final int FRONT_LEFT_DRIVE_MOTOR = 0, FRONT_RIGHT_DRIVE_MOTOR = 1, 
+							BACK_LEFT_DRIVE_MOTOR = 2, BACK_RIGHT_DRIVE_MOTOR = 3;
 
 	// Talons
 
 	public static final int CLIMB_MOTOR_ONE = 1, CLIMB_MOTOR_TWO = 2, CLIMB_MOTOR_THREE = 0;
-
-	// Drive Motors
-	public static final int FRONT_LEFT_MOTOR = 0, FRONT_RIGHT_MOTOR = 1, BACK_LEFT_MOTOR = 2, BACK_RIGHT_MOTOR = 3;
 
 	// Servo
 	public static final int RAMP_SERVO = 9;
@@ -49,11 +49,15 @@ public class Ports {
 	// Ultrasonic
 	public static final int CUBER_ULTRASONIC_TRIGGER = 4, CUBER_ULTRASONIC_ECHO = 3, CUBER_FAKE_ULTRASONIC = 9;
 
+	public static final int DRIVE_ULTRASONIC_TRIGGER = 1, DRIVE_ULTRASONIC_ECHO = 0;
 	// analog
 	public static final int CUBER_IR = 0;
 
 	// Limit Switch
 	public static final int VERT_LIMIT_SWITCH = 2;
+	
+	//Beam Break Sensors
+	public static final int VERT_BEAM_BREAK_RECEIVER = 2;
 
 	// Raspberry Pi
 	public static final edu.wpi.first.wpilibj.SerialPort.Port RASPI = Port.kMXP;
@@ -70,6 +74,6 @@ public class Ports {
 	public static final int FRONT_RIGHT_PDP = 13, FRONT_LEFT_PDP = 12, BACK_RIGHT_PDP = 14, BACK_LEFT_PDP = 15;
 
 	//Camera Ports
-	
 	public static final int CAMERA_PORT = 0;
+	
 }

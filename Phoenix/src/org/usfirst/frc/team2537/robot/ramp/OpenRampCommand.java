@@ -22,16 +22,17 @@ public class OpenRampCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 	
 	@Override
 	protected void end() {
-		
+		Robot.rampSys.isOpen = true;
 	}
 	
 	@Override
 	protected void interrupted() {
+		end();
 		
 	}
 

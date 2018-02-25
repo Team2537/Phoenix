@@ -6,23 +6,17 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ExpelCommand extends Command {
 	private long startTime;
-	private final boolean isFast;
+	private final double percentOutput;
 	
-	public ExpelCommand(boolean isFast) {
+	public ExpelCommand(double percentOutput) {
 		requires(Robot.cuberSys); //requires variables and methods form cuberSys
-		this.isFast = isFast;
+		this.percentOutput = percentOutput;
 	}
 	
 	@Override
 	protected void initialize() {
-		if (isFast) {
-			Robot.cuberSys.setFlywheelMotors(-0.8); // sets speed to reverse to expel out cube
+			Robot.cuberSys.setFlywheelMotors(-percentOutput); // sets speed to reverse to expel out cube
 			startTime = System.currentTimeMillis();
-		} else {
-			Robot.cuberSys.setFlywheelMotors(-0.5);
-			startTime = System.currentTimeMillis();
-		}
-		
 	}
 	
 	@Override
