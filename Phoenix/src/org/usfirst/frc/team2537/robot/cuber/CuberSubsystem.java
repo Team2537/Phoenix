@@ -101,12 +101,12 @@ public class CuberSubsystem extends Subsystem {
 		return limitSwitchLower.get();
 	}
 	
-	public double getTimeForWindow() {
+	/*public double getTimeForWindow() {
 		return windowEnc.getPeriod();
 	}
 	
 //BELOW COULD BE USED ONLY IF WE DONT HAVE SENSORS TO TURN WINDOW MOTOR ARM TO 90 DEGREES
-	/*
+	
 	public double getTimefor90Degrees() { //this calculates time needed for arm to move from 0 degrees to 90 degrees in case we don't have sensors or stuff
 		return ((radius*2*PI)/4)/speedLift; 
 	}
