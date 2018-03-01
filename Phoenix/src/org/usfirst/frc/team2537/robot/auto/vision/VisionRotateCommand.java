@@ -61,12 +61,13 @@ public class VisionRotateCommand extends Command {
 			power = Math.min(Math.abs(power), Math.abs(centerX*power*CENTER_kP)) * Math.signum(centerX);
 		}
 		
-		Robot.driveSys.setMotors( power,  Motor.LEFT);
-		Robot.driveSys.setMotors(-power, Motor.RIGHT);
+//		Robot.driveSys.setMotors( power,  Motor.LEFT);
+//		Robot.driveSys.setMotors(-power, Motor.RIGHT);
 	}
 
 	@Override
 	protected boolean isFinished() {
+		System.out.println("centerX: " + centerX);
 		return stopAtTarget && Math.abs(centerX) < TURNING_TOLERANCE;
 	}
 
