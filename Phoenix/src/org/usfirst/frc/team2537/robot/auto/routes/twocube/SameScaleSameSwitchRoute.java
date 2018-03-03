@@ -5,7 +5,7 @@ import org.usfirst.frc.team2537.robot.auto.RotateCommand;
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionRotateCommand;
 import org.usfirst.frc.team2537.robot.cuber.ExpelCommand;
-import org.usfirst.frc.team2537.robot.cuber.LiftFlipperCommand;
+import org.usfirst.frc.team2537.robot.cuber.LowerFlipperCommand;
 import org.usfirst.frc.team2537.robot.cuber.PickUpCommand;
 import org.usfirst.frc.team2537.robot.vert.VertDownCommand;
 import org.usfirst.frc.team2537.robot.vert.VertUpCommand;

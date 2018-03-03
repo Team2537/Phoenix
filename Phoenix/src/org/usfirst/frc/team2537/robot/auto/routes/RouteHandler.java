@@ -1,9 +1,8 @@
 package org.usfirst.frc.team2537.robot.auto.routes;
 
-import org.usfirst.frc.team2537.robot.Robot;
-
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleSameSwitchRoute;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 public class RouteHandler {
 	public static Command HandleRoute(AutoChooserOption autoChooserOption, String fmsData) {
@@ -12,7 +11,6 @@ public class RouteHandler {
 			switch(fmsCroppedConfiguration) {
 			case "LL":
 				return new SameScaleSameSwitchRoute(true);
-				break;
 			case "LR":
 				//addSequential(new SameSwitchOppositeScale(true));
 				break;
@@ -69,6 +67,8 @@ public class RouteHandler {
 		} else {
 			System.err.println("ERROR: invalid AutoChooserOption");
 		}
+		System.err.println("Something should have returned before you reach this code :(");
+		return null;
 	}
 	
 	public enum AutoChooserOption{

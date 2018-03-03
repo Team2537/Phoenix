@@ -1,9 +1,5 @@
 package org.usfirst.frc.team2537.robot.auto;
 
-import org.usfirst.frc.team2537.robot.auto.routes.LeftCoopAuto;
-import org.usfirst.frc.team2537.robot.auto.routes.LeftSoloAuto;
-import org.usfirst.frc.team2537.robot.auto.routes.RightCoopAuto;
-import org.usfirst.frc.team2537.robot.auto.routes.RightSoloAuto;
 import org.usfirst.frc.team2537.robot.auto.routes.RouteHandler.AutoChooserOption;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
