@@ -7,13 +7,20 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class VertDownCommand extends Command {
 
+	private final double targetDistance;
 
 	public VertDownCommand() {
-		requires(Robot.vertSys);
+		this(-1);
+	}
+	
+	public VertDownCommand(int targetDistance) {
+		requires(Robot.driveSys);
+		this.targetDistance = Math.abs(targetDistance);
 	}
 
 	@Override
 	protected void initialize() {
+		Robot.vertSys.resetEncoder();
 		Robot.vertSys.setVertMotors(-.7);
 	}
 
@@ -23,7 +30,7 @@ public class VertDownCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return (targetDistance > 0 && -Robot.vertSys.getEncoderPos() >= targetDistance);
 	}
 
 	@Override

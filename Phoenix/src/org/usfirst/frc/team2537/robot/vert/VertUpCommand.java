@@ -18,7 +18,6 @@ public class VertUpCommand extends Command {
 	}
 
 	protected void initialize() {
-		System.out.println("also hi");
 		Robot.vertSys.resetEncoder();
 		Robot.vertSys.setVertMotors(0);
 		if (!Robot.vertSys.getLimitSwitch())
