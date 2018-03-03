@@ -8,23 +8,8 @@ public class VertDownCommand extends Command {
 
 	private static final int AMP_LIMIT = 5;  //5 amps HECKKA TBD
 	
-	// PID Loop
-	private double kp = .01;
-	private double ki = 0;
-	private double kd = 0;
-	private double integralActivityZone = 2;
-
-	private double computedSpeed;
-	private double totalError;
-	private double currentError;
-	private double lastError;
-	private double proportionTerm;
-	private double integralTerm;
-	private double derivativeTerm;
-	
 	public VertDownCommand() {
 		requires(Robot.vertSys);
-		currentError = -0.8 + Robot.vertSys.getCurrentOne();
 
 	}
 
@@ -39,41 +24,15 @@ public class VertDownCommand extends Command {
 		if (Robot.vertSys.getCurrentOne() >= AMP_LIMIT) {
 			Robot.vertSys.setVertMotors(0);
 		} else {
-			Robot.vertSys.setVertMotors(-600);
+			Robot.vertSys.setVertMotors(-Robot.vertSys.targetVelocity);
 		}	
 		//stops bot when it exceeds amp limit for channel 4
 		if (Robot.vertSys.getCurrentTwo() >= AMP_LIMIT) {
-			Robot.vertSys.setVertMotors(-600);
+			Robot.vertSys.setVertMotors(0);
 		} else {
-			Robot.vertSys.setVertMotors(0.8);
+			Robot.vertSys.setVertMotors(-Robot.vertSys.targetVelocity);
 		}	
 		
-		while(true) {
-
-			// Placing limits on Integral term so it doesn't go wild
-			if (lastError < integralActivityZone && lastError != 0) {
-				totalError += lastError;
-			} else {
-				totalError = 0;
-			}
-			// Places cap on how large the integral term can be
-			if (totalError >= 50 / ki) {
-				totalError = 50 / ki;
-			}
-			if (lastError == 0) {
-				derivativeTerm = 0;
-			}
-
-			proportionTerm = lastError * kp;
-			integralTerm = totalError * ki;
-			derivativeTerm = (currentError - lastError) * kd;
-			// reset for next loop
-			lastError = currentError;
-
-			computedSpeed = proportionTerm + derivativeTerm + integralTerm;
-			Robot.vertSys.setVertMotors(computedSpeed);
-
-		}
 		
 	}
 
