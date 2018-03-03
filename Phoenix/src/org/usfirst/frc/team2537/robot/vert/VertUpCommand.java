@@ -32,6 +32,8 @@ public class VertUpCommand extends Command {
 		} else {
 			Robot.vertSys.setVertMotors(Robot.vertSys.targetVelocity);
 		}
+		
+		
 	}
 
 	protected boolean isFinished() {

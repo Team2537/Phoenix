@@ -22,7 +22,7 @@ public class VertSubsystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
-	
+	private Encoder vertEnc;
 	private TalonSRX vertMotorOne;
 	private TalonSRX vertMotorTwo;
 	private PowerDistributionPanel PDP;
@@ -36,7 +36,7 @@ public class VertSubsystem extends Subsystem {
 							//(23 in./5s) x (1 rad/1in.) x (1 rev/2Pi rad) x (360 ticks/1 rev) x (1 s/10 100 ms)
 
 	public VertSubsystem() {
-		
+		vertEnc = new Encoder(Ports.VERT_ENC_A, 1, false, Encoder.EncodingType.k4X);
 		vertMotorOne = new TalonSRX(Ports.VERT_MOTOR_ONE);
 		vertMotorTwo = new TalonSRX(Ports.VERT_MOTOR_TWO);
 		PDP = new PowerDistributionPanel(Ports.PDP);
@@ -84,11 +84,16 @@ public class VertSubsystem extends Subsystem {
 		return PDP.getCurrent(Ports.VERT_MOTOR_TWO_PDP_CHANNEL);
 
 	}
+	
+	public double getDistanceToBottom() {
+		return vertEnc.getDistance();
+
+	}
 
 	//things that need work
 	//is setVertMotors method correct?
 	//merge both up and down into one method
-	//possibly don't set it completely to 
+	//possibly don't set it completely to 0 when it comes down
 	//check PID values through testing or calculations
 	
 }

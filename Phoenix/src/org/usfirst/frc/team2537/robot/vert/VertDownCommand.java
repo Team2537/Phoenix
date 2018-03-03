@@ -32,9 +32,12 @@ public class VertDownCommand extends Command {
 		} else {
 			Robot.vertSys.setVertMotors(-Robot.vertSys.targetVelocity);
 		}	
-		
-		
-	}
+		if (Robot.vertSys.getDistanceToBottom() >= 20) { //stops bot when vert gets too close bottom (prevents locking)
+			Robot.vertSys.setVertMotors(0);
+		} else {
+			Robot.vertSys.setVertMotors(-Robot.vertSys.targetVelocity);
+		}	
+}
 
 	@Override
 	protected boolean isFinished() {
