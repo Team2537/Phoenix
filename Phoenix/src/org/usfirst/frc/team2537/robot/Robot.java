@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2537.robot;
 
+import java.util.Arrays;
+
 import org.usfirst.frc.team2537.robot.auto.AutoChooser;
 import org.usfirst.frc.team2537.robot.auto.Navx;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
@@ -29,7 +31,7 @@ public class Robot extends IterativeRobot {
 
 	public static PowerDistributionPanel pdp;
 
-	public static SmartDashboard smartDashboard;
+//	public static SmartDashboard smartDashboard;
 	public static VisionInput visionSerial;
 
 	public static long startTime;
@@ -39,32 +41,32 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void robotInit() {
-		driveSys = new DriveSubsystem();
-		driveSys.initDefaultCommand();
-		driveSys.resetEncoders();
-
-		smartDashboard = new SmartDashboard();
-		Navx.getInstance().reset();
-
-
-		vertSys = new VertSubsystem();
-		vertSys.registerButtons();
-
-		climbSys = new ClimbSubsystem();
-		climbSys.registerButtons();
-
-		rampSys = new RampSubsystem();
-		rampSys.registerButtons();
-
-		cuberSys = new CuberSubsystem();
-		cuberSys.registerButtons();
+//		driveSys = new DriveSubsystem();
+//		driveSys.initDefaultCommand();
+//		driveSys.resetEncoders();
+//
+//		smartDashboard = new SmartDashboard();
+//		Navx.getInstance().reset();
+//
+//
+//		vertSys = new VertSubsystem();
+//		vertSys.registerButtons();
+//
+//		climbSys = new ClimbSubsystem();
+//		climbSys.registerButtons();
+//
+//		rampSys = new RampSubsystem();
+//		rampSys.registerButtons();
+//
+//		cuberSys = new CuberSubsystem();
+//		cuberSys.registerButtons();
 
 		visionSerial = new VisionInput();
 
-		cameras = new Cameras();
-		cameras.start();
+//		cameras = new Cameras();
+//		cameras.start();
 
-		pdp = new PowerDistributionPanel();
+//		pdp = new PowerDistributionPanel();
 
 //		autoChooser = new AutoChooser();
 //		SmartDashboard.putData("Auto Choices", autoChooser);
@@ -73,23 +75,26 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousInit() {
-		Scheduler.getInstance().removeAll();
-
-		final int FMS_TIMEOUT=2; //num of seconds to wait before giving up on FMS
-		long startTime=System.currentTimeMillis();
-		while (DriverStation.getInstance().getGameSpecificMessage().length()==0 &&
-				System.currentTimeMillis()-startTime < FMS_TIMEOUT*1000);
-		fmsData=DriverStation.getInstance().getGameSpecificMessage();
-		if (fmsData.length()==0)
-			fmsData="OOO"; //if we can't get FMS data within 2 seconds, make dummy data
-
-//		Scheduler.getInstance().add(autoChooser.getSelected());
-		Scheduler.getInstance().add(new VisionRotateCommand());
+//		Scheduler.getInstance().removeAll();
+//
+//		final int FMS_TIMEOUT=2; //num of seconds to wait before giving up on FMS
+//		long startTime=System.currentTimeMillis();
+//		while (DriverStation.getInstance().getGameSpecificMessage().length()==0 &&
+//				System.currentTimeMillis()-startTime < FMS_TIMEOUT*1000);
+//		fmsData=DriverStation.getInstance().getGameSpecificMessage();
+//		if (fmsData.length()==0)
+//			fmsData="OOO"; //if we can't get FMS data within 2 seconds, make dummy data
+//
+////		Scheduler.getInstance().add(autoChooser.getSelected());
+//		Scheduler.getInstance().add(new VisionRotateCommand());
 	}
 
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		if (visionSerial.getVisionPacket().length!=0) {
+			SmartDashboard.putString("center", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().toString());
+		}
 	}
 
 	@Override
@@ -97,7 +102,7 @@ public class Robot extends IterativeRobot {
 //		Robot.vertSys.resetEncoder();
 		Scheduler.getInstance().removeAll();
 		Navx.getInstance().reset();
-		Robot.driveSys.resetEncoders();
+//		Robot.driveSys.resetEncoders();
 		startTime = System.currentTimeMillis();
 	}
 
@@ -108,9 +113,9 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("yaw", Navx.getInstance().getYaw());
 		SmartDashboard.putNumber("roll", Navx.getInstance().getRoll());
 		Scheduler.getInstance().run();
-		if(Robot.rampSys.isOpen) {
-			SmartDashboard.putString("Ramp is Open", "THE RAMP IS OPEN YOU SURE YOU WANT THIS");
-		}
+//		if(Robot.rampSys.isOpen) {
+//			SmartDashboard.putString("Ramp is Open", "THE RAMP IS OPEN YOU SURE YOU WANT THIS");
+//		}
 //		System.out.println(Robot.vertSys.getBeamBreak());
 	}
 
