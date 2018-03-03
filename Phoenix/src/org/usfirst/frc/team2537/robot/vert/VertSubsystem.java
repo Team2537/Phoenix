@@ -16,7 +16,6 @@ public class VertSubsystem extends Subsystem {
 	private CANTalon vertMotorTwo;
 	private DigitalInput limitSwitch;
 	double current;
-	private DigitalInput vertBeamBreak;
 
 	public VertSubsystem() { 
 		vertMotorOne = new CANTalon(Ports.VERT_MOTOR_ONE);
@@ -28,7 +27,6 @@ public class VertSubsystem extends Subsystem {
 		vertMotorTwo.follow(vertMotorOne);
 		
 		limitSwitch = new DigitalInput(Ports.VERT_LIMIT_SWITCH);
-		vertBeamBreak = new DigitalInput(Ports.VERT_BEAM_BREAK_RECEIVER);
 	}
 
 	public void initDefaultCommand() {
@@ -60,8 +58,4 @@ public class VertSubsystem extends Subsystem {
 		return limitSwitch.get();
 	}
 	
-	public boolean getBeamBreak() {
-		return vertBeamBreak.get();
-	}
-
 }

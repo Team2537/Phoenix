@@ -3,12 +3,14 @@ package org.usfirst.frc.team2537.robot;
 import org.usfirst.frc.team2537.robot.auto.AutoChooser;
 import org.usfirst.frc.team2537.robot.auto.Navx;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
+import org.usfirst.frc.team2537.robot.auto.vision.VisionRotateCommand;
 import org.usfirst.frc.team2537.robot.cameras.Cameras;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
 import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
 import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
 import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -57,15 +59,15 @@ public class Robot extends IterativeRobot {
 		cuberSys = new CuberSubsystem();
 		cuberSys.registerButtons();
 
-		//  visionSerial = new VisionInput();
+		visionSerial = new VisionInput();
 
 		cameras = new Cameras();
 		cameras.start();
 
 		pdp = new PowerDistributionPanel();
 
-		autoChooser = new AutoChooser();
-		SmartDashboard.putData("Auto Choices", autoChooser);
+//		autoChooser = new AutoChooser();
+//		SmartDashboard.putData("Auto Choices", autoChooser);
 
 	}
 
@@ -81,7 +83,8 @@ public class Robot extends IterativeRobot {
 		if (fmsData.length()==0)
 			fmsData="OOO"; //if we can't get FMS data within 2 seconds, make dummy data
 
-		Scheduler.getInstance().add(autoChooser.getSelected());
+//		Scheduler.getInstance().add(autoChooser.getSelected());
+		Scheduler.getInstance().add(new VisionRotateCommand());
 	}
 
 	@Override
@@ -91,7 +94,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		Robot.vertSys.resetEncoder();
+//		Robot.vertSys.resetEncoder();
 		Scheduler.getInstance().removeAll();
 		Navx.getInstance().reset();
 		Robot.driveSys.resetEncoders();
@@ -108,7 +111,7 @@ public class Robot extends IterativeRobot {
 		if(Robot.rampSys.isOpen) {
 			SmartDashboard.putString("Ramp is Open", "THE RAMP IS OPEN YOU SURE YOU WANT THIS");
 		}
-		System.out.println(Robot.vertSys.getBeamBreak());
+//		System.out.println(Robot.vertSys.getBeamBreak());
 	}
 
 	@Override
