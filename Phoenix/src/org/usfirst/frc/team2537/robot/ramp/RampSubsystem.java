@@ -27,11 +27,15 @@ public class RampSubsystem extends Subsystem {
 	}
 
 	public void lowerRampServo() {
-		rampServo.setAngle(90);
+		rampServo.setAngle(-100);
 	}
 
 	public void raiseRampServo() {
-		rampServo.setAngle(0);
+		rampServo.setAngle(100);
+	}
+	
+	public void stopServo() {
+		rampServo.setDisabled();
 	}
 	
 }

@@ -7,17 +7,20 @@ import org.usfirst.frc.team2537.robot.resources.CANTalon;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CuberSubsystem extends Subsystem {
 	private CANTalon flywheelMotorLeft; 
 	private CANTalon flywheelMotorRight;
 	private CANTalon liftMotor;
+	private DigitalInput flipperHolifaxOne;
+	private DigitalInput flipperHolifaxTwo;
 	private UltrasonicWrapper ultrasonic;
 	public static final double FLYWHEEL_SPEED = .5;
 	public static final double FLYWHEEL_CURRENT_LIMIT = 35; // TODO: determine max amps
 	public static final double CUTOFF_DISTANCE = 2; // TODO: determine cutoff distance
-	public static final int ULTRASONIC_RANGE = 3;
+	public static final int ULTRASONIC_RANGE = 6;
 	public static final double FLIPPER_TIMEOUT = 5000; //TODO: Figure this one out
 	
 
@@ -28,8 +31,9 @@ public class CuberSubsystem extends Subsystem {
 		liftMotor = new CANTalon(Ports.FLIPPER_WINDOW_MOTOR);	
 		ultrasonic = new UltrasonicWrapper(Ports.CUBER_ULTRASONIC_TRIGGER, Ports.CUBER_ULTRASONIC_ECHO, 
 				Ports.CUBER_FAKE_ULTRASONIC);
+		flipperHolifaxOne = new DigitalInput(Ports.FLIPPER_HOLIFAX_ONE);
+		flipperHolifaxTwo = new DigitalInput(Ports.FLIPPER_HOLIFAX_TW0);
 		
-		liftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
 		liftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
 		
 		liftMotor.overrideLimitSwitchesEnable(true);
@@ -76,6 +80,14 @@ public class CuberSubsystem extends Subsystem {
 	
 	public double getFlipperVoltage() {
 		return liftMotor.getMotorOutputVoltage();
+	}
+	
+	public boolean getHolifaxOne() {
+		return flipperHolifaxOne.get();
+	}
+	
+	public boolean getHolifaxTwo() {
+		return flipperHolifaxTwo.get();
 	}
 	
 }

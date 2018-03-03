@@ -6,13 +6,14 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class OpenRampCommand extends Command {
 	
+	
 	public OpenRampCommand() {
 		requires(Robot.rampSys);
 	}
 	
 	@Override
 	protected void initialize() {
-		Robot.rampSys.lowerRampServo();
+		System.out.println("trying to lower");
 	}
 	
 	@Override
@@ -28,11 +29,12 @@ public class OpenRampCommand extends Command {
 	@Override
 	protected void end() {
 		Robot.rampSys.isOpen = true;
+		Robot.rampSys.lowerRampServo();
 	}
 	
 	@Override
 	protected void interrupted() {
-		end();
+		Robot.rampSys.stopServo();
 		
 	}
 

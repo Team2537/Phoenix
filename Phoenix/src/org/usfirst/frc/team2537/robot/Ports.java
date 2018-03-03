@@ -38,7 +38,7 @@ public class Ports {
 
 	public static final int CLIMB_MOTOR_ONE = 1, CLIMB_MOTOR_TWO = 2, CLIMB_MOTOR_THREE = 0;
 
-	// Servo
+	// Servo 
 	public static final int RAMP_SERVO = 9;
 
 	/********** Sensors **********/
@@ -47,17 +47,20 @@ public class Ports {
 	public static final int LIFT_ENCODER_A = 1, LIFT_ENCODER_B = 2;
 
 	// Ultrasonic
-	public static final int CUBER_ULTRASONIC_TRIGGER = 4, CUBER_ULTRASONIC_ECHO = 3, CUBER_FAKE_ULTRASONIC = 9;
+	public static final int CUBER_ULTRASONIC_TRIGGER = 4, CUBER_ULTRASONIC_ECHO = 5, CUBER_FAKE_ULTRASONIC = 9;
 
 	public static final int DRIVE_ULTRASONIC_TRIGGER = 1, DRIVE_ULTRASONIC_ECHO = 0;
-	// analog
-	public static final int CUBER_IR = 0;
 
+	//Holifax
+	public static final int FLIPPER_HOLIFAX_ONE = 6, FLIPPER_HOLIFAX_TW0 = 7;
+	
 	// Limit Switch
 	public static final int VERT_LIMIT_SWITCH = 2;
 	
 	// Raspberry Pi
 	public static final edu.wpi.first.wpilibj.SerialPort.Port RASPI = Port.kMXP;
+	
+ 
 	
 	/********* Miscellaneous ********/
 

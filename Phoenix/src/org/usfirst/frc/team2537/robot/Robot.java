@@ -59,15 +59,15 @@ public class Robot extends IterativeRobot {
 		cuberSys = new CuberSubsystem();
 		cuberSys.registerButtons();
 
-		visionSerial = new VisionInput();
+//		visionSerial = new VisionInput();
 
 		cameras = new Cameras();
 		cameras.start();
 
 		pdp = new PowerDistributionPanel();
 
-//		autoChooser = new AutoChooser();
-//		SmartDashboard.putData("Auto Choices", autoChooser);
+		autoChooser = new AutoChooser();
+		SmartDashboard.putData("Auto Choices", autoChooser);
 
 	}
 
@@ -111,7 +111,7 @@ public class Robot extends IterativeRobot {
 		if(Robot.rampSys.isOpen) {
 			SmartDashboard.putString("Ramp is Open", "THE RAMP IS OPEN YOU SURE YOU WANT THIS");
 		}
-//		System.out.println(Robot.vertSys.getBeamBreak());
+		System.out.println(Robot.cuberSys.getUltrasonicInches());
 	}
 
 	@Override

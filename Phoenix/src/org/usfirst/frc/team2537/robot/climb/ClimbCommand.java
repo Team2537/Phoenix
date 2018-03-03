@@ -35,7 +35,7 @@ public class ClimbCommand extends Command {
 		Robot.climbSys.setClimbMotors(0);
 	}
 
-protected void interrupted() {
+	protected void interrupted() {
 		Robot.climbSys.setClimbMotors(0);
 	}
 }

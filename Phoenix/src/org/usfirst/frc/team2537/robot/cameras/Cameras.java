@@ -23,7 +23,7 @@ public class Cameras extends Thread {
 		cam0.setFPS(12);
 		CameraServer.getInstance().addCamera(cam0);
 		cvSink = CameraServer.getInstance().getVideo(cam0);
-		outputStream = CameraServer.getInstance().putVideo("cams", 640, 480);
+		outputStream = CameraServer.getInstance().putVideo("cams", 320, 240);
 	}
 	
 	

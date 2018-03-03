@@ -6,12 +6,14 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class CloseRampCommand extends Command {
 	
+	
 	public CloseRampCommand() {
 		requires(Robot.rampSys);
 	}
 	
 	@Override
 	protected void initialize() {
+		System.out.println("trying to close");
 		Robot.rampSys.raiseRampServo();
 		
 	}
@@ -29,12 +31,13 @@ public class CloseRampCommand extends Command {
 	@Override
 	protected void end() {
 		Robot.rampSys.isOpen = false;
+		Robot.rampSys.raiseRampServo();
 		
 	}
 	
 	@Override
 	protected void interrupted() {
-		end();
+		Robot.rampSys.stopServo();
 	}
 
 }
