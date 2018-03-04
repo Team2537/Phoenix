@@ -107,11 +107,12 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("pitch", Navx.getInstance().getPitch());
 		SmartDashboard.putNumber("yaw", Navx.getInstance().getYaw());
 		SmartDashboard.putNumber("roll", Navx.getInstance().getRoll());
+		SmartDashboard.putNumber("Cuber Ultrasonic", Robot.cuberSys.getUltrasonicInches());
 		Scheduler.getInstance().run();
 		if(Robot.rampSys.isOpen) {
 			SmartDashboard.putString("Ramp is Open", "THE RAMP IS OPEN YOU SURE YOU WANT THIS");
 		}
-		System.out.println(Robot.cuberSys.getUltrasonicInches());
+		Robot.cuberSys.updateUltrasonic();
 	}
 
 	@Override

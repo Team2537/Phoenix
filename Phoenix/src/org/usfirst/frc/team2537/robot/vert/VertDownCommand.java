@@ -14,7 +14,7 @@ public class VertDownCommand extends Command {
 
 	@Override
 	protected void initialize() {
-		Robot.vertSys.setVertMotors(-.7);
+		Robot.vertSys.setVertMotors(-.6);
 	}
 
 	@Override

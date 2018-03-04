@@ -14,8 +14,8 @@ public class CuberSubsystem extends Subsystem {
 	private CANTalon flywheelMotorLeft; 
 	private CANTalon flywheelMotorRight;
 	private CANTalon liftMotor;
-	private DigitalInput flipperHolifaxOne;
-	private DigitalInput flipperHolifaxTwo;
+	private DigitalInput flipperHallEffectOne;
+	private DigitalInput flipperHallEffectTwo;
 	private UltrasonicWrapper ultrasonic;
 	public static final double FLYWHEEL_SPEED = .5;
 	public static final double FLYWHEEL_CURRENT_LIMIT = 35; // TODO: determine max amps
@@ -31,8 +31,8 @@ public class CuberSubsystem extends Subsystem {
 		liftMotor = new CANTalon(Ports.FLIPPER_WINDOW_MOTOR);	
 		ultrasonic = new UltrasonicWrapper(Ports.CUBER_ULTRASONIC_TRIGGER, Ports.CUBER_ULTRASONIC_ECHO, 
 				Ports.CUBER_FAKE_ULTRASONIC);
-		flipperHolifaxOne = new DigitalInput(Ports.FLIPPER_HOLIFAX_ONE);
-		flipperHolifaxTwo = new DigitalInput(Ports.FLIPPER_HOLIFAX_TW0);
+		flipperHallEffectOne = new DigitalInput(Ports.FLIPPER_HOLIFAX_ONE);
+		flipperHallEffectTwo = new DigitalInput(Ports.FLIPPER_HOLIFAX_TW0);
 		
 		liftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
 		
@@ -83,11 +83,15 @@ public class CuberSubsystem extends Subsystem {
 	}
 	
 	public boolean getHolifaxOne() {
-		return flipperHolifaxOne.get();
+		return !flipperHallEffectOne.get();
 	}
 	
 	public boolean getHolifaxTwo() {
-		return flipperHolifaxTwo.get();
+		return !flipperHallEffectTwo.get();
+	}
+	
+	public void updateUltrasonic() {
+		ultrasonic.update();
 	}
 	
 }
