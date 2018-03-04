@@ -57,8 +57,8 @@ public class VertSubsystem extends Subsystem {
 
 	// makes sure command works when button held
 	public void registerButtons() {
-		HumanInput.registerWhileHeldCommand(HumanInput.raiseButton, new VertUpCommand());
-		HumanInput.registerWhileHeldCommand(HumanInput.lowerButton, new VertDownCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.vertRaiseButton, new VertUpCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.vertLowerButton, new VertDownCommand());
 
 	}
 

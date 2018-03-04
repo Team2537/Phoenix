@@ -1,7 +1,5 @@
 package org.usfirst.frc.team2537.robot.drive;
 
-import org.usfirst.frc.team2537.robot.Ports;
-import org.usfirst.frc.team2537.robot.input.HumanInput;
 import org.usfirst.frc.team2537.robot.resources.CANTalon;
 
 import edu.wpi.first.wpilibj.Talon;
