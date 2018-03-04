@@ -11,17 +11,17 @@ import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CuberSubsystem extends Subsystem {
-	private Encoder flywheelEnc; 
+	//private Encoder flywheelEnc; 
 	private Talon flywheelMotorLeft; 
 	private Talon flywheelMotorRight;
 	private Encoder windowEnc; 
 	private Talon liftMotor; 
-	private double radius = 2; //what units?//for getTime90Degrees() method (see below)
-	private static final double PI = 3.14; //for getTime90Degrees() method (see below)
+	//private double radius = 2; //what units?//for getTime90Degrees() method (see below) 
+	//private static final double PI = 3.14; //for getTime90Degrees() method (see below) 
 	private Ultrasonic ultrasonic;
-	private DigitalInput limitSwitchLift;
-	private DigitalInput limitSwitchLower;
-	private double liftTime;
+	private DigitalInput limitSwitchLift; 
+	private DigitalInput limitSwitchLower; 
+	//private double liftTime;
 	
 	//private double speedLift;
 	//private double leftCurrent;
@@ -29,7 +29,7 @@ public class CuberSubsystem extends Subsystem {
 	 public static final double currentLimit = 134;  //constant for max amp	
 	 
 	public CuberSubsystem() { //constructors for cuberSubsys
-		flywheelEnc = new Encoder(Ports.CUBER_ENCODER_A, Ports.CUBER_ENCODER_B, false, Encoder.EncodingType.k4X);
+		//flywheelEnc = new Encoder(Ports.CUBER_ENCODER_A, Ports.CUBER_ENCODER_B, false, Encoder.EncodingType.k4X);
 		flywheelMotorLeft = new Talon(Ports.FLYWHEEL_MOTOR_LEFT);
 		flywheelMotorRight = new Talon(Ports.FLYWHEEL_MOTOR_RIGHT);
 		liftMotor = new Talon(Ports.WINDOW_MOTOR);
@@ -105,7 +105,7 @@ public class CuberSubsystem extends Subsystem {
 		return windowEnc.getPeriod();
 	}
 	
-//BELOW COULD BE USED ONLY IF WE DONT HAVE SENSORS TO TURN WINDOW MOTOR ARM TO 90 DEGREES
+//BELOW IS LAST RESORT IF WE DONT HAVE SENSORS TO TURN WINDOW MOTOR ARM TO 90 DEGREES
 	
 	public double getTimefor90Degrees() { //this calculates time needed for arm to move from 0 degrees to 90 degrees in case we don't have sensors or stuff
 		return ((radius*2*PI)/4)/speedLift; 

@@ -67,6 +67,7 @@ public class VertSubsystem extends Subsystem {
 		 vertMotorOne.set(ControlMode.Velocity, speed); //CHECK
 		 vertMotorTwo.set(ControlMode.Velocity, speed);
 	}
+	
 
 	public boolean getLimitSwitch() {
 		return limitswitch.get();
@@ -96,4 +97,5 @@ public class VertSubsystem extends Subsystem {
 	//possibly don't set it completely to 0 when it comes down
 	//check PID values through testing or calculations
 	
+	//RAISE CUBER FIRST TO PREVENT GETTING STUCK
 }

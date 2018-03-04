@@ -27,7 +27,7 @@ public class LowerFlipperCommand extends Command {
 	} 
 
 	protected void execute() {
-
+		
 		// Robot.cuberSys.getDegrees(); ?
 
 	}

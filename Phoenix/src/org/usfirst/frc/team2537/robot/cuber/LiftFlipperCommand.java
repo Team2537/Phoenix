@@ -10,6 +10,7 @@ public class LiftFlipperCommand extends Command {
 	// "this is only here and not in cuberSys because eclipse hates me" - alex
 
 	double speedLift = 0.3; // local var used for window/lift motor
+	double speedVert = .1;
 	
 	protected LiftFlipperCommand() {
 		requires(Robot.cuberSys);
@@ -25,10 +26,15 @@ public class LiftFlipperCommand extends Command {
 		} else {
 			Robot.cuberSys.setLiftMotor(-speedLift);
 		}
+		
 	} 
 	
 	protected void execute() {
-
+		if (Robot.vertSys.setVertMotors(-speed) { //whenever actuator is moving down, and close to bottom, lift motor rotates up to prevent getting stuck
+			if (Robot.vertSys.getDistanceToBottom() >= 20) {
+				Robot.cuberSys.setLiftMotor(speedVert);
+			}
+		}
 	}
 
 	protected boolean isFinished() {

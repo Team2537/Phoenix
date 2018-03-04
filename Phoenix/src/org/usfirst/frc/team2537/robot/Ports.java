@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DigitalSource;
 
 public class Ports {
 
+//vert stuff
 
 	// Joysticks
 	public static final int LEFT_JOYSTICK = 0, RIGHT_JOYSTICK = 1;
@@ -30,9 +31,7 @@ public class Ports {
 	//limit switch values
 	public static final int LIMIT_SWITCH = 0;
 	
-	
-
-
+//cuber stuff
 
 	//flywheel motors
 	public static final int FLYWHEEL_MOTOR_LEFT = 0, FLYWHEEL_MOTOR_RIGHT = 2;

@@ -33,7 +33,6 @@ public class ExpelCommand extends Command {
 		return (Robot.cuberSys.getRightFlywheelCurrent() >= Robot.cuberSys.currentLimit
 				|| Robot.cuberSys.getLeftFlywheelCurrent() >= Robot.cuberSys.currentLimit
 				|| Robot.cuberSys.getUltrasonicDistance() <= 1);
-
 	}
 
 	/**
