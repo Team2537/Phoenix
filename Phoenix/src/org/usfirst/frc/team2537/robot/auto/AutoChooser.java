@@ -10,5 +10,7 @@ public class AutoChooser extends SendableChooser<AutoChooserOption> {
 		addObject("Left With Teammate", AutoChooserOption.CO_OP_LEFT);
 		addObject("Right Solo", AutoChooserOption.SOLO_RIGHT);
 		addObject("Right With Teammate", AutoChooserOption.CO_OP_RIGHT);
+		addObject("Left Scale", AutoChooserOption.SCALE_LEFT);
+		addObject("Right Scale", AutoChooserOption.SCALE_RIGHT);
 	}
 }

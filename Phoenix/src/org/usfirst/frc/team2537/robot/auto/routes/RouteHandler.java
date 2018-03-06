@@ -1,5 +1,9 @@
 package org.usfirst.frc.team2537.robot.auto.routes;
 
+import org.usfirst.frc.team2537.robot.auto.routes.onecube.OppositeSideScaleRoute;
+import org.usfirst.frc.team2537.robot.auto.routes.onecube.OppositeSideSwitchRoute;
+import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideScaleRoute;
+import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleSameSwitchRoute;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -10,14 +14,13 @@ public class RouteHandler {
 		if(autoChooserOption == AutoChooserOption.SOLO_LEFT) {
 			switch(fmsCroppedConfiguration) {
 			case "LL":
-				return new SameScaleSameSwitchRoute(true);
+				return new SameSideSwitchRoute(true);
 			case "LR":
-				//addSequential(new SameSwitchOppositeScale(true));
-				break;
+				return new SameSideSwitchRoute(true);
 			case "RL":
-				break;
+				return new OppositeSideSwitchRoute(true);
 			case "RR":
-				break;
+				return new OppositeSideSwitchRoute(true);
 			default:
 				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
 				break;
@@ -25,13 +28,13 @@ public class RouteHandler {
 		} else if(autoChooserOption == AutoChooserOption.SOLO_RIGHT) {
 			switch(fmsCroppedConfiguration) {
 			case "LL":
-				break;
+				return new OppositeSideSwitchRoute(false);
 			case "LR":
-				break;
+				return new OppositeSideSwitchRoute(false);
 			case "RL":
-				break;
+				return new SameSideSwitchRoute(false);
 			case "RR":
-				break;
+				return new SameSideSwitchRoute(false);
 			default:
 				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
 				break;
@@ -39,13 +42,13 @@ public class RouteHandler {
 		} else if(autoChooserOption == AutoChooserOption.CO_OP_LEFT) {
 			switch(fmsCroppedConfiguration) {
 			case "LL":
-				break;
+				return new SameSideSwitchRoute(true);
 			case "LR":
-				break;
+				return new SameSideSwitchRoute(true);
 			case "RL":
-				break;
+				return new SameSideScaleRoute(true);
 			case "RR":
-				break;
+				return new OppositeSideScaleRoute(true);
 			default:
 				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
 				break;
@@ -53,13 +56,41 @@ public class RouteHandler {
 		} else if(autoChooserOption == AutoChooserOption.CO_OP_RIGHT){
 			switch(fmsCroppedConfiguration) {
 			case "LL":
-				break;
+				return new OppositeSideScaleRoute(false);
 			case "LR":
-				break;
+				return new SameSideScaleRoute(false);
 			case "RL":
-				break;
+				return new SameSideSwitchRoute(false);
 			case "RR":
+				return new SameSideSwitchRoute(false);
+			default:
+				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
 				break;
+			}
+        } else if(autoChooserOption == AutoChooserOption.SCALE_LEFT) {
+			switch(fmsCroppedConfiguration) {
+			case "LL":
+                return new SameScaleSameSwitchRoute(true);
+			case "LR":
+				return new OppositeSideScaleRoute(true);
+			case "RL":
+                return new SameSideScaleRoute(true);
+			case "RR":
+				return new OppositeSideScaleRoute(true);
+			default:
+				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
+				break;
+			}
+        } else if(autoChooserOption == AutoChooserOption.SCALE_RIGHT) {
+			switch(fmsCroppedConfiguration) {
+			case "LL":
+				return new OppositeSideScaleRoute(false);
+			case "LR":
+                return new SameSideScaleRoute(false);
+			case "RL":
+				return new OppositeSideScaleRoute(false);
+			case "RR":
+                return new SameScaleSameSwitchRoute(false);
 			default:
 				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
 				break;
@@ -75,6 +106,8 @@ public class RouteHandler {
 		SOLO_LEFT,
 		SOLO_RIGHT,
 		CO_OP_LEFT,
-		CO_OP_RIGHT
+		CO_OP_RIGHT,
+		SCALE_LEFT,
+		SCALE_RIGHT
 	}
 }
