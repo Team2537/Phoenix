@@ -13,31 +13,29 @@ public class LowerFlipperCommand extends Command {
 
 	@Override
 	protected void initialize() {
-		System.out.println("trying to lower");
-		Robot.cuberSys.setLiftMotor(-1); // initializes speed of lift motor to lower
-
-
+		if(!Robot.cuberSys.getHolifaxTwo()) {
+			Robot.cuberSys.setLiftMotor(-1); //reverses direction to lift motor upwards
+		} else {
+			Robot.cuberSys.setLiftMotor(0);
+		}
 	}
 
 	@Override
 	protected void execute() {
-
+		if(Robot.cuberSys.getHolifaxTwo()) {
+			Robot.cuberSys.setLiftMotor(0);
+		}
 	}
 
 	protected boolean isFinished() { // returns true if motor turns over or equal to 90 degrees or when flywheel
-		return false;
+		return (Robot.cuberSys.getHolifaxTwo());
 	}
 
 	protected void end() {
-
 		Robot.cuberSys.setLiftMotor(0); // sets lift motor speed to zero
-		System.out.println("hi");
-
 	}
 
 	protected void interrupted() { // sets lift motor speed to zero
-
 		Robot.cuberSys.setLiftMotor(0);
-
 	}
 }

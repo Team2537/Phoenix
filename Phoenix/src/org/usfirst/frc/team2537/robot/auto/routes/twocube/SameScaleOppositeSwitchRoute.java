@@ -17,7 +17,7 @@ public class SameScaleOppositeSwitchRoute extends CommandGroup {
 		addParallel(new LowerFlipperCommand(), Specs.FLIPPER_SCALE_LOWER_TIME);
 		addParallel(new VertUpCommand(Specs.SCALE_HEIGHT));
 		addSequential(new DriveStraightCommand(270));
-		if(left) addSequential(new RotateCommand(60);
+		if(left) addSequential(new RotateCommand(60));
 		else addSequential(new RotateCommand(-60));
 		addSequential(new ExpelCommand(.8), Specs.EXPEL_TIME);
 		
