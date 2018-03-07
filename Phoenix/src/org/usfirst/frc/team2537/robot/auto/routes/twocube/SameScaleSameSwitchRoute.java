@@ -21,17 +21,17 @@ public class SameScaleSameSwitchRoute extends CommandGroup {
 		if(left) addSequential(new RotateCommand(90));
 		else addSequential(new RotateCommand(-90));
 		
-		addSequential(new DriveStraightCommand(75));
+		addSequential(new DriveStraightCommand(85));
 		if(left) addSequential(new RotateCommand(-90));
 		else addSequential(new RotateCommand(90));
 		
-		addSequential(new DriveStraightCommand(60));
+		addSequential(new DriveStraightCommand(70));
 		if(left) addSequential(new RotateCommand(90));
 		else addSequential(new RotateCommand(-90));
 		
 		addSequential(new VisionRotateCommand());
 		addParallel(new PickUpCommand(), .8);
-		addSequential(new DriveStraightCommand(10), 1);
+		addSequential(new DriveStraightCommand(20), 1);
 		
 		addSequential(new VertUpCommand(450000));
 		addSequential(new ExpelCommand(.5));

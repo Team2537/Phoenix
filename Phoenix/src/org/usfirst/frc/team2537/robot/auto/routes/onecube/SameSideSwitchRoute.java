@@ -15,7 +15,7 @@ public class SameSideSwitchRoute extends CommandGroup {
 		if (left) addSequential(new RotateCommand(90));
 		else addSequential(new RotateCommand(-90));
 
-		addSequential(new DriveStraightCommand(-30), 0.50);
+		addSequential(new DriveStraightCommand(30), 0.50);
 		addSequential(new ExpelCommand(0.5));
 	}
 }
