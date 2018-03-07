@@ -5,6 +5,7 @@ import org.usfirst.frc.team2537.robot.auto.routes.onecube.OppositeSideSwitchRout
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.OppositeSwitchOppositeScaleRoute;
+import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleOppositeSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleSameSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameSwitchSameScaleRoute;
 
@@ -20,7 +21,7 @@ public class RouteHandler {
 			case "LR":
 				return new SameSideSwitchRoute(true);
 			case "RL":
-				return new OppositeSideSwitchRoute(true);
+				return new SameScaleOppositeSwitchRoute(true);
 			case "RR":
 				return new OppositeSwitchOppositeScaleRoute(true);
 			default:
@@ -32,7 +33,7 @@ public class RouteHandler {
 			case "LL":
 				return new OppositeSwitchOppositeScaleRoute(false);
 			case "LR":
-				return new OppositeSideSwitchRoute(false);
+				return new SameScaleOppositeSwitchRoute(false);
 			case "RL":
 				return new SameSideSwitchRoute(false);
 			case "RR":
@@ -48,7 +49,7 @@ public class RouteHandler {
 			case "LR":
 				return new SameSideSwitchRoute(true);
 			case "RL":
-				return new SameSideScaleRoute(true);
+				return new SameScaleOppositeSwitchRoute(true);
 			case "RR":
 				return new OppositeSideScaleRoute(true);
 			default:
@@ -60,7 +61,7 @@ public class RouteHandler {
 			case "LL":
 				return new OppositeSideScaleRoute(false);
 			case "LR":
-				return new SameSideScaleRoute(false);
+				return new SameScaleOppositeSwitchRoute(false);
 			case "RL":
 				return new SameSideSwitchRoute(false);
 			case "RR":
@@ -76,7 +77,7 @@ public class RouteHandler {
 			case "LR":
 				return new OppositeSideScaleRoute(true);
 			case "RL":
-                return new SameSideScaleRoute(true);
+                return new SameScaleOppositeSwitchRoute(true);
 			case "RR":
 				return new OppositeSideScaleRoute(true);
 			default:
@@ -88,7 +89,7 @@ public class RouteHandler {
 			case "LL":
 				return new OppositeSideScaleRoute(false);
 			case "LR":
-                return new SameSideScaleRoute(false);
+                return new SameScaleOppositeSwitchRoute(false);
 			case "RL":
 				return new OppositeSideScaleRoute(false);
 			case "RR":
