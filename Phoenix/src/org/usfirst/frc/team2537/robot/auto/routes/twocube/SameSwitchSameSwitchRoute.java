@@ -27,7 +27,8 @@ public class SameSwitchSameSwitchRoute extends CommandGroup {
 		addParallel(new PickUpCommand(), 2);
 		addSequential(new DriveStraightCommand(40), 2);
 		addSequential(new VertUpCommand(450000));
-		addSequential(new DriveStraightCommand(10), .2);
-		addSequential(new ExpelCommand(.5));
+		addSequential(new DriveStraightCommand(10), .5);
+		addSequential(new RotateCommand(15), .5);
+		addSequential(new ExpelCommand(.5), 1);
 	}
 }
