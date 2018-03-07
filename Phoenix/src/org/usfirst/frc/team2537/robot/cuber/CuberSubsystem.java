@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CuberSubsystem extends Subsystem {
-	//private Encoder flywheelEnc; 
+	private Encoder cuberEnc; 
 	private Talon flywheelMotorLeft; 
 	private Talon flywheelMotorRight;
-	private Encoder windowEnc; 
+//	private Encoder windowEnc; 
 	private Talon liftMotor; 
 	//private double radius = 2; //what units?//for getTime90Degrees() method (see below) 
 	//private static final double PI = 3.14; //for getTime90Degrees() method (see below) 
@@ -29,11 +29,11 @@ public class CuberSubsystem extends Subsystem {
 	 public static final double currentLimit = 134;  //constant for max amp	
 	 
 	public CuberSubsystem() { //constructors for cuberSubsys
-		//flywheelEnc = new Encoder(Ports.CUBER_ENCODER_A, Ports.CUBER_ENCODER_B, false, Encoder.EncodingType.k4X);
+		cuberEnc = new Encoder(Ports.CUBER_ENCODER_A, Ports.CUBER_ENCODER_B, false, Encoder.EncodingType.k4X);
 		flywheelMotorLeft = new Talon(Ports.FLYWHEEL_MOTOR_LEFT);
 		flywheelMotorRight = new Talon(Ports.FLYWHEEL_MOTOR_RIGHT);
 		liftMotor = new Talon(Ports.WINDOW_MOTOR);
-		windowEnc = new Encoder(Ports.LIFT_ENCODER_A, Ports.LIFT_ENCODER_B, false, Encoder.EncodingType.k4X);
+//		windowEnc = new Encoder(Ports.LIFT_ENCODER_A, Ports.LIFT_ENCODER_B, false, Encoder.EncodingType.k4X);
 		ultrasonic = new Ultrasonic(Ports.ULTRASONIC_INPUT, Ports.ULTRASONIC_OUTPUT);
 		limitSwitchLift = new DigitalInput(Ports.LIMIT_SWITCH_LIFT);
 		limitSwitchLower = new DigitalInput(Ports.LIMIT_SWITCH_LOWER);
@@ -59,21 +59,15 @@ public class CuberSubsystem extends Subsystem {
 		flywheelMotorRight.set(speed);
 	}
 	
+	public double getAngleFlipper() { //returns tick/angle of the flipper
+		return cuberEnc.get();
+	}
 
 	/**
 	 * sets window motor speed
 	 */
 	public void setLiftMotor(double speedLift) { 
 			liftMotor.set(speedLift);  			
-	}
-	
-	
-	public double getDegrees() { //returns degrees of lift/window motor
-		return windowEnc.get();
-	}
-
-	public void resetEncoder() { //resets lift motor encoder
-		windowEnc.reset();
 	}
 	
 	public double getLeftFlywheelCurrent(){ // returns amps of left flywheel motor
@@ -101,6 +95,9 @@ public class CuberSubsystem extends Subsystem {
 		return limitSwitchLower.get();
 	}
 	
+	public double getFlipperRate() {
+		return cuberEnc.getRate(); //returns speed of cuber flipper motor
+	}
 	/*public double getTimeForWindow() {
 		return windowEnc.getPeriod();
 	}

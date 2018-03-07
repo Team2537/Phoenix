@@ -34,14 +34,14 @@ public class VertSubsystem extends Subsystem {
 	private double F = 0; // f gain
 	public double targetVelocity = (23/5) * (1/1) * (1/(Math.PI*2)) * (360/1) * (1/10); //for PID loop and sets speed of motors
 							//(23 in./5s) x (1 rad/1in.) x (1 rev/2Pi rad) x (360 ticks/1 rev) x (1 s/10 100 ms)
-
+	
+	
 	public VertSubsystem() {
 		vertEnc = new Encoder(Ports.VERT_ENC_A, 1, false, Encoder.EncodingType.k4X);
 		vertMotorOne = new TalonSRX(Ports.VERT_MOTOR_ONE);
 		vertMotorTwo = new TalonSRX(Ports.VERT_MOTOR_TWO);
 		PDP = new PowerDistributionPanel(Ports.PDP);
 		limitswitch = new DigitalInput(Ports.LIMIT_SWITCH);
-		
 		vertMotorOne.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0); //PID loop main encoder on vertMotorOne; for type of feedback device, 
 		vertMotorTwo.set(ControlMode.Follower, Ports.VERT_MOTOR_ONE); //corresponds to actions of vertMotorOne
 		
@@ -86,11 +86,6 @@ public class VertSubsystem extends Subsystem {
 
 	}
 	
-	public double getDistanceToBottom() {
-		return vertEnc.getDistance();
-
-	}
-
 	//things that need work
 	//is setVertMotors method correct?
 	//merge both up and down into one method
