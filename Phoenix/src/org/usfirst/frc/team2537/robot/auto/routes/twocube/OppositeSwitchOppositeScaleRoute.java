@@ -25,7 +25,7 @@ public class OppositeSwitchOppositeScaleRoute extends CommandGroup {
 		else addSequential(new RotateCommand(-90));
 
 		addParallel(new PickUpCommand(), 1);
-		addSequential(new DriveStraightCommand(25));
+		addSequential(new DriveStraightCommand(25), 1);
 		addSequential(new VertUpCommand(450000));
 		addSequential(new DriveStraightCommand(10), .5);
 		addSequential(new ExpelCommand(.5), 1);

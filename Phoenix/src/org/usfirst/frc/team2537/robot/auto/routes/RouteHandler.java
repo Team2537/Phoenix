@@ -4,8 +4,10 @@ import org.usfirst.frc.team2537.robot.auto.routes.onecube.OppositeSideScaleRoute
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.OppositeSideSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideSwitchRoute;
+import org.usfirst.frc.team2537.robot.auto.routes.twocube.OppositeSwitchOppositeScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleSameSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameSwitchSameScaleRoute;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class RouteHandler {
@@ -20,7 +22,7 @@ public class RouteHandler {
 			case "RL":
 				return new OppositeSideSwitchRoute(true);
 			case "RR":
-				return new OppositeSideSwitchRoute(true);
+				return new OppositeSwitchOppositeScaleRoute(true);
 			default:
 				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
 				return null;
@@ -28,7 +30,7 @@ public class RouteHandler {
 		} else if(autoChooserOption == AutoChooserOption.SOLO_RIGHT) {
 			switch(fmsCroppedConfiguration) {
 			case "LL":
-				return new OppositeSideSwitchRoute(false);
+				return new OppositeSwitchOppositeScaleRoute(false);
 			case "LR":
 				return new OppositeSideSwitchRoute(false);
 			case "RL":
