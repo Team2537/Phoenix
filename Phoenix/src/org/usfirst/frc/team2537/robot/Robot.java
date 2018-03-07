@@ -2,8 +2,8 @@ package org.usfirst.frc.team2537.robot;
 
 import org.usfirst.frc.team2537.robot.auto.AutoChooser;
 import org.usfirst.frc.team2537.robot.auto.Navx;
+import org.usfirst.frc.team2537.robot.auto.routes.RouteHandler;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
-import org.usfirst.frc.team2537.robot.auto.vision.VisionRotateCommand;
 import org.usfirst.frc.team2537.robot.cameras.Cameras;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
 import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
@@ -59,7 +59,7 @@ public class Robot extends IterativeRobot {
 		cuberSys = new CuberSubsystem();
 		cuberSys.registerButtons();
 
-//		visionSerial = new VisionInput();
+		visionSerial = new VisionInput();
 
 		cameras = new Cameras();
 		cameras.start();
@@ -83,13 +83,15 @@ public class Robot extends IterativeRobot {
 		if (fmsData.length()==0)
 			fmsData="OOO"; //if we can't get FMS data within 2 seconds, make dummy data
 
-//		Scheduler.getInstance().add(autoChooser.getSelected());
-		Scheduler.getInstance().add(new VisionRotateCommand());
+		Scheduler.getInstance().add(RouteHandler.HandleRoute(autoChooser.getSelected(), fmsData));
 	}
 
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		if (visionSerial.getVisionPacket().length!=0) {
+			SmartDashboard.putString("center", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().toString());
+		}
 	}
 
 	@Override
@@ -97,7 +99,7 @@ public class Robot extends IterativeRobot {
 //		Robot.vertSys.resetEncoder();
 		Scheduler.getInstance().removeAll();
 		Navx.getInstance().reset();
-		Robot.driveSys.resetEncoders();
+//		Robot.driveSys.resetEncoders();
 		startTime = System.currentTimeMillis();
 	}
 

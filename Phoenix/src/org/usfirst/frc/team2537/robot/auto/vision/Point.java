@@ -46,6 +46,6 @@ public class Point {
 
 	@Override
 	public String toString() {
-		return "X val: " + x + " Y val: " + y + "\n";
+		return x + "," + y;
 	}
 }
