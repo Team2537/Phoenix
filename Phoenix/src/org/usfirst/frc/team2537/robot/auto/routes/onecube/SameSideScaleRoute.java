@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2537.robot.auto.routes.onecube;
 
+import org.usfirst.frc.team2537.robot.Specs;
 import org.usfirst.frc.team2537.robot.auto.DriveStraightCommand;
 import org.usfirst.frc.team2537.robot.auto.RotateCommand;
 import org.usfirst.frc.team2537.robot.cuber.ExpelCommand;
@@ -13,10 +14,10 @@ public class SameSideScaleRoute extends CommandGroup {
 		if(left) addSequential(new RotateCommand(90));
 		else addSequential(new RotateCommand(-90));
 
-		addParallel(new LowerFlipperCommand(), 0.5);
+		addParallel(new LowerFlipperCommand(), Specs.FLIPPER_SCALE_LOWER_TIME);
 		addParallel(new DriveStraightCommand(-40), 0.5);
-		addSequential(new VertUpCommand(675000));
-		addSequential(new ExpelCommand(0.8));
+		addSequential(new VertUpCommand(Specs.SCALE_HEIGHT));
+		addSequential(new ExpelCommand(0.8), Specs.EXPEL_TIME);
 	}
 }
 

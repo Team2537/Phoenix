@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2537.robot.auto.routes.twocube;
 
+import org.usfirst.frc.team2537.robot.Specs;
 import org.usfirst.frc.team2537.robot.auto.DriveStraightCommand;
 import org.usfirst.frc.team2537.robot.auto.RotateCommand;
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideSwitchRoute;
@@ -17,7 +18,7 @@ public class SameSwitchOppositeScaleRoute extends CommandGroup {
 		addSequential(new SameSideSwitchRoute(left));
 		
 		addSequential(new DriveStraightCommand(-27));
-		addParallel(new VertDownCommand(450000));
+		addParallel(new VertDownCommand(Specs.SWITCH_HEIGHT));
 		if(left) addSequential(new RotateCommand(-60));
 		else addSequential(new RotateCommand(60));
 		
@@ -28,15 +29,15 @@ public class SameSwitchOppositeScaleRoute extends CommandGroup {
 		addSequential(new DriveStraightCommand(172.5));
 		if(left) addSequential(new RotateCommand(120));
 		else addSequential(new RotateCommand(-120));
-		addSequential(new VisionRotateCommand());
+		addSequential(new VisionRotateCommand(), Specs.VISION_TIMEOUT);
 		addParallel(new PickUpCommand(), 1);
 		addSequential(new DriveStraightCommand(25), 1);
 		
-		addParallel(new LiftFlipperCommand(), 1);
-		addParallel(new VertUpCommand(675000));
+		addParallel(new LiftFlipperCommand(), Specs.FLIPPER_SCALE_LIFT_TIME);
+		addParallel(new VertUpCommand(Specs.SCALE_HEIGHT));
 		addSequential(new DriveStraightCommand(-87));
 		if(left) addSequential(new RotateCommand(90));
 		else addSequential(new RotateCommand(-90));
-		addSequential(new ExpelCommand(.8), 1);
+		addSequential(new ExpelCommand(.8), Specs.EXPEL_TIME);
 	}
 }
