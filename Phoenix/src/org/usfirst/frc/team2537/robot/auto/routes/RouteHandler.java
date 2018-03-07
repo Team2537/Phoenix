@@ -5,7 +5,7 @@ import org.usfirst.frc.team2537.robot.auto.routes.onecube.OppositeSideSwitchRout
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleSameSwitchRoute;
-
+import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameSwitchSameScaleRoute;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class RouteHandler {
@@ -14,7 +14,7 @@ public class RouteHandler {
 		if(autoChooserOption == AutoChooserOption.SOLO_LEFT) {
 			switch(fmsCroppedConfiguration) {
 			case "LL":
-				return new SameSideSwitchRoute(true);
+				return new SameSwitchSameScaleRoute(true);
 			case "LR":
 				return new SameSideSwitchRoute(true);
 			case "RL":
@@ -23,7 +23,7 @@ public class RouteHandler {
 				return new OppositeSideSwitchRoute(true);
 			default:
 				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
-				break;
+				return null;
 			}
 		} else if(autoChooserOption == AutoChooserOption.SOLO_RIGHT) {
 			switch(fmsCroppedConfiguration) {
@@ -34,15 +34,15 @@ public class RouteHandler {
 			case "RL":
 				return new SameSideSwitchRoute(false);
 			case "RR":
-				return new SameSideSwitchRoute(false);
+				return new SameSwitchSameScaleRoute(false);
 			default:
 				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
-				break;
+				return null;
 			}
 		} else if(autoChooserOption == AutoChooserOption.CO_OP_LEFT) {
 			switch(fmsCroppedConfiguration) {
 			case "LL":
-				return new SameSideSwitchRoute(true);
+				return new SameSwitchSameScaleRoute(true);
 			case "LR":
 				return new SameSideSwitchRoute(true);
 			case "RL":
@@ -51,7 +51,7 @@ public class RouteHandler {
 				return new OppositeSideScaleRoute(true);
 			default:
 				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
-				break;
+				return null;
 			}
 		} else if(autoChooserOption == AutoChooserOption.CO_OP_RIGHT){
 			switch(fmsCroppedConfiguration) {
@@ -62,10 +62,10 @@ public class RouteHandler {
 			case "RL":
 				return new SameSideSwitchRoute(false);
 			case "RR":
-				return new SameSideSwitchRoute(false);
+				return new SameSwitchSameScaleRoute(false);
 			default:
 				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
-				break;
+				return null;
 			}
         } else if(autoChooserOption == AutoChooserOption.SCALE_LEFT) {
 			switch(fmsCroppedConfiguration) {
@@ -79,7 +79,7 @@ public class RouteHandler {
 				return new OppositeSideScaleRoute(true);
 			default:
 				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
-				break;
+				return null;
 			}
         } else if(autoChooserOption == AutoChooserOption.SCALE_RIGHT) {
 			switch(fmsCroppedConfiguration) {
@@ -93,13 +93,12 @@ public class RouteHandler {
                 return new SameScaleSameSwitchRoute(false);
 			default:
 				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
-				break;
+				return null;
 			}
 		} else {
 			System.err.println("ERROR: invalid AutoChooserOption");
+			return null;
 		}
-		System.err.println("Something should have returned before you reach this code :(");
-		return null;
 	}
 	
 	public enum AutoChooserOption{

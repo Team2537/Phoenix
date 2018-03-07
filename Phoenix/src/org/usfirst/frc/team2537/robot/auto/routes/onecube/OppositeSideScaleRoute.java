@@ -17,7 +17,7 @@ public class OppositeSideScaleRoute extends CommandGroup {
 		if(left) addSequential(new RotateCommand(-90));
 		else addSequential(new RotateCommand(90));
 
-		addSequential(new DriveStraightCommand(95));
+		addSequential(new DriveStraightCommand(8));
 		if(left) addSequential(new RotateCommand(-90));
 		else addSequential(new RotateCommand(90));
 
