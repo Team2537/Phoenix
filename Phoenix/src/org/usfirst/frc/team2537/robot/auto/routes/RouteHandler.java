@@ -1,9 +1,7 @@
 package org.usfirst.frc.team2537.robot.auto.routes;
 
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.OppositeSideScaleRoute;
-import org.usfirst.frc.team2537.robot.auto.routes.onecube.OppositeSideSwitchRoute;
-import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideScaleRoute;
-import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideSwitchRoute;
+import org.usfirst.frc.team2537.robot.auto.routes.twocube.OppositeScaleOppositeSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.OppositeSwitchOppositeScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleOppositeSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleSameSwitchRoute;
@@ -52,7 +50,7 @@ public class RouteHandler {
 			case "RL":
 				return new SameScaleOppositeSwitchRoute(true);
 			case "RR":
-				return new OppositeSideScaleRoute(true);
+				return new OppositeScaleOppositeSwitchRoute(true);
 			default:
 				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
 				return null;
@@ -60,7 +58,7 @@ public class RouteHandler {
 		} else if(autoChooserOption == AutoChooserOption.CO_OP_RIGHT){
 			switch(fmsCroppedConfiguration) {
 			case "LL":
-				return new OppositeSideScaleRoute(false);
+				return new OppositeScaleOppositeSwitchRoute(false);
 			case "LR":
 				return new SameScaleOppositeSwitchRoute(false);
 			case "RL":
@@ -80,7 +78,7 @@ public class RouteHandler {
 			case "RL":
                 return new SameScaleOppositeSwitchRoute(true);
 			case "RR":
-				return new OppositeSideScaleRoute(true);
+				return new OppositeScaleOppositeSwitchRoute(true);
 			default:
 				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
 				return null;
@@ -88,7 +86,7 @@ public class RouteHandler {
         } else if(autoChooserOption == AutoChooserOption.SCALE_RIGHT) {
 			switch(fmsCroppedConfiguration) {
 			case "LL":
-				return new OppositeSideScaleRoute(false);
+				return new OppositeScaleOppositeSwitchRoute(false);
 			case "LR":
                 return new SameScaleOppositeSwitchRoute(false);
 			case "RL":
