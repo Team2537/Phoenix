@@ -9,31 +9,24 @@ import org.usfirst.frc.team2537.robot.cuber.LowerFlipperCommand;
 import org.usfirst.frc.team2537.robot.cuber.PickUpCommand;
 import org.usfirst.frc.team2537.robot.vert.VertDownCommand;
 import org.usfirst.frc.team2537.robot.vert.VertUpCommand;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class SameScaleSameSwitchRoute extends CommandGroup {
 	public SameScaleSameSwitchRoute(boolean left) {
 		addSequential(new SameSideScaleRoute(left));
-		
+
 		addParallel(new LowerFlipperCommand());
 		addParallel(new VertDownCommand(675000));
-		if(left) addSequential(new RotateCommand(90));
-		else addSequential(new RotateCommand(-90));
-		
-		addSequential(new DriveStraightCommand(85));
-		if(left) addSequential(new RotateCommand(-90));
-		else addSequential(new RotateCommand(90));
-		
-		addSequential(new DriveStraightCommand(70));
-		if(left) addSequential(new RotateCommand(90));
-		else addSequential(new RotateCommand(-90));
-		
+		if(left) addSequential(new RotateCommand(60));
+		else addSequential(new RotateCommand(-60));
+
+		addSequential(new DriveStraightCommand(95));
 		addSequential(new VisionRotateCommand());
-		addParallel(new PickUpCommand(), .8);
-		addSequential(new DriveStraightCommand(20), 1);
-		
+		addParallel(new PickUpCommand(), 1);
+		addSequential(new DriveStraightCommand(30), 1);
+
 		addSequential(new VertUpCommand(450000));
+		addSequential(new DriveStraightCommand(10), .2);
 		addSequential(new ExpelCommand(.5));
 	}
 }
