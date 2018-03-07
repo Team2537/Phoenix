@@ -7,6 +7,7 @@ import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.OppositeSwitchOppositeScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleOppositeSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleSameSwitchRoute;
+import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameSwitchOppositeScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameSwitchSameScaleRoute;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -19,7 +20,7 @@ public class RouteHandler {
 			case "LL":
 				return new SameSwitchSameScaleRoute(true);
 			case "LR":
-				return new SameSideSwitchRoute(true);
+				return new SameSwitchOppositeScaleRoute(true);
 			case "RL":
 				return new SameScaleOppositeSwitchRoute(true);
 			case "RR":
@@ -35,7 +36,7 @@ public class RouteHandler {
 			case "LR":
 				return new SameScaleOppositeSwitchRoute(false);
 			case "RL":
-				return new SameSideSwitchRoute(false);
+				return new SameSwitchOppositeScaleRoute(false);
 			case "RR":
 				return new SameSwitchSameScaleRoute(false);
 			default:
@@ -47,7 +48,7 @@ public class RouteHandler {
 			case "LL":
 				return new SameSwitchSameScaleRoute(true);
 			case "LR":
-				return new SameSideSwitchRoute(true);
+				return new SameSwitchOppositeScaleRoute(true);
 			case "RL":
 				return new SameScaleOppositeSwitchRoute(true);
 			case "RR":
@@ -63,7 +64,7 @@ public class RouteHandler {
 			case "LR":
 				return new SameScaleOppositeSwitchRoute(false);
 			case "RL":
-				return new SameSideSwitchRoute(false);
+				return new SameSwitchOppositeScaleRoute(false);
 			case "RR":
 				return new SameSwitchSameScaleRoute(false);
 			default:
