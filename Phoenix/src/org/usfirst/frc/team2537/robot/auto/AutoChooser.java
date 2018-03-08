@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 public class AutoChooser extends SendableChooser<AutoChooserOption> {
 	public AutoChooser() {
+		addDefault("Drive Straight", AutoChooserOption.DRIVE_STRAIGHT);
 		addObject("Left Solo", AutoChooserOption.SOLO_LEFT);
 		addObject("Left With Teammate", AutoChooserOption.CO_OP_LEFT);
 		addObject("Right Solo", AutoChooserOption.SOLO_RIGHT);
