@@ -6,10 +6,10 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class LowerFlipperCommand extends Command {
 
-	// this is only here and not in cuberSys because eclipse hates me
+	// this is only here and not in cuberSys because eclipse hates me - alex
 
 	double speedLower = 0.3; // local var for speed of lift/window motor
-
+	double speedLift = .1;
 	protected LowerFlipperCommand() {
 		requires(Robot.cuberSys); // requires cuberSys variables and methods
 
@@ -27,8 +27,16 @@ public class LowerFlipperCommand extends Command {
 	} 
 
 	protected void execute() {
-		
-		// Robot.cuberSys.getDegrees(); ?
+		//prevents cuber from getting stuck 
+		//by checking if vertical actuator is still moving 
+		//while cuber stops and if cuber is also horizontal
+		if (Robot.cuberSys.getFlipperRate() == 0) {
+			if (Robot.cuberSys.getAngleFlipper() >= 80 && Robot.cuberSys.getAngleFlipper() <=100) { //measures angles 
+				if (Robot.vertSys.getSpeedVertMotorOne() < 0 || Robot.vertSys.getSpeedVertMotorOne() > 0) { 
+					Robot.cuberSys.setLiftMotor(speedLift); 
+				}
+			}
+		}
 
 	}
 

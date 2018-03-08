@@ -10,7 +10,6 @@ public class LiftFlipperCommand extends Command {
 	// "this is only here and not in cuberSys because eclipse hates me" - alex
 
 	double speedLift = 0.3; // local var used for window/lift motor
-
 	
 	protected LiftFlipperCommand() {
 		requires(Robot.cuberSys);
@@ -26,17 +25,10 @@ public class LiftFlipperCommand extends Command {
 		} else {
 			Robot.cuberSys.setLiftMotor(-speedLift);
 		}
-		
-		
 	} 
 	
 	protected void execute() {
-		//every 20 milliseconds, checks whether motor is stuck and if so, raises it vertically
-		if (Robot.cuberSys.getFlipperRate() == 0 && Robot.cuberSys.checkLowerSwitch() == false) { //speed
-			if (Robot.cuberSys.getAngleFlipper() == 90) { //measures angle
-				Robot.cuberSys.setLiftMotor(speedLift); //sets motor upright when stuck
-			}
-		}
+		
 	}
 
 	protected boolean isFinished() {
@@ -59,9 +51,9 @@ public class LiftFlipperCommand extends Command {
 
 }
 
-//things that need to be done
+//things that need to be done:
 //when button is false, motor stops but keeps arm in place
 //stop it from looping back to initialized
-//use timeout in case limitswitch breaks
+//use timeout in case limit switch breaks__
 
-//if pressed, don't stop?'
+//if pressed, don't stop?

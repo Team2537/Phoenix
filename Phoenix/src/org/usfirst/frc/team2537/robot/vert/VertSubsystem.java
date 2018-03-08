@@ -86,6 +86,10 @@ public class VertSubsystem extends Subsystem {
 
 	}
 	
+	public double getSpeedVertMotorOne() {
+		return vertEnc.getRate();
+	}
+	
 	//things that need work
 	//is setVertMotors method correct?
 	//merge both up and down into one method
