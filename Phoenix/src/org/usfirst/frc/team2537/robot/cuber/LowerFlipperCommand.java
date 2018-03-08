@@ -27,16 +27,6 @@ public class LowerFlipperCommand extends Command {
 	} 
 
 	protected void execute() {
-		//prevents cuber from getting stuck 
-		//by checking if vertical actuator is still moving 
-		//while cuber stops and if cuber is also horizontal
-		if (Robot.cuberSys.getFlipperRate() == 0) {
-			if (Robot.cuberSys.getAngleFlipper() >= 80 && Robot.cuberSys.getAngleFlipper() <=100) { //measures angles 
-				if (Robot.vertSys.getSpeedVertMotorOne() < 0 || Robot.vertSys.getSpeedVertMotorOne() > 0) { 
-					Robot.cuberSys.setLiftMotor(speedLift); 
-				}
-			}
-		}
 
 	}
 
