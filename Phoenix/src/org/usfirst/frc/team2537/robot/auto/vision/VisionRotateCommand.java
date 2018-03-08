@@ -9,9 +9,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class VisionRotateCommand extends Command {
 
 	/* when the pi cannot see the target, we spin faster to try to find the target */
-	private static final double DEFAULT_PERCENT_OUTPUT = 0.3;
-	private static final double CENTER_kP = 1;
-	private static final double TURNING_TOLERANCE = 0.1;
+	private static final double DEFAULT_PERCENT_OUTPUT = 1.00;
+	private static final double CENTER_kP = 8;
+	private static final double TURNING_TOLERANCE = 0.2;
+	private static final double PI_MOUNT_OFFSET = -0.25;
 	
 	private double centerX;
 	private Side lastSide;
@@ -53,7 +54,7 @@ public class VisionRotateCommand extends Command {
 					largestTarget = target;
 				}
 			}
-			centerX = largestTarget.getBoundingBoxCenter().x / 320.0 - 1;
+			centerX = largestTarget.getBoundingBoxCenter().y / 240.0 - 1;// - PI_MOUNT_OFFSET;
 			lastSide = centerX < 0 ? Side.LEFT : Side.RIGHT;
 
 			SmartDashboard.putNumber("center", centerX);
@@ -61,14 +62,14 @@ public class VisionRotateCommand extends Command {
 			power = Math.min(Math.abs(power), Math.abs(centerX*power*CENTER_kP)) * Math.signum(centerX);
 		}
 		
-//		Robot.driveSys.setMotors( power,  Motor.LEFT);
-//		Robot.driveSys.setMotors(-power, Motor.RIGHT);
+		Robot.driveSys.setMotors(-power,  Motor.LEFT);
+		Robot.driveSys.setMotors(power, Motor.RIGHT);
 	}
 
 	@Override
 	protected boolean isFinished() {
 		System.out.println("centerX: " + centerX);
-		return stopAtTarget && Math.abs(centerX) < TURNING_TOLERANCE;
+		return false && stopAtTarget && Math.abs(centerX) < TURNING_TOLERANCE;
 	}
 
 	@Override

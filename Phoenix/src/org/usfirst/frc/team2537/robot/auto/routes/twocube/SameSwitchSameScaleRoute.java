@@ -16,7 +16,7 @@ public class SameSwitchSameScaleRoute extends CommandGroup {
 	public SameSwitchSameScaleRoute(boolean left) {
 		addSequential(new SameSideSwitchRoute(left));
 
-		addSequential(new DriveStraightCommand(-25));
+		addSequential(new DriveStraightCommand(-10));
 		addParallel(new VertDownCommand(Specs.SWITCH_HEIGHT));
 		if(left) addSequential(new RotateCommand(-90));
 		else addSequential(new RotateCommand(90));
@@ -25,10 +25,10 @@ public class SameSwitchSameScaleRoute extends CommandGroup {
 		if(left) addSequential(new RotateCommand(120));
 		else addSequential(new RotateCommand(-120));
 
-		addSequential(new VisionRotateCommand(), Specs.VISION_TIMEOUT);
+//		addSequential(new VisionRotateCommand(), Specs.VISION_TIMEOUT);
 		addParallel(new PickUpCommand(), 2);
-		addSequential(new DriveStraightCommand(40), 2);
-		addSequential(new DriveStraightCommand(-40), 2);
+		addSequential(new DriveStraightCommand(40), 4);
+		addSequential(new DriveStraightCommand(-40), 4);
 		if(left) addSequential(new RotateCommand(-120));
 		else addSequential(new RotateCommand(120));
 

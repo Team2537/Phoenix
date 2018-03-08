@@ -3,18 +3,21 @@ package org.usfirst.frc.team2537.robot;
 import org.usfirst.frc.team2537.robot.auto.AutoChooser;
 import org.usfirst.frc.team2537.robot.auto.Navx;
 import org.usfirst.frc.team2537.robot.auto.routes.RouteHandler;
+import org.usfirst.frc.team2537.robot.auto.routes.RouteHandler.AutoChooserOption;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
 import org.usfirst.frc.team2537.robot.cameras.Cameras;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
 import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
 import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
+import org.usfirst.frc.team2537.robot.vert.VertDownCommand;
 import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
+import org.usfirst.frc.team2537.robot.vert.VertUpCommand;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
@@ -27,7 +30,7 @@ public class Robot extends IterativeRobot {
 
 	public static Cameras cameras;
 
-	public static PowerDistributionPanel pdp;
+//	public static PowerDistributionPanel pdp;
 
 	public static SmartDashboard smartDashboard;
 	public static VisionInput visionSerial;
@@ -35,7 +38,7 @@ public class Robot extends IterativeRobot {
 	public static long startTime;
 	public static String fmsData="OOO";
 
-	private static AutoChooser autoChooser;
+	private static SendableChooser<AutoChooserOption> autoChooser;
 
 	@Override
 	public void robotInit() {
@@ -61,14 +64,13 @@ public class Robot extends IterativeRobot {
 
 		visionSerial = new VisionInput();
 
-		cameras = new Cameras();
-		cameras.start();
+//		cameras = new Cameras();
+//		cameras.start();
 
-		pdp = new PowerDistributionPanel();
+//		pdp = new PowerDistributionPanel();
 
 		autoChooser = new AutoChooser();
 		SmartDashboard.putData("Auto Choices", autoChooser);
-
 	}
 
 	@Override
@@ -83,7 +85,11 @@ public class Robot extends IterativeRobot {
 		if (fmsData.length()==0)
 			fmsData="OOO"; //if we can't get FMS data within 2 seconds, make dummy data
 
-		Scheduler.getInstance().add(RouteHandler.HandleRoute(autoChooser.getSelected(), fmsData));
+		Scheduler.getInstance().add(RouteHandler.HandleRoute(AutoChooserOption.SOLO_LEFT, fmsData));
+//		Scheduler.getInstance().add(new DriveStraightCommand(180));
+//		Scheduler.getInstance().add(new RotateCommand(90));
+//		Scheduler.getInstance().add(new VisionRotateCommand());
+//		Scheduler.getInstance().add(new SameScaleSameSwitchRoute(true));
 	}
 
 	@Override

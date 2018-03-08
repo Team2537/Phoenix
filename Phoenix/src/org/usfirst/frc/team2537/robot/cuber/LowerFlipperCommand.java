@@ -9,6 +9,7 @@ public class LowerFlipperCommand extends Command {
 
 	public LowerFlipperCommand() {
 		requires(Robot.cuberSys); // requires cuberSys variables and methods
+		setTimeout(1.1);
 	}
 
 	@Override
@@ -28,7 +29,7 @@ public class LowerFlipperCommand extends Command {
 	}
 
 	protected boolean isFinished() { // returns true if motor turns over or equal to 90 degrees or when flywheel
-		return (Robot.cuberSys.getHolifaxTwo());
+		return (Robot.cuberSys.getHolifaxTwo()) || this.isTimedOut();
 	}
 
 	protected void end() {

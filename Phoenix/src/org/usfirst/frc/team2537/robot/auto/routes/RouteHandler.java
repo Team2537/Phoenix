@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2537.robot.auto.routes;
 
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.OppositeSideScaleRoute;
+import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.OppositeScaleOppositeSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.OppositeSwitchOppositeScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleOppositeSwitchRoute;
@@ -11,14 +12,18 @@ import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameSwitchSameScaleRou
 import edu.wpi.first.wpilibj.command.Command;
 
 public class RouteHandler {
+	private static final boolean TWO_CUBE = false;
+	
 	public static Command HandleRoute(AutoChooserOption autoChooserOption, String fmsData) {
 		String fmsCroppedConfiguration = fmsData.substring(0, 2);
 		if(autoChooserOption == AutoChooserOption.SOLO_LEFT) {
 			switch(fmsCroppedConfiguration) {
 			case "LL":
-				return new SameSwitchSameScaleRoute(true);
+				if(TWO_CUBE) return new SameSwitchSameScaleRoute(true);
+				else return new SameSideSwitchRoute(true);
 			case "LR":
-				return new SameSwitchOppositeScaleRoute(true);
+				if(TWO_CUBE) return new SameSwitchOppositeScaleRoute(true);
+				else return new SameSideSwitchRoute(true);
 			case "RL":
 				return new SameScaleOppositeSwitchRoute(true);
 			case "RR":

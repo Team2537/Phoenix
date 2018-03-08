@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2537.robot.cuber;
+package org.usfirst.frc.team2537.robot.resources;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Ultrasonic;

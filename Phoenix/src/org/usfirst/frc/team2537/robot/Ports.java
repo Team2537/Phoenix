@@ -47,12 +47,12 @@ public class Ports {
 	public static final int LIFT_ENCODER_A = 1, LIFT_ENCODER_B = 2;
 
 	// Ultrasonic
-	public static final int CUBER_ULTRASONIC_TRIGGER = 4, CUBER_ULTRASONIC_ECHO = 5, CUBER_FAKE_ULTRASONIC = 9;
+	public static final int CUBER_ULTRASONIC_TRIGGER = 4, CUBER_ULTRASONIC_ECHO = 5, CUBER_ULTRASONIC_DUMMY = 9;
 
-	public static final int DRIVE_ULTRASONIC_TRIGGER = 1, DRIVE_ULTRASONIC_ECHO = 0;
+	public static final int DRIVE_ULTRASONIC_TRIGGER = 1, DRIVE_ULTRASONIC_ECHO = 0, DRIVE_ULTRASONIC_DUMMY = 8;
 
 	//Holifax
-	public static final int FLIPPER_HOLIFAX_ONE = 6, FLIPPER_HOLIFAX_TW0 = 7;
+	public static final int FLIPPER_HALL_EFFECT_TOP = 6, FLIPPER_HALL_EFFECT_BOTTOM = 7;
 	
 	// Limit Switch
 	public static final int VERT_LIMIT_SWITCH = 2;
@@ -64,14 +64,14 @@ public class Ports {
 	
 	/********* Miscellaneous ********/
 
-	// PDP Channels
-	public static final int LEFT_FLYWHEEL_PDP_CHANNEL = 6, RIGHT_FLYWHEEL_PDP_CHANNEL = 7;
-
-	public static final int CLIMB_MOTOR_ONE_PDP = 2, CLIMB_MOTOR_TWO_PDP = 1, CLIMB_MOTOR_THREE_PDP = 0;
-
-	public static final int VERT_PDP = 12;
-
-	public static final int FRONT_RIGHT_PDP = 13, FRONT_LEFT_PDP = 12, BACK_RIGHT_PDP = 14, BACK_LEFT_PDP = 15;
+//	// PDP Channels
+//	public static final int LEFT_FLYWHEEL_PDP_CHANNEL = 6, RIGHT_FLYWHEEL_PDP_CHANNEL = 7;
+//
+//	public static final int CLIMB_MOTOR_ONE_PDP = 2, CLIMB_MOTOR_TWO_PDP = 1, CLIMB_MOTOR_THREE_PDP = 0;
+//
+//	public static final int VERT_PDP = 12;
+//
+//	public static final int FRONT_RIGHT_PDP = 13, FRONT_LEFT_PDP = 12, BACK_RIGHT_PDP = 14, BACK_LEFT_PDP = 15;
 
 	//Camera Ports
 	public static final int CAMERA_PORT = 0;

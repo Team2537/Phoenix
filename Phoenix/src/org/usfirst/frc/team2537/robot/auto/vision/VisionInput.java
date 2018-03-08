@@ -34,32 +34,38 @@ public class VisionInput {
 	}
 
 	public static Target[] decodeVisionPacket(String packetToDecode) {
-		if (packetToDecode.equals("") || packetToDecode == null) {
-			return new Target[0];
-		}
-		
-		String[] stringTargets = packetToDecode.split("#");
-		Target[] targets = new Target[stringTargets.length];
-		for (int i = 0; i < stringTargets.length; i++) {
-			String[] pointArr = stringTargets[i].split("\\|");
-			Point[] points = new Point[pointArr.length];
-			
-			int leftX = 640;
-			int rightX = 0;
-			for (int j = 0; j < pointArr.length; j++) {
-				String[] coordinates = pointArr[j].split(",");
-				points[j] = new Point(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
-				if(points[j].x < leftX){
-					leftX = points[j].x;
-				}
-				if(points[j].x > rightX){
-					rightX = points[j].x;
-				}
+		try {
+			if (packetToDecode.equals("") || packetToDecode == null) {
+				return new Target[0];
 			}
 			
-			targets[i] = new Target(points);
+			String[] stringTargets = packetToDecode.split("#");
+			Target[] targets = new Target[stringTargets.length];
+			for (int i = 0; i < stringTargets.length; i++) {
+				String[] pointArr = stringTargets[i].split("\\|");
+				Point[] points = new Point[pointArr.length];
+				
+				int leftX = 640;
+				int rightX = 0;
+				for (int j = 0; j < pointArr.length; j++) {
+					String[] coordinates = pointArr[j].split(",");
+					points[j] = new Point(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
+					if(points[j].x < leftX){
+						leftX = points[j].x;
+					}
+					if(points[j].x > rightX){
+						rightX = points[j].x;
+					}
+				}
+				
+				targets[i] = new Target(points);
+			}
+			return targets;
 		}
-		return targets;
+		catch (Exception e) {
+			System.out.println("fuck");
+			return new Target[0];
+		}
 	}
 
 	public void addToBuffer() { // should run periodically
@@ -68,7 +74,7 @@ public class VisionInput {
 				String stringToAppend = serial.readString();
 				serial.flush();
 				
-				//System.out.println(stringToAppend);
+//				[]\System.out.println(stringToAppend);
 				
 				int packetEnd = stringToAppend.lastIndexOf('<');
 				if(packetEnd == -1){

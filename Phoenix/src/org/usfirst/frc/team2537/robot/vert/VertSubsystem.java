@@ -52,6 +52,9 @@ public class VertSubsystem extends Subsystem {
 	
 	public void resetEncoder() {
 		vertMotorOne.getSensorCollection().setQuadraturePosition(0, 0);
+		vertMotorOne.getSensorCollection().setQuadraturePosition(0, 0);
+		vertMotorOne.getSensorCollection().setQuadraturePosition(0, 0);
+		vertMotorOne.getSensorCollection().setQuadraturePosition(0, 0);
 	}
 	
 	public boolean getLimitSwitch() {

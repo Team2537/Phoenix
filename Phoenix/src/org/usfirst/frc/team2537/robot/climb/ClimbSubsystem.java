@@ -1,7 +1,6 @@
 package org.usfirst.frc.team2537.robot.climb;
 
 import org.usfirst.frc.team2537.robot.Ports;
-import org.usfirst.frc.team2537.robot.Robot;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 
 import edu.wpi.first.wpilibj.Talon;
@@ -40,15 +39,15 @@ public class ClimbSubsystem extends Subsystem {
 		climbMotorThree.set(speed);
 	}
 
-	public double getCurrentClimbMotorOne() {
-		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_ONE_PDP);
-	}
-	public double getCurrentClimbMotorTwo() {
-		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_TWO_PDP);
-	}
-	public double getCurrentClimbMotorThree() {
-		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_THREE_PDP);
-	}
+//	public double getCurrentClimbMotorOne() {
+//		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_ONE_PDP);
+//	}
+//	public double getCurrentClimbMotorTwo() {
+//		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_TWO_PDP);
+//	}
+//	public double getCurrentClimbMotorThree() {
+//		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_THREE_PDP);
+//	}
 	
 	public boolean climberOverridden() {
 		return HumanInput.climbOverrideKeyOne.get() && HumanInput.climbOverrideKeyTwo.get();

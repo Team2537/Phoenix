@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RotateCommand extends Command {
 	private double targetAngle;
 	private static final double DEFAULT_PERCENT_OUTPUT = 0.9;
-	private static final double MIN_PERCENT_OUTPUT = 0.65;
+	private static final double MIN_PERCENT_OUTPUT = 0.9;
 	private static final double ANGLE_kP = 2;
 	private static final double TOLERANCE = 2; // degrees
 	private double currentAngle;

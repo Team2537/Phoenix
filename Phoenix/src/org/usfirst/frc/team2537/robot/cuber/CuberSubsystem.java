@@ -3,6 +3,7 @@ package org.usfirst.frc.team2537.robot.cuber;
 import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 import org.usfirst.frc.team2537.robot.resources.CANTalon;
+import org.usfirst.frc.team2537.robot.resources.UltrasonicWrapper;
 
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
@@ -30,9 +31,9 @@ public class CuberSubsystem extends Subsystem {
 		flywheelMotorRight = new CANTalon(Ports.FLYWHEEL_MOTOR_RIGHT);
 		liftMotor = new CANTalon(Ports.FLIPPER_WINDOW_MOTOR);	
 		ultrasonic = new UltrasonicWrapper(Ports.CUBER_ULTRASONIC_TRIGGER, Ports.CUBER_ULTRASONIC_ECHO, 
-				Ports.CUBER_FAKE_ULTRASONIC);
-		flipperHallEffectOne = new DigitalInput(Ports.FLIPPER_HOLIFAX_ONE);
-		flipperHallEffectTwo = new DigitalInput(Ports.FLIPPER_HOLIFAX_TW0);
+				Ports.CUBER_ULTRASONIC_DUMMY);
+		flipperHallEffectOne = new DigitalInput(Ports.FLIPPER_HALL_EFFECT_TOP);
+		flipperHallEffectTwo = new DigitalInput(Ports.FLIPPER_HALL_EFFECT_BOTTOM);
 		
 		liftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
 		

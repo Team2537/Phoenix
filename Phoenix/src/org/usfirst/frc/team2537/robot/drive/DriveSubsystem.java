@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2537.robot.drive;
 
 import org.usfirst.frc.team2537.robot.Ports;
-import org.usfirst.frc.team2537.robot.Robot;
+import org.usfirst.frc.team2537.robot.resources.UltrasonicWrapper;
 import org.usfirst.frc.team2537.robot.units.Distances;
 import org.usfirst.frc.team2537.robot.units.Times;
 import org.usfirst.frc.team2537.robot.units.Units;
@@ -58,7 +58,7 @@ public class DriveSubsystem extends Subsystem {
 		talonBackLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		
-		ultrasonic = new Ultrasonic(Ports.DRIVE_ULTRASONIC_TRIGGER, Ports.DRIVE_ULTRASONIC_ECHO);
+		ultrasonic = new UltrasonicWrapper(Ports.DRIVE_ULTRASONIC_TRIGGER, Ports.DRIVE_ULTRASONIC_ECHO, Ports.DRIVE_ULTRASONIC_DUMMY);
 	}
 
 	/******************************************************************************/
@@ -198,11 +198,4 @@ public class DriveSubsystem extends Subsystem {
 		this.controlMode = controlMode;
 	}
 	
-	public void fixingDrive() {
-		System.out.println("Front Right: " + Robot.pdp.getCurrent(Ports.FRONT_RIGHT_PDP));
-		System.out.println("Front Left: " + Robot.pdp.getCurrent(Ports.FRONT_LEFT_PDP));
-		System.out.println("Back Right: " + Robot.pdp.getCurrent(Ports.BACK_RIGHT_PDP));
-		System.out.println("Back Left : " + Robot.pdp.getCurrent(Ports.BACK_LEFT_PDP));
-	}
-
 }

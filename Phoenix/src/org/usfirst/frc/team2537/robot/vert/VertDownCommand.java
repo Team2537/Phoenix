@@ -10,11 +10,12 @@ public class VertDownCommand extends Command {
 	private final double targetDistance;
 
 	public VertDownCommand() {
-		this(-1);
+		requires(Robot.vertSys);
+		this.targetDistance = -1;
 	}
 	
 	public VertDownCommand(int targetDistance) {
-		requires(Robot.driveSys);
+		requires(Robot.vertSys);
 		this.targetDistance = Math.abs(targetDistance);
 	}
 
@@ -26,6 +27,7 @@ public class VertDownCommand extends Command {
 
 	@Override
 	protected void execute() {
+		System.out.println("encoder: " + -Robot.vertSys.getEncoderPos() + " target: " + targetDistance);
 	}
 
 	@Override

@@ -27,6 +27,7 @@ public class VertUpCommand extends Command {
 	protected void execute() {
 		if (Robot.vertSys.getLimitSwitch())
 			Robot.vertSys.setVertMotors(0);
+		System.out.println(Robot.vertSys.getEncoderPos());
 	}
 
 

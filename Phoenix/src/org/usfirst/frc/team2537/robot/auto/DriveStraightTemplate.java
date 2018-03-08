@@ -21,7 +21,7 @@ public abstract class DriveStraightTemplate extends Command {
 	
 	public static final double DISTANCE_TOLERANCE = 1;
 
-	public static final double SLOW_DOWN_POWER = 200;
+	public static final double SLOW_DOWN_POWER = 300;
 
 	public static final double ANGLE_kP = 1;
 
@@ -38,6 +38,7 @@ public abstract class DriveStraightTemplate extends Command {
 	private double remainingInchesAtSlowdown;
 	private boolean slowingDown;
 	private boolean initialized;
+	private double backwardsMultiplier;
 
 	/******************************************************************************/
 	/* CONSTRUCTORS */
@@ -77,6 +78,7 @@ public abstract class DriveStraightTemplate extends Command {
 		Navx.getInstance().reset();
 		System.out.println("starting angle: " + Navx.getInstance().getAngle());
 		System.out.println("encoders: " + Robot.driveSys.justFuckMyShitUpFam());
+		backwardsMultiplier = Math.signum(getRemainingInches());
 		initialized = true;
 	}
 
@@ -85,8 +87,8 @@ public abstract class DriveStraightTemplate extends Command {
 		if(!initialized) {
 			initialize();
 		}
-		double remainingInches = getRemainingInches();
-		double currentVelocity = Robot.driveSys.getEncoderVelocity();
+		double remainingInches = getRemainingInches() * backwardsMultiplier;
+		double currentVelocity = Robot.driveSys.getEncoderVelocity() * backwardsMultiplier;
 		double power = motorPower;
 
 		if (!slowingDown) {
@@ -110,18 +112,18 @@ public abstract class DriveStraightTemplate extends Command {
 		double currentAngle = Navx.getInstance().getAngle();
 //		System.out.println("current angle: " + currentAngle);
 		if (Math.abs(currentAngle) > ANGLE_TOLERANCE) {
-			powerAdjustmentFromAngle = currentAngle/180*ANGLE_kP*power;
+			powerAdjustmentFromAngle = currentAngle/180*ANGLE_kP*power * backwardsMultiplier;
 		}
 		
-		Robot.driveSys.setMotors(power - powerAdjustmentFromAngle, Motor.LEFT);
-		Robot.driveSys.setMotors(power + powerAdjustmentFromAngle, Motor.RIGHT);
+		Robot.driveSys.setMotors((power - powerAdjustmentFromAngle) * backwardsMultiplier, Motor.LEFT);
+		Robot.driveSys.setMotors((power + powerAdjustmentFromAngle) * backwardsMultiplier, Motor.RIGHT);
 	}
 
 	@Override
 	protected boolean isFinished() {
 		System.out.println("speed: " + Robot.driveSys.getEncoderVelocity() + "; " + 
 				"remaining dist: " + getRemainingInches());
-		return getRemainingInches() <= DISTANCE_TOLERANCE;
+		return getRemainingInches() * backwardsMultiplier <= DISTANCE_TOLERANCE;
 	}
 
 	@Override
