@@ -47,7 +47,7 @@ public class SuperGUI {
 	public static final double ROBOT_DIAMETER = Math.sqrt(Math.pow(ROBOT_LENGTH, 2) + Math.pow(ROBOT_WIDTH, 2));
 
 	public static final boolean WRITE_COMMAND = false; // write the code to a command and generate autoChooser
-	public static final boolean WRITE_MAP = true; // write the code to a readable map file
+	public static final boolean WRITE_MAP = false; // write the code to a readable map file
 
 	public static final String COMMANDS_DIRECTORY = "src/org/usfirst/frc/team2537/robot/auto/routes/";
 	public static final String MAPS_DIRECTORY = "src/org/usfirst/frc/team2537/robot/auto/superGUI/maps/";

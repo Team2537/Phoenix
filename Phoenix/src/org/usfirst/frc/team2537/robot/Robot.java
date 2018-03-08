@@ -5,15 +5,13 @@ import org.usfirst.frc.team2537.robot.auto.Navx;
 import org.usfirst.frc.team2537.robot.auto.routes.RouteHandler;
 import org.usfirst.frc.team2537.robot.auto.routes.RouteHandler.AutoChooserOption;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
-import org.usfirst.frc.team2537.robot.cameras.Cameras;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
 import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
 import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
-import org.usfirst.frc.team2537.robot.vert.VertDownCommand;
 import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
-import org.usfirst.frc.team2537.robot.vert.VertUpCommand;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -27,8 +25,6 @@ public class Robot extends IterativeRobot {
 	public static ClimbSubsystem climbSys;
 	public static RampSubsystem rampSys;
 	public static CuberSubsystem cuberSys;
-
-	public static Cameras cameras;
 
 //	public static PowerDistributionPanel pdp;
 
@@ -63,9 +59,8 @@ public class Robot extends IterativeRobot {
 		cuberSys.registerButtons();
 
 		visionSerial = new VisionInput();
-
-//		cameras = new Cameras();
-//		cameras.start();
+		
+		CameraServer.getInstance().startAutomaticCapture();
 
 //		pdp = new PowerDistributionPanel();
 
@@ -85,7 +80,7 @@ public class Robot extends IterativeRobot {
 		if (fmsData.length()==0)
 			fmsData="OOO"; //if we can't get FMS data within 2 seconds, make dummy data
 
-		Scheduler.getInstance().add(RouteHandler.HandleRoute(AutoChooserOption.SOLO_LEFT, fmsData));
+		Scheduler.getInstance().add(RouteHandler.HandleRoute(autoChooser.getSelected(), fmsData));
 //		Scheduler.getInstance().add(new DriveStraightCommand(180));
 //		Scheduler.getInstance().add(new RotateCommand(90));
 //		Scheduler.getInstance().add(new VisionRotateCommand());
