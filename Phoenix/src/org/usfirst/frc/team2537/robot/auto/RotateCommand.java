@@ -38,6 +38,7 @@ public class RotateCommand extends Command {
 		power = Math.max(Math.abs(power), Math.abs(MIN_PERCENT_OUTPUT)) * Math.signum(power);
     	Robot.driveSys.setMotors(-power,  Motor.LEFT);
 		Robot.driveSys.setMotors( power, Motor.RIGHT);
+		System.out.println(Navx.getInstance().getAngle());
     }
 
     @Override

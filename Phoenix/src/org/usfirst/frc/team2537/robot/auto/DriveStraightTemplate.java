@@ -129,6 +129,7 @@ public abstract class DriveStraightTemplate extends Command {
 	@Override
 	protected void end() {
 		System.out.println("ending driveforward");
+		Robot.driveSys.resetEncoders();
 		Robot.driveSys.setMotors(0);
 		initialized = false;
 	}

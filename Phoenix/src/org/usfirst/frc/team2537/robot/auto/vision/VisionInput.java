@@ -92,7 +92,7 @@ public class VisionInput {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("serial exception " + e.getMessage());
+//			System.out.println("serial exception " + e.getMessage());
 		}
 	}
 
