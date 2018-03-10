@@ -40,7 +40,6 @@ public class VisionRotateCommand extends Command {
 	@Override
 	protected void execute() {
 		Target[] targets = Robot.visionSerial.getVisionPacket();
-		
 		/* if we cannot see the target, we spin faster */
 		double power = DEFAULT_PERCENT_OUTPUT;
 		if(lastSide == Side.LEFT){

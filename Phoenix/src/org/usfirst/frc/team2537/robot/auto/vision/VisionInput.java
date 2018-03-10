@@ -74,7 +74,7 @@ public class VisionInput {
 				String stringToAppend = serial.readString();
 				serial.flush();
 				
-//				[]\System.out.println(stringToAppend);
+				System.out.println(stringToAppend);
 				
 				int packetEnd = stringToAppend.lastIndexOf('<');
 				if(packetEnd == -1){

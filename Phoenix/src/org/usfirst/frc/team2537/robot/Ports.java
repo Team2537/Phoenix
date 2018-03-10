@@ -10,7 +10,7 @@ public class Ports {
 	public static final int LEFT_JOYSTICK = 0, RIGHT_JOYSTICK = 1;
 
 	// Buttons
-	public static final int VERT_RAISE_BUTTON = 3, VERT_LOWER_BUTTON = 2;
+	public static final int VERT_RAISE_BUTTON = 3, VERT_LOWER_BUTTON = 2, VERT_OVERRIDE_BUTTON = 7, VERT_UNDERRIDE_BUTTON = 6;
 
 	public static final int CLIMB_ON_BUTTON = 5, CLIMB_OFF_BUTTON = 4;
 
@@ -47,9 +47,9 @@ public class Ports {
 	public static final int LIFT_ENCODER_A = 1, LIFT_ENCODER_B = 2;
 
 	// Ultrasonic
-	public static final int CUBER_ULTRASONIC_TRIGGER = 4, CUBER_ULTRASONIC_ECHO = 5, CUBER_ULTRASONIC_DUMMY = 9;
+	public static final int CUBER_ULTRASONIC_TRIGGER = 5, CUBER_ULTRASONIC_ECHO = 4;// CUBER_ULTRASONIC_DUMMY = 9;
 
-	public static final int DRIVE_ULTRASONIC_TRIGGER = 1, DRIVE_ULTRASONIC_ECHO = 0, DRIVE_ULTRASONIC_DUMMY = 8;
+	public static final int DRIVE_ULTRASONIC_TRIGGER = 0, DRIVE_ULTRASONIC_ECHO = 1;// DRIVE_ULTRASONIC_DUMMY = 8;
 
 	//Holifax
 	public static final int FLIPPER_HALL_EFFECT_TOP = 6, FLIPPER_HALL_EFFECT_BOTTOM = 7;

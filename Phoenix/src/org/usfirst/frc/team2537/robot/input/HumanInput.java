@@ -14,6 +14,8 @@ public class HumanInput {
 	
 	public static Button vertRaiseButton = new JoystickButton(rightJoystick, Ports.VERT_RAISE_BUTTON);
 	public static Button vertLowerButton = new JoystickButton(rightJoystick, Ports.VERT_LOWER_BUTTON);
+	public static Button vertOverrideButton = new JoystickButton(rightJoystick, Ports.VERT_OVERRIDE_BUTTON);
+	public static Button vertUnderrideButton = new JoystickButton(rightJoystick, Ports.VERT_UNDERRIDE_BUTTON);
 	
 	public static Button cuberPickUpButton = new JoystickButton(leftJoystick, Ports.PICK_UP_BUTTON); 
 	public static Button cuberPickUpButtonTwo = new JoystickButton(rightJoystick, Ports.PICK_UP_BUTTON_TWO);

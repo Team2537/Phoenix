@@ -3,12 +3,12 @@ package org.usfirst.frc.team2537.robot.cuber;
 import org.usfirst.frc.team2537.robot.Ports;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 import org.usfirst.frc.team2537.robot.resources.CANTalon;
-import org.usfirst.frc.team2537.robot.resources.UltrasonicWrapper;
 
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CuberSubsystem extends Subsystem {
@@ -17,7 +17,7 @@ public class CuberSubsystem extends Subsystem {
 	private CANTalon liftMotor;
 	private DigitalInput flipperHallEffectOne;
 	private DigitalInput flipperHallEffectTwo;
-	private UltrasonicWrapper ultrasonic;
+	private Ultrasonic ultrasonic;
 	public static final double FLYWHEEL_SPEED = .5;
 	public static final double FLYWHEEL_CURRENT_LIMIT = 35; // TODO: determine max amps
 	public static final double CUTOFF_DISTANCE = 2; // TODO: determine cutoff distance
@@ -30,8 +30,8 @@ public class CuberSubsystem extends Subsystem {
 		flywheelMotorLeft = new CANTalon(Ports.FLYWHEEL_MOTOR_LEFT);
 		flywheelMotorRight = new CANTalon(Ports.FLYWHEEL_MOTOR_RIGHT);
 		liftMotor = new CANTalon(Ports.FLIPPER_WINDOW_MOTOR);	
-		ultrasonic = new UltrasonicWrapper(Ports.CUBER_ULTRASONIC_TRIGGER, Ports.CUBER_ULTRASONIC_ECHO, 
-				Ports.CUBER_ULTRASONIC_DUMMY);
+		ultrasonic = new Ultrasonic(Ports.CUBER_ULTRASONIC_TRIGGER, Ports.CUBER_ULTRASONIC_ECHO);
+		ultrasonic.setAutomaticMode(true);
 		flipperHallEffectOne = new DigitalInput(Ports.FLIPPER_HALL_EFFECT_TOP);
 		flipperHallEffectTwo = new DigitalInput(Ports.FLIPPER_HALL_EFFECT_BOTTOM);
 		
@@ -89,10 +89,6 @@ public class CuberSubsystem extends Subsystem {
 	
 	public boolean getHolifaxTwo() {
 		return !flipperHallEffectTwo.get();
-	}
-	
-	public void updateUltrasonic() {
-		ultrasonic.update();
 	}
 	
 }

@@ -5,6 +5,7 @@ import org.usfirst.frc.team2537.robot.auto.Navx;
 import org.usfirst.frc.team2537.robot.auto.routes.RouteHandler;
 import org.usfirst.frc.team2537.robot.auto.routes.RouteHandler.AutoChooserOption;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
+import org.usfirst.frc.team2537.robot.auto.vision.VisionRotateCommand;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
 import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
@@ -71,7 +72,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		Scheduler.getInstance().removeAll();
-
+//
 		final int FMS_TIMEOUT=2; //num of seconds to wait before giving up on FMS
 		long startTime=System.currentTimeMillis();
 		while (DriverStation.getInstance().getGameSpecificMessage().length()==0 &&
@@ -81,8 +82,10 @@ public class Robot extends IterativeRobot {
 			fmsData="OOO"; //if we can't get FMS data within 2 seconds, make dummy data
 
 		Scheduler.getInstance().add(RouteHandler.HandleRoute(autoChooser.getSelected(), fmsData));
+		//uncomment above or youre an idiot
 //		Scheduler.getInstance().add(new DriveStraightCommand(180));
 //		Scheduler.getInstance().add(new RotateCommand(90));
+		//todo: comment below
 //		Scheduler.getInstance().add(new VisionRotateCommand());
 //		Scheduler.getInstance().add(new SameScaleSameSwitchRoute(true));
 	}
@@ -111,11 +114,13 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("yaw", Navx.getInstance().getYaw());
 		SmartDashboard.putNumber("roll", Navx.getInstance().getRoll());
 		SmartDashboard.putNumber("Cuber Ultrasonic", Robot.cuberSys.getUltrasonicInches());
+		SmartDashboard.putNumber("Drive Ultrasonic", Robot.driveSys.getUltrasonicRange());
+		SmartDashboard.putBoolean("Lift override enabled", !Robot.vertSys.enableReadSwitch);
 		Scheduler.getInstance().run();
 		if(Robot.rampSys.isOpen) {
 			SmartDashboard.putString("Ramp is Open", "THE RAMP IS OPEN YOU SURE YOU WANT THIS");
 		}
-		Robot.cuberSys.updateUltrasonic();
+//		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
 	}
 
 	@Override

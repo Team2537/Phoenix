@@ -1,7 +1,6 @@
 package org.usfirst.frc.team2537.robot.drive;
 
 import org.usfirst.frc.team2537.robot.Ports;
-import org.usfirst.frc.team2537.robot.resources.UltrasonicWrapper;
 import org.usfirst.frc.team2537.robot.units.Distances;
 import org.usfirst.frc.team2537.robot.units.Times;
 import org.usfirst.frc.team2537.robot.units.Units;
@@ -58,7 +57,7 @@ public class DriveSubsystem extends Subsystem {
 		talonBackLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		
-		ultrasonic = new UltrasonicWrapper(Ports.DRIVE_ULTRASONIC_TRIGGER, Ports.DRIVE_ULTRASONIC_ECHO, Ports.DRIVE_ULTRASONIC_DUMMY);
+		ultrasonic = new Ultrasonic(Ports.DRIVE_ULTRASONIC_TRIGGER, Ports.DRIVE_ULTRASONIC_ECHO);
 	}
 
 	/******************************************************************************/
@@ -74,6 +73,7 @@ public class DriveSubsystem extends Subsystem {
 	/* ENCODER METHODS */
 	/******************************************************************************/
 
+	/* return string containing all encoders individually and the uniform average */
 	public String justFuckMyShitUpFam() {
 		SmartDashboard.putNumber("front left", talonFrontLeft.getSelectedSensorPosition(0)*LEFT_MOTOR_DIRECTION);
 		SmartDashboard.putNumber("front right", talonFrontRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION);
@@ -83,18 +83,19 @@ public class DriveSubsystem extends Subsystem {
 		return "front left: "+talonFrontLeft.getSelectedSensorPosition(0)*LEFT_MOTOR_DIRECTION+"\n"
 				+ "front right: " + talonFrontRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION+"\n"
 				+ "back left: " + talonBackLeft.getSelectedSensorPosition(0)*LEFT_MOTOR_DIRECTION + "\n"
-				+ "back right: " + talonBackRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION;
+				+ "back right: " + talonBackRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION + "\n"
+				+ "uniform average: " + Units.convertDistance(getEncoderDistance(), Distances.INCHES, Distances.TICKS);
 	}
 	
 	/**
 	 * @return average value of all talons in inches
 	 */
 	public double getEncoderDistance() {
-		double[] encoderTicks = new double[2];
+		double[] encoderTicks = new double[4];
 		encoderTicks[0] = talonFrontLeft.getSelectedSensorPosition(0) * LEFT_MOTOR_DIRECTION;
 		encoderTicks[1] = talonFrontRight.getSelectedSensorPosition(0) * RIGHT_MOTOR_DIRECTION;
-		//encoderTicks[2] = talonBackLeft.getSelectedSensorPosition(0) * LEFT_MOTOR_DIRECTION;
-		//encoderTicks[3] = talonBackRight.getSelectedSensorPosition(0) * RIGHT_MOTOR_DIRECTION;
+		encoderTicks[2] = talonBackLeft.getSelectedSensorPosition(0) * LEFT_MOTOR_DIRECTION;
+		encoderTicks[3] = talonBackRight.getSelectedSensorPosition(0) * RIGHT_MOTOR_DIRECTION;
 		
 		double avg = getUniformAverage(encoderTicks, ENCODER_MIN_PERCENT_AGREEMENT);
 		return Units.convertDistance(avg, Distances.TICKS, Distances.INCHES);
@@ -104,11 +105,11 @@ public class DriveSubsystem extends Subsystem {
 	 * @return average velocity of all talons in inches/second
 	 */
 	public double getEncoderVelocity() {
-		double[] encoderTicks = new double[2];
+		double[] encoderTicks = new double[4];
 		encoderTicks[0] = talonFrontLeft.getSelectedSensorVelocity(0) * LEFT_MOTOR_DIRECTION;
 		encoderTicks[1] = talonFrontRight.getSelectedSensorVelocity(0) * RIGHT_MOTOR_DIRECTION;
-		//encoderTicks[2] = talonBackLeft.getSelectedSensorVelocity(0) * LEFT_MOTOR_DIRECTION;
-		//encoderTicks[3] = talonBackRight.getSelectedSensorVelocity(0) * RIGHT_MOTOR_DIRECTION;
+		encoderTicks[2] = talonBackLeft.getSelectedSensorVelocity(0) * LEFT_MOTOR_DIRECTION;
+		encoderTicks[3] = talonBackRight.getSelectedSensorVelocity(0) * RIGHT_MOTOR_DIRECTION;
 		
 		double avg = getUniformAverage(encoderTicks, ENCODER_MIN_PERCENT_AGREEMENT);
 		return Units.convertSpeed(avg, Distances.TICKS, Times.HUNDRED_MS, Distances.INCHES, Times.SECONDS);
@@ -129,7 +130,7 @@ public class DriveSubsystem extends Subsystem {
 		double sum = 0;
 		int validVals = 0;
 		for(double val : vals){
-			if(1 - val / maxVal <= tolerance){
+			if(1 - (val / maxVal) <= tolerance){
 				sum += val;
 				validVals++;
 			}

@@ -13,5 +13,6 @@ public class AutoChooser extends SendableChooser<AutoChooserOption> {
 		addObject("Right With Teammate", AutoChooserOption.CO_OP_RIGHT);
 		addObject("Left Scale", AutoChooserOption.SCALE_LEFT);
 		addObject("Right Scale", AutoChooserOption.SCALE_RIGHT);
+//		addObject("Straight w/ competent teammate", AutoChooserOption.DRIVE_STRAIGHT_WITH_COMPETENT_TEAMMATE);
 	}
 }
