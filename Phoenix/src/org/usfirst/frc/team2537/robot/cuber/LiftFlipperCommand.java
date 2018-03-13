@@ -31,7 +31,7 @@ public class LiftFlipperCommand extends Command {
 		
 	}
 
-	protected boolean isFinished() {
+	protected boolean isFinished() { //stops motor whenever flipper lowers cuber too much(could break bot) or current of window motor exceeds limit
 		return ( Robot.cuberSys.checkLiftSwitch() || Robot.cuberSys.getWindowMotorCurrent() >= Robot.cuberSys.currentLimit);
 			
 	}

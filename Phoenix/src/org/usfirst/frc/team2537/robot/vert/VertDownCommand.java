@@ -10,12 +10,12 @@ public class VertDownCommand extends Command {
 	
 	public VertDownCommand() {
 		requires(Robot.vertSys);
-
+		
 	}
 
 	@Override
 	protected void initialize() {
-		
+
 	}
 
 	@Override
@@ -37,17 +37,17 @@ public class VertDownCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return Robot.vertSys.getLimitSwitchDown(); //this prevents actuator from moving too far down and breaking the robot.
 	}
 
 	@Override
 	protected void end() {
-		Robot.vertSys.setVertMotors(0);
+		Robot.vertSys.setVertMotors(0); //turns off vertActuator whenever something listed in isFinished goes wrong 
 	}
 
 	@Override
 	protected void interrupted() {
-		Robot.vertSys.setVertMotors(0);
+		Robot.vertSys.setVertMotors(0); //turns off vertActuator whenever switching to different command
 	}
 
 }

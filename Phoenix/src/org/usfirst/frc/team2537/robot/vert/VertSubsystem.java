@@ -26,7 +26,8 @@ public class VertSubsystem extends Subsystem {
 	private TalonSRX vertMotorOne;
 	private TalonSRX vertMotorTwo;
 	private PowerDistributionPanel PDP;
-	private DigitalInput limitswitch;
+	private DigitalInput limitSwitchDown;
+	private DigitalInput limitSwitchUp;
 	double speed;
 	private double P = .2; //proportional value
 	private double I = .1; //integral value
@@ -36,12 +37,15 @@ public class VertSubsystem extends Subsystem {
 							//(23 in./5s) x (1 rad/1in.) x (1 rev/2Pi rad) x (360 ticks/1 rev) x (1 s/10 100 ms)
 	
 	
+	
+	
 	public VertSubsystem() {
 		vertEnc = new Encoder(Ports.VERT_ENC_A, 1, false, Encoder.EncodingType.k4X);
 		vertMotorOne = new TalonSRX(Ports.VERT_MOTOR_ONE);
 		vertMotorTwo = new TalonSRX(Ports.VERT_MOTOR_TWO);
 		PDP = new PowerDistributionPanel(Ports.PDP);
-		limitswitch = new DigitalInput(Ports.LIMIT_SWITCH);
+		limitSwitchDown = new DigitalInput(Ports.LIMIT_SWITCH_DOWN);
+		limitSwitchUp = new DigitalInput(Ports.LIMIT_SWITCH_UP);
 		vertMotorOne.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0); //PID loop main encoder on vertMotorOne; for type of feedback device, 
 		vertMotorTwo.set(ControlMode.Follower, Ports.VERT_MOTOR_ONE); //corresponds to actions of vertMotorOne
 		
@@ -49,6 +53,7 @@ public class VertSubsystem extends Subsystem {
 		vertMotorOne.config_kI(Ports.VERT_MOTOR_ONE, I, 0); //0 ID port, I value, 0 timeoutMs (none)
 		vertMotorOne.config_kD(Ports.VERT_MOTOR_ONE, D, 0); //0 ID port, D value, 0 timeoutMs (none)
 		vertMotorOne.config_kF(Ports.VERT_MOTOR_ONE, F, 0); //0 ID port, K value, 0 timeoutMs (none)
+		
 	}
 
 	public void initDefaultCommand() {
@@ -64,19 +69,23 @@ public class VertSubsystem extends Subsystem {
 
 	// sets speed of vertMotors
 	public void setVertMotors(double speed) {
-		 vertMotorOne.set(ControlMode.Velocity, speed); //CHECK
+		 vertMotorOne.set(ControlMode.Velocity, speed); 
 		 vertMotorTwo.set(ControlMode.Velocity, speed);
 	}
 	
 
-	public boolean getLimitSwitch() {
-		return limitswitch.get();
-
+	public boolean getLimitSwitchUp() {
+		return limitSwitchUp.get(); //This bit of code is used to get the output of the limit switch on the top of the Vertical Actuator.  
 	}
 
+	public boolean getLimitSwitchDown() {
+		return limitSwitchDown.get(); //This bit of code is used to get the output of the limit switch on the bottom of the Vertical Actuator.
+	}
+	
+	
 	// returns current of vert motor one
 	public double getCurrentOne() {
-		return PDP.getCurrent(Ports.VERT_MOTOR_ONE_PDP_CHANNEL);
+		return PDP.getCurrent(Ports.VERT_MOTOR_ONE_PDP_CHANNEL); //
 
 	}
 
@@ -86,7 +95,7 @@ public class VertSubsystem extends Subsystem {
 
 	}
 	
-	public double getSpeedVertMotorOne() {
+	public double getSpeedVertMotorOne() { //returns speed of motors
 		return vertEnc.getRate();
 	}
 	

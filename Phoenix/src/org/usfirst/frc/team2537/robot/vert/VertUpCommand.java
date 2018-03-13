@@ -38,15 +38,15 @@ public class VertUpCommand extends Command {
 
 	protected boolean isFinished() {
 
-		return (Robot.vertSys.getLimitSwitch());
+		return (Robot.vertSys.getLimitSwitchUp()); //this prevents actuator from moving too far up and breaking the robot.
 
 	}
 
 	protected void end() {
-		Robot.vertSys.setVertMotors(0);
+		Robot.vertSys.setVertMotors(0); //turns off vertActuator whenever something listed in isFinished goes wrong 
 	}
 
 	protected void interrupted() {
-		Robot.vertSys.setVertMotors(0);
+		Robot.vertSys.setVertMotors(0); //turns off vertActuator whenever switching to different command
 	}
 }

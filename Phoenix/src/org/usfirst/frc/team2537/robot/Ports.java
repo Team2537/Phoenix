@@ -1,7 +1,5 @@
 package org.usfirst.frc.team2537.robot;
 
-import edu.wpi.first.wpilibj.DigitalSource;
-
 public class Ports {
 
 //vert stuff
@@ -29,7 +27,7 @@ public class Ports {
 	public static final int VERT_MOTOR_TWO_PDP_CHANNEL = 4;
 	
 	//limit switch values
-	public static final int LIMIT_SWITCH = 0;
+	public static final int LIMIT_SWITCH_UP = 0, LIMIT_SWITCH_DOWN = 1;
 	
 //cuber stuff
 

@@ -45,7 +45,7 @@ public class LowerFlipperCommand extends Command {
 	 * motor amps exceed limit
 	 */
 	protected boolean isFinished() {
-		return (Robot.cuberSys.checkLowerSwitch()
+		return (Robot.cuberSys.checkLowerSwitch() //stops motor whenever flipper lowers cuber too much(could break bot) or current of window motor exceeds limit
 				|| Robot.cuberSys.getWindowMotorCurrent() >= Robot.cuberSys.currentLimit);
 
 	}
