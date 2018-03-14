@@ -32,7 +32,7 @@ public class VertSubsystem extends Subsystem {
 	private double P = .2; //proportional value
 	private double I = .1; //integral value
 	private double D = .1; //derivative value
-	private double F = 0; // f gain
+	private double F = 0;  // f gain
 	public double targetVelocity = (23/5) * (1/1) * (1/(Math.PI*2)) * (360/1) * (1/10); //for PID loop and sets speed of motors
 							//(23 in./5s) x (1 rad/1in.) x (1 rev/2Pi rad) x (360 ticks/1 rev) x (1 s/10 100 ms)
 	

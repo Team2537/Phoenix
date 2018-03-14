@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ExpelCommand extends Command {
 	double speed; 
-
 	public ExpelCommand() {
 		requires(Robot.cuberSys); 
 	}
