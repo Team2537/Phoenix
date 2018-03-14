@@ -38,7 +38,6 @@ public class VertSubsystem extends Subsystem {
 	
 	
 	
-	
 	public VertSubsystem() {
 		vertEnc = new Encoder(Ports.VERT_ENC_A, 1, false, Encoder.EncodingType.k4X);
 		vertMotorOne = new TalonSRX(Ports.VERT_MOTOR_ONE);
@@ -99,6 +98,10 @@ public class VertSubsystem extends Subsystem {
 		return vertEnc.getRate();
 	}
 	
+	
+	public void keepVertUp() {
+		
+	}
 	//things that need work
 	//is setVertMotors method correct?
 	//merge both up and down into one method

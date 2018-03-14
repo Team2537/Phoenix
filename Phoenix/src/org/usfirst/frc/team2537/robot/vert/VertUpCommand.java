@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2537.robot.vert;
 
 import org.usfirst.frc.team2537.robot.Robot;
-
+import java.util.*;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -16,7 +16,7 @@ public class VertUpCommand extends Command {
 	}
 
 	protected void initialize() {
-
+		 
 	}
 
 	protected void execute() {
@@ -33,7 +33,18 @@ public class VertUpCommand extends Command {
 			Robot.vertSys.setVertMotors(Robot.vertSys.targetVelocity);
 		}
 		
+//		if(org.usfirst.frc.team2537.robot.Ports.VERT_LOWER_BUTTON.)
 		
+		
+			double speedTest = Robot.vertSys.getSpeedVertMotorOne();
+		if (speedTest < 0 ) { // add condition that checks how long the motor has gone without any joystick inputs; currently, it only checks if the cuber is falling
+			Robot.vertSys.setVertMotors(-speedTest); //sets motors to the opposite direction and power they are currently going
+		}
+//		unused detection method that only sets motors to a constant upward speed
+//		double testSpeed = Robot.vertSys.getSpeedVertMotorOne();
+//			if(testSpeed < 0) {
+//				Robot.vertSys.setVertMotors(.1);
+//		}
 	}
 
 	protected boolean isFinished() {
