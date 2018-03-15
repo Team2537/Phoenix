@@ -9,12 +9,14 @@ public class PickUpCommand extends Command {
 
 	public PickUpCommand() {
 		requires(Robot.cuberSys);
+		requires(Robot.vertSys);
 	}
 
 	@Override
 	protected void initialize() {
+		Robot.vertSys.setVertMotors(-.1);
 		Robot.cuberSys.setFlywheelMotors(0);
-		if (Robot.cuberSys.getUltrasonicInches() > CuberSubsystem.ULTRASONIC_RANGE || Robot.cuberSys.getUltrasonicInches() <= 0.05) {
+		if (Robot.cuberSys.getUltrasonicInches() > CuberSubsystem.ULTRASONIC_RANGE || Robot.cuberSys.ultrasonicOverride || Robot.cuberSys.getUltrasonicInches() <= 0.05) {
 			Robot.cuberSys.setFlywheelMotors(0.8);
 		}
 
@@ -22,7 +24,7 @@ public class PickUpCommand extends Command {
 
 	@Override
 	protected void execute() {
-		if (Robot.cuberSys.getUltrasonicInches() < CuberSubsystem.ULTRASONIC_RANGE && Robot.cuberSys.getUltrasonicInches() > 0.01) {
+		if (Robot.cuberSys.getUltrasonicInches() < CuberSubsystem.ULTRASONIC_RANGE && Robot.cuberSys.getUltrasonicInches() > 0.05 && !Robot.cuberSys.ultrasonicOverride) {
 			Robot.cuberSys.setFlywheelMotors(0);
 		}
 		
@@ -36,12 +38,13 @@ public class PickUpCommand extends Command {
 
 	@Override
 	protected void end() {
+		Robot.vertSys.setVertMotors(0);
 		Robot.cuberSys.setFlywheelMotors(0);
 	}
 
 	@Override
 	protected void interrupted() {
-		Robot.cuberSys.setFlywheelMotors(0);
+		end();
 	}
 
 }

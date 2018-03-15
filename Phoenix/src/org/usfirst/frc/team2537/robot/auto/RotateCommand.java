@@ -9,10 +9,11 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class RotateCommand extends Command {
 	private double targetAngle;
-	private static final double DEFAULT_PERCENT_OUTPUT = 0.90;
-	private static final double MIN_PERCENT_OUTPUT = 0.70;
-	private static final double ANGLE_kP = 2;
+	private static final double DEFAULT_PERCENT_OUTPUT = 1;
+	private static final double MIN_PERCENT_OUTPUT = 0.55;
+	private static final double ANGLE_kP = 1;
 	private static final double TOLERANCE = 2; // degrees
+	private double startingAngle;
 	private double currentAngle;
     public RotateCommand(double angle) {
     	requires(Robot.driveSys);
@@ -26,6 +27,7 @@ public class RotateCommand extends Command {
     protected void initialize() {
     	Navx.getInstance().reset();
     	Navx.getInstance().reset();
+    	startingAngle = Navx.getInstance().getAngle();
     	Robot.driveSys.setMode(ControlMode.PercentOutput);
     }
 
@@ -34,7 +36,7 @@ public class RotateCommand extends Command {
     	currentAngle = Navx.getInstance().getAngle();
     	double deltaAngle = currentAngle - targetAngle;
     	double power = DEFAULT_PERCENT_OUTPUT;
-    	power = Math.min(power, Math.abs(deltaAngle/180*power*ANGLE_kP)) * Math.signum(deltaAngle);
+    	power = Math.min(power, Math.abs(deltaAngle/Math.abs(targetAngle - startingAngle)*power*ANGLE_kP)) * Math.signum(deltaAngle);
 		power = Math.max(Math.abs(power), Math.abs(MIN_PERCENT_OUTPUT)) * Math.signum(power);
     	Robot.driveSys.setMotors(-power,  Motor.LEFT);
 		Robot.driveSys.setMotors( power, Motor.RIGHT);

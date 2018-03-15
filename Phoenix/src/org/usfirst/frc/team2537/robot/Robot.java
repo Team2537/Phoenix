@@ -2,10 +2,11 @@ package org.usfirst.frc.team2537.robot;
 
 import org.usfirst.frc.team2537.robot.auto.AutoChooser;
 import org.usfirst.frc.team2537.robot.auto.Navx;
+import org.usfirst.frc.team2537.robot.auto.RotateCommand;
 import org.usfirst.frc.team2537.robot.auto.routes.RouteHandler;
 import org.usfirst.frc.team2537.robot.auto.routes.RouteHandler.AutoChooserOption;
+import org.usfirst.frc.team2537.robot.auto.vision.CoordinateSystems;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
-import org.usfirst.frc.team2537.robot.auto.vision.VisionRotateCommand;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
 import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
@@ -60,6 +61,7 @@ public class Robot extends IterativeRobot {
 		cuberSys.registerButtons();
 
 		visionSerial = new VisionInput();
+		visionSerial.initDefaultCommand();
 		
 		CameraServer.getInstance().startAutomaticCapture();
 
@@ -93,8 +95,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+//		if (visionSerial.getVisionPacket().length!=0) {
+//			SmartDashboard.putString("center", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().toString());
+//		}
 		if (visionSerial.getVisionPacket().length!=0) {
-			SmartDashboard.putString("center", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().toString());
+			SmartDashboard.putNumber("RPi Value", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().getY(CoordinateSystems.CARTESIAN));
 		}
 	}
 
@@ -122,6 +127,11 @@ public class Robot extends IterativeRobot {
 		}
 //		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
 	}
+	
+	@Override
+	public void testInit() {
+		Scheduler.getInstance().add(new RotateCommand(90));
+	}
 
 	@Override
 	public void testPeriodic() {
@@ -129,6 +139,10 @@ public class Robot extends IterativeRobot {
 	
 	}
 
+	@Override
+	public void disabledPeriodic() { 
 
+	}
+	
 
 }

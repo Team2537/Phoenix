@@ -21,12 +21,12 @@ public abstract class DriveStraightTemplate extends Command {
 	
 	public static final double DISTANCE_TOLERANCE = 1;
 
-	public static final double SLOW_DOWN_POWER = 300;
+	public static final double SLOW_DOWN_POWER = 100;
 
-	public static final double ANGLE_kP = 1;
+	public static final double ANGLE_kP = 2;
 
 	/** value [0,1] representing the percent of power to motors */
-	public static final double DEFAULT_PERCENT_OUTPUT = 0.68;
+	public static final double DEFAULT_PERCENT_OUTPUT = 1.00;
 	
 	public static final double MIN_PERCENT_OUTPUT = 0.15;
 
@@ -114,6 +114,8 @@ public abstract class DriveStraightTemplate extends Command {
 		if (Math.abs(currentAngle) > ANGLE_TOLERANCE) {
 			powerAdjustmentFromAngle = currentAngle/180*ANGLE_kP*power * backwardsMultiplier;
 		}
+		
+		System.out.println("power adjustment from angle: " + powerAdjustmentFromAngle);
 		
 		Robot.driveSys.setMotors((power - powerAdjustmentFromAngle) * backwardsMultiplier, Motor.LEFT);
 		Robot.driveSys.setMotors((power + powerAdjustmentFromAngle) * backwardsMultiplier, Motor.RIGHT);

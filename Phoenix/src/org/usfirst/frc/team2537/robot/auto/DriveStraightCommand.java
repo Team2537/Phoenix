@@ -13,7 +13,7 @@ public class DriveStraightCommand extends DriveStraightTemplate {
 	
 	public DriveStraightCommand(double targetInches) {
 		super();
-		this.targetInches = 0.75 * targetInches;
+		this.targetInches = targetInches;
 	}
 	
 	@Override

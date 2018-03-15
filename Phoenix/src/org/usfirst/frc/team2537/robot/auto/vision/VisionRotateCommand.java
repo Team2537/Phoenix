@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class VisionRotateCommand extends Command {
 
 	/* when the pi cannot see the target, we spin faster to try to find the target */
-	private static final double DEFAULT_PERCENT_OUTPUT = 1.00;
+	private static final double DEFAULT_PERCENT_OUTPUT = 0.60;
 	private static final double CENTER_kP = 8;
-	private static final double TURNING_TOLERANCE = 0.2;
+	private static final double TURNING_TOLERANCE = 0.01;
 	private static final double PI_MOUNT_OFFSET = -0.25;
 	
 	private double centerX;
@@ -35,11 +35,16 @@ public class VisionRotateCommand extends Command {
 
 	@Override
 	protected void initialize() {
+		System.out.println("starting visionRotate");
 	}
 
 	@Override
 	protected void execute() {
 		Target[] targets = Robot.visionSerial.getVisionPacket();
+		for(Target target : targets) {
+			System.out.println(target.getBoundingBoxCenter().y +": "+(target.getBoundingBoxCenter().y/240.0 - 1));
+		}
+		System.out.println();
 		/* if we cannot see the target, we spin faster */
 		double power = DEFAULT_PERCENT_OUTPUT;
 		if(lastSide == Side.LEFT){
@@ -68,12 +73,13 @@ public class VisionRotateCommand extends Command {
 	@Override
 	protected boolean isFinished() {
 		System.out.println("centerX: " + centerX);
-		return false && stopAtTarget && Math.abs(centerX) < TURNING_TOLERANCE;
+		return stopAtTarget && Math.abs(centerX) < TURNING_TOLERANCE;
 	}
 
 	@Override
 	protected void end() {
 		Robot.driveSys.setMotors(0, Motor.ALL);
+		System.out.println("ending visionROtate");
 	}
 
 	@Override

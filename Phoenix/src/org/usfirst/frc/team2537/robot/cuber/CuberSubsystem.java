@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2537.robot.cuber;
 
 import org.usfirst.frc.team2537.robot.Ports;
+import org.usfirst.frc.team2537.robot.Robot;
 import org.usfirst.frc.team2537.robot.input.HumanInput;
 import org.usfirst.frc.team2537.robot.resources.CANTalon;
 
@@ -9,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CuberSubsystem extends Subsystem {
@@ -18,10 +20,11 @@ public class CuberSubsystem extends Subsystem {
 	private DigitalInput flipperHallEffectOne;
 	private DigitalInput flipperHallEffectTwo;
 	private Ultrasonic ultrasonic;
+	public boolean ultrasonicOverride = false;
 	public static final double FLYWHEEL_SPEED = .5;
 	public static final double FLYWHEEL_CURRENT_LIMIT = 35; // TODO: determine max amps
 	public static final double CUTOFF_DISTANCE = 2; // TODO: determine cutoff distance
-	public static final int ULTRASONIC_RANGE = 6;
+	public static final int ULTRASONIC_RANGE = 3;
 	public static final double FLIPPER_TIMEOUT = 5000; //TODO: Figure this one out
 	
 
@@ -53,6 +56,32 @@ public class CuberSubsystem extends Subsystem {
 		HumanInput.registerWhileHeldCommand(HumanInput.cuberExpelSlowButton, new ExpelCommand(0.5));
 		HumanInput.registerWhileHeldCommand(HumanInput.cuberFlipDownButton, new LowerFlipperCommand());
 		HumanInput.registerWhileHeldCommand(HumanInput.cuberFlipUpButton, new LiftFlipperCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.enableUltrasonicOverride, new Command() {
+
+			@Override
+			protected void initialize() {
+				Robot.cuberSys.ultrasonicOverride = true;
+			}
+			
+			@Override
+			protected boolean isFinished() {
+				return true;
+			} 
+			
+		});
+		HumanInput.registerWhenPressedCommand(HumanInput.disableUltrasonicOverride, new Command() {
+
+			@Override
+			protected void initialize() {
+				Robot.cuberSys.ultrasonicOverride = false;
+			}
+			
+			@Override
+			protected boolean isFinished() {
+				return true;
+			} 
+			
+		});
 	}
 	
 	public void setFlywheelMotors(double speed) {

@@ -18,13 +18,13 @@ public class OppositeSideSwitchRoute extends CommandGroup {
 		if(left) addSequential(new RotateCommand(90));
 		else addSequential(new RotateCommand(-90));
 
-		addParallel(new LowerFlipperCommand());
-		addParallel(new VertUpCommand(Specs.SWITCH_HEIGHT));
+		addParallel(new LowerFlipperCommand(), 0.5);
+		addParallel(new VertUpCommand(Specs.SWITCH_HEIGHT), 0.5);
 		addSequential(new DriveStraightCommand(70));
 		if(left) addSequential(new RotateCommand(90));
 		else addSequential(new RotateCommand(-90));
 
-		addSequential(new DriveStraightCommand(40), 0.5);
+		addSequential(new DriveStraightCommand(45), 1.5);
 		addSequential(new ExpelCommand(0.5), Specs.EXPEL_TIME);
 	}
 }

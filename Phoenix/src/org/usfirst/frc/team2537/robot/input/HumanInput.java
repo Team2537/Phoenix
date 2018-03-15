@@ -23,6 +23,8 @@ public class HumanInput {
 	public static Button cuberExpelSlowButton = new JoystickButton(leftJoystick, Ports.EXPEL_SLOW_BUTTON);
 	public static Button cuberFlipDownButton = new JoystickButton(leftJoystick, Ports.FLIP_MANIPULATOR_DOWN_BUTTON);
 	public static Button cuberFlipUpButton = new JoystickButton(leftJoystick, Ports.FLIP_MANIPULATOR_UP_BUTTON);
+	public static Button enableUltrasonicOverride = new JoystickButton(leftJoystick, Ports.OVERRIDE_KEY_TWO);
+	public static Button disableUltrasonicOverride = new JoystickButton(leftJoystick, Ports.OVERRIDE_KEY_ONE);
 	
 	public static Button climbOnButton = new JoystickButton(rightJoystick, Ports.CLIMB_ON_BUTTON);
 	public static Button climbOffButton = new JoystickButton(rightJoystick, Ports.CLIMB_OFF_BUTTON);

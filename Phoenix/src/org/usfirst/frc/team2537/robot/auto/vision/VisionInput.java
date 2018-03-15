@@ -1,11 +1,13 @@
 package org.usfirst.frc.team2537.robot.auto.vision;
 
 import org.usfirst.frc.team2537.robot.Ports;
+import org.usfirst.frc.team2537.robot.Robot;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class VisionInput {
+public class VisionInput extends Subsystem {
 	public final boolean DEBUG = true;
 	public final int BAUDRATE = 38400;
 
@@ -17,16 +19,12 @@ public class VisionInput {
 		serial = new SerialPort(BAUDRATE, Ports.RASPI);
 		buffer = "";
 		lastCompletedString = "";
-		new Command(){
-			@Override
-			protected void execute() {
-				addToBuffer();
-			}
-			@Override
-			protected boolean isFinished() {
-				return false;
-			}
-		}.start();
+	}
+	
+	@Override
+	public void initDefaultCommand() {
+		// TODO Auto-generated method stub
+		this.setDefaultCommand(new VisionCommand());
 	}
 
 	public Target[] getVisionPacket() {
@@ -74,8 +72,6 @@ public class VisionInput {
 				String stringToAppend = serial.readString();
 				serial.flush();
 				
-				System.out.println(stringToAppend);
-				
 				int packetEnd = stringToAppend.lastIndexOf('<');
 				if(packetEnd == -1){
 					buffer += stringToAppend;
@@ -96,8 +92,29 @@ public class VisionInput {
 		}
 	}
 
+
+
 	/*
 	 * public void sendVisionPacket(Point[] packetsToSend) {
 	 * serial.writeString(encodeVisionPacket(packetsToSend)); }
 	 */
+}
+
+class VisionCommand extends Command {
+
+	public VisionCommand() {
+		requires(Robot.visionSerial);
+	}
+	
+	@Override
+	protected void execute() {
+		Robot.visionSerial.addToBuffer();
+	}
+	
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 }
