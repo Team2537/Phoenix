@@ -56,18 +56,8 @@ public class VertSubsystem extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		//checks how long the motor has gone without any joystick inputs; currently, it only checks if the cuber is falling and 
-		long startTime = System.currentTimeMillis();
-		double speedTest = getSpeedVertMotorOne();
-		if (speedTest < 0 && startTime >= 4000) { //when vertMotorOne begins sliding down vert actuator and timer reaches 4 seconds
-			while(speedTest < 0) {                //while vertMotor is still sliding down
-				speedTest = speedTest + .1;		  //motor will boost up back actuator to original position
-				Robot.vertSys.setVertMotors(-speedTest);
-			}
-			
-			speedTest = Robot.vertSys.getSpeedVertMotorOne(); 
-			Robot.vertSys.setVertMotors(-speedTest); //sets motors to the opposite direction and power they are currently going
-		}
+		
+		setDefaultCommand(new keepVertUp());
 	
 	}
 
@@ -111,9 +101,7 @@ public class VertSubsystem extends Subsystem {
 	}
 	
 	
-	public void keepVertUp() {
-		
-	}
+	
 	//things that need work
 	//is setVertMotors method correct?
 	//merge both up and down into one method
