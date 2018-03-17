@@ -7,20 +7,22 @@ import edu.wpi.first.wpilibj.command.Command;
 public class keepVertUp extends Command {
 	long startTime;
 	double speedTest; 
+	
 	protected void initialize() {
-		startTime = System.currentTimeMillis();
+	
+		startTime = System.currentTimeMillis(); //timer
+	
 	}
 	
 	protected void execute() {
 		speedTest = Robot.vertSys.getSpeedVertMotorOne();
 		//checks how long the motor has gone without any joystick inputs; currently, it only checks if the cuber is falling and 
-		if (speedTest < 0 && startTime >= 4000) { //when vertMotorOne begins sliding down vert actuator and timer reaches 4 seconds
-			while(speedTest < 0) {                //while vertMotor is still sliding down
-				speedTest = speedTest + .1;		  //motor will boost up back actuator to original position
+		if (speedTest < 0 && startTime >= 4000) { //when vertMotorOne begins sliding down vert actuator as timer reaches 4 seconds
+			while(speedTest < 0) {                //motor will boost up back actuator to original position whenever it slides down
+				speedTest = speedTest + .1;		 
 				Robot.vertSys.setVertMotors(-speedTest);
 			}
-		speedTest = Robot.vertSys.getSpeedVertMotorOne(); 
-		Robot.vertSys.setVertMotors(-speedTest); //sets motors to the opposite direction and power they are currently going
+
 		}
 	}
 	@Override
