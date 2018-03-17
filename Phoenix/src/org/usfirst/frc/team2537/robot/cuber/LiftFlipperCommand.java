@@ -28,6 +28,7 @@ public class LiftFlipperCommand extends Command {
 	} 
 	
 	protected void execute() {
+		Robot.vertSys.initDefaultCommand();
 		
 	}
 

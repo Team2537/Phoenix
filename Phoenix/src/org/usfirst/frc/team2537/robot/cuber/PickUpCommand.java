@@ -21,6 +21,7 @@ public class PickUpCommand extends Command {
 
 	@Override
 	protected void execute() {
+		Robot.vertSys.initDefaultCommand();
 	}
 	
 	/**

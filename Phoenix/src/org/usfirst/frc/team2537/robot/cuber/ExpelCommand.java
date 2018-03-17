@@ -21,6 +21,7 @@ public class ExpelCommand extends Command {
 
 	@Override
 	protected void execute() {
+		Robot.vertSys.initDefaultCommand();
 
 	}
 	

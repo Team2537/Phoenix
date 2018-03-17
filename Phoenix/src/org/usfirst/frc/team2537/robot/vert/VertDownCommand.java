@@ -20,6 +20,7 @@ public class VertDownCommand extends Command {
 
 	@Override
 	protected void execute() {
+		Robot.vertSys.initDefaultCommand();
 		//stops bot when it exceeds amp limit for channel 5
 		if (Robot.vertSys.getCurrentOne() >= AMP_LIMIT) {
 			Robot.vertSys.setVertMotors(0);

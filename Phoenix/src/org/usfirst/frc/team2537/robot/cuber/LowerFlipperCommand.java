@@ -27,6 +27,7 @@ public class LowerFlipperCommand extends Command {
 	} 
 
 	protected void execute() {
+		Robot.vertSys.initDefaultCommand();
 		//prevents cuber from getting stuck 
 		//by checking if vertical actuator is still moving 
 		//while cuber stops and if cuber is also horizontal
