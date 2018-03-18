@@ -47,9 +47,9 @@ public class Robot extends IterativeRobot {
 		smartDashboard = new SmartDashboard();
 		Navx.getInstance().reset();
 
-
 		vertSys = new VertSubsystem();
 		vertSys.registerButtons();
+		vertSys.initDefaultCommand();
 
 		climbSys = new ClimbSubsystem();
 		climbSys.registerButtons();
@@ -62,7 +62,7 @@ public class Robot extends IterativeRobot {
 
 		visionSerial = new VisionInput();
 		visionSerial.initDefaultCommand();
-		
+
 		CameraServer.getInstance().startAutomaticCapture();
 
 //		pdp = new PowerDistributionPanel();
