@@ -24,8 +24,7 @@ public class Navx extends AHRS {
 	 */
 	@Override
 	public double getAngle(){
-//		return ((super.getAngle() + 180) % 360 + 360) % 360 - 180;
-		return super.getAngle();
+		return ((super.getAngle() + 180) % 360 + 360) % 360 - 180;
 	}
 	
 	/**

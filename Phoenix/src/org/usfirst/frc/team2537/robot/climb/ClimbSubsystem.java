@@ -8,17 +8,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class ClimbSubsystem extends Subsystem {
 
-	private Talon climbMotorOne;
-	private Talon climbMotorTwo;
-	private Talon climbMotorThree;
-	
+//	private Talon climbMotorOne;
+//	private Talon climbMotorTwo;
+//	private Talon climbMotorThree;
+//	
 	public static final double MAX_CURRENT = 131; //TODO: test for the max current value (131 is the listed CIM stall current)
 	
 	public ClimbSubsystem() {
 		
-		climbMotorOne = new Talon(Ports.CLIMB_MOTOR_ONE);
-		climbMotorTwo = new Talon(Ports.CLIMB_MOTOR_TWO);
-		climbMotorThree = new Talon(Ports.CLIMB_MOTOR_THREE);
+//		climbMotorOne = new Talon(Ports.CLIMB_MOTOR_ONE);
+//		climbMotorTwo = new Talon(Ports.CLIMB_MOTOR_TWO);
+//		climbMotorThree = new Talon(Ports.CLIMB_MOTOR_THREE);
 	}
 
 	@Override
@@ -34,9 +34,9 @@ public class ClimbSubsystem extends Subsystem {
 
 	public void setClimbMotors(double speed) {
 		// CHECK THAT THESE ARE CORRECT BEFORE STARTING TO AVOID DESTROYING GEARBOX
-		climbMotorOne.set(speed);
-		climbMotorTwo.set(speed);
-		climbMotorThree.set(speed);
+//		climbMotorOne.set(speed);
+//		climbMotorTwo.set(speed);
+//		climbMotorThree.set(speed);
 	}
 
 //	public double getCurrentClimbMotorOne() {

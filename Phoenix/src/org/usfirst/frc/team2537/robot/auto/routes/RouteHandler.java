@@ -21,7 +21,7 @@ public class RouteHandler {
 	public static Command HandleRoute(AutoChooserOption autoChooserOption, String fmsData) {
 		String fmsCroppedConfiguration = fmsData.substring(0, 2);
 		if(autoChooserOption == AutoChooserOption.DRIVE_STRAIGHT) {
-			return new DriveStraightCommand(290);
+			return new DriveStraightCommand(148.65);
 		} else if (autoChooserOption == AutoChooserOption.VISION_ROTATE_TEST) {
 			return new VisionRotateCommand();
 		} else if(autoChooserOption == AutoChooserOption.SOLO_LEFT) {

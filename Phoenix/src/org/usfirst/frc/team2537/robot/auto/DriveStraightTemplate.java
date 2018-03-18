@@ -21,9 +21,9 @@ public abstract class DriveStraightTemplate extends Command {
 	
 	public static final double DISTANCE_TOLERANCE = 1;
 
-	public static final double SLOW_DOWN_POWER = 100;
+	public static final double SLOW_DOWN_POWER = 300;
 
-	public static final double ANGLE_kP = 2;
+	public static final double ANGLE_kP = 20;
 
 	/** value [0,1] representing the percent of power to motors */
 	public static final double DEFAULT_PERCENT_OUTPUT = 1.00;
@@ -101,7 +101,7 @@ public abstract class DriveStraightTemplate extends Command {
 		}
 
 		if (slowingDown) {
-			power *= remainingInches / remainingInchesAtSlowdown;
+			power = MIN_PERCENT_OUTPUT;
 		}
 		
 		power = Math.max(power, MIN_PERCENT_OUTPUT);
@@ -115,7 +115,7 @@ public abstract class DriveStraightTemplate extends Command {
 			powerAdjustmentFromAngle = currentAngle/180*ANGLE_kP*power * backwardsMultiplier;
 		}
 		
-		System.out.println("power adjustment from angle: " + powerAdjustmentFromAngle);
+//		System.out.println("power adjustment from angle: " + powerAdjustmentFromAngle);
 		
 		Robot.driveSys.setMotors((power - powerAdjustmentFromAngle) * backwardsMultiplier, Motor.LEFT);
 		Robot.driveSys.setMotors((power + powerAdjustmentFromAngle) * backwardsMultiplier, Motor.RIGHT);
@@ -123,8 +123,7 @@ public abstract class DriveStraightTemplate extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		System.out.println("speed: " + Robot.driveSys.getEncoderVelocity() + "; " + 
-				"remaining dist: " + getRemainingInches());
+		System.out.println("speed: " + Robot.driveSys.getEncoderVelocity() + "; " + "remaining dist: " + getRemainingInches());
 		return getRemainingInches() * backwardsMultiplier <= DISTANCE_TOLERANCE;
 	}
 

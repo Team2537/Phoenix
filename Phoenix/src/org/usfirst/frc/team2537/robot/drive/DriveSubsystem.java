@@ -6,9 +6,9 @@ import org.usfirst.frc.team2537.robot.units.Times;
 import org.usfirst.frc.team2537.robot.units.Units;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PWMTalonSRX;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -34,11 +34,15 @@ public class DriveSubsystem extends Subsystem {
 	/******************************************************************************/
 	/* INSTANCE VARIABLES */
 	/******************************************************************************/
-
-	private TalonSRX talonFrontLeft;
-	private TalonSRX talonFrontRight;
-	private TalonSRX talonBackLeft;
-	private TalonSRX talonBackRight;
+//  lmao weed
+//	private TalonSRX talonFrontLeft;
+//	private TalonSRX talonFrontRight;
+//	private TalonSRX talonBackLeft;
+//	private TalonSRX talonBackRight;
+	private PWMTalonSRX talonLeft;
+	private PWMTalonSRX talonRight;
+	private Encoder leftTalonEncoder;
+	private Encoder rightTalonEncoder;
 	private Ultrasonic ultrasonic;
 	public ControlMode controlMode = ControlMode.PercentOutput;
 
@@ -47,17 +51,23 @@ public class DriveSubsystem extends Subsystem {
 	/******************************************************************************/
 
 	public DriveSubsystem() {
-		talonFrontLeft = new TalonSRX(Ports.FRONT_LEFT_DRIVE_MOTOR);
-		talonFrontRight = new TalonSRX(Ports.FRONT_RIGHT_DRIVE_MOTOR);
-		talonBackLeft = new TalonSRX(Ports.BACK_LEFT_DRIVE_MOTOR);
-		talonBackRight = new TalonSRX(Ports.BACK_RIGHT_DRIVE_MOTOR);
-
-		talonFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		talonBackLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		
-		ultrasonic = new Ultrasonic(Ports.DRIVE_ULTRASONIC_TRIGGER, Ports.DRIVE_ULTRASONIC_ECHO);
+//		talonFrontLeft = new TalonSRX(Ports.FRONT_LEFT_DRIVE_MOTOR);
+//		talonFrontRight = new TalonSRX(Ports.FRONT_RIGHT_DRIVE_MOTOR);
+//		talonBackLeft = new TalonSRX(Ports.BACK_LEFT_DRIVE_MOTOR);
+//		talonBackRight = new TalonSRX(Ports.BACK_RIGHT_DRIVE_MOTOR);
+//
+//		talonFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+//		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+//		talonBackLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+//		talonFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+//		
+		talonLeft=new PWMTalonSRX(Ports.FRONT_LEFT_DRIVE_MOTOR);
+		talonRight=new PWMTalonSRX(Ports.FRONT_RIGHT_DRIVE_MOTOR);
+		leftTalonEncoder=new Encoder(Ports.LEFT_TALON_ENCODER_A,Ports.LEFT_TALON_ENCODER_B,
+				false, Encoder.EncodingType.k4X);
+		rightTalonEncoder=new Encoder(Ports.RIGHT_TALON_ENCODER_A,Ports.RIGHT_TALON_ENCODER_B,
+				false, Encoder.EncodingType.k4X);
+		//ultrasonic = new Ultrasonic(Ports.DRIVE_ULTRASONIC_TRIGGER, Ports.DRIVE_ULTRASONIC_ECHO);
 	}
 
 	/******************************************************************************/
@@ -75,15 +85,11 @@ public class DriveSubsystem extends Subsystem {
 
 	/* return string containing all encoders individually and the uniform average */
 	public String justFuckMyShitUpFam() {
-		SmartDashboard.putNumber("front left", talonFrontLeft.getSelectedSensorPosition(0)*LEFT_MOTOR_DIRECTION);
-		SmartDashboard.putNumber("front right", talonFrontRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION);
-		SmartDashboard.putNumber("back left", talonBackLeft.getSelectedSensorPosition(0)*LEFT_MOTOR_DIRECTION);
-		SmartDashboard.putNumber("back right", talonBackRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION);
+		SmartDashboard.putNumber("left", leftTalonEncoder.get()*LEFT_MOTOR_DIRECTION);
+		SmartDashboard.putNumber("right", rightTalonEncoder.get()*RIGHT_MOTOR_DIRECTION);
 		SmartDashboard.putNumber("speed", getEncoderVelocity());
-		return "front left: "+talonFrontLeft.getSelectedSensorPosition(0)*LEFT_MOTOR_DIRECTION+"\n"
-				+ "front right: " + talonFrontRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION+"\n"
-				+ "back left: " + talonBackLeft.getSelectedSensorPosition(0)*LEFT_MOTOR_DIRECTION + "\n"
-				+ "back right: " + talonBackRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION + "\n"
+		return "left: "+leftTalonEncoder.get()*LEFT_MOTOR_DIRECTION+"\n"
+				+ "right: " + rightTalonEncoder.get()*RIGHT_MOTOR_DIRECTION+"\n"
 				+ "uniform average: " + Units.convertDistance(getEncoderDistance(), Distances.INCHES, Distances.TICKS);
 	}
 	
@@ -91,11 +97,9 @@ public class DriveSubsystem extends Subsystem {
 	 * @return average value of all talons in inches
 	 */
 	public double getEncoderDistance() {
-		double[] encoderTicks = new double[4];
-		encoderTicks[0] = talonFrontLeft.getSelectedSensorPosition(0) * LEFT_MOTOR_DIRECTION;
-		encoderTicks[1] = talonFrontRight.getSelectedSensorPosition(0) * RIGHT_MOTOR_DIRECTION;
-		encoderTicks[2] = talonBackLeft.getSelectedSensorPosition(0) * LEFT_MOTOR_DIRECTION;
-		encoderTicks[3] = talonBackRight.getSelectedSensorPosition(0) * RIGHT_MOTOR_DIRECTION;
+		double[] encoderTicks = new double[2];
+		encoderTicks[0] = leftTalonEncoder.get() * LEFT_MOTOR_DIRECTION;
+		encoderTicks[1] = rightTalonEncoder.get() * RIGHT_MOTOR_DIRECTION;
 		
 		double avg = getUniformAverage(encoderTicks, ENCODER_MIN_PERCENT_AGREEMENT);
 		return Units.convertDistance(avg, Distances.TICKS, Distances.INCHES);
@@ -105,14 +109,12 @@ public class DriveSubsystem extends Subsystem {
 	 * @return average velocity of all talons in inches/second
 	 */
 	public double getEncoderVelocity() {
-		double[] encoderTicks = new double[4];
-		encoderTicks[0] = talonFrontLeft.getSelectedSensorVelocity(0) * LEFT_MOTOR_DIRECTION;
-		encoderTicks[1] = talonFrontRight.getSelectedSensorVelocity(0) * RIGHT_MOTOR_DIRECTION;
-		encoderTicks[2] = talonBackLeft.getSelectedSensorVelocity(0) * LEFT_MOTOR_DIRECTION;
-		encoderTicks[3] = talonBackRight.getSelectedSensorVelocity(0) * RIGHT_MOTOR_DIRECTION;
-		
-		double avg = getUniformAverage(encoderTicks, ENCODER_MIN_PERCENT_AGREEMENT);
-		return Units.convertSpeed(avg, Distances.TICKS, Times.HUNDRED_MS, Distances.INCHES, Times.SECONDS);
+		double[] encoderTicks = new double[2];
+		encoderTicks[0] = leftTalonEncoder.get() * LEFT_MOTOR_DIRECTION;
+		encoderTicks[1] = rightTalonEncoder.get() * RIGHT_MOTOR_DIRECTION;
+//		double averageEncoderTicks = getUniformAverage(encoderTicks, ENCODER_MIN_PERCENT_AGREEMENT);
+		double minimumValidEncoderTicks = getMinimumValidEncoder(encoderTicks, ENCODER_MIN_PERCENT_AGREEMENT);
+		return Units.convertSpeed(minimumValidEncoderTicks, Distances.TICKS, Times.HUNDRED_MS, Distances.INCHES, Times.SECONDS);
 	}
 	
 	private double getUniformAverage(double[] vals, double tolerance) {
@@ -137,12 +139,31 @@ public class DriveSubsystem extends Subsystem {
 		}
 		return sum / validVals;
 	}
+	
+	private double getMinimumValidEncoder(double[] vals, double tolerance) {
+		double maxVal = 0;
+		for(double val : vals){
+			if(Math.abs(val) > Math.abs(maxVal)){
+				maxVal = val;
+			}
+		}
+		
+		if(maxVal == 0){
+			return 0;
+		}
+		
+		double minValidVal = Double.MAX_VALUE;
+		for(double val : vals){
+			if((Math.abs(val) < Math.abs(minValidVal)) && (1 - (val / maxVal) <= tolerance)){
+				minValidVal = val;
+			}
+		}
+		return minValidVal;
+	}
 
 	public void resetEncoders() {
-		talonFrontRight.getSensorCollection().setQuadraturePosition(0, 0);
-		talonFrontLeft.getSensorCollection().setQuadraturePosition(0, 0);
-		talonBackRight.getSensorCollection().setQuadraturePosition(0, 0);
-		talonBackLeft.getSensorCollection().setQuadraturePosition(0, 0);
+		leftTalonEncoder.reset();
+		rightTalonEncoder.reset();
 	}
 
 	/******************************************************************************/
@@ -151,16 +172,16 @@ public class DriveSubsystem extends Subsystem {
 
 	public void setMotors(double speed, Motor id) {
 		if (id == Motor.FRONT_LEFT || id == Motor.LEFT || id == Motor.FRONT || id == Motor.ALL) {
-			talonFrontLeft.set(controlMode, speed * LEFT_MOTOR_DIRECTION);
+			talonLeft.set(speed * LEFT_MOTOR_DIRECTION);
 		}
 		if (id == Motor.FRONT_RIGHT || id == Motor.RIGHT || id == Motor.FRONT || id == Motor.ALL) {
-			talonFrontRight.set(controlMode, speed * RIGHT_MOTOR_DIRECTION);
+			talonRight.set(speed * RIGHT_MOTOR_DIRECTION);
 		}
 		if (id == Motor.BACK_LEFT || id == Motor.LEFT || id == Motor.BACK || id == Motor.ALL) {
-			talonBackLeft.set(controlMode, speed * LEFT_MOTOR_DIRECTION);
+			talonLeft.set(speed * LEFT_MOTOR_DIRECTION);
 		}
 		if (id == Motor.BACK_RIGHT || id == Motor.RIGHT || id == Motor.BACK || id == Motor.ALL) {
-			talonBackRight.set(controlMode, speed * RIGHT_MOTOR_DIRECTION);
+			talonRight.set(speed * RIGHT_MOTOR_DIRECTION);
 		}
 	}
 

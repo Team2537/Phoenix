@@ -43,9 +43,13 @@ public class Ports {
 
 	/********** Sensors **********/
 
+	public static final int LEFT_TALON_ENCODER_A = 0, LEFT_TALON_ENCODER_B = 1,
+			RIGHT_TALON_ENCODER_A = 2, RIGHT_TALON_ENCODER_B=3;
+	
 	// Encoders
 	public static final int LIFT_ENCODER_A = 1, LIFT_ENCODER_B = 2;
-
+	
+	
 	// Ultrasonic
 	public static final int CUBER_ULTRASONIC_TRIGGER = 5, CUBER_ULTRASONIC_ECHO = 4;// CUBER_ULTRASONIC_DUMMY = 9;
 

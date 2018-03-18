@@ -14,22 +14,22 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class VertSubsystem extends Subsystem {
 
-	private CANTalon vertMotorOne;
-	private CANTalon vertMotorTwo;
+//	private CANTalon vertMotorOne;
+//	private CANTalon vertMotorTwo;
 	private DigitalInput limitSwitch;
 	public boolean enableReadSwitch = true;
 	double current;
 
 	public VertSubsystem() { 
-		vertMotorOne = new CANTalon(Ports.VERT_MOTOR_ONE);
-		vertMotorTwo = new CANTalon(Ports.VERT_MOTOR_TWO);
+//		vertMotorOne = new CANTalon(Ports.VERT_MOTOR_ONE);
+//		vertMotorTwo = new CANTalon(Ports.VERT_MOTOR_TWO);
+//		
+//		vertMotorOne.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+//		
+//		vertMotorTwo.setControlMode(ControlMode.Follower);
+//		vertMotorTwo.follow(vertMotorOne);
 		
-		vertMotorOne.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		
-		vertMotorTwo.setControlMode(ControlMode.Follower);
-		vertMotorTwo.follow(vertMotorOne);
-		
-		limitSwitch = new DigitalInput(Ports.VERT_LIMIT_SWITCH);
+		//limitSwitch = new DigitalInput(Ports.VERT_LIMIT_SWITCH);
 	}
 
 	public void initDefaultCommand() {
@@ -70,24 +70,26 @@ public class VertSubsystem extends Subsystem {
 
 	public void setVertMotors(double speed) {
 		// CHECK THAT THESE ARE CORRECT BEFORE STARTING TO AVOID DESTROYING GEARBOX
-		vertMotorOne.set(speed);
+//		vertMotorOne.set(speed);
 		
 	
 	}
 	
 	public double getEncoderPos() {
-		return vertMotorOne.getSelectedSensorPosition(0)*-1;
+//		return vertMotorOne.getSelectedSensorPosition(0)*-1;
+		return 0;
 	}
 	
 	public void resetEncoder() {
-		vertMotorOne.getSensorCollection().setQuadraturePosition(0, 0);
-		vertMotorOne.getSensorCollection().setQuadraturePosition(0, 0);
-		vertMotorOne.getSensorCollection().setQuadraturePosition(0, 0);
-		vertMotorOne.getSensorCollection().setQuadraturePosition(0, 0);
+//		vertMotorOne.getSensorCollection().setQuadraturePosition(0, 0);
+//		vertMotorOne.getSensorCollection().setQuadraturePosition(0, 0);
+//		vertMotorOne.getSensorCollection().setQuadraturePosition(0, 0);
+//		vertMotorOne.getSensorCollection().setQuadraturePosition(0, 0);
 	}
 	
 	public boolean getLimitSwitch() {
-		return !limitSwitch.get() && enableReadSwitch;
+		//return !limitSwitch.get() && enableReadSwitch;
+		return false;
 	}
 	
 }
