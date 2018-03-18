@@ -22,17 +22,21 @@ public class VertDownCommand extends Command {
 	@Override
 	protected void initialize() {
 		Robot.vertSys.resetEncoder();
-		Robot.vertSys.setVertMotors(-.6);
+		Robot.vertSys.setVertMotors(0);
+		if (!Robot.vertSys.getLimitSwitch())
+			Robot.vertSys.setVertMotors(-.6);
 	}
 
 	@Override
 	protected void execute() {
+		if (Robot.vertSys.getLimitSwitch())
+			Robot.vertSys.setVertMotors(0);
 		System.out.println("encoder: " + -Robot.vertSys.getEncoderPos() + " target: " + targetDistance);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return (targetDistance > 0 && -Robot.vertSys.getEncoderPos() >= targetDistance);
+		return (targetDistance > 0 && -Robot.vertSys.getEncoderPos() >= targetDistance) || Robot.vertSys.getLimitSwitch();
 	}
 
 	@Override
