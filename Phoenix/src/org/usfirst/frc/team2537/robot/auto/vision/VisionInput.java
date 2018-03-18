@@ -68,8 +68,10 @@ public class VisionInput extends Subsystem {
 
 	public void addToBuffer() { // should run periodically
 		try { // wrapped in a try/catch because if the pi inits before the rio it'll crash otherwise
+			System.out.println("zongo");
 			if (serial.getBytesReceived() > 0) {
 				String stringToAppend = serial.readString();
+				System.out.println(stringToAppend);
 				serial.flush();
 				
 				int packetEnd = stringToAppend.lastIndexOf('<');

@@ -43,7 +43,7 @@ public class DriveSubsystem extends Subsystem {
 	private PWMTalonSRX talonRight;
 	private Encoder leftTalonEncoder;
 	private Encoder rightTalonEncoder;
-	private Ultrasonic ultrasonic;
+//	private Ultrasonic ultrasonic; //no ultrasonic on peanut
 	public ControlMode controlMode = ControlMode.PercentOutput;
 
 	/******************************************************************************/
@@ -67,7 +67,7 @@ public class DriveSubsystem extends Subsystem {
 				false, Encoder.EncodingType.k4X);
 		rightTalonEncoder=new Encoder(Ports.RIGHT_TALON_ENCODER_A,Ports.RIGHT_TALON_ENCODER_B,
 				false, Encoder.EncodingType.k4X);
-		//ultrasonic = new Ultrasonic(Ports.DRIVE_ULTRASONIC_TRIGGER, Ports.DRIVE_ULTRASONIC_ECHO);
+//		ultrasonic = new Ultrasonic(Ports.DRIVE_ULTRASONIC_TRIGGER, Ports.DRIVE_ULTRASONIC_ECHO);
 	}
 
 	/******************************************************************************/
@@ -203,7 +203,8 @@ public class DriveSubsystem extends Subsystem {
 	 * @return ultrasonic ping distance in inches
 	 */
 	public double getUltrasonicRange() {
-		return ultrasonic.getRangeInches();
+		//return ultrasonic.getRangeInches();
+		return 0;
 	}
 	
 	/******************************************************************************/

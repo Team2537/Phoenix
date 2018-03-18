@@ -13,7 +13,7 @@ import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
 import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
 import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
 
-import edu.wpi.first.wpilibj.CameraServer;
+//import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -62,7 +62,8 @@ public class Robot extends IterativeRobot {
 		visionSerial = new VisionInput();
 		visionSerial.initDefaultCommand();
 		
-		CameraServer.getInstance().startAutomaticCapture();
+		//no camera
+///		CameraServer.getInstance().startAutomaticCapture();
 
 //		pdp = new PowerDistributionPanel();
 
@@ -101,6 +102,8 @@ public class Robot extends IterativeRobot {
 		if (visionSerial.getVisionPacket().length!=0) {
 			SmartDashboard.putNumber("RPi Value", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().getY(CoordinateSystems.CARTESIAN));
 		}
+		else
+			System.out.println("dongo");
 	}
 
 	@Override
@@ -125,7 +128,7 @@ public class Robot extends IterativeRobot {
 		if(Robot.rampSys.isOpen) {
 			SmartDashboard.putString("Ramp is Open", "THE RAMP IS OPEN YOU SURE YOU WANT THIS");
 		}
-//		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
+		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
 	}
 	
 	@Override
