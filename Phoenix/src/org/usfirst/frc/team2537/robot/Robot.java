@@ -10,6 +10,7 @@ import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
 import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
+import org.usfirst.frc.team2537.robot.input.Cameras;
 import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
 import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
 
@@ -32,6 +33,7 @@ public class Robot extends IterativeRobot {
 
 	public static SmartDashboard smartDashboard;
 	public static VisionInput visionSerial;
+	public static Cameras cameras;
 
 	public static long startTime;
 	public static String fmsData="OOO";
@@ -62,8 +64,9 @@ public class Robot extends IterativeRobot {
 
 		visionSerial = new VisionInput();
 		visionSerial.initDefaultCommand();
-
-		CameraServer.getInstance().startAutomaticCapture();
+		
+		cameras = new Cameras();
+		cameras.start();
 
 //		pdp = new PowerDistributionPanel();
 
