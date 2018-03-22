@@ -1,8 +1,13 @@
 package org.usfirst.frc.team2537.robot;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 import org.usfirst.frc.team2537.robot.auto.AutoChooser;
 import org.usfirst.frc.team2537.robot.auto.Navx;
 import org.usfirst.frc.team2537.robot.auto.RotateCommand;
+import org.usfirst.frc.team2537.robot.auto.recording.RecordingChooser;
 import org.usfirst.frc.team2537.robot.auto.routes.RouteHandler;
 import org.usfirst.frc.team2537.robot.auto.routes.RouteHandler.AutoChooserOption;
 import org.usfirst.frc.team2537.robot.auto.vision.CoordinateSystems;
@@ -11,10 +16,10 @@ import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
 import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
 import org.usfirst.frc.team2537.robot.input.Cameras;
+import org.usfirst.frc.team2537.robot.input.HumanInput;
 import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
 import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
 
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -39,6 +44,9 @@ public class Robot extends IterativeRobot {
 	public static String fmsData="OOO";
 
 	private static SendableChooser<AutoChooserOption> autoChooser;
+	private static SendableChooser<Boolean> recordChooser; 
+	private static PrintWriter record;
+	private static int count;
 
 	@Override
 	public void robotInit() {
@@ -71,7 +79,9 @@ public class Robot extends IterativeRobot {
 //		pdp = new PowerDistributionPanel();
 
 		autoChooser = new AutoChooser();
+		recordChooser = new RecordingChooser();
 		SmartDashboard.putData("Auto Choices", autoChooser);
+		SmartDashboard.putData("Recording", recordChooser);
 	}
 
 	@Override
@@ -113,10 +123,35 @@ public class Robot extends IterativeRobot {
 		Navx.getInstance().reset();
 //		Robot.driveSys.resetEncoders();
 		startTime = System.currentTimeMillis();
+		if (recordChooser.getSelected() == true) {
+			File path = new File("/home/lvuser/record");
+			try {
+				record = new PrintWriter(path);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		count = 0;
 	}
 
 	@Override
 	public void teleopPeriodic() {
+		if (count < 750) {
+			Double LeftJoystick = -HumanInput.leftJoystick.getRawAxis(1);
+			Double RightJoystick = -HumanInput.rightJoystick.getRawAxis(1);
+			Boolean VertUp = HumanInput.vertRaiseButton.get();
+			Boolean VertDown = HumanInput.vertLowerButton.get();
+			Boolean CuberIntake = HumanInput.cuberPickUpButton.get();
+			Boolean CuberOutputSlow = HumanInput.cuberExpelSlowButton.get();
+			Boolean CuberOutputFast = HumanInput.cuberExpelFastButton.get();
+			String[] JoystickArray = new String[]{LeftJoystick.toString(), RightJoystick.toString()};
+			String[] VertArray = new String[]{VertUp.toString(), VertDown.toString()};
+			String[] CuberArray = new String[]{CuberIntake.toString(), CuberOutputSlow.toString(), CuberOutputFast.toString()};
+			String[] OutputArray = new String[]{String.join(",", JoystickArray), String.join(",", VertArray), String.join(",", CuberArray)};
+			record.println(String.join(";", OutputArray));
+		} else if (count == 750) {
+			record.close();
+		}
 		SmartDashboard.putNumber("angle",  Navx.getInstance().getAngle());
 		SmartDashboard.putNumber("pitch", Navx.getInstance().getPitch());
 		SmartDashboard.putNumber("yaw", Navx.getInstance().getYaw());

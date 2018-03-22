@@ -2,7 +2,6 @@ package org.usfirst.frc.team2537.robot.auto;
 
 import org.usfirst.frc.team2537.robot.auto.routes.RouteHandler.AutoChooserOption;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 public class AutoChooser extends SendableChooser<AutoChooserOption> {
@@ -15,6 +14,7 @@ public class AutoChooser extends SendableChooser<AutoChooserOption> {
 		addObject("Left Elims Ally 2-cube", AutoChooserOption.ELIMS_LEFT);
 		addObject("Right Elims Ally 2-cube", AutoChooserOption.ELIMS_RIGHT);
 		addObject("Vision Rotate (Test)", AutoChooserOption.VISION_ROTATE_TEST);
+		addObject("Playback Recording", AutoChooserOption.PLAYBACK_RECORDING);
 //		addObject("Straight w/ competent teammate", AutoChooserOption.DRIVE_STRAIGHT_WITH_COMPETENT_TEAMMATE);
 	}
 }
