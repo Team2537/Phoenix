@@ -61,7 +61,23 @@ public class PlaybackCommand extends Command {
 		} else {
 			Robot.cuberSys.setFlywheelMotors(0);
 		}
-			
+		
+		if (recordedArray[count][2][3] == "true") {
+			if(!Robot.cuberSys.getHolifaxOne()) {
+				Robot.cuberSys.setLiftMotor(1); //reverses direction to lift motor upwards
+			} else {
+				Robot.cuberSys.setLiftMotor(0);
+			}		
+		} else if (recordedArray[count][2][4] == "true") {
+			if(!Robot.cuberSys.getHolifaxTwo()) {
+				Robot.cuberSys.setLiftMotor(-1); //reverses direction to lift motor upwards
+			} else {
+				Robot.cuberSys.setLiftMotor(0);
+			}
+		} else {
+			Robot.cuberSys.setLiftMotor(0);
+		}
+		count++;
 	}
 
 	@Override

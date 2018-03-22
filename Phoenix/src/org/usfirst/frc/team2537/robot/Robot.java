@@ -144,9 +144,11 @@ public class Robot extends IterativeRobot {
 			Boolean CuberIntake = HumanInput.cuberPickUpButton.get();
 			Boolean CuberOutputSlow = HumanInput.cuberExpelSlowButton.get();
 			Boolean CuberOutputFast = HumanInput.cuberExpelFastButton.get();
+			Boolean CuberWinchUp = HumanInput.cuberFlipUpButton.get();
+			Boolean CuberWinchDown = HumanInput.cuberFlipDownButton.get();
 			String[] JoystickArray = new String[]{LeftJoystick.toString(), RightJoystick.toString()};
 			String[] VertArray = new String[]{VertUp.toString(), VertDown.toString()};
-			String[] CuberArray = new String[]{CuberIntake.toString(), CuberOutputSlow.toString(), CuberOutputFast.toString()};
+			String[] CuberArray = new String[]{CuberIntake.toString(), CuberOutputSlow.toString(), CuberOutputFast.toString(), CuberWinchUp.toString(), CuberWinchDown.toString()};
 			String[] OutputArray = new String[]{String.join(",", JoystickArray), String.join(",", VertArray), String.join(",", CuberArray)};
 			record.println(String.join(";", OutputArray));
 		} else if (count == 750) {

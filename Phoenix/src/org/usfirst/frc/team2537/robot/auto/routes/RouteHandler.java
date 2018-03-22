@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2537.robot.auto.routes;
 
 import org.usfirst.frc.team2537.robot.auto.DriveStraightCommand;
+import org.usfirst.frc.team2537.robot.auto.recording.PlaybackCommand;
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.OppositeSideScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.OppositeSideSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideScaleRoute;
@@ -24,6 +25,8 @@ public class RouteHandler {
 			return new DriveStraightCommand(290);
 		} else if (autoChooserOption == AutoChooserOption.VISION_ROTATE_TEST) {
 			return new VisionRotateCommand();
+		} else if (autoChooserOption == AutoChooserOption.PLAYBACK_RECORDING) {
+			return new PlaybackCommand();
 		} else if(autoChooserOption == AutoChooserOption.SOLO_LEFT) {
 			switch(fmsCroppedConfiguration) {
 			case "LL":
