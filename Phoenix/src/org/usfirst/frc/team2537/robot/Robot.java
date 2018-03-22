@@ -136,7 +136,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopPeriodic() {
-		if (count < 750) {
+		if (count < 750 && recordChooser.getSelected() == true) {
 			Double LeftJoystick = -HumanInput.leftJoystick.getRawAxis(1);
 			Double RightJoystick = -HumanInput.rightJoystick.getRawAxis(1);
 			Boolean VertUp = HumanInput.vertRaiseButton.get();
@@ -151,7 +151,7 @@ public class Robot extends IterativeRobot {
 			String[] CuberArray = new String[]{CuberIntake.toString(), CuberOutputSlow.toString(), CuberOutputFast.toString(), CuberWinchUp.toString(), CuberWinchDown.toString()};
 			String[] OutputArray = new String[]{String.join(",", JoystickArray), String.join(",", VertArray), String.join(",", CuberArray)};
 			record.println(String.join(";", OutputArray));
-		} else if (count == 750) {
+		} else if (count == 750 && recordChooser.getSelected() == true) {
 			record.close();
 		}
 		SmartDashboard.putNumber("angle",  Navx.getInstance().getAngle());
@@ -171,6 +171,13 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testInit() {
 		Scheduler.getInstance().add(new RotateCommand(90));
+	}
+	
+	@Override
+	public void disabledInit() {
+		if (record != null) {
+			record.close();
+		}
 	}
 
 	@Override
