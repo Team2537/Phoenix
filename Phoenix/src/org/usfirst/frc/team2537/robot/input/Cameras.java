@@ -27,6 +27,7 @@ public class Cameras extends Thread {
 	@Override
 	public void run() {
 		cam0 = new UsbCamera("cam0", 0);
+		cam0.setFPS(30);
 		cam0.setResolution(320, 240);
 		CameraServer.getInstance().addCamera(cam0);
 		cvSink = CameraServer.getInstance().getVideo(cam0);
