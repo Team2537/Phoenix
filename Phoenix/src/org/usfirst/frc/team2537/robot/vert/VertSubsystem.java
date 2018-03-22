@@ -16,7 +16,8 @@ public class VertSubsystem extends Subsystem {
 
 	private CANTalon vertMotorOne;
 	private CANTalon vertMotorTwo;
-	private DigitalInput limitSwitch;
+	private DigitalInput topReedSwitch;
+	private DigitalInput bottomReedSwitch;
 	public boolean enableReadSwitch = true;
 	double current;
 
@@ -29,7 +30,8 @@ public class VertSubsystem extends Subsystem {
 		vertMotorTwo.setControlMode(ControlMode.Follower);
 		vertMotorTwo.follow(vertMotorOne);
 		
-		limitSwitch = new DigitalInput(Ports.VERT_LIMIT_SWITCH);
+		topReedSwitch = new DigitalInput(Ports.VERT_TOP_SWITCH);
+		bottomReedSwitch = new DigitalInput(Ports.VERT_BOTTOM_SWITCH);
 	}
 
 	public void initDefaultCommand() {
@@ -86,8 +88,12 @@ public class VertSubsystem extends Subsystem {
 		vertMotorOne.getSensorCollection().setQuadraturePosition(0, 0);
 	}
 	
-	public boolean getLimitSwitch() {
-		return !limitSwitch.get() && enableReadSwitch;
+	public boolean getTopSwitch() {
+		return !topReedSwitch.get() && enableReadSwitch;
+	}
+	
+	public boolean getBottomSwitch() { 
+		return !bottomReedSwitch.get();
 	}
 	
 }

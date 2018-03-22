@@ -14,7 +14,6 @@ import org.usfirst.frc.team2537.robot.input.Cameras;
 import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
 import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
 
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;

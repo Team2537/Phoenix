@@ -55,7 +55,7 @@ public class Ports {
 	public static final int FLIPPER_HALL_EFFECT_TOP = 6, FLIPPER_HALL_EFFECT_BOTTOM = 7;
 	
 	// Limit Switch
-	public static final int VERT_LIMIT_SWITCH = 2;
+	public static final int VERT_TOP_SWITCH = 2, VERT_BOTTOM_SWITCH = 8;
 	
 	// Raspberry Pi
 	public static final edu.wpi.first.wpilibj.SerialPort.Port RASPI = Port.kMXP;

@@ -12,7 +12,8 @@ public class HoldCommand extends Command {
 	
 	@Override
 	protected void initialize() {
-		Robot.vertSys.setVertMotors(0.1);
+		if (!Robot.vertSys.getBottomSwitch())
+			Robot.vertSys.setVertMotors(0.1);
 	}
 
 	@Override
