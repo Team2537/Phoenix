@@ -14,22 +14,15 @@ public class LowerFlipperCommand extends Command {
 
 	@Override
 	protected void initialize() {
-		if(!Robot.cuberSys.getHolifaxTwo()) {
-			Robot.cuberSys.setLiftMotor(-1); //reverses direction to lift motor upwards
-		} else {
-			Robot.cuberSys.setLiftMotor(0);
-		}
+		Robot.cuberSys.setLiftMotor(-1); //reverses direction to lift motor upwards
 	}
 
 	@Override
 	protected void execute() {
-		if(Robot.cuberSys.getHolifaxTwo()) {
-			Robot.cuberSys.setLiftMotor(0);
-		}
 	}
 
 	protected boolean isFinished() { // returns true if motor turns over or equal to 90 degrees or when flywheel
-		return (Robot.cuberSys.getHolifaxTwo()) || this.isTimedOut();
+		return this.isTimedOut();
 	}
 
 	protected void end() {

@@ -21,7 +21,7 @@ public abstract class DriveStraightTemplate extends Command {
 	
 	public static final double DISTANCE_TOLERANCE = 1;
 
-	public static final double SLOW_DOWN_POWER = 100;
+	public static final double SLOW_DOWN_POWER = 420;
 
 	public static final double ANGLE_kP = 2;
 

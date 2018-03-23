@@ -10,16 +10,16 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class OppositeSideSwitchRoute extends CommandGroup {
 	public OppositeSideSwitchRoute(boolean left){
-		addSequential(new DriveStraightCommand(225));
+		addSequential(new DriveStraightCommand(230));
 		if(left) addSequential(new RotateCommand(90));
 		else addSequential(new RotateCommand(-90));
 
-		addSequential(new DriveStraightCommand(225));
+		addSequential(new DriveStraightCommand(250));
 		if(left) addSequential(new RotateCommand(90));
 		else addSequential(new RotateCommand(-90));
 
 		addParallel(new LowerFlipperCommand(), 0.5);
-		addParallel(new VertUpCommand(Specs.SWITCH_HEIGHT), 0.5);
+		addParallel(new VertUpCommand(Specs.SWITCH_HEIGHT));
 		addSequential(new DriveStraightCommand(70));
 		if(left) addSequential(new RotateCommand(90));
 		else addSequential(new RotateCommand(-90));

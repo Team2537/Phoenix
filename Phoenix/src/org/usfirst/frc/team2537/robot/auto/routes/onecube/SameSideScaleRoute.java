@@ -10,14 +10,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class SameSideScaleRoute extends CommandGroup {
 	public SameSideScaleRoute(boolean left){
-		addSequential(new DriveStraightCommand(305));
+		addSequential(new DriveStraightCommand(345));
 		if(left) addSequential(new RotateCommand(90));
 		else addSequential(new RotateCommand(-90));
 
 		addParallel(new LowerFlipperCommand(), Specs.FLIPPER_SCALE_LOWER_TIME);
 		addParallel(new DriveStraightCommand(-40), 0.5);
 		addSequential(new VertUpCommand(Specs.SCALE_HEIGHT));
-		addSequential(new ExpelCommand(0.8), Specs.EXPEL_TIME);
+		addSequential(new ExpelCommand(1), Specs.EXPEL_TIME);
 	}
 }
 

@@ -9,9 +9,11 @@ import org.usfirst.frc.team2537.robot.auto.vision.CoordinateSystems;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
 import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
+import org.usfirst.frc.team2537.robot.cuber.LiftFlipperCommand;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
 import org.usfirst.frc.team2537.robot.input.Cameras;
 import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
+import org.usfirst.frc.team2537.robot.vert.VertDownCommand;
 import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -86,6 +88,7 @@ public class Robot extends IterativeRobot {
 			fmsData="OOO"; //if we can't get FMS data within 2 seconds, make dummy data
 
 		Scheduler.getInstance().add(RouteHandler.HandleRoute(autoChooser.getSelected(), fmsData));
+		if (autoChooser.getSelected() == AutoChooserOption.DRIVE_STRAIGHT) Scheduler.getInstance().add(new VertDownCommand());
 		//uncomment above or youre an idiot
 //		Scheduler.getInstance().add(new DriveStraightCommand(180));
 //		Scheduler.getInstance().add(new RotateCommand(90));
@@ -103,6 +106,8 @@ public class Robot extends IterativeRobot {
 		if (visionSerial.getVisionPacket().length!=0) {
 			SmartDashboard.putNumber("RPi Value", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().getY(CoordinateSystems.CARTESIAN));
 		}
+		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
+
 	}
 
 	@Override
@@ -132,18 +137,19 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void testInit() {
-		Scheduler.getInstance().add(new RotateCommand(90));
+
 	}
 
 	@Override
 	public void testPeriodic() {
-		Scheduler.getInstance().run();
 	
 	}
 
 	@Override
 	public void disabledPeriodic() { 
-
+		SmartDashboard.putBoolean("Hall Effect", cuberSys.getHallEffectOne());
+		SmartDashboard.putBoolean("Bottom reed switch", vertSys.getBottomSwitch());
+		SmartDashboard.putBoolean("Top reed switch", vertSys.getTopSwitch());
 	}
 	
 

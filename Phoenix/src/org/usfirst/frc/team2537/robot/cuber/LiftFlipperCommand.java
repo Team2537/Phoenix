@@ -12,7 +12,7 @@ public class LiftFlipperCommand extends Command {
 	}
 
 	protected void initialize() {
-		if(!Robot.cuberSys.getHolifaxOne()) {
+		if(!Robot.cuberSys.getHallEffectOne()) {
 			Robot.cuberSys.setLiftMotor(1); //reverses direction to lift motor upwards
 		} else {
 			Robot.cuberSys.setLiftMotor(0);
@@ -20,13 +20,13 @@ public class LiftFlipperCommand extends Command {
 	}
 
 	protected void execute() {
-		if(Robot.cuberSys.getHolifaxOne()) {
+		if(Robot.cuberSys.getHallEffectOne()) {
 			Robot.cuberSys.setLiftMotor(0);
 		}
 	}
 	
 	protected boolean isFinished() { //returns true if motor turns under or equal to 0 degrees or when flywheel motors exceed max amp
-		return (Robot.cuberSys.getHolifaxOne());
+		return (Robot.cuberSys.getHallEffectOne());
 	}
 	
 	protected void end() {		

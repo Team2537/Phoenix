@@ -7,7 +7,7 @@ public class Ports {
 	/********** Input **********/
 
 	// Joysticks
-	public static final int LEFT_JOYSTICK = 0, RIGHT_JOYSTICK = 1;
+	public static final int LEFT_JOYSTICK = 2, RIGHT_JOYSTICK = 1;
 
 	// Buttons
 	public static final int VERT_RAISE_BUTTON = 3, VERT_LOWER_BUTTON = 2, VERT_OVERRIDE_BUTTON = 7, VERT_UNDERRIDE_BUTTON = 6;

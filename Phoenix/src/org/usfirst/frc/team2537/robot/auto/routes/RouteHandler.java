@@ -12,8 +12,10 @@ import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleSameSwitchRou
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameSwitchOppositeScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameSwitchSameScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionRotateCommand;
+import org.usfirst.frc.team2537.robot.cuber.LiftFlipperCommand;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.filters.LinearDigitalFilter;
 
 public class RouteHandler {
 	private static final boolean TWO_CUBE = false;
@@ -21,7 +23,8 @@ public class RouteHandler {
 	public static Command HandleRoute(AutoChooserOption autoChooserOption, String fmsData) {
 		String fmsCroppedConfiguration = fmsData.substring(0, 2);
 		if(autoChooserOption == AutoChooserOption.DRIVE_STRAIGHT) {
-			return new DriveStraightCommand(290);
+//			return new DriveStraightCommand(290);
+			return new LiftFlipperCommand();
 		} else if (autoChooserOption == AutoChooserOption.VISION_ROTATE_TEST) {
 			return new VisionRotateCommand();
 		} else if(autoChooserOption == AutoChooserOption.SOLO_LEFT) {
@@ -73,7 +76,7 @@ public class RouteHandler {
 				else return new SameSideScaleRoute(true);
 			case "RR":
 				if(TWO_CUBE) return new OppositeScaleOppositeSwitchRoute(true);
-				else return new DriveStraightCommand(130);
+				else return new OppositeSideScaleRoute(true);
 			default:
 				System.out.println("Invalid fmsData " + fmsData + " was cropped to " + fmsCroppedConfiguration);	
 				return null;

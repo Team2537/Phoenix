@@ -3,6 +3,7 @@ package org.usfirst.frc.team2537.robot.auto.routes.onecube;
 import org.usfirst.frc.team2537.robot.Specs;
 import org.usfirst.frc.team2537.robot.auto.DriveStraightCommand;
 import org.usfirst.frc.team2537.robot.auto.RotateCommand;
+import org.usfirst.frc.team2537.robot.auto.ShittyAutoCommand;
 import org.usfirst.frc.team2537.robot.cuber.ExpelCommand;
 import org.usfirst.frc.team2537.robot.cuber.LowerFlipperCommand;
 import org.usfirst.frc.team2537.robot.vert.VertUpCommand;
@@ -10,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class OppositeSideScaleRoute extends CommandGroup {
 	public OppositeSideScaleRoute(boolean left){
-		addSequential(new DriveStraightCommand(225));
+		addSequential(new DriveStraightCommand(230));
 		if(left) addSequential(new RotateCommand(90));
 		else addSequential(new RotateCommand(-90));
 
@@ -18,14 +19,15 @@ public class OppositeSideScaleRoute extends CommandGroup {
 		if(left) addSequential(new RotateCommand(-90));
 		else addSequential(new RotateCommand(90));
 
-		addSequential(new DriveStraightCommand(8));
+		addSequential(new DriveStraightCommand(69));
 		if(left) addSequential(new RotateCommand(-90));
 		else addSequential(new RotateCommand(90));
 
 		addParallel(new LowerFlipperCommand(), Specs.FLIPPER_SCALE_LOWER_TIME);
-		addParallel(new DriveStraightCommand(-40), Specs.FLIPPER_SCALE_LOWER_TIME);
+		addParallel(new ShittyAutoCommand(-0.5), 0.420);
 		addSequential(new VertUpCommand(Specs.SCALE_HEIGHT));
-		addSequential(new ExpelCommand(0.8), Specs.EXPEL_TIME);
+		addSequential(new ShittyAutoCommand(0.5), 0.420/2);
+		addSequential(new ExpelCommand(1), Specs.EXPEL_TIME);
 	}
 }
 

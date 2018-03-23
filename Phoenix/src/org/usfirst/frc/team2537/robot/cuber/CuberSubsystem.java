@@ -112,13 +112,8 @@ public class CuberSubsystem extends Subsystem {
 		return liftMotor.getMotorOutputVoltage();
 	}
 	
-	public boolean getHolifaxOne() {
+	public boolean getHallEffectOne() {
 		return !flipperHallEffectOne.get();
-	}
-	
-	public boolean getHolifaxTwo() {
-		return !flipperHallEffectTwo.get();
-	}
-	
+	}	
 }
 
