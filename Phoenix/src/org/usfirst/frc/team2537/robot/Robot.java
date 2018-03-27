@@ -20,8 +20,8 @@ public class Robot extends IterativeRobot {
 		driveSys.initDefaultCommand();
 		cuberSys =  new CuberSubsystem();
 		pdp = new PowerDistributionPanel();
-		
-		Robot.vertSys.initDefaultCommand();
+		vertSys = new VertSubsystem();
+		vertSys.initDefaultCommand();
 	}
 
 	@Override
