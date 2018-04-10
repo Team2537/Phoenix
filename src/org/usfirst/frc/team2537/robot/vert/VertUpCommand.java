@@ -14,7 +14,7 @@ public class VertUpCommand extends Command {
 	}
 	
 	public VertUpCommand() {
-		this(-1);
+		this(-0.75);
 	}
 
 	protected void initialize() {
@@ -27,7 +27,6 @@ public class VertUpCommand extends Command {
 	protected void execute() {
 		if (Robot.vertSys.getTopSwitch())
 			Robot.vertSys.setVertMotors(0);
-		System.out.println(Robot.vertSys.getEncoderPos());
 	}
 
 

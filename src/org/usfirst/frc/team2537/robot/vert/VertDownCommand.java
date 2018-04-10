@@ -18,20 +18,19 @@ public class VertDownCommand extends Command {
 		requires(Robot.vertSys);
 		this.targetDistance = Math.abs(targetDistance);
 	}
-
+	
 	@Override
 	protected void initialize() {
 		Robot.vertSys.resetEncoder();
 		Robot.vertSys.setVertMotors(0);
 		if (!Robot.vertSys.getBottomSwitch())
-			Robot.vertSys.setVertMotors(-.6);
+			Robot.vertSys.setVertMotors(-.5);
 	}
 
 	@Override
 	protected void execute() {
 		if (Robot.vertSys.getBottomSwitch())
-			Robot.vertSys.setVertMotors(0);
-		System.out.println("encoder: " + -Robot.vertSys.getEncoderPos() + " target: " + targetDistance);
+ 			Robot.vertSys.setVertMotors(0);
 	}
 
 	@Override

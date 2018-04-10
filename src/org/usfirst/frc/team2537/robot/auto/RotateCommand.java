@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class RotateCommand extends Command {
 	private double targetAngle;
-	private static final double DEFAULT_PERCENT_OUTPUT = 0.95;
-	private static final double MIN_PERCENT_OUTPUT = 0.69;
+	private static final double DEFAULT_PERCENT_OUTPUT = 1.00;
+	private static final double MIN_PERCENT_OUTPUT = 0.90;
 	private static final double ANGLE_kP = 1;
 	private static final double TOLERANCE = 2; // degrees
 	private double startingAngle;
@@ -40,7 +40,7 @@ public class RotateCommand extends Command {
 		power = Math.max(Math.abs(power), Math.abs(MIN_PERCENT_OUTPUT)) * Math.signum(power);
     	Robot.driveSys.setMotors(-power,  Motor.LEFT);
 		Robot.driveSys.setMotors( power, Motor.RIGHT);
-		System.out.println(Navx.getInstance().getAngle());
+		System.out.println("Navx angle: "+Navx.getInstance().getAngle());
     }
 
     @Override

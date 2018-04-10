@@ -30,6 +30,11 @@ public class VisionInput extends Subsystem {
 	public Target[] getVisionPacket() {
 		return decodeVisionPacket(lastCompletedString);
 	}
+	
+	public void clearCache() {
+		buffer="";
+		lastCompletedString="";
+	}
 
 	public static Target[] decodeVisionPacket(String packetToDecode) {
 		try {
@@ -71,7 +76,7 @@ public class VisionInput extends Subsystem {
 			if (serial.getBytesReceived() > 0) {
 				String stringToAppend = serial.readString();
 				serial.flush();
-				
+//				System.out.println(stringToAppend);
 				int packetEnd = stringToAppend.lastIndexOf('<');
 				if(packetEnd == -1){
 					buffer += stringToAppend;

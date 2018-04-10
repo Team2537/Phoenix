@@ -10,7 +10,7 @@ public class Specs {
 	public static final double FLIPPER_SCALE_LOWER_TIME = 0.15; // seconds to lower flipper to scale position from fully raised
 	public static final double FLIPPER_SCALE_LIFT_TIME = 1; // seconds to raise flipper to scale position from fully lowered
 	public static final double EXPEL_TIME = 0.8; // seconds to expel a cube
-	public static final double VISION_TIMEOUT = 3; // seconds
+	public static final double VISION_TIMEOUT = 8; // seconds
 	
 	public static final int SWITCH_HEIGHT = 350000; // ticks
 	public static final int SCALE_HEIGHT = 675000; // ticks

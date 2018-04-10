@@ -2,8 +2,6 @@ package org.usfirst.frc.team2537.robot;
 
 import org.usfirst.frc.team2537.robot.auto.AutoChooser;
 import org.usfirst.frc.team2537.robot.auto.Navx;
-import org.usfirst.frc.team2537.robot.auto.routes.RouteHandler;
-import org.usfirst.frc.team2537.robot.auto.routes.RouteHandler.AutoChooserOption;
 import org.usfirst.frc.team2537.robot.auto.vision.CoordinateSystems;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
@@ -16,7 +14,6 @@ import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
@@ -36,7 +33,7 @@ public class Robot extends IterativeRobot {
 	public static long startTime;
 	public static String fmsData="OOO";
 
-	private static SendableChooser<AutoChooserOption> autoChooser;
+	private static AutoChooser autoChooser;
 
 	@Override
 	public void robotInit() {
@@ -69,7 +66,6 @@ public class Robot extends IterativeRobot {
 //		pdp = new PowerDistributionPanel();
 
 		autoChooser = new AutoChooser();
-		SmartDashboard.putData("Auto Choices", autoChooser);
 	}
 
 	@Override
@@ -84,7 +80,8 @@ public class Robot extends IterativeRobot {
 		if (fmsData.length()==0)
 			fmsData="OOO"; //if we can't get FMS data within 2 seconds, make dummy data
 
-		Scheduler.getInstance().add(RouteHandler.HandleRoute(autoChooser.getSelected(), fmsData));
+		Scheduler.getInstance().add(autoChooser.getRoute(fmsData));
+		System.out.println("HERE GOES NOTHING :^)");
 		//uncomment above or youre an idiot
 //		Scheduler.getInstance().add(new DriveStraightCommand(180));
 //		Scheduler.getInstance().add(new RotateCommand(90));
@@ -102,7 +99,7 @@ public class Robot extends IterativeRobot {
 		if (visionSerial.getVisionPacket().length!=0) {
 			SmartDashboard.putNumber("RPi Value", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().getY(CoordinateSystems.CARTESIAN));
 		}
-		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
+//		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
 
 	}
 
@@ -113,6 +110,7 @@ public class Robot extends IterativeRobot {
 		Navx.getInstance().reset();
 //		Robot.driveSys.resetEncoders();
 		startTime = System.currentTimeMillis();
+		Robot.vertSys.resetEncoder(); 
 	}
 
 	@Override
@@ -125,10 +123,12 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Drive Ultrasonic", Robot.driveSys.getUltrasonicRange());*/
 		SmartDashboard.putBoolean("Lift override enabled", !Robot.vertSys.enableReedSwitch);
 		Scheduler.getInstance().run();
+		if (visionSerial.getVisionPacket().length!=0) {
+			SmartDashboard.putNumber("RPi Value", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().getY(CoordinateSystems.CARTESIAN));
+		}
 //		if(Robot.rampSys.isOpen) {
 //			SmartDashboard.putString("Ramp is Open", "THE RAMP IS OPEN YOU SURE YOU WANT THIS");
 //		}
-//		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
 	}
 	
 	@Override
@@ -142,10 +142,13 @@ public class Robot extends IterativeRobot {
 	}
 
 	@Override
-	public void disabledPeriodic() { 
+	public void disabledPeriodic() {
 		SmartDashboard.putBoolean("Hall Effect", cuberSys.getHallEffectOne());
 		SmartDashboard.putBoolean("Bottom reed switch", vertSys.getBottomSwitch());
-		SmartDashboard.putBoolean("Top reed switch", vertSys.getTopSwitch());
+		SmartDashboard.putBoolean("Top reid switch", vertSys.getTopSwitch());
+		if (visionSerial.getVisionPacket().length!=0) {
+			SmartDashboard.putNumber("RPi Value", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().getY(CoordinateSystems.CARTESIAN));
+		}
 	}
 	
 

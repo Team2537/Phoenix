@@ -9,7 +9,7 @@ public class LowerFlipperCommand extends Command {
 
 	public LowerFlipperCommand() {
 		requires(Robot.cuberSys); // requires cuberSys variables and methods
-		setTimeout(1.1);
+		setTimeout(1.25);
 	}
 
 	@Override

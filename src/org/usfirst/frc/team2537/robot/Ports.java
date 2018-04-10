@@ -11,10 +11,12 @@ public class Ports {
 
 	// Buttons
 	public static final int VERT_RAISE_BUTTON = 3, VERT_LOWER_BUTTON = 2, VERT_OVERRIDE_BUTTON = 7, VERT_UNDERRIDE_BUTTON = 6;
+	
+	public static final int VERT_LOWER_SLOW_ONE = 8, VERT_LOWER_SLOW_TWO = 9;
 
 	public static final int CLIMB_ON_BUTTON = 5, CLIMB_OFF_BUTTON = 4;
 
-	public static final int OVERRIDE_KEY_ONE = 11, OVERRIDE_KEY_TWO = 10;
+	public static final int OVERRIDE_KEY_ONE = 10, OVERRIDE_KEY_TWO = 11;
 
 	public static final int RAMP_LOWER_BUTTON = 8, RAMP_RAISE_BUTTON = 9;
 

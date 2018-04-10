@@ -27,7 +27,7 @@ public class ClimbSubsystem extends Subsystem {
 	}
 
 	public void registerButtons() {
-		HumanInput.registerWhenPressedCommand(HumanInput.climbOnButton, new ClimbCommand());
+		HumanInput.registerWhenPressedCommand(HumanInput.climbOnButton, new ClimbCommand(1));
 		HumanInput.registerWhenPressedCommand(HumanInput.climbOffButton, new ClimbKillCommand());
 		HumanInput.registerWhenPressedCommand(HumanInput.climbOverrideKeyOne, new ClimbOverrideCommand());
 	}
@@ -49,8 +49,6 @@ public class ClimbSubsystem extends Subsystem {
 //		return Robot.pdp.getCurrent(Ports.CLIMB_MOTOR_THREE_PDP);
 //	}
 	
-	public boolean climberOverridden() {
-		return HumanInput.climbOverrideKeyOne.get() && HumanInput.climbOverrideKeyTwo.get();
-	}
+
 	
 }

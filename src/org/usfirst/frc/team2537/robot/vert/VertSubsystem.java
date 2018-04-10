@@ -41,6 +41,8 @@ public class VertSubsystem extends Subsystem {
 	public void registerButtons() {
 		HumanInput.registerWhileHeldCommand(HumanInput.vertRaiseButton, new VertUpCommand());
 		HumanInput.registerWhileHeldCommand(HumanInput.vertLowerButton, new VertDownCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.vertLowerSlowOne, new VertDownSlowCommand());
+		HumanInput.registerWhileHeldCommand(HumanInput.vertLowerSlowTwo, new VertDownSlowCommand());
 		HumanInput.registerWhenPressedCommand(HumanInput.vertOverrideButton, new Command() {
 
 			@Override

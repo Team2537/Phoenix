@@ -12,7 +12,7 @@ public class VisionRotateCommand extends Command {
 	private static final double DEFAULT_PERCENT_OUTPUT = 0.60;
 	private static final double CENTER_kP = 8;
 	private static final double TURNING_TOLERANCE = 0.01;
-	private static final double PI_MOUNT_OFFSET = -0.25;
+	private static final double PI_MOUNT_OFFSET = 0;
 	
 	private double centerX;
 	private Side lastSide;
@@ -73,6 +73,9 @@ public class VisionRotateCommand extends Command {
 	@Override
 	protected boolean isFinished() {
 		System.out.println("centerX: " + centerX);
+		if (Math.abs(centerX) >= 0.99) {
+			return true;
+		}
 		return stopAtTarget && Math.abs(centerX) < TURNING_TOLERANCE;
 	}
 
