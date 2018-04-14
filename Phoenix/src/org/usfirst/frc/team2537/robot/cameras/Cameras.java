@@ -2,12 +2,8 @@ package org.usfirst.frc.team2537.robot.cameras; //PHOENIX
 
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
-import org.opencv.core.RotatedRect;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
-import org.usfirst.frc.team2537.robot.input.HumanInput;
-
-import com.sun.glass.ui.Size;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
@@ -17,22 +13,14 @@ import edu.wpi.first.wpilibj.CameraServer;
 public class Cameras extends Thread {
 	protected CvSink cvSink;
 	private UsbCamera cam0;
-	private UsbCamera cam1;
-	private int camNum;
-	private int width = 320;
-	private int length = 240;
 	private CvSource outputStream;
 	private Mat source;
 	private Mat output;
-	private boolean switched;
-	private long lastSwitched;
+
 
 	public Cameras() {
 		// define variables
-		camNum = 0;
-		lastSwitched = 0;
 		source = new Mat();
-		
 		output = new Mat();
 
 		// setup default camera
@@ -52,6 +40,7 @@ public class Cameras extends Thread {
 			if (source.rows() != 240 || source.cols() != 320) {
 				continue;
 			}
+			
 			output = source;
 
 			cvSink.grabFrame(source);
@@ -72,9 +61,7 @@ public class Cameras extends Thread {
 
 			Imgproc.line(source, new Point(0, output.rows() / 2), new Point(output.cols(), output.rows() / 2),
 					new Scalar(55, 250, 37), 1);
-			 Imgproc.CV_SHAPE_ELLIPSE(source, new Point(width/2, length/ 2),
-						new Scalar(55, 250, 37), 1);
-			      
+
 			// send frame to output stream
 			outputStream.putFrame(output);
 
