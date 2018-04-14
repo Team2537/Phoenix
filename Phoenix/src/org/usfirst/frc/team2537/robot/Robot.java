@@ -11,13 +11,14 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void robotInit() {
-		DriverStation.getInstance().getGameSpecificMessage();
+		cameras = new Cameras();
+		cameras.start();
+		//things that could be added to the camera: if ultraviolet is attached, cube line shows when 1 foot away
 	}
 
 	@Override
 	public void autonomousInit() {
-		cameras = new Cameras();
-		cameras.start();
+		
 	}
 
 	@Override

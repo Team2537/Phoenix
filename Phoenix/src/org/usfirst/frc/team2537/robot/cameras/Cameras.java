@@ -53,7 +53,7 @@ public class Cameras extends Thread {
 			Imgproc.putText(source, "CUBE", new Point(output.cols() - 75, 25), 4, 0.8, new Scalar(55, 250, 37), 1);
 
 			// draws a vertical and horizontal line through the center of the image
-			Imgproc.line(source, new Point(output.cols() / 4, 0), new Point(output.cols() / 4, output.rows()),
+			Imgproc.line(source, new Point(output.cols()*.75, 0), new Point(output.cols() *.75, output.rows()),
 					new Scalar(55, 250, 37), 1);
 			
 			Imgproc.line(source, new Point(output.cols() / 4, 0), new Point(output.cols() / 4, output.rows()),
