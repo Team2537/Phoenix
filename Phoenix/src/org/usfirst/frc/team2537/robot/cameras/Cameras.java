@@ -61,7 +61,7 @@ public class Cameras extends Thread {
 
 			Imgproc.line(source, new Point(0, output.rows() / 2), new Point(output.cols(), output.rows() / 2),
 					new Scalar(55, 250, 37), 1);
-
+			//Imgproc.rectangle(source, new Point(0, 9), new Point(0 + 3, 5 + 6), new Scalar(0, 255, 0, 255), 5);
 			// send frame to output stream
 			outputStream.putFrame(output);
 
