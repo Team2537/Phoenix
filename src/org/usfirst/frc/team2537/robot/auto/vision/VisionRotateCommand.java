@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2537.robot.auto.vision;
 
 import org.usfirst.frc.team2537.robot.Robot;
+import org.usfirst.frc.team2537.robot.auto.Navx;
 import org.usfirst.frc.team2537.robot.drive.Motor;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -36,6 +37,7 @@ public class VisionRotateCommand extends Command {
 	@Override
 	protected void initialize() {
 		System.out.println("starting visionRotate");
+		Navx.getInstance().reset();
 	}
 
 	@Override

@@ -13,6 +13,7 @@ import org.usfirst.frc.team2537.robot.cuber.LiftFlipperCommand;
 import org.usfirst.frc.team2537.robot.cuber.LowerFlipperCommand;
 import org.usfirst.frc.team2537.robot.cuber.PickUpCommand;
 import org.usfirst.frc.team2537.robot.vert.VertDownCommand;
+import org.usfirst.frc.team2537.robot.vert.VertUpCommand;
 
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
@@ -35,7 +36,8 @@ public class OppositeSwitchSecondCubeRoute extends AutoRoute {
 		addSequential(new VisionRotateCommand(), Specs.VISION_TIMEOUT);
 		addSequential(new LowerFlipperCommand());
 		addParallel(new PickUpCommand(), 2);
-		addSequential(new ShittyAutoCommand(.6), 2);
+		addSequential(new DriveStraightCommand(30, 0.3), 2);
+		addSequential(new VertUpCommand(1000));
 
 	}
 	

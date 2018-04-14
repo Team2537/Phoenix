@@ -15,14 +15,20 @@ public class RotateCommand extends Command {
 	private static final double TOLERANCE = 2; // degrees
 	private double startingAngle;
 	private double currentAngle;
-    public RotateCommand(double angle) {
+
+    public RotateCommand() {
+    	this(-Navx.getInstance().getAngle());
+    }
+
+
+	public RotateCommand(double angle) {
     	requires(Robot.driveSys);
     	targetAngle = angle;
     	if(targetAngle > 180){
     		targetAngle -= 360;
     	}
     }
-
+    
     @Override
     protected void initialize() {
     	Navx.getInstance().reset();

@@ -7,10 +7,12 @@ import org.usfirst.frc.team2537.robot.auto.routes.onecube.OppositeSideScaleRoute
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.OppositeSideSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.onecube.SameSideSwitchRoute;
+import org.usfirst.frc.team2537.robot.auto.routes.twocube.OppositeScaleOppositeScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.OppositeScaleOppositeSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.OppositeScaleSecondCubeRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.OppositeSwitchOppositeSwitch;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.OppositeSwitchSecondCubeRoute;
+import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleSameScaleRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleSameSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleSecondCubeRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameSwitchSameSwitchRoute;
@@ -51,6 +53,7 @@ public class AutoChooser {
 		addOption("Switch + Switch", new SameSwitchSameSwitchRoute(), currentChooser);
 		addOption("Scale + Switch (risky)", new SameScaleSameSwitchRoute(), currentChooser);
 		addOption("Scale + Grab Cube", new SameScaleSecondCubeRoute(), currentChooser);
+		addOption("Scale + Scale", new SameScaleSameScaleRoute(), currentChooser);
 		addOptionDefault("Drive Straight", new DriveStraightRoute(), currentChooser);
 		
 		/* same switch opposite scale */
@@ -61,6 +64,7 @@ public class AutoChooser {
 		addOption("Scale + Grab Cube", new OppositeScaleSecondCubeRoute(), currentChooser);
 		addOption("Switch + Grab Cube", new SameSwitchSecondCubeRoute(), currentChooser);
 		addOption("Switch + Switch", new SameSwitchSameSwitchRoute(), currentChooser);
+		addOption("Scale + Scale", new OppositeScaleOppositeScaleRoute(), currentChooser);
 		addOptionDefault("Drive Straight", new DriveStraightRoute(), currentChooser);
 		
 		/* opposite switch same scale */
@@ -71,6 +75,7 @@ public class AutoChooser {
 		addOption("Switch + Grab Cube", new OppositeSwitchSecondCubeRoute(), currentChooser);
 		addOption("Switch + Switch", new OppositeSwitchOppositeSwitch(), currentChooser);
 		addOption("Scale + Grab Cube", new SameScaleSecondCubeRoute(), currentChooser);
+		addOption("Scale + Scale", new SameScaleSameScaleRoute(), currentChooser);
 		addOptionDefault("Drive Straight", new DriveStraightRoute(), currentChooser);
 		
 		/* opposite switch opposite scale */
@@ -82,6 +87,7 @@ public class AutoChooser {
 		addOption("Switch + Switch", new OppositeSwitchOppositeSwitch(), currentChooser);
 		addOption("Scale + Grab Cube", new OppositeScaleSecondCubeRoute(), currentChooser);
 		addOption("Scale + Switch", new OppositeScaleOppositeSwitchRoute(), currentChooser);
+		addOption("Scale + Scale", new OppositeScaleOppositeScaleRoute(), currentChooser);
 		addOptionDefault("Drive Straight", new DriveStraightRoute(), currentChooser);
 		
 		/** ------------------- **/
