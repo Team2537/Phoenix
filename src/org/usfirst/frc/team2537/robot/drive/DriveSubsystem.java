@@ -1,9 +1,7 @@
 package org.usfirst.frc.team2537.robot.drive;
 
 import org.usfirst.frc.team2537.robot.Ports;
-import org.usfirst.frc.team2537.robot.units.Distances;
-import org.usfirst.frc.team2537.robot.units.Times;
-import org.usfirst.frc.team2537.robot.units.Units;
+import static org.usfirst.frc.team2537.robot.util.Units.*;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -84,7 +82,7 @@ public class DriveSubsystem extends Subsystem {
 				+ "front right: " + talonFrontRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION+"\n"
 				+ "back left: " + talonBackLeft.getSelectedSensorPosition(0)*LEFT_MOTOR_DIRECTION + "\n"
 				+ "back right: " + talonBackRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION + "\n"
-				+ "uniform average: " + Units.convertDistance(getEncoderDistance(), Distances.INCHES, Distances.TICKS);
+				+ "uniform average: " + getEncoderDistance()*in/tick;
 	}
 	
 	/**
@@ -98,7 +96,7 @@ public class DriveSubsystem extends Subsystem {
 		encoderTicks[3] = talonBackRight.getSelectedSensorPosition(0) * RIGHT_MOTOR_DIRECTION;
 		
 		double avg = getUniformAverage(encoderTicks, ENCODER_MIN_PERCENT_AGREEMENT);
-		return Units.convertDistance(avg, Distances.TICKS, Distances.INCHES);
+		return avg*tick/in;
 	}
 	
 	/**
@@ -112,7 +110,7 @@ public class DriveSubsystem extends Subsystem {
 		encoderTicks[3] = talonBackRight.getSelectedSensorVelocity(0) * RIGHT_MOTOR_DIRECTION;
 		
 		double avg = getUniformAverage(encoderTicks, ENCODER_MIN_PERCENT_AGREEMENT);
-		return Units.convertSpeed(avg, Distances.TICKS, Times.HUNDRED_MS, Distances.INCHES, Times.SECONDS);
+		return avg * (tick/ds) / (in/s);
 	}
 	
 	private double getUniformAverage(double[] vals, double tolerance) {
