@@ -8,6 +8,7 @@ import org.usfirst.frc.team2537.robot.resources.CANTalon;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
+import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
@@ -27,7 +28,7 @@ public class CuberSubsystem extends Subsystem {
 	public static final int ULTRASONIC_RANGE = 3;
 	public static final double FLIPPER_TIMEOUT = 5000; //TODO: Figure this one out
 	
-
+	private AnalogOutput led;
 	
 	public CuberSubsystem() {
 		flywheelMotorLeft = new CANTalon(Ports.FLYWHEEL_MOTOR_LEFT);
@@ -42,11 +43,12 @@ public class CuberSubsystem extends Subsystem {
 		
 		liftMotor.overrideLimitSwitchesEnable(true);
 		
+		led = new AnalogOutput(Ports.LED_ANALOG);
 		
 	}
 	
 	public void initDefaultCommand() {
-		
+		this.setDefaultCommand(new LedCommand());
 	}
 	
 	public void registerButtons() { 
@@ -108,12 +110,21 @@ public class CuberSubsystem extends Subsystem {
 		return ultrasonic.getRangeInches();
 	}
 	
+	public double getUltrasonicCm() {
+		return ultrasonic.getRangeMM() * 10;
+	}
+	
 	public double getFlipperVoltage() {
 		return liftMotor.getMotorOutputVoltage();
 	}
 	
 	public boolean getHallEffectOne() {
 		return !flipperHallEffectOne.get();
-	}	
+	}
+	
+	public void setLedAnalogOutput(double voltage) {
+		led.setVoltage(voltage);
+	}
+	
 }
 

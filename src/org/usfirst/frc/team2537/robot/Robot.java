@@ -56,6 +56,7 @@ public class Robot extends IterativeRobot {
 
 		cuberSys = new CuberSubsystem();
 		cuberSys.registerButtons();
+		cuberSys.initDefaultCommand();
 
 		visionSerial = new VisionInput();
 		visionSerial.initDefaultCommand();

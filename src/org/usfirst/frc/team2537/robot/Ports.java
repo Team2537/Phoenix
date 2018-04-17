@@ -53,7 +53,7 @@ public class Ports {
 
 	public static final int DRIVE_ULTRASONIC_TRIGGER = 0, DRIVE_ULTRASONIC_ECHO = 1;// DRIVE_ULTRASONIC_DUMMY = 8;
 
-	//Holifax
+	// Hall Effect
 	public static final int FLIPPER_HALL_EFFECT_TOP = 6, FLIPPER_HALL_EFFECT_BOTTOM = 7;
 	
 	// Limit Switch
@@ -75,7 +75,10 @@ public class Ports {
 //
 //	public static final int FRONT_RIGHT_PDP = 13, FRONT_LEFT_PDP = 12, BACK_RIGHT_PDP = 14, BACK_LEFT_PDP = 15;
 
-	//Camera Ports
+	// Camera Ports
 	public static final int CAMERA_PORT = 0;
+	
+	// Analog Outputs
+	public static final int LED_ANALOG = 0;
 	
 }
