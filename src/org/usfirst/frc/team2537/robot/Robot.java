@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2537.robot;
 
 import org.usfirst.frc.team2537.robot.auto.AutoChooser;
+import org.usfirst.frc.team2537.robot.auto.DriveStraightCommand;
 import org.usfirst.frc.team2537.robot.auto.Navx;
 import org.usfirst.frc.team2537.robot.auto.vision.CoordinateSystems;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
@@ -80,8 +81,9 @@ public class Robot extends IterativeRobot {
 		if (fmsData.length()==0)
 			fmsData="OOO"; //if we can't get FMS data within 2 seconds, make dummy data
 
-		Scheduler.getInstance().add(autoChooser.getRoute(fmsData));
+//		Scheduler.getInstance().add(autoChooser.getRoute(fmsData));
 		System.out.println("HERE GOES NOTHING :^)");
+		Scheduler.getInstance().add(new DriveStraightCommand(48));
 		//uncomment above or youre an idiot
 //		Scheduler.getInstance().add(new DriveStraightCommand(180));
 //		Scheduler.getInstance().add(new RotateCommand(90));
@@ -93,12 +95,13 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		Robot.driveSys.justFuckMyShitUpFam();
 //		if (visionSerial.getVisionPacket().length!=0) {
 //			SmartDashboard.putString("center", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().toString());
 //		}
-		if (visionSerial.getVisionPacket().length!=0) {
-			SmartDashboard.putNumber("RPi Value", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().getY(CoordinateSystems.CARTESIAN));
-		}
+//		if (visionSerial.getVisionPacket().length!=0) {
+//			SmartDashboard.putNumber("RPi Value", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().getY(CoordinateSystems.CARTESIAN));
+//		}
 //		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
 
 	}
@@ -111,6 +114,7 @@ public class Robot extends IterativeRobot {
 //		Robot.driveSys.resetEncoders();
 		startTime = System.currentTimeMillis();
 		Robot.vertSys.resetEncoder(); 
+		Robot.driveSys.resetEncoders();
 	}
 
 	@Override

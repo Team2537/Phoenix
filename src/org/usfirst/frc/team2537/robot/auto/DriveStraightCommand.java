@@ -21,14 +21,14 @@ public class DriveStraightCommand extends Command {
 	
 	public static final double DISTANCE_TOLERANCE = 1;
 
-	public static final double SLOW_DOWN_POWER = 420;
-
 	public static final double ANGLE_kP = 2;
 
 	/** value [0,1] representing the percent of power to motors */
-	public static final double DEFAULT_PERCENT_OUTPUT = 1.00;
+	public static final double DEFAULT_PERCENT_OUTPUT = .4;
 	
 	public static final double MIN_PERCENT_OUTPUT = 0.15;
+	
+	public static final double RAMP_UP_TIME = 1.5;
 
 	/******************************************************************************/
 	/* INSTANCE VARIABLES */
@@ -39,6 +39,8 @@ public class DriveStraightCommand extends Command {
 	private boolean slowingDown;
 	private double backwardsMultiplier;
 	private double targetInches;
+	private double startingTime;
+	private double slowDownPower;
 
 	/******************************************************************************/
 	/* CONSTRUCTORS */
@@ -49,6 +51,7 @@ public class DriveStraightCommand extends Command {
 		motorPower = defaultPercentOutput;
 		slowingDown = false;
 		this.targetInches = targetInches;
+		slowDownPower = targetInches * 50;
 	}
 	
 	public DriveStraightCommand(double targetInches) {
@@ -67,6 +70,7 @@ public class DriveStraightCommand extends Command {
 		System.out.println("starting angle: " + Navx.getInstance().getAngle());
 		System.out.println("encoders: " + Robot.driveSys.justFuckMyShitUpFam());
 		backwardsMultiplier = Math.signum(getRemainingInches());
+		startingTime = System.currentTimeMillis();
 	}
 
 	@Override
@@ -75,6 +79,8 @@ public class DriveStraightCommand extends Command {
 		double currentVelocity = Robot.driveSys.getEncoderVelocity() * backwardsMultiplier;
 		double power = motorPower;
 
+		power = Math.min(((DEFAULT_PERCENT_OUTPUT - MIN_PERCENT_OUTPUT) * (System.currentTimeMillis() - startingTime) * 1e9) + MIN_PERCENT_OUTPUT, DEFAULT_PERCENT_OUTPUT);
+		System.out.println(power);
 		if (!slowingDown) {
 			double slowDownDistance = calculateSlowDownDistance(currentVelocity);
 			if (remainingInches <= slowDownDistance) {
@@ -115,7 +121,6 @@ public class DriveStraightCommand extends Command {
 	@Override
 	protected void end() {
 		System.out.println("ending driveforward");
-		Robot.driveSys.resetEncoders();
 		Robot.driveSys.setMotors(0);
 	}
 
@@ -146,7 +151,7 @@ public class DriveStraightCommand extends Command {
 	 */
 	private double calculateSlowDownDistance(double speed) {
 		//return Math.pow(speed, speed / SLOW_DOWN_POWER) / SLOW_DOWN_POWER;
-		return Math.pow(speed, 2) / SLOW_DOWN_POWER;
+		return Math.pow(speed, 2) / 1;
 	}
 
 }
