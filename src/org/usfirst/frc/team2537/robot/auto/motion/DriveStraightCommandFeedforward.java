@@ -1,6 +1,10 @@
 package org.usfirst.frc.team2537.robot.auto.motion;
 
-import static org.usfirst.frc.team2537.robot.util.Units.*;
+import static org.usfirst.frc.team2537.robot.util.Units.ft;
+import static org.usfirst.frc.team2537.robot.util.Units.in;
+import static org.usfirst.frc.team2537.robot.util.Units.ms;
+import static org.usfirst.frc.team2537.robot.util.Units.s;
+import static org.usfirst.frc.team2537.robot.util.Units.tick;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -14,14 +18,14 @@ import org.usfirst.frc.team2537.robot.drive.Motor;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveStraightCommandFeedforward extends Command {
-	private static final double dt = 50*ms;
+	private static final double dt = 5*ms;
 	
-	private static final double VEL_MAX = 10 * ft/s;
-	private static final double ACC_MAX = 0.4 * ft/s/s;
+	private static final double VEL_MAX = 15.5 * ft/s;
+	private static final double ACC_MAX = 31 * ft/s/s;
 	
 	private static final double Kv = 1.00 * 1/VEL_MAX;
-	private static final double Ka = 0.05 * 1/ACC_MAX;
-	private static final double Kp = 0.00;
+	private static final double Ka = 0.00 * 1/ACC_MAX;
+	private static final double Kp = 1/(2000*tick);
 
 	private MotionProfile profile;
 	private ScheduledFuture<?> future;
@@ -42,7 +46,7 @@ public class DriveStraightCommandFeedforward extends Command {
 			double pos = Robot.driveSys.getEncoderDistance()*in;
 			double posErr = posPredicted - pos;
 			
-			double power = Kp*posErr + Kv*velPredicted + Ka*accPredicted; 
+			double power = Kp*posErr + Kv*velPredicted + Ka*accPredicted;
 			Robot.driveSys.setMotors(power, Motor.ALL);
 		} catch(IllegalStateException e) {
 			future.cancel(true);
@@ -51,6 +55,8 @@ public class DriveStraightCommandFeedforward extends Command {
 
 	@Override
 	protected void initialize() {
+		System.out.println(profile);
+		
 		Robot.driveSys.resetEncoders();
 		
 		Thread thread = new Thread(() -> {
@@ -63,7 +69,12 @@ public class DriveStraightCommandFeedforward extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return future.isCancelled();
+	}
+	
+	@Override
+	protected void end() {
+		
 	}
 
 }

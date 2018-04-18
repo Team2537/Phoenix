@@ -1,8 +1,12 @@
 package org.usfirst.frc.team2537.robot;
 
+import static org.usfirst.frc.team2537.robot.util.Units.in;
+import static org.usfirst.frc.team2537.robot.util.Units.ms;
+import static org.usfirst.frc.team2537.robot.util.Units.s;
+
 import org.usfirst.frc.team2537.robot.auto.AutoChooser;
-import org.usfirst.frc.team2537.robot.auto.DriveStraightCommand;
 import org.usfirst.frc.team2537.robot.auto.Navx;
+import org.usfirst.frc.team2537.robot.auto.motion.DriveStraightCommandFeedforward;
 import org.usfirst.frc.team2537.robot.auto.vision.CoordinateSystems;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
@@ -35,6 +39,9 @@ public class Robot extends IterativeRobot {
 	public static String fmsData="OOO";
 
 	private static AutoChooser autoChooser;
+	
+	
+	private static double maxVel = 0, maxAcc = 0, lastVel = 0;
 
 	@Override
 	public void robotInit() {
@@ -83,7 +90,7 @@ public class Robot extends IterativeRobot {
 
 //		Scheduler.getInstance().add(autoChooser.getRoute(fmsData));
 		System.out.println("HERE GOES NOTHING :^)");
-		Scheduler.getInstance().add(new DriveStraightCommand(48));
+		Scheduler.getInstance().add(new DriveStraightCommandFeedforward(200*in));
 		//uncomment above or youre an idiot
 //		Scheduler.getInstance().add(new DriveStraightCommand(180));
 //		Scheduler.getInstance().add(new RotateCommand(90));
@@ -115,10 +122,15 @@ public class Robot extends IterativeRobot {
 		startTime = System.currentTimeMillis();
 		Robot.vertSys.resetEncoder(); 
 		Robot.driveSys.resetEncoders();
+		
+		maxVel = 0;
+		maxAcc = 0;
+		lastVel = 0;
 	}
 
 	@Override
 	public void teleopPeriodic() {
+		Robot.driveSys.justFuckMyShitUpFam();
 /*		SmartDashboard.putNumber("angle",  Navx.getInstance().getAngle());
 		SmartDashboard.putNumber("pitch", Navx.getInstance().getPitch());
 		SmartDashboard.putNumber("yaw", Navx.getInstance().getYaw());
@@ -133,6 +145,17 @@ public class Robot extends IterativeRobot {
 //		if(Robot.rampSys.isOpen) {
 //			SmartDashboard.putString("Ramp is Open", "THE RAMP IS OPEN YOU SURE YOU WANT THIS");
 //		}
+		
+		double vel = Robot.driveSys.getEncoderVelocity()*in/s;
+		double acc = (vel-lastVel)/(20*ms);
+		
+		maxVel = Math.max(vel, maxVel);
+		maxAcc = Math.max(acc, maxAcc);
+		lastVel = vel;
+		
+		SmartDashboard.putNumber("MaxVel", maxVel);
+		SmartDashboard.putNumber("MaxAcc", maxAcc);
+		
 	}
 	
 	@Override

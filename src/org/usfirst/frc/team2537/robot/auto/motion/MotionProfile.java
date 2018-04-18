@@ -117,14 +117,6 @@ public class MotionProfile {
 		}
 		throw new IllegalStateException("Acceleration at time t is not defined within this MotionProfile");
 	}
-
-	public MotionProfile inverse() {
-		List<MotionSegment> reversedSegments = new ArrayList<>();
-		for (MotionSegment segment : segments) {
-			reversedSegments.add(0, segment.inverse(t()));
-		}
-		return new MotionProfile(reversedSegments);
-	}
 	
 	public MotionProfile flip(){
 		List<MotionSegment> flippedSegments = new ArrayList<>();
