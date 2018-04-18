@@ -40,13 +40,11 @@ public class DriveStraightCommandFeedforward extends Command {
 	private void step(){
 		double t = stepCount.getAndIncrement()*dt;
 		try {
-			double velPredicted = profile.interpolateVel(t);
-			double accPredicted = profile.interpolateAcc(t);
-			double posPredicted = profile.interpolatePos(t);
+			MotorState setpoint = profile.getSetpoint(t);
 			double pos = Robot.driveSys.getEncoderDistance()*in;
-			double posErr = posPredicted - pos;
+			double posErr = setpoint.pos - pos;
 			
-			double power = Kp*posErr + Kv*velPredicted + Ka*accPredicted;
+			double power = Kp*posErr + Kv*setpoint.vel + Ka*setpoint.acc;
 			Robot.driveSys.setMotors(power, Motor.ALL);
 		} catch(IllegalStateException e) {
 			future.cancel(true);
@@ -75,6 +73,11 @@ public class DriveStraightCommandFeedforward extends Command {
 	@Override
 	protected void end() {
 		
+	}
+	
+	public static void main(String[] args){
+		MotionProfile p = new MotionProfile(200*in, 0, 0, VEL_MAX, ACC_MAX);
+		System.out.println(p);
 	}
 
 }

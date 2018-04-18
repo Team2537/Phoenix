@@ -30,8 +30,8 @@ public class MotionProfile {
 				throw new IllegalStateException("Cannot generate MotionProfile within the given distance and constraints");
 			}
 			
-			MotionSegment rampUp = new MotionSegment(0, t_mid, 0, vel_i, accMax);
-			MotionSegment rampDown = new MotionSegment(rampUp, t_f, -accMax);
+			LinearMotionSegment rampUp = new LinearMotionSegment(t_mid, 0, vel_i, accMax);
+			LinearMotionSegment rampDown = new LinearMotionSegment(rampUp, t_f, -accMax);
 
 			List<MotionSegment> segments = new ArrayList<>();
 			segments.add(rampUp);
@@ -44,9 +44,9 @@ public class MotionProfile {
 			t_B += t_increase;
 			t_f += t_increase;
 
-			MotionSegment rampUp = new MotionSegment(0, t_A, 0, vel_i, accMax);
-			MotionSegment cruise = new MotionSegment(rampUp, t_B, 0);
-			MotionSegment rampDown = new MotionSegment(cruise, t_f, -accMax);
+			LinearMotionSegment rampUp = new LinearMotionSegment(t_A, 0, vel_i, accMax);
+			LinearMotionSegment cruise = new LinearMotionSegment(rampUp, t_B-t_A, 0);
+			LinearMotionSegment rampDown = new LinearMotionSegment(cruise, t_f-t_B, -accMax);
 
 			List<MotionSegment> segments = new ArrayList<>();
 			segments.add(rampUp);
@@ -74,48 +74,16 @@ public class MotionProfile {
 			}
 		}
 	}
-	
-	public double d(){
-		if(segments.size() > 0){
-			return segments.get(segments.size()-1).pos_f - segments.get(0).pos_i;
-		} else {
-			return 0;
-		}
-	}
-	
-	public double t(){
-		if(segments.size() > 0){
-			return segments.get(segments.size()-1).t_f - segments.get(0).t_i;
-		} else {
-			return 0;
-		}
-	}
-	
-	public double interpolatePos(double t){
+
+	public MotorState getSetpoint(double t){
 		for(MotionSegment segment : segments){
-			if(t >= segment.t_i && t < segment.t_f){
-				return segment.interpolatePos(t);
+			if(segment.dt > t){
+				t -= segment.dt;
+			} else {
+				return segment.getSetpoint(t);
 			}
 		}
-		throw new IllegalStateException("Position at time t is not defined within this MotionProfile");
-	}
-	
-	public double interpolateVel(double t){
-		for(MotionSegment segment : segments){
-			if(t >= segment.t_i && t < segment.t_f){
-				return segment.interpolateVel(t);
-			}
-		}
-		throw new IllegalStateException("Velocity at time t is not defined within this MotionProfile");
-	}
-	
-	public double interpolateAcc(double t){
-		for(MotionSegment segment : segments){
-			if(t >= segment.t_i && t < segment.t_f){
-				return segment.acc;
-			}
-		}
-		throw new IllegalStateException("Acceleration at time t is not defined within this MotionProfile");
+		throw new IllegalStateException("Setpoint at time t is not defined within this MotionProfile");
 	}
 	
 	public MotionProfile flip(){
