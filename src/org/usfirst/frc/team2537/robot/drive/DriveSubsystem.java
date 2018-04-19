@@ -1,7 +1,12 @@
 package org.usfirst.frc.team2537.robot.drive;
 
+import static org.usfirst.frc.team2537.robot.util.Units.ds;
+import static org.usfirst.frc.team2537.robot.util.Units.tick;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.usfirst.frc.team2537.robot.Ports;
-import static org.usfirst.frc.team2537.robot.util.Units.*;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -77,44 +82,74 @@ public class DriveSubsystem extends Subsystem {
 		SmartDashboard.putNumber("front right", talonFrontRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION);
 		SmartDashboard.putNumber("back left", talonBackLeft.getSelectedSensorPosition(0)*LEFT_MOTOR_DIRECTION);
 		SmartDashboard.putNumber("back right", talonBackRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION);
-		SmartDashboard.putNumber("enc avg", getEncoderDistance()*in);
-		SmartDashboard.putNumber("speed", getEncoderVelocity()*in/s);
+		SmartDashboard.putNumber("enc avg", getEncoderDistance());
+		SmartDashboard.putNumber("speed", getEncoderVelocity());
 		return "front left: "+talonFrontLeft.getSelectedSensorPosition(0)*LEFT_MOTOR_DIRECTION+"\n"
 				+ "front right: " + talonFrontRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION+"\n"
 				+ "back left: " + talonBackLeft.getSelectedSensorPosition(0)*LEFT_MOTOR_DIRECTION + "\n"
 				+ "back right: " + talonBackRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION + "\n"
-				+ "uniform average: " + getEncoderDistance()*in/tick;
+				+ "uniform average: " + getEncoderDistance();
 	}
 	
 	/**
-	 * @return average value of all talons in inches
+	 * @return average value of selected talons in ticks
+	 */
+	public double getEncoderDistance(Motor id) {
+		List<Integer> encoderTicks = new ArrayList<>();
+		if (id == Motor.FRONT_LEFT || id == Motor.LEFT || id == Motor.FRONT || id == Motor.ALL) {
+			encoderTicks.add(talonFrontLeft.getSelectedSensorPosition(0)*LEFT_MOTOR_DIRECTION);
+		}
+		if (id == Motor.FRONT_RIGHT || id == Motor.RIGHT || id == Motor.FRONT || id == Motor.ALL) {
+			encoderTicks.add(talonFrontRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION);
+		}
+		if (id == Motor.BACK_LEFT || id == Motor.LEFT || id == Motor.BACK || id == Motor.ALL) {
+			encoderTicks.add(talonBackLeft.getSelectedSensorPosition(0)*LEFT_MOTOR_DIRECTION);
+		}
+		if (id == Motor.BACK_RIGHT || id == Motor.RIGHT || id == Motor.BACK || id == Motor.ALL) {
+			encoderTicks.add(talonBackRight.getSelectedSensorPosition(0)*RIGHT_MOTOR_DIRECTION);
+		}
+		
+		double avg = getUniformAverage(encoderTicks, ENCODER_MIN_PERCENT_AGREEMENT);
+		return avg*tick;
+	}
+	
+	/**
+	 * @return average value of all talons in ticks
 	 */
 	public double getEncoderDistance() {
-		double[] encoderTicks = new double[4];
-		encoderTicks[0] = talonFrontLeft.getSelectedSensorPosition(0) * LEFT_MOTOR_DIRECTION;
-		encoderTicks[1] = talonFrontRight.getSelectedSensorPosition(0) * RIGHT_MOTOR_DIRECTION;
-		encoderTicks[2] = talonBackLeft.getSelectedSensorPosition(0) * LEFT_MOTOR_DIRECTION;
-		encoderTicks[3] = talonBackRight.getSelectedSensorPosition(0) * RIGHT_MOTOR_DIRECTION;
-		
-		double avg = getUniformAverage(encoderTicks, ENCODER_MIN_PERCENT_AGREEMENT);
-		return avg*tick/in;
+		return getEncoderDistance(Motor.ALL);
 	}
 	
 	/**
-	 * @return average velocity of all talons in inches/second
+	 * @return average velocity of all talons in ticks/ms
 	 */
-	public double getEncoderVelocity() {
-		double[] encoderTicks = new double[4];
-		encoderTicks[0] = talonFrontLeft.getSelectedSensorVelocity(0) * LEFT_MOTOR_DIRECTION;
-		encoderTicks[1] = talonFrontRight.getSelectedSensorVelocity(0) * RIGHT_MOTOR_DIRECTION;
-		encoderTicks[2] = talonBackLeft.getSelectedSensorVelocity(0) * LEFT_MOTOR_DIRECTION;
-		encoderTicks[3] = talonBackRight.getSelectedSensorVelocity(0) * RIGHT_MOTOR_DIRECTION;
+	public double getEncoderVelocity(Motor id) {
+		List<Integer> encoderTicks = new ArrayList<>();
+		if (id == Motor.FRONT_LEFT || id == Motor.LEFT || id == Motor.FRONT || id == Motor.ALL) {
+			encoderTicks.add(talonFrontLeft.getSelectedSensorVelocity(0)*LEFT_MOTOR_DIRECTION);
+		}
+		if (id == Motor.FRONT_RIGHT || id == Motor.RIGHT || id == Motor.FRONT || id == Motor.ALL) {
+			encoderTicks.add(talonFrontRight.getSelectedSensorVelocity(0)*RIGHT_MOTOR_DIRECTION);
+		}
+		if (id == Motor.BACK_LEFT || id == Motor.LEFT || id == Motor.BACK || id == Motor.ALL) {
+			encoderTicks.add(talonBackLeft.getSelectedSensorVelocity(0)*LEFT_MOTOR_DIRECTION);
+		}
+		if (id == Motor.BACK_RIGHT || id == Motor.RIGHT || id == Motor.BACK || id == Motor.ALL) {
+			encoderTicks.add(talonBackRight.getSelectedSensorVelocity(0)*RIGHT_MOTOR_DIRECTION);
+		}
 		
 		double avg = getUniformAverage(encoderTicks, ENCODER_MIN_PERCENT_AGREEMENT);
-		return avg * (tick/ds) / (in/s);
+		return avg * (tick/ds);
 	}
 	
-	private double getUniformAverage(double[] vals, double tolerance) {
+	/**
+	 * @return average velocity of all talons in ticks/ms
+	 */
+	public double getEncoderVelocity() {
+		return getEncoderVelocity(Motor.ALL);
+	}
+	
+	private double getUniformAverage(List<Integer> vals, double tolerance) {
 		double maxVal = 0;
 		for(double val : vals){
 			if(Math.abs(val) > Math.abs(maxVal)){

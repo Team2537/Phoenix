@@ -41,11 +41,16 @@ public class DriveStraightCommandFeedforward extends Command {
 		double t = stepCount.getAndIncrement()*dt;
 		try {
 			MotorState setpoint = profile.getSetpoint(t);
-			double pos = Robot.driveSys.getEncoderDistance()*in;
-			double posErr = setpoint.pos - pos;
 			
-			double power = Kp*posErr + Kv*setpoint.vel + Ka*setpoint.acc;
-			Robot.driveSys.setMotors(power, Motor.ALL);
+			double posLeft = Robot.driveSys.getEncoderDistance(Motor.LEFT);
+			double posLeftErr = setpoint.pos - posLeft;
+			
+			double posRight = Robot.driveSys.getEncoderDistance(Motor.RIGHT);
+			double posRightErr = setpoint.pos - posRight;
+			
+			double powerBase = Kv*setpoint.vel + Ka*setpoint.acc;
+			Robot.driveSys.setMotors(powerBase + Kp*posLeftErr,  Motor.LEFT);
+			Robot.driveSys.setMotors(powerBase + Kp*posRightErr, Motor.RIGHT);
 		} catch(IllegalStateException e) {
 			future.cancel(true);
 		}

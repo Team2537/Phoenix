@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2537.robot.auto;
 
+import static org.usfirst.frc.team2537.robot.util.Units.*;
 import org.usfirst.frc.team2537.robot.Robot;
 import org.usfirst.frc.team2537.robot.drive.Motor;
 
@@ -76,7 +77,7 @@ public class DriveStraightCommand extends Command {
 	@Override
 	protected void execute() {
 		double remainingInches = getRemainingInches() * backwardsMultiplier;
-		double currentVelocity = Robot.driveSys.getEncoderVelocity() * backwardsMultiplier;
+		double currentVelocity = Robot.driveSys.getEncoderVelocity()/(in/s) * backwardsMultiplier;
 		double power = motorPower;
 
 		power = Math.min(((DEFAULT_PERCENT_OUTPUT - MIN_PERCENT_OUTPUT) * (System.currentTimeMillis() - startingTime) * 1e9) + MIN_PERCENT_OUTPUT, DEFAULT_PERCENT_OUTPUT);
@@ -113,7 +114,7 @@ public class DriveStraightCommand extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		System.out.println("speed: " + Robot.driveSys.getEncoderVelocity() + "; " + 
+		System.out.println("speed: " + Robot.driveSys.getEncoderVelocity()/(in/s) + "; " + 
 				"remaining dist: " + getRemainingInches());
 		return getRemainingInches() * backwardsMultiplier <= DISTANCE_TOLERANCE;
 	}
@@ -140,7 +141,7 @@ public class DriveStraightCommand extends Command {
 	/******************************************************************************/
 	
 	protected double getRemainingInches() {
-		return targetInches - Robot.driveSys.getEncoderDistance();
+		return targetInches - Robot.driveSys.getEncoderDistance()/in;
 	}
 	
 	/**

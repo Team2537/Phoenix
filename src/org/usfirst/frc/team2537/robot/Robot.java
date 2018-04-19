@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2537.robot;
 
+import static org.usfirst.frc.team2537.robot.util.Units.ft;
 import static org.usfirst.frc.team2537.robot.util.Units.in;
-import static org.usfirst.frc.team2537.robot.util.Units.ms;
 import static org.usfirst.frc.team2537.robot.util.Units.s;
 
 import org.usfirst.frc.team2537.robot.auto.AutoChooser;
@@ -146,8 +146,8 @@ public class Robot extends IterativeRobot {
 //			SmartDashboard.putString("Ramp is Open", "THE RAMP IS OPEN YOU SURE YOU WANT THIS");
 //		}
 		
-		double vel = Robot.driveSys.getEncoderVelocity()*in/s;
-		double acc = (vel-lastVel)/(20*ms);
+		double vel = Robot.driveSys.getEncoderVelocity()/(ft/s);
+		double acc = (vel-lastVel)/(0.02*s); // 20 ms (WPILib cycle time)
 		
 		maxVel = Math.max(vel, maxVel);
 		maxAcc = Math.max(acc, maxAcc);
