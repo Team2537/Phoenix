@@ -25,7 +25,8 @@ public class DriveStraightCommandFeedforward extends Command {
 	
 	private static final double Kv = 1.00 * 1/VEL_MAX;
 	private static final double Ka = 0.00 * 1/ACC_MAX;
-	private static final double Kp = 1/(2000*tick);
+	private static final double Kpf = 1/(1000*tick);
+	private static final double Kvf = 1/(2000*tick/ms);
 
 	private MotionProfile profile;
 	private ScheduledFuture<?> future;
@@ -48,9 +49,15 @@ public class DriveStraightCommandFeedforward extends Command {
 			double posRight = Robot.driveSys.getEncoderDistance(Motor.RIGHT);
 			double posRightErr = setpoint.pos - posRight;
 			
+			double velLeft = Robot.driveSys.getEncoderVelocity(Motor.LEFT);
+			double velLeftErr = setpoint.vel - velLeft;
+			
+			double velRight = Robot.driveSys.getEncoderVelocity(Motor.RIGHT);
+			double velRightErr = setpoint.vel - velRight;
+			
 			double powerBase = Kv*setpoint.vel + Ka*setpoint.acc;
-			Robot.driveSys.setMotors(powerBase + Kp*posLeftErr,  Motor.LEFT);
-			Robot.driveSys.setMotors(powerBase + Kp*posRightErr, Motor.RIGHT);
+			Robot.driveSys.setMotors(powerBase + Kpf*posLeftErr + Kvf*velLeftErr,  Motor.LEFT);
+			Robot.driveSys.setMotors(powerBase + Kpf*posRightErr + Kvf*velRightErr, Motor.RIGHT);
 		} catch(IllegalStateException e) {
 			future.cancel(true);
 		}
@@ -61,6 +68,7 @@ public class DriveStraightCommandFeedforward extends Command {
 		System.out.println(profile);
 		
 		Robot.driveSys.resetEncoders();
+		Robot.driveSys.setStatusFrames(5);
 		
 		Thread thread = new Thread(() -> {
 			step();
@@ -77,7 +85,7 @@ public class DriveStraightCommandFeedforward extends Command {
 	
 	@Override
 	protected void end() {
-		
+		Robot.driveSys.setStatusFrames(160);
 	}
 	
 	public static void main(String[] args){

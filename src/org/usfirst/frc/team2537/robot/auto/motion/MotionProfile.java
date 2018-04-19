@@ -77,7 +77,7 @@ public class MotionProfile {
 
 	public MotorState getSetpoint(double t){
 		for(MotionSegment segment : segments){
-			if(segment.dt > t){
+			if(t > segment.dt){
 				t -= segment.dt;
 			} else {
 				return segment.getSetpoint(t);

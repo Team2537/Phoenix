@@ -232,5 +232,12 @@ public class DriveSubsystem extends Subsystem {
 	public void setMode(ControlMode controlMode) {
 		this.controlMode = controlMode;
 	}
+
+	public void setStatusFrames(int i) {
+		talonBackLeft.setStatusFramePeriod(3, i, 0);
+		talonBackRight.setStatusFramePeriod(3, i, 0);
+		talonFrontLeft.setStatusFramePeriod(3, i, 0);
+		talonFrontRight.setStatusFramePeriod(3, i, 0);
+	}
 	
 }
