@@ -1,12 +1,11 @@
 package org.usfirst.frc.team2537.robot;
 
 import static org.usfirst.frc.team2537.robot.util.Units.ft;
-import static org.usfirst.frc.team2537.robot.util.Units.in;
 import static org.usfirst.frc.team2537.robot.util.Units.s;
 
 import org.usfirst.frc.team2537.robot.auto.AutoChooser;
 import org.usfirst.frc.team2537.robot.auto.Navx;
-import org.usfirst.frc.team2537.robot.auto.motion.DriveStraightCommandFeedforward;
+import org.usfirst.frc.team2537.robot.auto.motion.DriveStraight;
 import org.usfirst.frc.team2537.robot.auto.vision.CoordinateSystems;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
@@ -18,6 +17,7 @@ import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -37,6 +37,7 @@ public class Robot extends IterativeRobot {
 
 	public static long startTime;
 	public static String fmsData="OOO";
+	public Command driveStraight;
 
 	private static AutoChooser autoChooser;
 	
@@ -74,6 +75,7 @@ public class Robot extends IterativeRobot {
 //		pdp = new PowerDistributionPanel();
 
 		autoChooser = new AutoChooser();
+		driveStraight = new DriveStraight(200);
 	}
 
 	@Override
@@ -90,7 +92,7 @@ public class Robot extends IterativeRobot {
 
 //		Scheduler.getInstance().add(autoChooser.getRoute(fmsData));
 		System.out.println("HERE GOES NOTHING :^)");
-		Scheduler.getInstance().add(new DriveStraightCommandFeedforward(200*in));
+		Scheduler.getInstance().add(driveStraight);
 		//uncomment above or youre an idiot
 //		Scheduler.getInstance().add(new DriveStraightCommand(180));
 //		Scheduler.getInstance().add(new RotateCommand(90));
@@ -176,6 +178,7 @@ public class Robot extends IterativeRobot {
 		if (visionSerial.getVisionPacket().length!=0) {
 			SmartDashboard.putNumber("RPi Value", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().getY(CoordinateSystems.CARTESIAN));
 		}
+		SmartDashboard.putNumber("Angle", Navx.getInstance().getAngle());
 	}
 	
 

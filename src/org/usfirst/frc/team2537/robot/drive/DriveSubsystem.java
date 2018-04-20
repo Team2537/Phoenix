@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.usfirst.frc.team2537.robot.Ports;
+import org.usfirst.frc.team2537.robot.Specs;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -171,7 +172,7 @@ public class DriveSubsystem extends Subsystem {
 		}
 		return sum / validVals;
 	}
-
+	
 	public void resetEncoders() {
 		talonFrontRight.getSensorCollection().setQuadraturePosition(0, 0);
 		talonFrontLeft.getSensorCollection().setQuadraturePosition(0, 0);
@@ -184,6 +185,9 @@ public class DriveSubsystem extends Subsystem {
 	/******************************************************************************/
 
 	public void setMotors(double speed, Motor id) {
+		if (controlMode == ControlMode.Velocity) {
+			speed = ((speed/0.254) * Specs.TICKS_PER_REVOLUTION) / (Specs.WHEEL_DIAMETER * Math.PI); // input is m/s
+		}
 		if (id == Motor.FRONT_LEFT || id == Motor.LEFT || id == Motor.FRONT || id == Motor.ALL) {
 			talonFrontLeft.set(controlMode, speed * LEFT_MOTOR_DIRECTION);
 		}
@@ -196,6 +200,7 @@ public class DriveSubsystem extends Subsystem {
 		if (id == Motor.BACK_RIGHT || id == Motor.RIGHT || id == Motor.BACK || id == Motor.ALL) {
 			talonBackRight.set(controlMode, speed * RIGHT_MOTOR_DIRECTION);
 		}
+		System.out.println(speed);
 	}
 
 	public void setMotors(double speed, Motor... motors) {
