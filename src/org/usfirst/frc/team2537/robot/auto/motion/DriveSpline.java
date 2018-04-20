@@ -20,12 +20,12 @@ public class DriveSpline extends Command {
 	EncoderFollower left;
 	EncoderFollower right;
 
-	final static double MAX_VELOCITY = 5.3;
-	final static double MAX_ACCEL = 40;
-	final static double MAX_JERK = 120.0;
-	final static double P = 4.0;
-	final static double I = 2.0;
-	final static double D = 0.4;
+	final static double MAX_VELOCITY = 4.72;
+	final static double MAX_ACCEL = 4.72 * 5;
+	final static double MAX_JERK = 60.0;
+	final static double P = 2.0;
+	final static double I = 0.0;
+	final static double D = 0.0;
 	final static double GAIN = 0.0;
 
 	public DriveSpline(double dist) {
@@ -66,7 +66,7 @@ public class DriveSpline extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return left.isFinished() || right.isFinished();
+		return left.isFinished() && right.isFinished();
 	}
 	
 	@Override
