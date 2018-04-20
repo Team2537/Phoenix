@@ -5,7 +5,7 @@ import static org.usfirst.frc.team2537.robot.util.Units.s;
 
 import org.usfirst.frc.team2537.robot.auto.AutoChooser;
 import org.usfirst.frc.team2537.robot.auto.Navx;
-import org.usfirst.frc.team2537.robot.auto.motion.DriveStraight;
+import org.usfirst.frc.team2537.robot.auto.motion.DriveSpline;
 import org.usfirst.frc.team2537.robot.auto.vision.CoordinateSystems;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
@@ -75,7 +75,7 @@ public class Robot extends IterativeRobot {
 //		pdp = new PowerDistributionPanel();
 
 		autoChooser = new AutoChooser();
-		driveStraight = new DriveStraight(200);
+		driveStraight = new DriveSpline(200);
 	}
 
 	@Override

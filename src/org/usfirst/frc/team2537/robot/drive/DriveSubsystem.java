@@ -236,6 +236,12 @@ public class DriveSubsystem extends Subsystem {
 	 */
 	public void setMode(ControlMode controlMode) {
 		this.controlMode = controlMode;
+		if (controlMode == ControlMode.Velocity) {
+			talonBackLeft.config_kP(0, 1, 0);
+			talonBackRight.config_kP(0, 1, 0);
+			talonFrontLeft.config_kP(0, 1, 0);
+			talonFrontRight.config_kP(0, 1, 0);
+		}
 	}
 
 	public void setStatusFrames(int i) {

@@ -5,6 +5,8 @@ import org.usfirst.frc.team2537.robot.Specs;
 import org.usfirst.frc.team2537.robot.auto.Navx;
 import org.usfirst.frc.team2537.robot.drive.Motor;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
@@ -12,7 +14,7 @@ import jaci.pathfinder.Waypoint;
 import jaci.pathfinder.followers.EncoderFollower;
 import jaci.pathfinder.modifiers.TankModifier;
 
-public class DriveStraight extends Command {
+public class DriveSpline extends Command {
 
 	Trajectory trajectory;
 	EncoderFollower left;
@@ -26,7 +28,7 @@ public class DriveStraight extends Command {
 	final static double D = 0.4;
 	final static double GAIN = 0.0;
 
-	public DriveStraight(double dist) {
+	public DriveSpline(double dist) {
 		requires(Robot.driveSys);
 		Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC,
 				Trajectory.Config.SAMPLES_HIGH, 0.02, MAX_VELOCITY, MAX_ACCEL, MAX_JERK);
@@ -50,7 +52,7 @@ public class DriveStraight extends Command {
 	protected void initialize() {
 		Robot.driveSys.resetEncoders();
 		Navx.getInstance().reset();
-		Robot.driveSys.setStatusFrames(20);
+		Robot.driveSys.setMode(ControlMode.Velocity);
 	}
 
 	@Override
@@ -58,20 +60,18 @@ public class DriveStraight extends Command {
 		double l = left.calculate((int) Robot.driveSys.getEncoderDistance(Motor.LEFT));
 		double r = right.calculate((int) Robot.driveSys.getEncoderDistance(Motor.RIGHT));
 		
-		Robot.driveSys.setMotors((l) / MAX_VELOCITY, Motor.LEFT);
-		Robot.driveSys.setMotors((r) / MAX_VELOCITY, Motor.RIGHT);
+		Robot.driveSys.setMotors(l, Motor.LEFT);
+		Robot.driveSys.setMotors(r, Motor.RIGHT);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
+		return left.isFinished() || right.isFinished();
 	}
 	
 	@Override
 	protected void end() {
 		Robot.driveSys.setMotors(0, Motor.ALL);
-		Robot.driveSys.setStatusFrames(160);
 	}
 	
 	@Override
