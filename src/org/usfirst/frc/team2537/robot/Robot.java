@@ -5,12 +5,14 @@ import static org.usfirst.frc.team2537.robot.util.Units.s;
 
 import org.usfirst.frc.team2537.robot.auto.AutoChooser;
 import org.usfirst.frc.team2537.robot.auto.Navx;
+import org.usfirst.frc.team2537.robot.auto.RotateCommand;
 import org.usfirst.frc.team2537.robot.auto.motion.DriveSpline;
 import org.usfirst.frc.team2537.robot.auto.vision.CoordinateSystems;
 import org.usfirst.frc.team2537.robot.auto.vision.VisionInput;
 import org.usfirst.frc.team2537.robot.climb.ClimbSubsystem;
 import org.usfirst.frc.team2537.robot.cuber.CuberSubsystem;
 import org.usfirst.frc.team2537.robot.drive.DriveSubsystem;
+import org.usfirst.frc.team2537.robot.drive.Motor;
 import org.usfirst.frc.team2537.robot.input.Cameras;
 import org.usfirst.frc.team2537.robot.ramp.RampSubsystem;
 import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
@@ -18,6 +20,7 @@ import org.usfirst.frc.team2537.robot.vert.VertSubsystem;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -37,7 +40,8 @@ public class Robot extends IterativeRobot {
 
 	public static long startTime;
 	public static String fmsData="OOO";
-	public Command driveStraight;
+	public static Command driveStraight;
+	public static Command driveStraight2;
 
 	private static AutoChooser autoChooser;
 	
@@ -76,6 +80,7 @@ public class Robot extends IterativeRobot {
 
 		autoChooser = new AutoChooser();
 		driveStraight = new DriveSpline(200);
+		driveStraight2 = new DriveSpline(50);
 	}
 
 	@Override
@@ -92,7 +97,7 @@ public class Robot extends IterativeRobot {
 
 //		Scheduler.getInstance().add(autoChooser.getRoute(fmsData));
 		System.out.println("HERE GOES NOTHING :^)");
-		Scheduler.getInstance().add(driveStraight);
+		Scheduler.getInstance().add(new lol());
 		//uncomment above or youre an idiot
 //		Scheduler.getInstance().add(new DriveStraightCommand(180));
 //		Scheduler.getInstance().add(new RotateCommand(90));
@@ -112,6 +117,9 @@ public class Robot extends IterativeRobot {
 //			SmartDashboard.putNumber("RPi Value", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().getY(CoordinateSystems.CARTESIAN));
 //		}
 //		System.out.println(Robot.driveSys.justFuckMyShitUpFam());
+		SmartDashboard.putNumber("Left speed", Robot.driveSys.getEncoderVelocity(Motor.LEFT));
+		SmartDashboard.putNumber("Right speed", Robot.driveSys.getEncoderVelocity(Motor.RIGHT));
+		SmartDashboard.putNumber("Angle", Navx.getInstance().getAngle());
 
 	}
 
@@ -182,4 +190,13 @@ public class Robot extends IterativeRobot {
 	}
 	
 
+}
+
+class lol extends CommandGroup {
+	public lol() {
+		this.addSequential(Robot.driveStraight);
+		this.addSequential(new RotateCommand(90));
+		this.addSequential(Robot.driveStraight2);
+
+	}
 }

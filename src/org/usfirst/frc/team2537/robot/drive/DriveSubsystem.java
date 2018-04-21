@@ -188,19 +188,18 @@ public class DriveSubsystem extends Subsystem {
 		if (controlMode == ControlMode.Velocity) {
 			speed = ((speed/0.254) * Specs.TICKS_PER_REVOLUTION) / (Specs.WHEEL_DIAMETER * Math.PI); // input is m/s
 		}
-		if (id == Motor.FRONT_LEFT || id == Motor.LEFT || id == Motor.FRONT || id == Motor.ALL) {
-			talonFrontLeft.set(controlMode, speed * LEFT_MOTOR_DIRECTION);
-		}
-		if (id == Motor.FRONT_RIGHT || id == Motor.RIGHT || id == Motor.FRONT || id == Motor.ALL) {
-			talonFrontRight.set(controlMode, speed * RIGHT_MOTOR_DIRECTION);
-		}
 		if (id == Motor.BACK_LEFT || id == Motor.LEFT || id == Motor.BACK || id == Motor.ALL) {
 			talonBackLeft.set(controlMode, speed * LEFT_MOTOR_DIRECTION);
 		}
 		if (id == Motor.BACK_RIGHT || id == Motor.RIGHT || id == Motor.BACK || id == Motor.ALL) {
 			talonBackRight.set(controlMode, speed * RIGHT_MOTOR_DIRECTION);
 		}
-		System.out.println(speed);
+		if (id == Motor.FRONT_LEFT || id == Motor.LEFT || id == Motor.FRONT || id == Motor.ALL) {
+			talonFrontLeft.set(ControlMode.Follower, Ports.BACK_LEFT_DRIVE_MOTOR);
+		}
+		if (id == Motor.FRONT_RIGHT || id == Motor.RIGHT || id == Motor.FRONT || id == Motor.ALL) {
+			talonFrontRight.set(ControlMode.Follower, Ports.BACK_RIGHT_DRIVE_MOTOR);
+		}
 	}
 
 	public void setMotors(double speed, Motor... motors) {
@@ -237,18 +236,18 @@ public class DriveSubsystem extends Subsystem {
 	public void setMode(ControlMode controlMode) {
 		this.controlMode = controlMode;
 		if (controlMode == ControlMode.Velocity) {
-			talonBackLeft.config_kP(0, 1, 0);
-			talonBackRight.config_kP(0, 1, 0);
-			talonFrontLeft.config_kP(0, 1, 0);
-			talonFrontRight.config_kP(0, 1, 0);
+			talonBackLeft.config_kP(0, 5, 0);
+			talonBackRight.config_kP(0, 5, 0);
+			talonFrontLeft.config_kP(0, 5, 0);
+			talonFrontRight.config_kP(0, 5, 0);
 		}
 	}
 
 	public void setStatusFrames(int i) {
-		talonBackLeft.setStatusFramePeriod(3, i, 0);
-		talonBackRight.setStatusFramePeriod(3, i, 0);
-		talonFrontLeft.setStatusFramePeriod(3, i, 0);
-		talonFrontRight.setStatusFramePeriod(3, i, 0);
+		talonBackLeft.setStatusFramePeriod(2, i, 0);
+		talonBackRight.setStatusFramePeriod(2, i, 0);
+		talonFrontLeft.setStatusFramePeriod(2, i, 0);
+		talonFrontRight.setStatusFramePeriod(2, i, 0);
 	}
 	
 }
