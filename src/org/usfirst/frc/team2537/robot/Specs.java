@@ -13,5 +13,5 @@ public class Specs {
 	public static final double VISION_TIMEOUT = 8; // seconds
 	
 	public static final int SWITCH_HEIGHT = 350000; // ticks
-	public static final int SCALE_HEIGHT = 675000; // ticks
+	public static final int SCALE_HEIGHT = 715000; // ticks
 }

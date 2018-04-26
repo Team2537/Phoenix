@@ -66,6 +66,7 @@ public class Robot extends IterativeRobot {
 //		pdp = new PowerDistributionPanel();
 
 		autoChooser = new AutoChooser();
+		SmartDashboard.putNumber("Delay", 0);
 	}
 
 	@Override

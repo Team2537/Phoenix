@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class OppositeSideScaleRoute extends AutoRoute {
 	public void scheduleCommands(){
+		addSequential(new WaitCommand(delay()));
 		addSequential(new DriveStraightCommand(230));
 		addSequential(new RotateCommand(90*sideMultiplier()));
 

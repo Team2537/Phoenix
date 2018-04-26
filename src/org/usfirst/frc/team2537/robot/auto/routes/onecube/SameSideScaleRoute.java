@@ -7,18 +7,21 @@ import org.usfirst.frc.team2537.robot.auto.routes.AutoRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.StartingSide;
 import org.usfirst.frc.team2537.robot.cuber.ExpelCommand;
 import org.usfirst.frc.team2537.robot.cuber.LowerFlipperCommand;
+import org.usfirst.frc.team2537.robot.vert.HoldCommand;
 import org.usfirst.frc.team2537.robot.vert.VertUpCommand;
 
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class SameSideScaleRoute extends AutoRoute {
 	public void scheduleCommands(){
+		addSequential(new WaitCommand(delay()));
 		addSequential(new DriveStraightCommand(345));
 		addSequential(new RotateCommand(90*sideMultiplier()));
 
 		addParallel(new LowerFlipperCommand(), Specs.FLIPPER_SCALE_LOWER_TIME);
 		addParallel(new DriveStraightCommand(-40), 0.5);
 		addSequential(new VertUpCommand(Specs.SCALE_HEIGHT));
+		addParallel(new HoldCommand(), 0.5 + Specs.EXPEL_TIME);
 		addSequential(new WaitCommand(0.5));
 		addSequential(new ExpelCommand(1), Specs.EXPEL_TIME);
 	}

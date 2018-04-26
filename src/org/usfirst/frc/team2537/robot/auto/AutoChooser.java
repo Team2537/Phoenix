@@ -96,6 +96,7 @@ public class AutoChooser {
 	}
 
 	public Command getRoute(String fmsData) {
+		double delay = SmartDashboard.getNumber("Delay", 0);
 		StartingSide side = startingSide.getSelected();
 		char sideChar = side == StartingSide.LEFT ? 'L' : 'R';
 		boolean sameSwitch = fmsData.charAt(0) == sideChar;
@@ -116,7 +117,8 @@ public class AutoChooser {
 			}
 		}
 		
-		AutoRoute chosenRoute = scenario.getSelected().setStartingSide(side);
+		AutoRoute chosenRoute = scenario.getSelected().setStartingSide(side).setDelayTime(delay);
+		chosenRoute.scheduleCommands();
 		System.out.println("AUTOCHOOSER PRINT");
 		System.out.println("  Start side: "+sideChar);
 		System.out.println("    FMS data: "+fmsData);

@@ -11,8 +11,11 @@ import org.usfirst.frc.team2537.robot.cuber.ExpelCommand;
 import org.usfirst.frc.team2537.robot.cuber.LowerFlipperCommand;
 import org.usfirst.frc.team2537.robot.vert.VertUpCommand;
 
+import edu.wpi.first.wpilibj.command.WaitCommand;
+
 public class SameSideSwitchRoute extends AutoRoute {
 	public void scheduleCommands(){
+		addSequential(new WaitCommand(delay()));
 		addSequential(new DriveStraightCommand(148.625));
 		addSequential(new RotateCommand(90*sideMultiplier()));
 
