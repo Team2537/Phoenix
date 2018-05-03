@@ -20,7 +20,7 @@ public class SameScaleSecondCubeRoute extends AutoRoute {
 	public void scheduleCommands() {
 		addSequential(new SameSideScaleRoute());
 
-		addSequential(new VertDownCommand());
+
 		addSequential(new DriveStraightCommand(20));
 		addSequential(new RotateCommand(60 * sideMultiplier()));
 		addSequential(new DriveStraightCommand(75));

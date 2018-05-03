@@ -26,7 +26,6 @@ public class Robot extends IterativeRobot {
 
 //	public static PowerDistributionPanel pdp;
 
-	public static SmartDashboard smartDashboard;
 	public static VisionInput visionSerial;
 	public static Cameras cameras;
 
@@ -41,7 +40,6 @@ public class Robot extends IterativeRobot {
 		driveSys.initDefaultCommand();
 		driveSys.resetEncoders();
 
-		smartDashboard = new SmartDashboard();
 		Navx.getInstance().reset();
 
 		vertSys = new VertSubsystem();
@@ -93,6 +91,8 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousPeriodic() {
+		Robot.driveSys.justFuckMyShitUpFam();
+		SmartDashboard.putNumber("Angle", Navx.getInstance().getAngle());
 		Scheduler.getInstance().run();
 //		if (visionSerial.getVisionPacket().length!=0) {
 //			SmartDashboard.putString("center", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().toString());
@@ -112,6 +112,7 @@ public class Robot extends IterativeRobot {
 //		Robot.driveSys.resetEncoders();
 		startTime = System.currentTimeMillis();
 		Robot.vertSys.resetEncoder(); 
+		Robot.driveSys.resetEncoders();
 	}
 
 	@Override
@@ -124,6 +125,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Drive Ultrasonic", Robot.driveSys.getUltrasonicRange());*/
 		SmartDashboard.putBoolean("Lift override enabled", !Robot.vertSys.enableReedSwitch);
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Angle", Navx.getInstance().getAngle());
+		Robot.driveSys.justFuckMyShitUpFam();
 		if (visionSerial.getVisionPacket().length!=0) {
 			SmartDashboard.putNumber("RPi Value", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().getY(CoordinateSystems.CARTESIAN));
 		}
@@ -143,6 +146,10 @@ public class Robot extends IterativeRobot {
 	}
 
 	@Override
+	public void disabledInit() {
+	}
+	
+	@Override
 	public void disabledPeriodic() {
 		SmartDashboard.putBoolean("Hall Effect", cuberSys.getHallEffectOne());
 		SmartDashboard.putBoolean("Bottom reed switch", vertSys.getBottomSwitch());
@@ -150,7 +157,9 @@ public class Robot extends IterativeRobot {
 		if (visionSerial.getVisionPacket().length!=0) {
 			SmartDashboard.putNumber("RPi Value", visionSerial.getVisionPacket()[0].getBoundingBoxCenter().getY(CoordinateSystems.CARTESIAN));
 		}
+		if (Navx.getInstance().getAngle() != 0.0)
+			Navx.getInstance().reset();
+		Robot.driveSys.justFuckMyShitUpFam();
+		SmartDashboard.putNumber("Angle", Navx.getInstance().getAngle());
 	}
-	
-
 }

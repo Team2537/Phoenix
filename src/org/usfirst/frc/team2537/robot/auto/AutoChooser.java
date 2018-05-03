@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2537.robot.auto;
 
+import org.usfirst.frc.team2537.robot.Specs;
 import org.usfirst.frc.team2537.robot.auto.routes.AutoRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.DriveStraightRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.StartingSide;
@@ -15,6 +16,7 @@ import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleSameSwitchRou
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameScaleSecondCubeRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameSwitchSameSwitchRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.twocube.SameSwitchSecondCubeRoute;
+import org.usfirst.frc.team2537.robot.vert.VertUpCommand;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -43,7 +45,7 @@ public class AutoChooser {
 		/** AutoChooser options **/
 		
 		/* same switch same scale */
-		SendableChooser currentChooser = sameSwitch_sameScale;
+		SendableChooser<AutoRoute> currentChooser = sameSwitch_sameScale;
 		addOption("Same Switch :: Same Scale", null, currentChooser);
 		addOption("Switch", new SameSideSwitchRoute(), currentChooser);
 		addOption("Scale", new SameSideScaleRoute(), currentChooser);

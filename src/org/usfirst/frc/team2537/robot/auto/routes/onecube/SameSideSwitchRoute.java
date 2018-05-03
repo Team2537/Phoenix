@@ -16,10 +16,10 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class SameSideSwitchRoute extends AutoRoute {
 	public void scheduleCommands(){
 		addSequential(new WaitCommand(delay()));
+		addParallel(new LowerFlipperCommand());
 		addSequential(new DriveStraightCommand(148.625));
 		addSequential(new RotateCommand(90*sideMultiplier()));
 
-		addParallel(new LowerFlipperCommand());
 		addSequential(new VertUpCommand(Specs.SWITCH_HEIGHT));
 
 		addSequential(new ShittyAutoCommand(0.5), 0.69);

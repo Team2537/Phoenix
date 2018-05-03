@@ -14,7 +14,7 @@ public class VertUpCommand extends Command {
 	}
 	
 	public VertUpCommand() {
-		this(-0.75);
+		this(-1);
 	}
 
 	protected void initialize() {

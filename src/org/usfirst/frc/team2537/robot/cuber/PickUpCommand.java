@@ -27,6 +27,9 @@ public class PickUpCommand extends Command {
 		if (Robot.cuberSys.getUltrasonicInches() < CuberSubsystem.ULTRASONIC_RANGE && Robot.cuberSys.getUltrasonicInches() > 0.05 && !Robot.cuberSys.ultrasonicOverride) {
 			Robot.cuberSys.setFlywheelMotors(0);
 		}
+		if (Robot.vertSys.getBottomSwitch() == true) {
+			Robot.vertSys.setVertMotors(0);
+		}
 		
 //		System.out.println(Robot.cuberSys.getUltrasonicInches());
 	}

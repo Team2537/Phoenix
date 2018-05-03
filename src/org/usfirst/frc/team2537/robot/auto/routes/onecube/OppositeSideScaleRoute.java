@@ -3,7 +3,6 @@ package org.usfirst.frc.team2537.robot.auto.routes.onecube;
 import org.usfirst.frc.team2537.robot.Specs;
 import org.usfirst.frc.team2537.robot.auto.DriveStraightCommand;
 import org.usfirst.frc.team2537.robot.auto.RotateCommand;
-import org.usfirst.frc.team2537.robot.auto.ShittyAutoCommand;
 import org.usfirst.frc.team2537.robot.auto.routes.AutoRoute;
 import org.usfirst.frc.team2537.robot.auto.routes.StartingSide;
 //github.com/Team2537/Phoenix.git
@@ -19,16 +18,13 @@ public class OppositeSideScaleRoute extends AutoRoute {
 		addSequential(new DriveStraightCommand(230));
 		addSequential(new RotateCommand(90*sideMultiplier()));
 
-		addSequential(new DriveStraightCommand(250));
-		addSequential(new RotateCommand(-90*sideMultiplier()));
-
-		addSequential(new DriveStraightCommand(69));
-		addSequential(new RotateCommand(-90*sideMultiplier()));
-
+		addSequential(new DriveStraightCommand(225));
 		addParallel(new LowerFlipperCommand(), Specs.FLIPPER_SCALE_LOWER_TIME);
-		addSequential(new ShittyAutoCommand(-0.5), 1);
+		addSequential(new RotateCommand(-90*sideMultiplier()));
+
 		addSequential(new VertUpCommand(Specs.SCALE_HEIGHT));
-		addSequential(new WaitCommand(0.5));
+		addSequential(new DriveStraightCommand(69));
+
 		addSequential(new ExpelCommand(1), Specs.EXPEL_TIME);
 	}
 	

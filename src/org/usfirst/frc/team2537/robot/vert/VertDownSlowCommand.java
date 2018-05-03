@@ -19,7 +19,7 @@ public class VertDownSlowCommand extends Command {
 		Robot.vertSys.resetEncoder();
 		Robot.vertSys.setVertMotors(0);
 		if (!Robot.vertSys.getBottomSwitch())
-			Robot.vertSys.setVertMotors(-.25);
+			Robot.vertSys.setVertMotors(-.15);
 	}
 
 	@Override
